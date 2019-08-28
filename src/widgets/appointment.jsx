@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HelloWorld from '@components/hello-world';
+import Appointment from '@components/appointment';
 
-ReactDOM.render(<HelloWorld />, document.getElementById('widget-root'));
+ReactDOM.render(<Appointment />, document.getElementById('widget-root'));
