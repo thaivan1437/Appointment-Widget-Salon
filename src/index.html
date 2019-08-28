@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Salon Manager Widgets</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Widget Implementation Block Start -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        injectWidget();
+      });
+
+      function injectWidget() {
+        var element = document.createElement('div');
+        element.setAttribute('id', 'widget-root');
+        element.setAttribute(
+          'style',
+          'position: fixed; z-index: 10000; right: 0; bottom: 0;'
+        );
+
+        var script = document.createElement('script');
+        script.setAttribute('src', 'widget_appointment_bundle.js');
+
+        document.body.appendChild(element);
+        document.body.appendChild(script);
+      }
+    </script>
+    <!-- Widget Implementation Block End -->
+  </head>
+  <body>
+    <div></div>
+  </body>
+</html>
