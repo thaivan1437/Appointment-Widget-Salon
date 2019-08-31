@@ -65,7 +65,7 @@ const FormContent = styled.div`
   .appointment-date {
     //overrides
     .react-datepicker__day--selected {
-      background: ${COLORS.CABARET};
+      background-color: ${COLORS.CABARET};
     }
   }
 `;
@@ -86,6 +86,12 @@ const TimeWrapper = styled.div`
 
       .react-datepicker__time-box {
         width: 100px;
+
+        .react-datepicker__time-list {
+          .react-datepicker__time-list-item--selected {
+            background-color: ${COLORS.CABARET};
+          }
+        }
       }
     }
   }
