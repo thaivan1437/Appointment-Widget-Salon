@@ -20,5 +20,4 @@ All components and pages are controlled on 3 different browsers before push to r
 
 - Google Chrome: 76.0.3809.132 
 - Mozilla Firefox: 68.0.2
-- Internet Explorer: 11.0.9600.17031
-
+- Safari 12.1.2 (14607.3.9)
