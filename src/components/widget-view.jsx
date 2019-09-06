@@ -5,6 +5,9 @@ import AppointmentIcon from '@assets/icon_widgets_appointment.png';
 import PricingIcon from '@assets/icon_widgets_pricing.png';
 import PromotionsIcon from '@assets/icon_widgets_promotions.png';
 
+import 'rodal/lib/rodal.css';
+import Rodal from 'rodal';
+
 const WidgetViewWrapper = styled.div`
   position: fixed;
   bottom: 5px;
@@ -21,6 +24,7 @@ const WidgetViewWrapper = styled.div`
 const ImageWrapper = styled.img`
   width: 65px;
   height: 65px;
+  cursor: pointer;
 `;
 
 // TODO remove after demo
@@ -36,6 +40,7 @@ const WidgetView = () => {
   const [top, setTop] = useState(true);
   const [bottom, setBottom] = useState(false);
   const [vertical, setVertical] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <>
@@ -85,10 +90,19 @@ const WidgetView = () => {
         left={left}
         vertical={vertical}
       >
-        <ImageWrapper src={AppointmentIcon} />
-        <ImageWrapper src={PricingIcon} />
-        <ImageWrapper src={PromotionsIcon} />
+        <ImageWrapper
+          onClick={() => setShowModal(true)}
+          src={AppointmentIcon}
+        />
+        <ImageWrapper onClick={() => setShowModal(true)} src={PricingIcon} />
+        <ImageWrapper onClick={() => setShowModal(true)} src={PromotionsIcon} />
       </WidgetViewWrapper>
+
+      <Rodal
+        visible={showModal}
+        animation="flip"
+        onClose={() => setShowModal(false)}
+      ></Rodal>
     </>
   );
 };
