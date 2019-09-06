@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Manager from '@components/Manager';
+import WidgetView from '@components/widget-view';
 
-ReactDOM.render(<Manager />, document.getElementById('widget-root'));
+ReactDOM.render(<WidgetView />, document.getElementById('widget-root'));
