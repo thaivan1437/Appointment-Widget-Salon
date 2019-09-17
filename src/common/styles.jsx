@@ -22,6 +22,11 @@ export const AppointmentInput = styled.input`
   }
 `;
 
+export const ShortCenteredInput = styled(AppointmentInput)`
+  width: 40px;
+  text-align: center;
+`;
+
 export const AppointmentTimeInput = styled(AppointmentInput)`
   width: 92px;
 `;
