@@ -2,7 +2,7 @@ const path = require('path');
 const argv = require('yargs').argv;
 const JS_JSX_PATTERN = /\.jsx?$/;
 const CSS_PATTERN = /\.css$/i;
-const IMG_PATTERN = /\.(png|jpg|gif|svg)$/i;
+const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 process.env.NODE_ENV = argv.buildEnv || 'development';
@@ -37,10 +37,14 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: IMG_PATTERN,
+        test: URL_LOADER_PATTERN,
         use: [
           {
             loader: 'url-loader',
+            options: {
+              limit: 100000,
+              name: '[name].[ext]',
+            },
           },
         ],
       },
