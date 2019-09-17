@@ -13,6 +13,8 @@ import Rodal from 'rodal';
 import DayPicker from '@components/day-picker';
 import { COLORS } from '../common/colors';
 
+import { AppointmentInput, ShortCenteredInput } from '../common/styles';
+
 const WidgetViewWrapper = styled.div`
   position: fixed;
   bottom: 5px;
@@ -54,7 +56,7 @@ const OptionsWrapper = styled.div`
 //   position: absolute;
 //   transform: rotate(-45deg);
 // `;
-
+// TODO move styles to global style
 const CustomRodal = styled(Rodal)`
   .rodal-dialog {
     padding: 0;
@@ -74,9 +76,18 @@ const CloseIcon = styled.img`
 const ModalContentWrapper = styled.div`
   display: flex;
   height: 100%;
+  * {
+    font-family: 'Roboto';
+  }
 `;
 const ModalContentContainer = styled.div`
   flex: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 50px 0 68px;
 `;
 const ModalInformationContainer = styled.div`
   flex: 1;
@@ -97,6 +108,35 @@ const DialogCycle = styled.div`
 
   top: ${props => (props.top ? '-15px' : 'auto')};
   bottom: ${props => (props.bottom ? '-15px' : 'auto')};
+`;
+
+const WidgetFooter = styled.div`
+  position: fixed;
+  bottom: 0;
+  border-top-width: 2px;
+  border-top-style: dotted;
+  border-color: ${COLORS.MERCURY};
+  width: 500px;
+  color: ${COLORS.DOVE_GRAY};
+
+  padding: 10px 0;
+  margin-bottom: 30px;
+`;
+
+const WidgetStepTitle = styled.div`
+  width: 400px;
+  font-size: 24px;
+  margin-bottom: 20px;
+`;
+
+const InputWrapper = styled.div`
+  width: 320px;
+  margin-bottom: 16px;
+`;
+
+const InlineInformation = styled.span`
+  padding: 0 10px;
+  color: ${COLORS.DOVE_GRAY};
 `;
 
 const WidgetView = () => {
@@ -165,7 +205,7 @@ const WidgetView = () => {
       </WidgetViewWrapper>
 
       <DayPicker />
-
+      {/*TODO: (refactor) move content separate component*/}
       <CustomRodal
         visible={showModal}
         animation="flip"
@@ -184,7 +224,20 @@ const WidgetView = () => {
         <DialogCycle bottom />
 
         <ModalContentWrapper>
-          <ModalContentContainer />
+          <ModalContentContainer>
+            <WidgetStepTitle>About Me</WidgetStepTitle>
+            <InputWrapper>
+              <AppointmentInput placeholder="Enter name"></AppointmentInput>
+            </InputWrapper>
+            <InputWrapper>
+              <AppointmentInput placeholder="Enter phone number"></AppointmentInput>
+            </InputWrapper>
+            <InputWrapper>
+              <ShortCenteredInput placeholder="1"></ShortCenteredInput>
+              <InlineInformation>Number of people</InlineInformation>
+            </InputWrapper>
+            <WidgetFooter>Salon Manager</WidgetFooter>
+          </ModalContentContainer>
           <ModalInformationContainer />
         </ModalContentWrapper>
       </CustomRodal>
