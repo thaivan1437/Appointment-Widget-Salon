@@ -2,19 +2,22 @@ import styled from 'styled-components';
 import { COLORS } from './colors';
 
 export const AppointmentInput = styled.input`
-  width: 248px;
-  font-size: 13px;
+  width: 300px;
+  font-size: 16px;
   border-radius: 5px;
 
-  padding: 5px;
-  border: 1px solid ${COLORS.SILVER_CHALICE};
+  font-family: 'Roboto', sans-serif;
+  padding: 8px;
+  border: 1px solid ${COLORS.MERCURY};
 
   box-shadow: inset 0 1px 3px ${COLORS.SHADOW};
   color: ${COLORS.DOVE_GRAY};
 
+  line-height: 1.5;
+
   :focus,
   :hover {
-    border-color: ${COLORS.MANDY};
+    border-color: ${COLORS.MONZA};
     outline: 0;
   }
 `;
