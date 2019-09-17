@@ -8,4 +8,9 @@ export const COLORS = {
   SILVER_CHALICE: '#AEAEAE',
   DOVE_GRAY: '#666666',
   SHADOW: 'rgba(0, 0, 0, 0.1)',
+  ALABASTER: '#F8F8F8',
+  MERCURY: '#E2E2E2',
+  GALLERY: '#EEEEEE',
+  ALTO: '#D6D6D6',
+  MONZA: '#CF003C',
 };
