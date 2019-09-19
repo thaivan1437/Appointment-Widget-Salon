@@ -15,6 +15,8 @@ import { COLORS } from '../common/colors';
 
 import { AppointmentInput, ShortCenteredInput } from '../common/styles';
 
+import Counter from '@components/counter';
+
 const WidgetViewWrapper = styled.div`
   position: fixed;
   bottom: 5px;
@@ -137,6 +139,11 @@ const InlineInformation = styled.span`
   color: ${COLORS.DOVE_GRAY};
 `;
 
+const CounterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const WidgetView = () => {
   // Demo section should remove
   const [left, setLeft] = useState(false);
@@ -231,8 +238,10 @@ const WidgetView = () => {
               <AppointmentInput placeholder="Enter phone number"></AppointmentInput>
             </InputWrapper>
             <InputWrapper>
-              <ShortCenteredInput placeholder="1"></ShortCenteredInput>
-              <InlineInformation>Number of people</InlineInformation>
+              <CounterWrapper>
+                <Counter />
+                <InlineInformation>Number of people</InlineInformation>
+              </CounterWrapper>
             </InputWrapper>
             <WidgetFooter>powered by Salon Manager</WidgetFooter>
           </ModalContentContainer>
