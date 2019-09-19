@@ -6,11 +6,9 @@ export const AppointmentInput = styled.input`
   font-size: 16px;
   border-radius: 5px;
 
-  font-family: 'Roboto', sans-serif;
   padding: 8px;
   border: 1px solid ${COLORS.MERCURY};
 
-  box-shadow: inset 0 1px 3px ${COLORS.SHADOW};
   color: ${COLORS.DOVE_GRAY};
 
   line-height: 1.5;

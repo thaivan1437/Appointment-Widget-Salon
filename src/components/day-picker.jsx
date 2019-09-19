@@ -21,10 +21,6 @@ const DayPickerWrapper = styled.div`
   margin: 0 auto;
   position: relative;
 
-  * {
-    font-family: 'Roboto', sans-serif;
-  }
-
   *:focus {
     outline: 0;
   }

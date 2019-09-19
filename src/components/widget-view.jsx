@@ -76,9 +76,6 @@ const CloseIcon = styled.img`
 const ModalContentWrapper = styled.div`
   display: flex;
   height: 100%;
-  * {
-    font-family: 'Roboto';
-  }
 `;
 const ModalContentContainer = styled.div`
   flex: 2;
@@ -117,7 +114,8 @@ const WidgetFooter = styled.div`
   border-top-style: dotted;
   border-color: ${COLORS.MERCURY};
   width: 500px;
-  color: ${COLORS.DOVE_GRAY};
+  color: ${COLORS.MERCURY};
+  font-size: 12px;
 
   padding: 10px 0;
   margin-bottom: 30px;
@@ -236,7 +234,7 @@ const WidgetView = () => {
               <ShortCenteredInput placeholder="1"></ShortCenteredInput>
               <InlineInformation>Number of people</InlineInformation>
             </InputWrapper>
-            <WidgetFooter>Salon Manager</WidgetFooter>
+            <WidgetFooter>powered by Salon Manager</WidgetFooter>
           </ModalContentContainer>
           <ModalInformationContainer />
         </ModalContentWrapper>
