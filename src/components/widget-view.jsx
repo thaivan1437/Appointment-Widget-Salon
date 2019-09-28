@@ -15,7 +15,7 @@ import { COLORS } from '../common/colors';
 
 import { AppointmentInput, ShortCenteredInput } from '../common/styles';
 
-import Counter from '@components/counter';
+import Counter from '@components/counter/counter';
 
 const WidgetViewWrapper = styled.div`
   position: fixed;
@@ -239,7 +239,7 @@ const WidgetView = () => {
             </InputWrapper>
             <InputWrapper>
               <CounterWrapper>
-                <Counter />
+                <Counter countChange={newCount => console.log(newCount)} />
                 <InlineInformation>Number of people</InlineInformation>
               </CounterWrapper>
             </InputWrapper>

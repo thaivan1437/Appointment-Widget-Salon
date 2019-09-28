@@ -24,6 +24,7 @@ module.exports = {
       '@components': path.resolve(__dirname, 'src', 'components'),
       '@assets': path.resolve(__dirname, 'src', 'assets'),
     },
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   module: {
     rules: [
