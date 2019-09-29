@@ -10,7 +10,7 @@ process.env.NODE_ENV = argv.buildEnv || 'development';
 module.exports = {
   output: {
     path: path.resolve('dist'),
-    filename: 'widget_[name]_bundle.js',
+    filename: 'widgets.js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
