@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import AppointmentIcon from '@assets/icon_widgets_appointment.png';
@@ -59,6 +59,9 @@ const ButtonWrapper = styled.div`
   align-self: flex-end;
   margin: 30px 50px 0 0;
 `;
+const DayPickerWrapper = styled.div`
+  margin: 42px 0;
+`;
 
 const WidgetView = () => {
   // Demo section should remove
@@ -67,7 +70,70 @@ const WidgetView = () => {
   const [top, setTop] = useState(true);
   const [bottom, setBottom] = useState(false);
   const [vertical, setVertical] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
+  const [selectedStep, setSelectedStep] = useState(1);
+
+  useEffect(() => {
+    if (!showModal) {
+      setSelectedStep(1);
+    }
+  }, [showModal]);
+
+  const renderContent = () => {
+    switch (selectedStep) {
+      case 1:
+        return (
+          <>
+            <ModalStyles.ModalStepTitle>About Me</ModalStyles.ModalStepTitle>
+            <InputWrapper>
+              <CommonStyles.Input placeholder="Enter name"></CommonStyles.Input>
+            </InputWrapper>
+            <InputWrapper>
+              <CommonStyles.Input placeholder="Enter phone number"></CommonStyles.Input>
+            </InputWrapper>
+            <InputWrapper>
+              <CounterWrapper>
+                <Counter countChange={newCount => console.log(newCount)} />
+                <InlineInformation>Number of people</InlineInformation>
+              </CounterWrapper>
+            </InputWrapper>
+
+            <ButtonWrapper>
+              <CommonStyles.Button onClick={() => setSelectedStep(2)}>
+                Next
+                <img src={ArrowIcon}></img>
+              </CommonStyles.Button>
+            </ButtonWrapper>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <ModalStyles.ModalStepTitle>Date</ModalStyles.ModalStepTitle>
+
+            <DayPickerWrapper>
+              <DayPicker />
+            </DayPickerWrapper>
+            <ButtonWrapper>
+              <CommonStyles.Button onClick={() => setSelectedStep(3)}>
+                Next
+                <img src={ArrowIcon}></img>
+              </CommonStyles.Button>
+            </ButtonWrapper>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <ModalStyles.ModalStepTitle>Time</ModalStyles.ModalStepTitle>
+          </>
+        );
+
+      default:
+        return <div>Invalid Step</div>;
+    }
+  };
 
   return (
     <>
@@ -125,31 +191,10 @@ const WidgetView = () => {
         <ImageWrapper onClick={() => setShowModal(true)} src={PromotionsIcon} />
       </WidgetViewWrapper>
 
-      <DayPicker />
       {/*TODO: (refactor) move content separate component*/}
       <CustomRodal showModal={showModal} setShowModal={setShowModal}>
         <ModalStyles.ModalContentContainer>
-          <ModalStyles.ModalStepTitle>About Me</ModalStyles.ModalStepTitle>
-          <InputWrapper>
-            <CommonStyles.Input placeholder="Enter name"></CommonStyles.Input>
-          </InputWrapper>
-          <InputWrapper>
-            <CommonStyles.Input placeholder="Enter phone number"></CommonStyles.Input>
-          </InputWrapper>
-          <InputWrapper>
-            <CounterWrapper>
-              <Counter countChange={newCount => console.log(newCount)} />
-              <InlineInformation>Number of people</InlineInformation>
-            </CounterWrapper>
-          </InputWrapper>
-
-          <ButtonWrapper>
-            <CommonStyles.Button>
-              Next
-              <img src={ArrowIcon}></img>
-            </CommonStyles.Button>
-          </ButtonWrapper>
-
+          {renderContent()}
           <ModalStyles.ModalFooter>
             powered by Salon Manager
           </ModalStyles.ModalFooter>
