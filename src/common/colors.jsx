@@ -13,4 +13,5 @@ export const COLORS = {
   GALLERY: '#EEEEEE',
   ALTO: '#D6D6D6',
   MONZA: '#CF003C',
+  STORM_GRAY: '#747883',
 };

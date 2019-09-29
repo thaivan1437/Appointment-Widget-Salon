@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { COLORS } from './colors';
 
-export const AppointmentInput = styled.input`
+export const S = {};
+
+S.Input = styled.input`
   width: 300px;
   font-size: 16px;
   border-radius: 5px;
@@ -20,36 +22,27 @@ export const AppointmentInput = styled.input`
   }
 `;
 
-export const ShortCenteredInput = styled(AppointmentInput)`
-  width: 40px;
-  text-align: center;
-`;
+S.Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-export const AppointmentTimeInput = styled(AppointmentInput)`
-  width: 92px;
-`;
-
-export const SendButton = styled.button`
-  padding: 5px;
-  width: 100%;
+  padding: 8px 12px;
   border-radius: 5px;
-  border: 1px solid ${COLORS.SILVER_CHALICE};
-  background: ${COLORS.MANDY};
+  border: 1px solid ${COLORS.MERCURY};
+  background-color: ${COLORS.STORM_GRAY};
 
-  margin: 10px 0;
+  font-size: 14px;
+  font-family: inherit;
 
-  height: 35px;
   color: white;
 
   :focus {
-    border-color: ${COLORS.MANDY};
-
     outline: 0;
   }
 
   :hover {
-    background-color: ${COLORS.CABARET};
-    font-weight: bold;
     cursor: pointer;
+    background-color: rgba(116, 120, 131, 0.7);
   }
 `;
