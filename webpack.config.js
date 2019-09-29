@@ -8,12 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 process.env.NODE_ENV = argv.buildEnv || 'development';
 
 module.exports = {
-  entry: {
-    manager: './src/widgets/manager.jsx',
-    appointment: './src/widgets/appointment.jsx',
-    pricing: './src/widgets/pricing.jsx',
-    'special-offer': './src/widgets/special-offer.jsx',
-  },
   output: {
     path: path.resolve('dist'),
     filename: 'widget_[name]_bundle.js',
