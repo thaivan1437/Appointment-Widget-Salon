@@ -10,7 +10,7 @@ import CloseDialogIcon from '@assets/icon_dialog_close.png';
 import 'rodal/lib/rodal.css';
 import Rodal from 'rodal';
 
-import DayPicker from '@components/day-picker';
+import DayPicker from '@components/day-picker/day-picker';
 import { COLORS } from '../common/colors';
 
 import { AppointmentInput, ShortCenteredInput } from '../common/styles';
