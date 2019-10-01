@@ -9,7 +9,7 @@ process.env.NODE_ENV = argv.buildEnv || 'development';
 
 module.exports = {
   output: {
-    path: path.resolve('dist'),
+    path: path.resolve('build'),
     filename: 'widgets.js',
   },
   resolve: {
