@@ -4,7 +4,7 @@
   "scripts": {
     "start": "npm run package:prepare && npm run dev",
     "package:prepare": "npm install && npm run clean",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf build",
     "dev": "webpack-dev-server",
     "build": "webpack -p --buildEnv=production",
     "dist:prod": "npm run package:prepare && npm run build",

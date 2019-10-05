@@ -12,7 +12,7 @@
 ####Create distribution bundle
 `npm run dist:prod`
 
-> After task complete, you should see different files for different widgets under the dist folder after webpack build complete
+> After task complete, you should see build folder after webpack build completed
 
 
 ##Test Environments
