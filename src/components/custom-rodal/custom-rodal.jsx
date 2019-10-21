@@ -1,5 +1,5 @@
 import React from 'react';
-import CloseDialogIcon from '@assets/icon_dialog_close.png';
+import CloseDialogIcon from '@assets/icon_close_bg.png';
 import { S } from '@components/custom-rodal/custom-rodal.styles';
 
 const CustomRodal = ({ children, showModal, setShowModal }) => {
@@ -13,6 +13,9 @@ const CustomRodal = ({ children, showModal, setShowModal }) => {
       height={420}
       onClose={() => setShowModal(false)}
     >
+      <S.CloseIconText onClick={() => setShowModal(false)}>
+        Close
+      </S.CloseIconText>
       <S.CloseIcon
         src={CloseDialogIcon}
         role="button"

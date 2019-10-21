@@ -21,6 +21,21 @@ S.CloseIcon = styled.img`
   left: 0;
   top: 0;
   cursor: pointer;
+  width: 72px;
+  height: 72px;
+`;
+
+S.CloseIconText = styled.div`
+  position: absolute;
+  top: 13px;
+
+  padding: 5px;
+  z-index: 1;
+  color: white;
+  transform: rotate(-45deg);
+
+  user-select: none;
+  cursor: pointer;
 `;
 
 S.ModalContentWrapper = styled.div`
@@ -57,6 +72,7 @@ S.ModalInformationContainer = styled.div`
   border-left-width: 1px;
   border-left-style: solid;
   border-left-color: ${COLORS.MERCURY};
+  padding: 20px 0 40px;
 `;
 
 S.ModalFooter = styled.div`
@@ -66,7 +82,7 @@ S.ModalFooter = styled.div`
   border-top-style: dotted;
   border-color: ${COLORS.MERCURY};
   width: 500px;
-  color: ${COLORS.MERCURY};
+  color: ${COLORS.STORM_GRAY};
   font-size: 12px;
 
   padding: 10px 0;
