@@ -9,6 +9,16 @@ export const getTimeString = date =>
     ? date.toLocaleTimeString('en-US')
     : '';
 
+export const getDisplayDateString = date => {
+  return date && typeof date.toLocaleTimeString === 'function'
+    ? date.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : null;
+};
+
 const addDays = (date, days) => {
   const tempDate = new Date(date);
   return tempDate.setDate(tempDate.getDate() + days);
