@@ -4,7 +4,7 @@ import { COLORS } from '../../common/colors';
 export const S = {};
 
 S.DayPickerWrapper = styled.div`
-  width: 455px;
+  width: 400px;
   margin: 0 auto;
   position: relative;
 
@@ -15,9 +15,25 @@ S.DayPickerWrapper = styled.div`
   .slick-prev:before,
   .slick-next:before {
     color: ${COLORS.MONZA};
+    font-size: 45px;
+  }
+  .slick-arrow:not(.slick-disabled):before {
+    opacity: 1;
+  }
+
+  .slick-prev,
+  .slick-next {
+    width: 45px;
+    height: 45px;
+  }
+  .slick-next {
+    right: -50px;
+  }
+
+  .slick-prev {
+    left: -50px;
   }
 `;
-
 S.DayItem = styled.div`
   display: flex;
   flex-direction: column;

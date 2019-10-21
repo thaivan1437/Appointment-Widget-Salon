@@ -11,11 +11,11 @@ const SETTINGS = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 7,
-  slidesToScroll: 7,
+  slidesToShow: 6,
+  slidesToScroll: 6,
 };
 
-const DayPicker = ({ selectedDateChange }) => {
+const DayPicker = ({ selectedDateChange, initialValue }) => {
   const [selectedDate, setSelectedDate] = useState();
   const [dates, setDates] = useState([]);
 
@@ -24,11 +24,14 @@ const DayPicker = ({ selectedDateChange }) => {
   }, []);
 
   useEffect(() => {
-    handleDateChange(dates[0] || {});
+    if (initialValue) {
+      handleDateChange(initialValue);
+    } else {
+      handleDateChange(dates[0] || {});
+    }
   }, [dates]);
 
   const handleDateChange = dateItem => {
-    console.log(dateItem);
     setSelectedDate(dateItem);
 
     if (selectedDateChange) {
@@ -38,12 +41,14 @@ const DayPicker = ({ selectedDateChange }) => {
 
   return (
     <S.DayPickerWrapper>
-      <S.BoxBackground />
       <Slider {...SETTINGS}>
         {dates.map(dateItem => (
           <div key={`${dateItem.day}_${dateItem.month}`}>
             <S.DayItem
-              selected={selectedDate.dateValue === dateItem.dateValue}
+              selected={
+                selectedDate.day === dateItem.day &&
+                selectedDate.month === dateItem.month
+              }
               onClick={() => {
                 handleDateChange(dateItem);
               }}
