@@ -17,6 +17,12 @@ module.exports = {
     alias: {
       '@components': path.resolve(__dirname, 'src', 'components'),
       '@assets': path.resolve(__dirname, 'src', 'assets'),
+      '@environment': path.resolve(
+        __dirname,
+        'src',
+        'environments',
+        process.env.NODE_ENV + '.js'
+      ),
     },
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
