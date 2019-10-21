@@ -10,20 +10,15 @@
 
     <!-- Widget Implementation Block Start -->
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        injectWidget();
-      });
-
-      function injectWidget() {
-        var element = document.createElement('div');
-        element.setAttribute('id', 'widget-root');
-
-        var script = document.createElement('script');
-        script.setAttribute('src', 'widgets.js');
-
-        document.body.appendChild(element);
-        document.body.appendChild(script);
-      }
+      (function(d, m, r, c) {
+        var e = d.createElement(m),
+          n = d.getElementsByTagName(m)[0];
+        e.src = c; e.defer = true; e.type = r;
+        e.onload = function() {
+          initWidget(d, 'APP_ID_GOES_HERE');
+        };
+        n.parentNode.insertBefore(e, n);
+      })(document, 'script', 'text/javascript', 'widgets.js');
     </script>
     <!-- Widget Implementation Block End -->
   </head>
