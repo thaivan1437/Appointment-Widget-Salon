@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { COUNT_ACTIONS, COUNTER_MAX_LIMIT } from '../../common/constants';
 import { S } from './counter.styles';
 
-const Counter = ({ countChange }) => {
-  const [count, setCount] = useState(1);
+const Counter = ({ countChange, initialValue }) => {
+  const [count, setCount] = useState(initialValue || 1);
 
   // TODO: add callback props
   const setCountHandler = actionType => {
@@ -34,7 +34,7 @@ const Counter = ({ countChange }) => {
           setCountHandler(COUNT_ACTIONS.DECREASE);
         }}
       >
-        -
+        —
       </S.CountDown>
       <S.CountText>{count}</S.CountText>
       <S.CountUp

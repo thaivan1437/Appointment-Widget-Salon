@@ -4,9 +4,9 @@ import { COLORS } from 'common/colors';
 export const S = {};
 
 const CountBase = styled.div`
-  width: 30px;
-  height: 30px;
-  line-height: 30px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   text-align: center;
   cursor: pointer;
   user-select: none;
@@ -25,8 +25,10 @@ S.CountUp = styled(CountBase)`
 `;
 
 S.CountText = styled.div`
-  width: 50px;
-  line-height: 30px;
+  color: ${COLORS.DOVE_GRAY};
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
   text-align: center;
   box-shadow: 0 0 0 1px ${COLORS.SHADOW};
 `;
