@@ -12,6 +12,7 @@ export const COLORS = {
   MERCURY: '#E2E2E2',
   GALLERY: '#EEEEEE',
   ALTO: '#D6D6D6',
-  MONZA: '#CF003C',
+  MONZA: '#FF004A',
   STORM_GRAY: '#747883',
+  SILVER: '#C8C8C8',
 };
