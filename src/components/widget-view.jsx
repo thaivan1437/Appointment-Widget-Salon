@@ -16,7 +16,9 @@ import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import Counter from '@components/counter/counter';
 import TimePicker from '@components/time-picker/time-picker';
 import ServiceSelection from '@components/service-selection/service-selection';
-import { getDisplayDateString } from 'common/utils';
+import { getDisplayDateString, getRequestDateString } from 'common/utils';
+import httpUtil from 'common/HttpUtil';
+
 const WidgetViewWrapper = styled.div`
   position: fixed;
   bottom: 5px;
@@ -34,12 +36,6 @@ const ImageWrapper = styled.img`
   width: 65px;
   height: 65px;
   cursor: pointer;
-`;
-
-// TODO remove after demo
-const OptionsWrapper = styled.div`
-  width: 175px;
-  margin: 100px auto;
 `;
 
 const InputWrapper = styled.div`
@@ -166,14 +162,17 @@ const ConfirmationStepWrapper = styled.div`
   align-items: center;
 `;
 
-const WidgetView = () => {
-  // Demo section should remove
-  const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(true);
-  const [top, setTop] = useState(true);
-  const [bottom, setBottom] = useState(false);
-  const [vertical, setVertical] = useState(false);
+const showWidgetButton = (widgetName, registeredWidgets) => {
+  return Array.isArray(registeredWidgets)
+    ? registeredWidgets.indexOf(widgetName) !== -1
+    : false;
+};
 
+const WidgetView = ({ widgetConfig, appId }) => {
+  const [left, setLeft] = useState(false);
+  const [right, setRight] = useState(false);
+  const [top, setTop] = useState(false);
+  const [bottom, setBottom] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [selectedStep, setSelectedStep] = useState(1);
   const [userName, setUserName] = useState('');
@@ -198,6 +197,33 @@ const WidgetView = () => {
       setSelectedServices([]);
     }
   }, [showModal]);
+
+  useEffect(() => {
+    switch (widgetConfig.position) {
+      case 'TOP_LEFT':
+        setTop(true);
+        setLeft(true);
+        break;
+
+      case 'TOP_RIGHT':
+        setTop(true);
+        setRight(true);
+        break;
+
+      case 'BOTTOM_LEFT':
+        setBottom(true);
+        setLeft(true);
+        break;
+
+      case 'BOTTOM_RIGHT':
+        setBottom(true);
+        setRight(true);
+        break;
+      default:
+        setRight(true);
+        setBottom(true);
+    }
+  }, []);
 
   const getHourString = selectedTimeObject => {
     const hourString =
@@ -369,7 +395,8 @@ const WidgetView = () => {
               </BackButton>
               <CommonStyles.Button
                 disabled={!(selectedTime1 && selectedTime2)}
-                onClick={() => setSelectedStep(4)}
+                // onClick={() => setSelectedStep(4)} // TODO: open when services ready
+                onClick={() => setSelectedStep(5)}
               >
                 Next
                 <img src={ArrowIcon} />
@@ -412,8 +439,29 @@ const WidgetView = () => {
             <ConfirmationStepWrapper>
               <CommonStyles.AppointmentButton
                 onClick={() => {
-                  console.log('request atılacak');
-                  setSelectedStep(6);
+                  const data = {
+                    customerName: userName,
+                    customerPhoneNumber: `+1${userPhone.replace(/[^\d]/g, '')}`,
+                    numberOfPeople: userCount,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    date: getRequestDateString(selectedDate.dateValue),
+                    time1: getHourString(selectedTime1),
+                    time2: getHourString(selectedTime2),
+                    services: [], // TODO add later
+                  };
+
+                  console.log('request data', data);
+
+                  httpUtil
+                    .makeRequest({
+                      method: 'POST',
+                      url: `https://salon.api.salonmanager.net/v1/widgets/${appId}/appointment`,
+                      data,
+                    })
+                    .then(response => {
+                      console.log('result', response);
+                      setSelectedStep(6);
+                    });
                 }}
               >
                 Make an Appointment
@@ -443,59 +491,28 @@ const WidgetView = () => {
 
   return (
     <>
-      {/*TODO: remove after demo*/}
-      <OptionsWrapper>
-        <div
-          onChange={e => {
-            const isLeft = e.target.value === 'left';
-
-            setLeft(isLeft);
-            setRight(!isLeft);
-          }}
+      {top || left || bottom || right ? (
+        <WidgetViewWrapper
+          top={top}
+          right={right}
+          bottom={bottom}
+          left={left}
+          vertical={widgetConfig.orientation === 'vertical'}
         >
-          <input type="radio" name="Group1" value="left" /> Left
-          <input type="radio" name="Group1" value="right" defaultChecked />{' '}
-          Right
-        </div>
-
-        <div
-          onChange={e => {
-            const isBottom = e.target.value === 'bottom';
-
-            setBottom(isBottom);
-            setTop(!isBottom);
-          }}
-        >
-          <input type="radio" name="Group2" value="top" defaultChecked /> Top
-          <input type="radio" name="Group2" value="bottom" /> Bottom
-        </div>
-
-        <div
-          onChange={e => {
-            const isVertical = e.target.value === 'vertical';
-            setVertical(isVertical);
-          }}
-        >
-          <input type="radio" name="Group3" value="horizontal" defaultChecked />{' '}
-          Horizontal
-          <input type="radio" name="Group3" value="vertical" />
-          Vertical
-        </div>
-      </OptionsWrapper>
-      <WidgetViewWrapper
-        top={top}
-        right={right}
-        bottom={bottom}
-        left={left}
-        vertical={vertical}
-      >
-        <ImageWrapper
-          onClick={() => setShowModal(true)}
-          src={AppointmentIcon}
-        />
-        <ImageWrapper onClick={() => setShowModal(true)} src={PricingIcon} />
-        <ImageWrapper onClick={() => setShowModal(true)} src={PromotionsIcon} />
-      </WidgetViewWrapper>
+          {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
+            <ImageWrapper
+              onClick={() => setShowModal(true)}
+              src={AppointmentIcon}
+            />
+          ) : null}
+          {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
+            <ImageWrapper src={PricingIcon} />
+          ) : null}
+          {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
+            <ImageWrapper src={PromotionsIcon} />
+          ) : null}
+        </WidgetViewWrapper>
+      ) : null}
 
       {/*TODO: (refactor) move content separate component*/}
       <CustomRodal showModal={showModal} setShowModal={setShowModal}>

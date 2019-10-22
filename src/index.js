@@ -12,11 +12,15 @@ window.initWidget = function(d, appId) {
   httpUtil
     .makeRequest({
       method: 'GET',
-      url: `${appId}.json`,
+      // url: `https://configs.widgets.salonmanager.net/${appId}.json`, // TODO open when cors problem resolved
+      url: `https://s3-us-west-2.amazonaws.com/configs.widgets.salonmanager.net/${appId}.json`,
     })
     .then(response => {
-      console.log(response);
-    });
+      const configData = response.data;
 
-  ReactDOM.render(<WidgetView />, document.getElementById('widget-root'));
+      ReactDOM.render(
+        <WidgetView widgetConfig={configData} appId={appId} />,
+        document.getElementById('widget-root')
+      );
+    });
 };
