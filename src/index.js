@@ -12,8 +12,8 @@ window.initWidget = function(d, appId) {
   httpUtil
     .makeRequest({
       method: 'GET',
-      // url: `https://configs.widgets.salonmanager.net/${appId}.json`, // TODO open when cors problem resolved
-      url: `https://s3-us-west-2.amazonaws.com/configs.widgets.salonmanager.net/${appId}.json`,
+      url: `https://configs.widgets.salonmanager.net/${appId}.json`,
+      // url: `https://s3-us-west-2.amazonaws.com/configs.widgets.salonmanager.net/${appId}.json`,
     })
     .then(response => {
       const configData = response.data;

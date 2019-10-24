@@ -457,6 +457,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                       method: 'POST',
                       url: `https://salon.api.salonmanager.net/v1/widgets/${appId}/appointment`,
                       data,
+                      headers: {
+                        'x-api-key': 'yajpLtZTee2BAEcvWZgjYa4qXLT6WANy6JogEmQk',
+                        appToken: 'e15cf450-e9a2-11e9-8911-afe5120f53d7',
+                        'x-app-version':'v1.0.1@20190610'
+                      },
                     })
                     .then(response => {
                       console.log('result', response);
