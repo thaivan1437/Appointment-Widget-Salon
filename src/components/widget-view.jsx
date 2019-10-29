@@ -8,7 +8,7 @@ import ArrowIcon from '@assets/arrow.svg';
 
 import DayPicker from '@components/day-picker/day-picker';
 import CustomRodal from '@components/custom-rodal/custom-rodal';
-import { COLORS } from '../common/colors';
+import { COLORS, INPUT_COLORS } from '../common/colors';
 
 import { S as CommonStyles } from 'common/styles';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
@@ -39,13 +39,15 @@ const ImageWrapper = styled.img`
 `;
 
 const InputWrapper = styled.div`
-  width: 320px;
-  margin-bottom: 16px;
+  margin-top: 20px;
+
+  width: 424px;
 `;
 
 const InlineInformation = styled.span`
   padding: 0 10px;
-  color: ${COLORS.DOVE_GRAY};
+  color: ${INPUT_COLORS.TEXT_COLOR};
+  font-size: 22px;
 `;
 
 const CounterWrapper = styled.div`
@@ -55,7 +57,7 @@ const CounterWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   align-self: flex-end;
-  margin: 30px 50px 0 0;
+  margin: 47px 50px 0 0;
 
   display: flex;
   align-items: center;
@@ -63,7 +65,7 @@ const ButtonWrapper = styled.div`
 
 // TODO move common styles file
 const ButtonWrapper2 = styled(ButtonWrapper)`
-  margin-top: 0;
+  margin-top: 17px;
 `;
 
 const ButtonWrapper4 = styled(ButtonWrapper)`
@@ -71,7 +73,7 @@ const ButtonWrapper4 = styled(ButtonWrapper)`
 `;
 
 const ButtonWrapper3 = styled(ButtonWrapper)`
-  margin-top: 20px;
+  margin-top: 37px;
 `;
 
 const DayPickerWrapper = styled.div`
@@ -162,6 +164,17 @@ const ConfirmationStepWrapper = styled.div`
   align-items: center;
 `;
 
+const FormWrapper = styled.div`
+  border: 1px solid ${INPUT_COLORS.BORDER};
+  border-radius: 10px;
+`;
+
+const SeparatorLine = styled.div`
+  border-bottom-color: ${INPUT_COLORS.BORDER};
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+`;
+
 const showWidgetButton = (widgetName, registeredWidgets) => {
   return Array.isArray(registeredWidgets)
     ? registeredWidgets.indexOf(widgetName) !== -1
@@ -240,7 +253,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         return (
           <>
             <ModalStyles.ModalStepTitle>Me</ModalStyles.ModalStepTitle>
-            <InputWrapper>
+            <FormWrapper>
               <CommonStyles.Input
                 value={userName}
                 hasError={errors.userName}
@@ -260,8 +273,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 }}
                 placeholder="Enter name"
               ></CommonStyles.Input>
-            </InputWrapper>
-            <InputWrapper>
+              <SeparatorLine />
               <CommonStyles.Input
                 value={userPhone}
                 hasError={errors.userPhone}
@@ -302,7 +314,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 }}
                 placeholder="Enter phone number (000) 000-0000"
               ></CommonStyles.Input>
-            </InputWrapper>
+            </FormWrapper>
             <InputWrapper>
               <CounterWrapper>
                 <Counter
@@ -460,7 +472,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                       headers: {
                         'x-api-key': 'yajpLtZTee2BAEcvWZgjYa4qXLT6WANy6JogEmQk',
                         appToken: 'e15cf450-e9a2-11e9-8911-afe5120f53d7',
-                        'x-app-version':'v1.0.1@20190610'
+                        'x-app-version': 'v1.0.1@20190610',
                       },
                     })
                     .then(response => {

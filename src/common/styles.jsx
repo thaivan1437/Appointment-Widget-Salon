@@ -1,32 +1,29 @@
 import styled from 'styled-components';
-import { COLORS } from './colors';
+import { COLORS, INPUT_COLORS } from './colors';
 
 export const S = {};
 
 S.Input = styled.input`
-  width: 300px;
-  font-size: 18px;
-  border-radius: 5px;
+  width: 400px;
+  font-size: 22px;
+  border-radius: 10px;
 
-  padding: 8px;
-  border: 1px solid
-    ${props => (props.hasError ? COLORS.MONZA : COLORS.OSLO_GRAY)};
+  padding: 12px;
+  border: none;
 
-  color: ${COLORS.DOVE_GRAY};
+  color: ${props => (props.hasError ? COLORS.MONZA : INPUT_COLORS.TEXT_COLOR)};
 
-  line-height: 1.5;
-  height: 36px;
+  line-height: 2;
 
   text-transform: capitalize;
 
   :focus,
   :hover {
-    border-color: ${COLORS.MONZA};
     outline: 0;
   }
 
   ::placeholder {
-    color: ${COLORS.SILVER};
+    color: ${props => (props.hasError ? COLORS.MONZA : INPUT_COLORS.HIT_TEXT)};
   }
 `;
 
@@ -35,12 +32,12 @@ S.Button = styled.button`
   justify-content: center;
   align-items: center;
 
-  padding: 8px 12px;
-  border-radius: 5px;
-  border: 1px solid ${COLORS.MERCURY};
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
   background-color: ${COLORS.MONZA};
 
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
 
   color: white;

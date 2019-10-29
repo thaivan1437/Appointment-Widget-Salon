@@ -94,9 +94,9 @@ S.SelectionOptionContainer = styled.div`
 
   width: 400px;
 
-  min-height: 145px;
+  min-height: 165px;
 
-  padding-bottom: 20px;
+  padding-bottom: 40px;
 
   flex-wrap: wrap;
 
