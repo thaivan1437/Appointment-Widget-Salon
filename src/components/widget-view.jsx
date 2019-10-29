@@ -131,9 +131,9 @@ const FirstStepMessage = styled(AppointmentInfo)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 40px;
+  padding: 0 24px;
   height: 100%;
-  font-size: 20px;
+  font-size: 24px;
   text-align: center;
 `;
 
