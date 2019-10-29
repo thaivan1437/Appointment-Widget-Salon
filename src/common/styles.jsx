@@ -17,6 +17,8 @@ S.Input = styled.input`
   line-height: 1.5;
   height: 36px;
 
+  text-transform: capitalize;
+
   :focus,
   :hover {
     border-color: ${COLORS.MONZA};
