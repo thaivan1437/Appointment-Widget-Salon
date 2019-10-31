@@ -269,6 +269,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   }
                 }}
                 placeholder="Enter name"
+                hasValue={userName.length > 0}
               ></CommonStyles.Input>
               <SeparatorLine />
               <CommonStyles.Input
@@ -310,6 +311,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   }
                 }}
                 placeholder="Enter phone number (000) 000-0000"
+                hasValue={userPhone.length > 0}
               ></CommonStyles.Input>
             </FormWrapper>
             <InputWrapper>

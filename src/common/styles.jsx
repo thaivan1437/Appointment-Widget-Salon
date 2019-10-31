@@ -15,7 +15,7 @@ S.Input = styled.input`
 
   line-height: 2;
 
-  text-transform: capitalize;
+  text-transform: ${props => (props.hasValue ? 'capitalize' : 'none')};
 
   :focus,
   :hover {
