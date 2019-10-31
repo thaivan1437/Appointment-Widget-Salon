@@ -1,8 +1,7 @@
 import React from 'react';
-import CloseDialogIcon from '@assets/icon_close_bg.png';
 import { S } from '@components/custom-rodal/custom-rodal.styles';
 
-const CustomRodal = ({ children, showModal, setShowModal }) => {
+const CustomRodal = ({ children, showModal, setShowModal, selectedStyle }) => {
   return (
     <S.CustomRodal
       visible={showModal}
@@ -17,7 +16,7 @@ const CustomRodal = ({ children, showModal, setShowModal }) => {
         Close
       </S.CloseIconText>
       <S.CloseIcon
-        src={CloseDialogIcon}
+        src={`https://widgets.salonmanager.net/icons/${selectedStyle}/close-button.png`}
         role="button"
         onClick={() => setShowModal(false)}
       />

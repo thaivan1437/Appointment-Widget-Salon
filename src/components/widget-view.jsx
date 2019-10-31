@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import AppointmentIcon from '@assets/icon_widgets_appointment.png';
-import PricingIcon from '@assets/icon_widgets_pricing.png';
-import PromotionsIcon from '@assets/icon_widgets_promotions.png';
 import ArrowIcon from '@assets/arrow.svg';
 
 import DayPicker from '@components/day-picker/day-picker';
@@ -519,20 +516,28 @@ const WidgetView = ({ widgetConfig, appId }) => {
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <ImageWrapper
               onClick={() => setShowModal(true)}
-              src={AppointmentIcon}
+              src={`https://widgets.salonmanager.net/icons/${widgetConfig.style}/appointments.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
-            <ImageWrapper src={PricingIcon} />
+            <ImageWrapper
+              src={`https://widgets.salonmanager.net/icons/${widgetConfig.style}/pricing.png`}
+            />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
-            <ImageWrapper src={PromotionsIcon} />
+            <ImageWrapper
+              src={`https://widgets.salonmanager.net/icons/${widgetConfig.style}/promotions.png`}
+            />
           ) : null}
         </WidgetViewWrapper>
       ) : null}
 
       {/*TODO: (refactor) move content separate component*/}
-      <CustomRodal showModal={showModal} setShowModal={setShowModal}>
+      <CustomRodal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        selectedStyle={widgetConfig.style}
+      >
         <ModalStyles.ModalContentContainer>
           {renderContent()}
           <ModalStyles.ModalFooter>
