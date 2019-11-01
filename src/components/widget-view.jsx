@@ -15,6 +15,9 @@ import TimePicker from '@components/time-picker/time-picker';
 import ServiceSelection from '@components/service-selection/service-selection';
 import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
+import { COLOR_SCHEMA } from 'common/constants';
+
+export const ColorContext = React.createContext(COLOR_SCHEMA['red']);
 
 const WidgetViewWrapper = styled.div`
   position: fixed;
@@ -192,6 +195,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [selectedTime1, setSelectedTime1] = useState();
   const [selectedTime2, setSelectedTime2] = useState();
   const [selectedServices, setSelectedServices] = useState([]);
+  const [color, setColor] = useState(COLOR_SCHEMA['red']);
 
   const [errors, setErrors] = useState({ userName: false, userPhone: false });
 
@@ -233,6 +237,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setRight(true);
         setBottom(true);
     }
+
+    const color = COLOR_SCHEMA[widgetConfig.style] || COLOR_SCHEMA['red'];
+    setColor(color);
   }, []);
 
   const getHourString = selectedTimeObject => {
@@ -327,6 +334,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
             </InputWrapper>
             <ButtonWrapper4>
               <CommonStyles.Button
+                color={color}
                 onClick={() => {
                   if (userName.length < 2 || userPhone.length !== 14) {
                     setErrors({
@@ -364,6 +372,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 {'< Back'}
               </BackButton>
               <CommonStyles.Button
+                color={color}
                 disabled={!(selectedDate && selectedDate.dateValue)}
                 onClick={() => setSelectedStep(3)}
               >
@@ -405,6 +414,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 {'< Back'}
               </BackButton>
               <CommonStyles.Button
+                color={color}
                 disabled={!(selectedTime1 && selectedTime2)}
                 // onClick={() => setSelectedStep(4)} // TODO: open when services ready
                 onClick={() => setSelectedStep(5)}
@@ -434,6 +444,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 {'< Back'}
               </BackButton>
               <CommonStyles.Button
+                color={color}
                 disabled={selectedServices.length < 1}
                 onClick={() => setSelectedStep(5)}
               >
@@ -449,6 +460,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
           <>
             <ConfirmationStepWrapper>
               <CommonStyles.AppointmentButton
+                color={color}
                 onClick={() => {
                   const data = {
                     customerName: userName,
@@ -540,58 +552,60 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setShowModal={setShowModal}
         selectedStyle={widgetConfig.style}
       >
-        <ModalStyles.ModalContentContainer>
-          {renderContent()}
-          <ModalStyles.ModalFooter>
-            powered by
-            <FooterLink href="https://salonmanager.net" target="_blank">
-              Salon Manager
-            </FooterLink>
-          </ModalStyles.ModalFooter>
-        </ModalStyles.ModalContentContainer>
-        <ModalStyles.ModalInformationContainer>
-          {selectedStep === 1 ? (
-            <FirstStepMessage>
-              Your appointment details will appear here
-            </FirstStepMessage>
-          ) : null}
+        <ColorContext.Provider value={color}>
+          <ModalStyles.ModalContentContainer>
+            {renderContent()}
+            <ModalStyles.ModalFooter>
+              powered by
+              <FooterLink href="https://salonmanager.net" target="_blank">
+                Salon Manager
+              </FooterLink>
+            </ModalStyles.ModalFooter>
+          </ModalStyles.ModalContentContainer>
+          <ModalStyles.ModalInformationContainer>
+            {selectedStep === 1 ? (
+              <FirstStepMessage>
+                Your appointment details will appear here
+              </FirstStepMessage>
+            ) : null}
 
-          {selectedStep > 1 ? (
-            <>
-              <AppointmentInfo header>Appointment Details</AppointmentInfo>
+            {selectedStep > 1 ? (
+              <>
+                <AppointmentInfo header>Appointment Details</AppointmentInfo>
+                <InformationWrapper>
+                  <AppointmentInfo>{userName}</AppointmentInfo>
+                  <AppointmentInfo>{userPhone}</AppointmentInfo>
+                  <AppointmentInfo>
+                    {userCount} {userCount === 1 ? 'Person' : 'People'}
+                  </AppointmentInfo>
+                </InformationWrapper>
+              </>
+            ) : null}
+
+            {selectedStep > 2 ? (
               <InformationWrapper>
-                <AppointmentInfo>{userName}</AppointmentInfo>
-                <AppointmentInfo>{userPhone}</AppointmentInfo>
                 <AppointmentInfo>
-                  {userCount} {userCount === 1 ? 'Person' : 'People'}
+                  {getDisplayDateString(selectedDate.dateValue)}
                 </AppointmentInfo>
+                {selectedStep > 3 ? (
+                  <AppointmentInfo>
+                    {`${getHourString(selectedTime1)} / ${getHourString(
+                      selectedTime2
+                    )}`}
+                  </AppointmentInfo>
+                ) : null}
               </InformationWrapper>
-            </>
-          ) : null}
+            ) : null}
 
-          {selectedStep > 2 ? (
-            <InformationWrapper>
-              <AppointmentInfo>
-                {getDisplayDateString(selectedDate.dateValue)}
-              </AppointmentInfo>
-              {selectedStep > 3 ? (
-                <AppointmentInfo>
-                  {`${getHourString(selectedTime1)} / ${getHourString(
-                    selectedTime2
-                  )}`}
-                </AppointmentInfo>
-              ) : null}
-            </InformationWrapper>
-          ) : null}
-
-          {selectedStep > 4 ? (
-            <InformationWrapper>
-              {selectedServices.map(service => (
-                <AppointmentInfo>{service.serviceName}</AppointmentInfo>
-              ))}
-            </InformationWrapper>
-          ) : null}
-        </ModalStyles.ModalInformationContainer>
+            {selectedStep > 4 ? (
+              <InformationWrapper>
+                {selectedServices.map(service => (
+                  <AppointmentInfo>{service.serviceName}</AppointmentInfo>
+                ))}
+              </InformationWrapper>
+            ) : null}
+          </ModalStyles.ModalInformationContainer>
+        </ColorContext.Provider>
       </CustomRodal>
     </>
   );

@@ -6,6 +6,7 @@ import Slider from 'react-slick';
 
 import { getDates } from '../../common/utils';
 import { S } from 'components/day-picker/day-picker.styles';
+import { ColorContext } from '@components/widget-view';
 
 const SETTINGS = {
   dots: false,
@@ -40,27 +41,32 @@ const DayPicker = ({ selectedDateChange, initialValue }) => {
   };
 
   return (
-    <S.DayPickerWrapper>
-      <Slider {...SETTINGS}>
-        {dates.map(dateItem => (
-          <div key={`${dateItem.day}_${dateItem.month}`}>
-            <S.DayItem
-              selected={
-                selectedDate.day === dateItem.day &&
-                selectedDate.month === dateItem.month
-              }
-              onClick={() => {
-                handleDateChange(dateItem);
-              }}
-            >
-              <S.DayInfo>{dateItem.month}</S.DayInfo>
-              <S.DayValue>{dateItem.day}</S.DayValue>
-              <S.DayInfo>{dateItem.weekday}</S.DayInfo>
-            </S.DayItem>
-          </div>
-        ))}
-      </Slider>
-    </S.DayPickerWrapper>
+    <ColorContext.Consumer>
+      {color => (
+        <S.DayPickerWrapper color={color}>
+          <Slider {...SETTINGS}>
+            {dates.map(dateItem => (
+              <div key={`${dateItem.day}_${dateItem.month}`}>
+                <S.DayItem
+                  color={color}
+                  selected={
+                    selectedDate.day === dateItem.day &&
+                    selectedDate.month === dateItem.month
+                  }
+                  onClick={() => {
+                    handleDateChange(dateItem);
+                  }}
+                >
+                  <S.DayInfo>{dateItem.month}</S.DayInfo>
+                  <S.DayValue>{dateItem.day}</S.DayValue>
+                  <S.DayInfo>{dateItem.weekday}</S.DayInfo>
+                </S.DayItem>
+              </div>
+            ))}
+          </Slider>
+        </S.DayPickerWrapper>
+      )}
+    </ColorContext.Consumer>
   );
 };
 

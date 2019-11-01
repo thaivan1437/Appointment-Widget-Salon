@@ -14,7 +14,7 @@ S.DayPickerWrapper = styled.div`
 
   .slick-prev:before,
   .slick-next:before {
-    color: ${COLORS.MONZA};
+    color: ${props => props.color};
     font-size: 45px;
   }
   .slick-arrow:not(.slick-disabled):before {
@@ -47,11 +47,11 @@ S.DayItem = styled.div`
   margin: 0 3px;
   box-shadow: inset -1px -1px 3px 1px ${COLORS.SHADOW};
 
-  background-color: ${props => (props.selected ? COLORS.MONZA : COLORS.WHITE)};
+  background-color: ${props => (props.selected ? props.color : COLORS.WHITE)};
   color: ${props => (props.selected ? COLORS.WHITE : COLORS.BLACK)};
 
   :hover {
-    background-color: ${props => (props.selected ? COLORS.MONZA : COLORS.ALTO)};
+    background-color: ${props => (props.selected ? props.color : COLORS.ALTO)};
     cursor: pointer;
   }
 `;

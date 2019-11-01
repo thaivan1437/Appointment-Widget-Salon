@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { S } from './time-picker.styles';
 
+import { ColorContext } from '@components/widget-view';
+
 const HOURS = [
   '8 AM',
   '9 AM',
@@ -48,65 +50,71 @@ const TimePicker = ({ onTimeSelected, initialValue }) => {
 
   return (
     <>
-      <S.TimePickerWrapper>
-        <S.SelectionContainer
-          selected={showHourSelection}
-          hasValue={selectedHour}
-          onClick={() => {
-            setShowMinutesSelection(false);
-            setShowHourSelection(true);
-          }}
-        >
-          <S.SelectionText>HOUR</S.SelectionText>
-          <S.SelectionValue>{displayHour.hour}</S.SelectionValue>
-        </S.SelectionContainer>
-        <S.TimeSeparator>:</S.TimeSeparator>
-        <S.SelectionContainer
-          selected={showMinutesSelection}
-          hasValue={selectedMinute !== '_ _'}
-          onClick={() => {
-            setShowHourSelection(false);
-            setShowMinutesSelection(true);
-          }}
-        >
-          <S.SelectionText>MINUTE</S.SelectionText>
-          <S.SelectionValue>{selectedMinute}</S.SelectionValue>
-        </S.SelectionContainer>
-        <S.TimeText>{displayHour.text}</S.TimeText>
+      <ColorContext.Consumer>
+        {color => (
+          <S.TimePickerWrapper>
+            <S.SelectionContainer
+              selected={showHourSelection}
+              hasValue={selectedHour}
+              onClick={() => {
+                setShowMinutesSelection(false);
+                setShowHourSelection(true);
+              }}
+            >
+              <S.SelectionText>HOUR</S.SelectionText>
+              <S.SelectionValue>{displayHour.hour}</S.SelectionValue>
+            </S.SelectionContainer>
+            <S.TimeSeparator>:</S.TimeSeparator>
+            <S.SelectionContainer
+              selected={showMinutesSelection}
+              hasValue={selectedMinute !== '_ _'}
+              onClick={() => {
+                setShowHourSelection(false);
+                setShowMinutesSelection(true);
+              }}
+            >
+              <S.SelectionText>MINUTE</S.SelectionText>
+              <S.SelectionValue>{selectedMinute}</S.SelectionValue>
+            </S.SelectionContainer>
+            <S.TimeText>{displayHour.text}</S.TimeText>
 
-        {showHourSelection || showMinutesSelection ? (
-          <S.SelectionOptionContainer>
-            {showHourSelection
-              ? HOURS.map(value => (
-                  <S.OptionItem
-                    key={`option_${value}`}
-                    onClick={() => {
-                      setSelectedHour(value);
-                      setShowHourSelection(false);
-                    }}
-                    selected={selectedHour === value}
-                  >
-                    {value}
-                  </S.OptionItem>
-                ))
-              : null}
-            {showMinutesSelection
-              ? MINUTES.map(value => (
-                  <S.OptionItem
-                    key={`option_${value}`}
-                    onClick={() => {
-                      setSelectedMinute(value);
-                      setShowMinutesSelection(false);
-                    }}
-                    selected={selectedMinute === value}
-                  >
-                    {value}
-                  </S.OptionItem>
-                ))
-              : null}
-          </S.SelectionOptionContainer>
-        ) : null}
-      </S.TimePickerWrapper>
+            {showHourSelection || showMinutesSelection ? (
+              <S.SelectionOptionContainer>
+                {showHourSelection
+                  ? HOURS.map(value => (
+                      <S.OptionItem
+                        color={color}
+                        key={`option_${value}`}
+                        onClick={() => {
+                          setSelectedHour(value);
+                          setShowHourSelection(false);
+                        }}
+                        selected={selectedHour === value}
+                      >
+                        {value}
+                      </S.OptionItem>
+                    ))
+                  : null}
+                {showMinutesSelection
+                  ? MINUTES.map(value => (
+                      <S.OptionItem
+                        color={color}
+                        key={`option_${value}`}
+                        onClick={() => {
+                          setSelectedMinute(value);
+                          setShowMinutesSelection(false);
+                        }}
+                        selected={selectedMinute === value}
+                      >
+                        {value}
+                      </S.OptionItem>
+                    ))
+                  : null}
+              </S.SelectionOptionContainer>
+            ) : null}
+          </S.TimePickerWrapper>
+        )}
+      </ColorContext.Consumer>
       {showHourSelection || showMinutesSelection ? (
         <S.TimePickerOverlay
           onClick={() => {

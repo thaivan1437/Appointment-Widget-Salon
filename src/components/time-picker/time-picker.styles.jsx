@@ -117,7 +117,7 @@ S.OptionItem = styled.div`
   border: 1px solid ${COLORS.MERCURY};
 
   background-color: ${props =>
-    props.selected ? COLORS.MONZA : COLORS.ALABASTER};
+    props.selected ? props.color : COLORS.ALABASTER};
 
   color: ${props => (props.selected ? COLORS.WHITE : 'inherit')};
 

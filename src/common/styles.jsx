@@ -35,7 +35,7 @@ S.Button = styled.button`
   padding: 8px 20px;
   border-radius: 10px;
   border: none;
-  background-color: ${COLORS.MONZA};
+  background-color: ${props => props.color};
 
   font-size: 16px;
   font-family: inherit;
