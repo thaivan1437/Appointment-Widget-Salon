@@ -21,7 +21,7 @@ const WidgetViewWrapper = styled.div`
   bottom: 5px;
   right: 5px;
 
-  width: ${props => (props.vertical ? '65px' : 'auto')};
+  width: ${props => (props.vertical ? '90px' : 'auto')};
 
   top: ${props => (props.top ? '5px' : 'auto')};
   left: ${props => (props.left ? '5px' : 'auto')};
@@ -30,8 +30,8 @@ const WidgetViewWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.img`
-  width: 65px;
-  height: 65px;
+  width: 90px;
+  height: 90px;
   cursor: pointer;
 `;
 
