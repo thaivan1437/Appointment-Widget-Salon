@@ -17,7 +17,9 @@ import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
 import { COLOR_SCHEMA } from 'common/constants';
 
-export const ColorContext = React.createContext(COLOR_SCHEMA['red']);
+const FALLBACK_COLOR = 'red';
+
+export const ColorContext = React.createContext(COLOR_SCHEMA[FALLBACK_COLOR]);
 
 const WidgetViewWrapper = styled.div`
   position: fixed;
@@ -195,7 +197,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [selectedTime1, setSelectedTime1] = useState();
   const [selectedTime2, setSelectedTime2] = useState();
   const [selectedServices, setSelectedServices] = useState([]);
-  const [color, setColor] = useState(COLOR_SCHEMA['red']);
+  const [color, setColor] = useState(COLOR_SCHEMA[FALLBACK_COLOR]);
   const [folderName, setFolderName] = useState();
 
   const [errors, setErrors] = useState({ userName: false, userPhone: false });
@@ -239,10 +241,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setBottom(true);
     }
 
-    const color = COLOR_SCHEMA[widgetConfig.style] || COLOR_SCHEMA['red'];
+    const color =
+      COLOR_SCHEMA[widgetConfig.style] || COLOR_SCHEMA[FALLBACK_COLOR];
     setColor(color);
     setFolderName(
-      COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : 'red'
+      COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
     );
   }, []);
 
