@@ -196,6 +196,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [selectedTime2, setSelectedTime2] = useState();
   const [selectedServices, setSelectedServices] = useState([]);
   const [color, setColor] = useState(COLOR_SCHEMA['red']);
+  const [folderName, setFolderName] = useState();
 
   const [errors, setErrors] = useState({ userName: false, userPhone: false });
 
@@ -240,6 +241,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
 
     const color = COLOR_SCHEMA[widgetConfig.style] || COLOR_SCHEMA['red'];
     setColor(color);
+    setFolderName(
+      COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : 'red'
+    );
   }, []);
 
   const getHourString = selectedTimeObject => {
@@ -519,7 +523,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
 
   return (
     <>
-      {top || left || bottom || right ? (
+      {(top || left || bottom || right) && folderName ? (
         <WidgetViewWrapper
           top={top}
           right={right}
@@ -530,17 +534,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <ImageWrapper
               onClick={() => setShowModal(true)}
-              src={`https://widgets.salonmanager.net/icons/${widgetConfig.style}/appointments.png`}
+              src={`https://widgets.salonmanager.net/icons/${folderName}/appointments.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.net/icons/${widgetConfig.style}/pricing.png`}
+              src={`https://widgets.salonmanager.net/icons/${folderName}/pricing.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.net/icons/${widgetConfig.style}/promotions.png`}
+              src={`https://widgets.salonmanager.net/icons/${folderName}/promotions.png`}
             />
           ) : null}
         </WidgetViewWrapper>
@@ -550,7 +554,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       <CustomRodal
         showModal={showModal}
         setShowModal={setShowModal}
-        selectedStyle={widgetConfig.style}
+        selectedStyle={folderName}
       >
         <ColorContext.Provider value={color}>
           <ModalStyles.ModalContentContainer>
