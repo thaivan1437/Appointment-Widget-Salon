@@ -492,7 +492,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     });
                 }}
               >
-                Make an Appointment
+                Request an Appointment
               </CommonStyles.AppointmentButton>
               <EditAppointment
                 onClick={() => {
