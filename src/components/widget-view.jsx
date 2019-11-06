@@ -336,7 +336,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     setUserCount(newCount);
                   }}
                 />
-                <InlineInformation>Number of people</InlineInformation>
+                <InlineInformation>
+                  {userCount === 1 ? 'person' : 'people'}
+                </InlineInformation>
               </CounterWrapper>
             </InputWrapper>
             <ButtonWrapper4>
