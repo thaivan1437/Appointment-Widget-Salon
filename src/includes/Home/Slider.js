@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-// import ImageGallery from 'react-image-gallery';
 import { Container, Row, Col, } from "react-bootstrap";
 import sliderData from './sliderData'
-// import "../../assets/css/image-gallery.css";
 import {Animated} from "react-animated-css";
 import MySlider from 'react-animated-slider';
+import { isMobile } from "react-device-detect";
 import '../../assets/css/horizontal.css';
 
 class Slider extends Component {
@@ -15,14 +14,16 @@ class Slider extends Component {
         }
     }
     sliderRender = () => {
+        
         return <div className="banner-info">
             <Container>
                 <Row>
                     <Col>
                     <Animated animationIn="fadeInLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
-                    <div className="time-table">
+                    
+                    <div className="time-table" style={ isMobile ? {width: "90%"} : {}}>
                         <span><b>Belmont Beauty Salon</b></span><br /><br />
-                        <span style={{fontSize:14}}>951 Old Country Rd. Ste 4, <br/>  Belmont CA 94002</span>
+                        <span style={{fontSize:14}}>951 Old Country Rd. #4, <br/>  Belmont, CA 94002</span>
                         <br/> <br/>
                         <a id="tel-number" href="tel:(650) 595-2800"><span id="call-action">(650) 595-2800</span></a>
                     </div>
@@ -30,7 +31,7 @@ class Slider extends Component {
                     </Col>
                     <Col>
                     <Animated animationIn="fadeInRight" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
-                    <div className="time-table">
+                    <div className="time-table" style={ isMobile ? {width: "90%"} : {}}>
         					<span ><b>Open 7 Days A Week</b></span> <br /><br />
         					<span>Mon - Fri</span> <span style={{marginLeft:25}}>10:00 am - 7:30 pm</span> <br />
         					<strong><span>Sat</span></strong> <span style={{marginLeft:80}}>9:00 am - 7:00 pm</span> <br />

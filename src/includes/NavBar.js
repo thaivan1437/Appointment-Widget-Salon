@@ -36,7 +36,10 @@ class NavBar extends Component {
             <Nav id="top-menu" className="nav navbar-nav navbar-right">
               {
                 menuDatas.map((item,index) => {
-                  return  <Nav.Link key={index} href={item.route} 
+                  return  <Nav.Link 
+                  key={index}
+                  href={item.route} 
+                  target={item.target}
                   style={{ marginTop: 10, flexDirection:'row' }} 
                   onMouseOver={() => {this.onMouseOver(index)}}
                   onMouseOut={this.onMouseOut}

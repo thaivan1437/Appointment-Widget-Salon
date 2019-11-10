@@ -1,31 +1,38 @@
 const menuItem = [
 {
     "title" : "Home",
-    "route" : "/"
+    "route" : "/",
+    "target": ""
 },
 {
     "title" : "Permanent Cosmetics",
-    "route" : "/"
+    "route" : "/",
+    "target": ""
 },
 {
     "title" : "Buy Gift Card",
-    "route" : "/"
+    "route" : "https://squareup.com/gift/NMX9BT7AD693E/order",
+    "target": "_blank"
 },
 {
     "title" : "Customer's Pictures",
-    "route" : "/"
+    "route" : "https://www.instagram.com/belmontbeautysalon/",
+    "target": "_blank"
 },
 {
-    "title" : "Salon Pictures",
-    "route" : "/"
+    "title" : "Salon's Pictures",
+    "route" : "/",
+    "target": ""
 },
 {
     "title" : "Contact",
-    "route" : "/"
+    "route" : "/",
+    "target": ""
 },
 {
     "title" : "About Us",
-    "route" : "/"
+    "route" : "/",
+    "target": ""
 }];
 
 export default menuItem;

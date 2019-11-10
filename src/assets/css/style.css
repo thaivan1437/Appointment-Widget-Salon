@@ -854,7 +854,8 @@ a.button-default:hover{
     .page-slider .item {
           background-position: center center !important;
           background-size: cover !important;
-          height: 450px;
+		  height: 450px;
+		  width: 100%;
           
 		}
 		.time-table {
@@ -863,7 +864,6 @@ a.button-default:hover{
 			border-radius: 14px;
 			box-shadow: 1px 0px 4px #000;
 			height:180px;
-			
 		}
 		.boxTitle{
 			font-size: 20px;
