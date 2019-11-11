@@ -6,7 +6,7 @@ const menuItem = [
 },
 {
     "title" : "Permanent Cosmetics",
-    "route" : "/",
+    "route" : "/parment-cosmetics",
     "target": ""
 },
 {

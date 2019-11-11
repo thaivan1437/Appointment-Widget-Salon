@@ -21,7 +21,7 @@ class Slider extends Component {
                     <Col>
                     <Animated animationIn="fadeInLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
                     
-                    <div className="time-table" style={ isMobile ? {width: "90%"} : {}}>
+                    <div className="time-table" style={ isMobile ? {width: 315} : {}}>
                         <span><b>Belmont Beauty Salon</b></span><br /><br />
                         <span style={{fontSize:14}}>951 Old Country Rd. #4, <br/>  Belmont, CA 94002</span>
                         <br/> <br/>
@@ -31,7 +31,7 @@ class Slider extends Component {
                     </Col>
                     <Col>
                     <Animated animationIn="fadeInRight" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
-                    <div className="time-table" style={ isMobile ? {width: "90%"} : {}}>
+                    <div className="time-table" style={ isMobile ? {width: 315} : {}}>
         					<span ><b>Open 7 Days A Week</b></span> <br /><br />
         					<span>Mon - Fri</span> <span style={{marginLeft:25}}>10:00 am - 7:30 pm</span> <br />
         					<strong><span>Sat</span></strong> <span style={{marginLeft:80}}>9:00 am - 7:00 pm</span> <br />

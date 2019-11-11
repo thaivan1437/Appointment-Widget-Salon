@@ -1,24 +1,27 @@
-import React, {Fragment} from 'react';
-// import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom'
+import { createBrowserHistory } from 'history';
 import './assets/css/style.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/bootstrap.min.css';
 
+import Home from "./pages/Home"
+import ParmentCosmetics from "./pages/ParmentCosmetics"
 
-import Navbar from './includes/NavBar'
-import Footer from './includes/Footer'
-import Slider from './includes/Home/Slider';
-import Text from './includes/Home/Text';
+const history = createBrowserHistory();
+
+const path = (/#!(\/.*)$/.exec(history.location.hash) || [])[1];
+if (path) {
+  history.replace(path);
+}
 
 function App() {
   return (
-    <Fragment >
-
-      <Navbar />
-      <Slider />
-      <Text />
-      <Footer />
-      </Fragment>
+    <Router>
+    <Switch>
+    <Route exact path='/' component={Home} />
+    <Route exact path='/parment-cosmetics' component={ParmentCosmetics} />
+    </Switch>
+  </Router>
         );
       }
       
