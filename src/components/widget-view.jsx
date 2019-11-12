@@ -490,8 +490,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
                       url: `https://salon.api.salonmanager.net/v1/widgets/${appId}/appointment`,
                       data,
                       headers: {
-                        'x-api-key': 'yajpLtZTee2BAEcvWZgjYa4qXLT6WANy6JogEmQk',
-                        appToken: 'e15cf450-e9a2-11e9-8911-afe5120f53d7',
+                        'x-api-key': 'lONqBGLAQ53dEtWmBXzamigKpGU9TTx7FBkLaf57',
+                        appToken: '82711411-fc9b-11e9-9000-3b3f222744c9',
                         'x-app-version': 'v1.0.1@20190610',
                       },
                     })
