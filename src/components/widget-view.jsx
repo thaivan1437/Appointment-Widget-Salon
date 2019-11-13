@@ -43,7 +43,7 @@ const ImageWrapper = styled.img`
 const InputWrapper = styled.div`
   margin-top: 20px;
 
-  width: 424px;
+  width: 400px;
 `;
 
 const InlineInformation = styled.span`
