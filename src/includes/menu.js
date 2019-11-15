@@ -26,12 +26,12 @@ const menuItem = [
 },
 {
     "title" : "Contact",
-    "route" : "/",
+    "route" : "/contact",
     "target": ""
 },
 {
     "title" : "About Us",
-    "route" : "/",
+    "route" : "/about-us",
     "target": ""
 }];
 

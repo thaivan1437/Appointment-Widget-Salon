@@ -4,8 +4,10 @@ import { createBrowserHistory } from 'history';
 import './assets/css/style.css';
 import './assets/css/bootstrap.min.css';
 
-import Home from "./pages/Home"
-import ParmentCosmetics from "./pages/ParmentCosmetics"
+import Home from "./pages/Home";
+import ParmentCosmetics from "./pages/ParmentCosmetics";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
 
 const history = createBrowserHistory();
 
@@ -20,6 +22,8 @@ function App() {
     <Switch>
     <Route exact path='/' component={Home} />
     <Route exact path='/parment-cosmetics' component={ParmentCosmetics} />
+    <Route exact path='/about-us' component={AboutUs} />
+    <Route exact path='/contact' component={Contact} />
     </Switch>
   </Router>
         );

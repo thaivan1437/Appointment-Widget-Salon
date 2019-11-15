@@ -21,7 +21,7 @@ class Title extends Component {
             </Col>
             <Col className="col-md-4" style={{textAlign:"center"}}>
                 <Animated animationIn="fadeIn" animationOut="fadeOut" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
-                    <b style={{ fontSize: 25, textAlign: 'center', color: '#1D3557' }}>{this.props.header}</b>
+                    <b style={{ fontSize: 21, textAlign: 'center',  marginLeft:0, color: '#1D3557' }}>{this.props.header}</b>
                 </Animated>
             </Col>
             <Col className="col-md-4">
@@ -33,10 +33,10 @@ class Title extends Component {
     }
 }
 
-const myStyle ={
+const myStyle = {
     line : {
         width: "100%",
-        marginTop: 20, 
+        marginTop: 16, 
         height: 2, 
         backgroundColor: '#CF003C'
     }

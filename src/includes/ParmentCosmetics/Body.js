@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { Container, Row, Col, Card } from "react-bootstrap";
-import {Animated} from "react-animated-css";
+import { isMobile } from "react-device-detect";
 
 
 class Body extends Component {
@@ -15,9 +15,9 @@ class Body extends Component {
         return this.props.reverse === false ?
         <Row style={{marginTop:50}}>
                 <Col className="col-md-5">
-                    <img src={this.props.imgUrl} style={{borderRadius:10,width:420,height:250}} />
+                    <img src={this.props.imgUrl} style={{borderRadius:10,width:isMobile ? 330 : 420,height: isMobile ? 220 : 250}} />
                 </Col>
-                <Col className="col-md-7" style={{fontSize:20}}>
+                <Col className="col-md-7" style={{fontSize:23}}>
                 <p style={{marginTop:this.props.top}}>
                {this.props.text}
                 </p>
@@ -25,13 +25,13 @@ class Body extends Component {
             </Row>
             :
             <Row style={{marginTop:50}}>
-                <Col className="col-md-7" style={{fontSize:20}}>
+                <Col className="col-md-7" style={{fontSize:23}}>
                 <p style={{marginTop:this.props.top}}>
                {this.props.text}
                 </p>
                 </Col>
                 <Col className="col-md-5">
-                    <img src={this.props.imgUrl} style={{borderRadius:10,width:420,height:250}} />
+                    <img src={this.props.imgUrl} style={{borderRadius:10,width:isMobile ? 330 : 420,height: isMobile ? 220 : 250}} />
                 </Col>
             </Row>
     }

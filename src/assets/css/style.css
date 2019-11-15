@@ -15,6 +15,11 @@ a{
     color:#0B83A2;
     font-family:'Montserrat'
 }
+.myCard {
+	width:250px;
+    height:500px;
+    margin:10px;
+}
 .boxTitle{
 	font-size: 25px;
 	color: #fff;
@@ -349,7 +354,7 @@ a:focus, a:hover {
 	color: #fff;
 }
 .copyright {
-	background: #F1FAEE;
+	background: #d6e8d0;
 	padding: 15px 0px 5px;
 }
 .copyright p {
@@ -764,6 +769,7 @@ a.button-default:hover{
 	/* height: 200px; */
 	margin:12px;
 	margin-top:0 auto;
+	height:250px
 }
 .appointment-link{
     color:#fff;
@@ -781,11 +787,23 @@ a.button-default:hover{
 	font-size: 13px !important;
 	letter-spacing: 0px !important;
 }
-.time-table span{
+.time-table span {
 	color: #fff!important;
 	font-size: 20px !important;
 	letter-spacing: 0px !important;
 	font-weight:600;
+}
+.time-table span > b{
+	color: #fff!important;
+	font-size: 30px !important;
+	letter-spacing: 0px !important;
+	font-weight:600;
+}
+.time-table > a{
+	color: #fff!important;
+	font-size: 25px !important;
+	letter-spacing: 0px !important;
+	font-weight:bold;
 }
 
 
@@ -840,6 +858,11 @@ a.button-default:hover{
 	z-index: 99;
 }
 
+.myCard {
+	width:250px;
+    height:500px;
+    margin:10px;
+}
 
 @media (max-width:767px)
 {
@@ -885,11 +908,33 @@ a.button-default:hover{
 			font-weight:600;
 			
 		}
+		.time-table span > b{
+			color: #fff!important;
+			font-size: 20px !important;
+			letter-spacing: 0px !important;
+			font-weight:600;
+			
+		}
+		.time-table a{
+			color: #fff!important;
+			font-size: 16px !important;
+			letter-spacing: 0px !important;
+			font-weight:600;
+			
+		}
 		.banner-info {
 			position: absolute;
 			top: 100px;
 			width: 100%;
 			z-index: 99;
+		}
+		.myCard {
+			width:450px;
+			height:450px;
+			margin:10px;
+		}
+		.myCardImage {
+        height:450px
 		}
 }
 

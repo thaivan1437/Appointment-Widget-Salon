@@ -32,6 +32,10 @@ Looking for top hair & color services? Belmont Beauty Salon offers high-quality 
             <br /><br />
             Our salon has a wheelchair accessible entrance. Belmont Beauty Salon also provides easy access to an adjacent lot in the rear. We offer perks like free Wi-Fi, hot & cold beverages and candies!
             <br /><br />
+            6 SPA chairs for your group parties
+            <br />
+            Our specialties are haircut, hairstyle and hair color
+            <br/><br/>
             We are open all year round, except on July 4th, Labor Day, Thanksgiving, Christmas and New Year Day.    
             <br /><br />
             <b>Open 7 Days A Week</b><br />

@@ -6,7 +6,7 @@ import ParmentContent from '../../includes/ParmentCosmetics';
 
 function ParmentCosmetics() {
   return (
-    <Fragment >
+    <Fragment>
       <Navbar />
       <ParmentContent />
       <Footer />
