@@ -22,16 +22,14 @@ const FALLBACK_COLOR = 'red';
 export const ColorContext = React.createContext(COLOR_SCHEMA[FALLBACK_COLOR]);
 
 const WidgetViewWrapper = styled.div`
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
+  position: absolute;
 
   width: ${props => (props.vertical ? '90px' : 'auto')};
 
-  top: ${props => (props.top ? '5px' : 'auto')};
-  left: ${props => (props.left ? '5px' : 'auto')};
-  right: ${props => (props.right ? '5px' : 'auto')};
-  bottom: ${props => (props.bottom ? '5px' : 'auto')};
+  top: ${props => (props.top ? '0' : 'auto')};
+  left: ${props => (props.left ? '0' : 'auto')};
+  right: ${props => (props.right ? '0' : 'auto')};
+  bottom: ${props => (props.bottom ? '0' : 'auto')};
 `;
 
 const ImageWrapper = styled.img`
@@ -202,6 +200,79 @@ const WidgetView = ({ widgetConfig, appId }) => {
 
   const [errors, setErrors] = useState({ userName: false, userPhone: false });
 
+  const [frameStyle, setFrameStyle] = useState({
+    common: 'position:fixed;bottom:0px;right:0px;border:none;',
+    position: null,
+    orientation: 'width:0;height:0;',
+  });
+
+  const [isInit, setIsInit] = useState(true);
+
+  useEffect(() => {
+    switch (widgetConfig.position) {
+      case 'TOP_LEFT':
+        setTop(true);
+        setLeft(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'top:0;left:0',
+        }));
+        break;
+
+      case 'TOP_RIGHT':
+        setTop(true);
+        setRight(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'top:0;right:0',
+        }));
+        break;
+
+      case 'BOTTOM_LEFT':
+        setBottom(true);
+        setLeft(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'bottom:0;left:0',
+        }));
+        break;
+
+      case 'BOTTOM_RIGHT':
+        setBottom(true);
+        setRight(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'bottom:0;right:0',
+        }));
+        break;
+      default:
+        setRight(true);
+        setBottom(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'bottom:0;right:0',
+        }));
+    }
+
+    const color =
+      COLOR_SCHEMA[widgetConfig.style] || COLOR_SCHEMA[FALLBACK_COLOR];
+    setColor(color);
+    setFolderName(
+      COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
+    );
+
+    const size = (widgetConfig.widgets.length || 1) * 90;
+
+    setFrameStyle(prev => ({
+      ...prev,
+      orientation: `width: ${
+        widgetConfig.orientation === 'vertical' ? '90px' : size + 'px'
+      };height: ${
+        widgetConfig.orientation === 'vertical' ? size + 'px' : '90px'
+      };`,
+    }));
+  }, []);
+
   useEffect(() => {
     if (!showModal) {
       setSelectedStep(1);
@@ -213,41 +284,45 @@ const WidgetView = ({ widgetConfig, appId }) => {
       setSelectedTime2();
       setSelectedServices([]);
     }
+
+    if (showModal) {
+      parent.postMessage({
+        type: 'showModal',
+        data: {
+          showModal,
+          style:
+            'position: fixed; width: 100%; height: 100%;bottom: 0px;right: 0px;border:none;',
+        },
+      });
+    } else if (!isInit) {
+      setTimeout(() => {
+        parent.postMessage({
+          type: 'showModal',
+          data: {
+            showModal,
+            style: getFrameStyle(),
+          },
+        });
+      }, 300);
+    } else {
+      setIsInit(false);
+    }
   }, [showModal]);
 
   useEffect(() => {
-    switch (widgetConfig.position) {
-      case 'TOP_LEFT':
-        setTop(true);
-        setLeft(true);
-        break;
+    const style = getFrameStyle();
 
-      case 'TOP_RIGHT':
-        setTop(true);
-        setRight(true);
-        break;
+    parent.postMessage({
+      type: 'init',
+      data: {
+        style,
+      },
+    });
+  }, [frameStyle]);
 
-      case 'BOTTOM_LEFT':
-        setBottom(true);
-        setLeft(true);
-        break;
-
-      case 'BOTTOM_RIGHT':
-        setBottom(true);
-        setRight(true);
-        break;
-      default:
-        setRight(true);
-        setBottom(true);
-    }
-
-    const color =
-      COLOR_SCHEMA[widgetConfig.style] || COLOR_SCHEMA[FALLBACK_COLOR];
-    setColor(color);
-    setFolderName(
-      COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
-    );
-  }, []);
+  const getFrameStyle = () => {
+    return frameStyle.common + frameStyle.orientation + frameStyle.position;
+  };
 
   const getHourString = selectedTimeObject => {
     const hourString =
