@@ -425,8 +425,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <CommonStyles.Button
                 color={color}
                 disabled={!(selectedTime1 && selectedTime2)}
-                // onClick={() => setSelectedStep(4)} // TODO: open when services ready
-                onClick={() => setSelectedStep(5)}
+                onClick={() => setSelectedStep(4)}
               >
                 Next
                 <img src={ArrowIcon} />
@@ -442,6 +441,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               Desired Services
             </ModalStyles.ModalStepTitle>
             <ServiceSelection
+              serviceList={widgetConfig.services.appointment}
               initialValue={selectedServices}
               onServiceSelected={services => {
                 setSelectedServices(services);
@@ -479,7 +479,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     date: getRequestDateString(selectedDate.dateValue),
                     time1: getHourString(selectedTime1),
                     time2: getHourString(selectedTime2),
-                    services: [], // TODO add later
+                    services: [...selectedServices],
                   };
 
                   console.log('request data', data);
@@ -609,7 +609,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
             {selectedStep > 4 ? (
               <InformationWrapper>
                 {selectedServices.map(service => (
-                  <AppointmentInfo>{service.serviceName}</AppointmentInfo>
+                  <AppointmentInfo>{service.name}</AppointmentInfo>
                 ))}
               </InformationWrapper>
             ) : null}
