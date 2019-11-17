@@ -33,3 +33,18 @@ body {
   background: transparent;
   box-sizing: border-box;
 }
+
+#spinner {
+  animation: spin 2s infinite linear;
+  position: absolute;
+  left: 0;
+}
+
+@-webkit-keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
