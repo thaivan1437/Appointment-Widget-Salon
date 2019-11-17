@@ -16,6 +16,7 @@ import ServiceSelection from '@components/service-selection/service-selection';
 import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
 import { COLOR_SCHEMA } from 'common/constants';
+import Spinner from '@assets/spinner.png';
 
 const FALLBACK_COLOR = 'red';
 
@@ -153,6 +154,11 @@ const EditAppointment = styled.div`
   :hover {
     text-decoration: underline;
   }
+
+  ${props =>
+    props.disabled
+      ? 'opacity: 0.4; pointer-events: none; user-select:none;'
+      : null}
 `;
 const ConfirmationStepWrapper = styled.div`
   flex: 1;
@@ -207,6 +213,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   });
 
   const [isInit, setIsInit] = useState(true);
+  const [showLoading, setShowLoading] = useState(false);
 
   useEffect(() => {
     switch (widgetConfig.position) {
@@ -283,6 +290,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       setSelectedTime1();
       setSelectedTime2();
       setSelectedServices([]);
+      setShowLoading(false);
     }
 
     if (showModal) {
@@ -545,6 +553,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
             <ConfirmationStepWrapper>
               <CommonStyles.AppointmentButton
                 color={color}
+                disabled={showLoading}
                 onClick={() => {
                   const data = {
                     customerName: userName,
@@ -557,7 +566,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     services: [...selectedServices],
                   };
 
-                  console.log('request data', data);
+                  setShowLoading(true);
 
                   httpUtil
                     .makeRequest({
@@ -570,15 +579,19 @@ const WidgetView = ({ widgetConfig, appId }) => {
                         'x-app-version': 'v1.0.1@20190610',
                       },
                     })
-                    .then(response => {
-                      console.log('result', response);
+                    .then(() => {
                       setSelectedStep(6);
+                    })
+                    .finally(() => {
+                      setShowLoading(false);
                     });
                 }}
               >
+                {showLoading ? <img src={Spinner} id="spinner" /> : null}
                 Request an Appointment
               </CommonStyles.AppointmentButton>
               <EditAppointment
+                disabled={showLoading}
                 onClick={() => {
                   setSelectedStep(1);
                 }}

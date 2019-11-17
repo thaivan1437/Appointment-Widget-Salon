@@ -52,12 +52,13 @@ S.Button = styled.button`
 
   ${props =>
     props.disabled
-      ? 'opacity: 0.4; pointer-events: none; user-select:none; background-color: #747883'
+      ? 'opacity: 0.4; pointer-events: none; user-select:none; background-color: #747883;'
       : null}
 `;
 
 S.AppointmentButton = styled(S.Button)`
   font-size: 20px;
   line-height: 2;
-  width: 300px;
+  width: 310px;
+  position: relative;
 `;
