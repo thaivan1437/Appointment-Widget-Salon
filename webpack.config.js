@@ -4,14 +4,17 @@ const JS_JSX_PATTERN = /\.jsx?$/;
 const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 
 process.env.NODE_ENV = argv.buildEnv || 'development';
 
 module.exports = {
+  entry: {
+    widgets: 'index.js',
+    'sm-loader': 'sm-loader.js',
+  },
   output: {
     path: path.resolve('build'),
-    filename: 'widgets.js',
+    filename: '[name].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
@@ -58,7 +61,6 @@ module.exports = {
       template: path.join(__dirname, 'src', 'index.html'),
       inject: false,
     }),
-    new CopyPlugin([{ from: 'src/sm-loader.js', to: 'sm-loader.js' }]),
   ],
   devServer: {
     port: 5555,
