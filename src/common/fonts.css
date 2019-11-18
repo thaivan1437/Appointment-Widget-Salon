@@ -37,7 +37,6 @@ body {
 #spinner {
   animation: spin 2s infinite linear;
   position: absolute;
-  left: 0;
 }
 
 @-webkit-keyframes spin {

@@ -60,5 +60,6 @@ S.AppointmentButton = styled(S.Button)`
   font-size: 20px;
   line-height: 2;
   width: 310px;
+  height: 56px;
   position: relative;
 `;

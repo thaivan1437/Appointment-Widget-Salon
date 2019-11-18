@@ -587,8 +587,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     });
                 }}
               >
-                {showLoading ? <img src={Spinner} id="spinner" /> : null}
-                Request an Appointment
+                {showLoading ? (
+                  <img src={Spinner} id="spinner" />
+                ) : (
+                  'Request an Appointment'
+                )}
               </CommonStyles.AppointmentButton>
               <EditAppointment
                 disabled={showLoading}
