@@ -27,10 +27,10 @@ const WidgetViewWrapper = styled.div`
 
   width: ${props => (props.vertical ? '90px' : 'auto')};
 
-  top: ${props => (props.top ? '0' : 'auto')};
-  left: ${props => (props.left ? '0' : 'auto')};
-  right: ${props => (props.right ? '0' : 'auto')};
-  bottom: ${props => (props.bottom ? '0' : 'auto')};
+  top: ${props => (props.top ? '10px' : 'auto')};
+  left: ${props => (props.left ? '10px' : 'auto')};
+  right: ${props => (props.right ? '10px' : 'auto')};
+  bottom: ${props => (props.bottom ? '10px' : 'auto')};
 `;
 
 const ImageWrapper = styled.img`
@@ -273,9 +273,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
     setFrameStyle(prev => ({
       ...prev,
       orientation: `width: ${
-        widgetConfig.orientation === 'vertical' ? '90px' : size + 'px'
+        widgetConfig.orientation === 'vertical' ? '100px' : size + 10 + 'px'
       };height: ${
-        widgetConfig.orientation === 'vertical' ? size + 'px' : '90px'
+        widgetConfig.orientation === 'vertical' ? size + 10 + 'px' : '100px'
       };`,
     }));
   }, []);
