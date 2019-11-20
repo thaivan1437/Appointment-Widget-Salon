@@ -21,7 +21,7 @@ const menuItem = [
 },
 {
     "title" : "Salon's Pictures",
-    "route" : "/",
+    "route" : "/salon-picture",
     "target": ""
 },
 {

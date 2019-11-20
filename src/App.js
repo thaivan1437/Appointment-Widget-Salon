@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import ParmentCosmetics from "./pages/ParmentCosmetics";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
+import SalonPicture from "./pages/SalonPicture";
 
 const history = createBrowserHistory();
 
@@ -24,6 +25,7 @@ function App() {
     <Route exact path='/parment-cosmetics' component={ParmentCosmetics} />
     <Route exact path='/about-us' component={AboutUs} />
     <Route exact path='/contact' component={Contact} />
+    <Route exact path='/salon-picture' component={SalonPicture} />
     </Switch>
   </Router>
         );

@@ -17,22 +17,20 @@ class myFooter extends Component {
                     marginLeft: 20,
                     textAlign: 'center'
                 }}>
-                <a href="/">
                     <font color="#CF003C"
                         style={{
                             fontWeight: 'bold',
-                            fontSize: 16
+                            fontSize: 18
                         }}>
                         BELMONT BEAUTY SALON
                     </font>
-                </a>
                 <br />
                 <span style={{ fontSize: 15 }}>
-                    <a href="/contact" style={myStyle.myLink}>951 Old Country Rd. #4, Belmont, CA 94002</a> &nbsp;- &nbsp;
+                    <a href="/contact" style={{...myStyle.myLink, fontWeight:500, fontSize:18}}>951 Old Country Rd. #4, Belmont, CA 94002</a> &nbsp;- &nbsp;
                 </span>
                 
                 <span style={{ fontSize: 15 }}>
-                <a id="tel-number" href="tel:(650) 595-2800" style={myStyle.myLink}>(650) 595-2800</a>
+                <b><a id="tel-number" href="tel:(650) 595-2800" style={{...myStyle.myLink,fontWeight:'bold', fontSize:18}}>(650) 595-2800</a></b>
                 </span>
             </p>
             <div className="col-md-12 social-footer" style={{ textAlign: 'right' }}>

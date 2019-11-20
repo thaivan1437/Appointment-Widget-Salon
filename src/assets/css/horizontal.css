@@ -4,6 +4,12 @@
 	height: 600px;
 	overflow: hidden
 }
+.slider2 {
+	position: relative;
+	width: 100%;
+	height: 400px;
+	overflow: hidden
+}
 
 @media (max-width:767px)
 {
@@ -26,7 +32,7 @@
 	-webkit-transition: all .3s linear;
 	transition: all .3s linear;
 	z-index: 1;
-	color: #333;
+	color: #FFF;
 	padding: 10px;
 	text-decoration: none;
 	-webkit-backface-visibility: hidden;
@@ -47,6 +53,51 @@
 .slider a.nextButton {
 	right: 20px;
 }
+
+
+
+.slider2 {
+	position: relative;
+	width: 100%;
+	height: 800px;
+	overflow: hidden
+}
+
+.slider2 a.previousButton, .slider2 a.nextButton {
+	font-size: 22px;
+	line-height: 0;
+	display: block;
+	position: absolute;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	        transform: translateY(-50%);
+	-webkit-transition: all .3s linear;
+	transition: all .3s linear;
+	z-index: 1;
+	color: #FFF;
+	padding: 10px;
+	text-decoration: none;
+	-webkit-backface-visibility: hidden;
+	        backface-visibility: hidden
+	/* prevent jump effect when scaling */
+}
+
+.slider2 a.previousButton:not(.disabled):hover, .slider2 a.nextButton:not(.disabled):hover {
+	-webkit-transform: translateY(-50%) scale(1.25);
+	        transform: translateY(-50%) scale(1.25);
+	cursor: pointer;
+}
+
+.slider2 a.previousButton {
+	left: 20px;
+}
+
+.slider2 a.nextButton {
+	right: 20px;
+}
+
+
+
 
 .slide {
 	width: 100%;

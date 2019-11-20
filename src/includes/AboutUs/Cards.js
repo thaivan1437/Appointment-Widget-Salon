@@ -12,12 +12,17 @@ class Cards extends Component {
 
     render() {
         // return  <Col style={myStyle.cardCol}>
-            return <Card className="myCard" style={{borderTopLeftRadius:25, borderTopRightRadius:25, marginTop:50}}>
-                <Card.Img className="myCardImage" style={{borderTopRightRadius:25, borderTopLeftRadius:25}} variant="top" src={this.props.imgUrl} />
-                <Card.Body style={myStyle.cardBody}>
+        return <Card className="myCard" style={{ borderTopLeftRadius: 25, borderTopRightRadius: 25, marginTop: 50 }}>
+            <div style={{backgroundColor:`${this.props.bgColor}`,  width:'100%', borderTopLeftRadius: 25, borderTopRightRadius: 25,}}>
+                <center>
+                <div className="myCardImage" style={{alignSelf:'center',borderTopLeftRadius: 25, borderTopRightRadius: 25, backgroundImage:`url(${this.props.imgUrl})`, height:155, width:130, justifyContent:'center'}} />
+
+                </center>
+            </div>
+            <Card.Body style={myStyle.cardBody}>
                 {this.props.body}
-                </Card.Body>
-            </Card>
+            </Card.Body>
+        </Card>
         // </Col>
     }
 }
@@ -25,15 +30,13 @@ class Cards extends Component {
 const myStyle = {
     cardBody: {
         color: '#1D3557',
-        // fontWeight: 'bold',
-        textAlign:'center',
-        fontSize:14
+        fontSize: 16
     },
     cardCol: {
-        marginTop:50,
+        marginTop: 50,
     },
     cardImg: {
-        
+
     }
 }
 

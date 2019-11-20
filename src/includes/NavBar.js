@@ -27,7 +27,7 @@ class NavBar extends Component {
         <Navbar className={this.state.isTop ? "navbar navbar-fixed-top" : "navbar navbar-fixed-top scrolled"} fixed="top" expand="lg">
         {/* <Navbar className={"navbar navbar-fixed-top scrolled"}> */}
           <Navbar.Brand className='navbar-brand' href="/">
-            <Image src={require("../assets/image/logo_yellow.png")} style={{width:250}} className='logo-brand ml-sm-5 img-fluid' />
+            <Image src={"https://cdn.belmontbeautysalon.net/site/logo.png"} style={{width:250}} className='logo-brand ml-sm-5 img-fluid' />
           </Navbar.Brand>
           <Navbar.Toggle style={{border:0}}>
           <img src={require("../assets/image/navbar-toggler-icon.png")} height="20" width="20" alt="" />
