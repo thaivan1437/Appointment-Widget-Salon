@@ -20,6 +20,12 @@
 		overflow: hidden
 	}
 }
+.slider2 {
+	position: relative;
+	width: 100%;
+	height: 200px;
+	overflow: hidden
+}
 
 .slider a.previousButton, .slider a.nextButton {
 	font-size: 22px;

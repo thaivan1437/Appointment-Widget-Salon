@@ -14,7 +14,7 @@ class SalonPicture extends Component {
         }
     }
     render() {
-        return   <div>
+        return   <section className="page-slider">
              <div >
                 <MySlider className={`slider2`}>
                     {sliderData.map((item, index) => (
@@ -35,7 +35,7 @@ class SalonPicture extends Component {
                     ))}
                 </MySlider>
             </div>
-            </div>
+          </section>
     }
 }
 
