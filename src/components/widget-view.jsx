@@ -184,7 +184,19 @@ const SeparatorLine = styled.div`
 const UpToLabel = styled.span`
   font-size: 16px;
   margin-left: 10px;
-  color: #666;
+  color: ${COLORS.DOVE_GRAY};
+`;
+
+const PolicyContainer = styled.div`
+  position: absolute;
+  bottom: 90px;
+  color: ${COLORS.DOVE_GRAY};
+  width: 400px;
+
+  a,
+  a:visited {
+    color: ${COLORS.DOVE_GRAY};
+  }
 `;
 
 const showWidgetButton = (widgetName, registeredWidgets) => {
@@ -608,6 +620,22 @@ const WidgetView = ({ widgetConfig, appId }) => {
               >
                 Edit Details
               </EditAppointment>
+
+              <PolicyContainer>
+                {
+                  'By requesting an appointment, you agree to receive text messages and to out '
+                }
+                <a href="https://salonmanager.com/terms-of-use" target="_blank">
+                  Terms of Use
+                </a>
+                {' and '}
+                <a
+                  href="https://salonmanager.com/privacy-policy"
+                  target="_blank"
+                >
+                  Privacy Policy
+                </a>
+              </PolicyContainer>
             </ConfirmationStepWrapper>
           </>
         );
