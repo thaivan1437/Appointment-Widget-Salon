@@ -181,6 +181,12 @@ const SeparatorLine = styled.div`
   border-bottom-width: 1px;
 `;
 
+const UpToLabel = styled.span`
+  font-size: 16px;
+  margin-left: 10px;
+  color: #666;
+`;
+
 const showWidgetButton = (widgetName, registeredWidgets) => {
   return Array.isArray(registeredWidgets)
     ? registeredWidgets.indexOf(widgetName) !== -1
@@ -522,6 +528,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
           <>
             <ModalStyles.ModalStepTitle>
               Desired Services
+              <UpToLabel>(up to 4 Services)</UpToLabel>
             </ModalStyles.ModalStepTitle>
             <ServiceSelection
               serviceList={widgetConfig.services.appointment}
