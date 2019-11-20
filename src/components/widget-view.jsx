@@ -279,9 +279,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
     setFrameStyle(prev => ({
       ...prev,
       orientation: `width: ${
-        widgetConfig.orientation === 'vertical' ? '100px' : size + 10 + 'px'
+        widgetConfig.orientation === 'VERTICAL' ? '100px' : size + 10 + 'px'
       };height: ${
-        widgetConfig.orientation === 'vertical' ? size + 10 + 'px' : '100px'
+        widgetConfig.orientation === 'VERTICAL' ? size + 10 + 'px' : '100px'
       };`,
     }));
   }, []);
@@ -531,7 +531,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <UpToLabel>(up to 4 Services)</UpToLabel>
             </ModalStyles.ModalStepTitle>
             <ServiceSelection
-              serviceList={widgetConfig.services.appointment}
+              serviceList={widgetConfig.widgetData.appointments}
               initialValue={selectedServices}
               onServiceSelected={services => {
                 setSelectedServices(services);
@@ -632,7 +632,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
           right={right}
           bottom={bottom}
           left={left}
-          vertical={widgetConfig.orientation === 'vertical'}
+          vertical={widgetConfig.orientation === 'VERTICAL'}
         >
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <ImageWrapper
