@@ -21,6 +21,15 @@ S.ServiceCategoryContainer = styled.div`
   flex: 1;
   overflow-x: hidden;
   overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${COLORS.STORM_GRAY};
+  }
 `;
 S.ServiceServicesContainer = styled.div`
   flex: 1;
