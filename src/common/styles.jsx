@@ -62,4 +62,9 @@ S.AppointmentButton = styled(S.Button)`
   width: 310px;
   height: 56px;
   position: relative;
+
+  ${props =>
+    props.disabled
+      ? `opacity:1;filter:brightness(0.85);background-color:${props.color};`
+      : null}
 `;
