@@ -623,7 +623,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
 
               <PolicyContainer>
                 {
-                  'By requesting an appointment, you agree to receive text messages and to out '
+                  'By requesting an appointment, you agree to receive text messages and to our '
                 }
                 <a href="https://salonmanager.com/terms-of-use" target="_blank">
                   Terms of Use
