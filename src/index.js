@@ -20,7 +20,7 @@ window.initWidget = function(d, appId) {
       const configData = response.data;
 
       Sentry.init({
-        dsn: 'https://42b8f6c49ef64e5db61139711826584b@sentry.io/1468247',
+        dsn: 'https://21d4a1621eed4d63bf372f2e17869753@sentry.io/1826350',
       });
 
       ReactDOM.render(
