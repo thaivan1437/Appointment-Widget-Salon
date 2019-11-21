@@ -17,7 +17,7 @@ a{
 }
 .myCard {
 	width:250px;
-    height:500px;
+    height:700px;
     margin:10px;
 }
 .boxTitle{
@@ -859,7 +859,7 @@ a.button-default:hover{
 
 .myCard {
 	width:250px;
-    height:500px;
+    height:700px;
     margin:10px;
 }
 
@@ -929,7 +929,7 @@ a.button-default:hover{
 		}
 		.myCard {
 			width:450px;
-			height:450px;
+			height:550px;
 			margin:10px;
 		}
 		.myCardImage {

@@ -21,7 +21,7 @@ class Parment extends Component {
             <Row>
             {
                 cardData.map((item,index) => {
-                    return <Cards key={index} body={item.body} imgUrl={item.imgUrl} bgColor={item.bgColor} />
+                    return <Cards key={index} body={item.body} imgUrl={item.imgUrl} bgColor={item.bgColor} leftMargin={item.leftMargin} />
                 })
             }
             </Row>

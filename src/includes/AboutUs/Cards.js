@@ -15,7 +15,7 @@ class Cards extends Component {
         return <Card className="myCard" style={{ borderTopLeftRadius: 25, borderTopRightRadius: 25, marginTop: 50 }}>
             <div style={{backgroundColor:`${this.props.bgColor}`,  width:'100%', borderTopLeftRadius: 25, borderTopRightRadius: 25,}}>
                 <center>
-                <div className="myCardImage" style={{alignSelf:'center',borderTopLeftRadius: 25, borderTopRightRadius: 25, backgroundImage:`url(${this.props.imgUrl})`, height:155, width:130, justifyContent:'center'}} />
+                <div className="myCardImage" style={{marginLeft:this.props.leftMargin, marginTop:10, alignSelf:'center',borderTopLeftRadius: 25, borderTopRightRadius: 25, backgroundImage:`url(${this.props.imgUrl})`, backgroundRepeat  : 'no-repeat', height:155, width:155, justifyContent:'center'}} />
 
                 </center>
             </div>
@@ -30,7 +30,7 @@ class Cards extends Component {
 const myStyle = {
     cardBody: {
         color: '#1D3557',
-        fontSize: 16
+        fontSize: 23
     },
     cardCol: {
         marginTop: 50,

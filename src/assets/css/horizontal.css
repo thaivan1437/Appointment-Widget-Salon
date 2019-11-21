@@ -68,9 +68,13 @@
 	height: 800px;
 	overflow: hidden
 }
-
+.slider2 a.previousButton > svg, .slider2 a.nextButton > svg {
+	height: 60px;
+	width: 60px;
+	
+}
 .slider2 a.previousButton, .slider2 a.nextButton {
-	font-size: 22px;
+	font-size: 60px;
 	line-height: 0;
 	display: block;
 	position: absolute;

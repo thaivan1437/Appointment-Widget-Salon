@@ -11,7 +11,7 @@ class Text extends Component {
 
     render() {
         return <Container>
-            <Row style={{ marginTop: 60, marginBottom:50, fontSize:20 }}>
+            <Row style={{ marginTop: 60, marginBottom:50, fontSize:23 }}>
                 <Col>
                 Belmont Beauty Salon is dedicated to providing you with professional, relaxing and excellent services in an environment that is sparkling with freshness and where the ambiance creates a relaxing & soothing sensation for every customer who walks through our doors.
 
