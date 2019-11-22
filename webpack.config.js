@@ -1,7 +1,9 @@
 
 const path = require('path');
-
+const argv = require('yargs').argv;
 const HWP = require('html-webpack-plugin');
+
+process.env.NODE_ENV = argv.buildEnv || 'development';
 
 module.exports = {
     entry: path.join(__dirname, '/src/index.js'),

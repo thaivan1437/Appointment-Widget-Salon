@@ -20,8 +20,8 @@
     "package:prepare": "npm install && npm run clean",
     "clean": "rm -rf build",
     "dev": "webpack-dev-server",
-    "build:dev": "webpack -p --NODE_ENV=development",
-    "build:prod": "webpack -p --NODE_ENV=production",
+    "build:dev": "webpack -p --buildEnv=development",
+    "build:prod": "webpack -p --buildEnv=production",
     "dist:dev": "npm run package:prepare && npm run build:dev",
     "dist:prod": "npm run package:prepare && npm run build:prod"
   },
@@ -54,6 +54,7 @@
     "style-loader": "^1.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "webpack-dev-server": "^3.9.0",
+    "yargs": "^14.0.0"
   }
 }
