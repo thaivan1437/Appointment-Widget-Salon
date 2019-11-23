@@ -30,7 +30,7 @@ class NavBar extends Component {
           <Image src={CDN_URL + "site/logo.png"} style={{ width: 250 }} className='logo-brand ml-sm-5 img-fluid' />
         </Navbar.Brand>
         <Navbar.Toggle style={{ border: 0 }}>
-          <img src="https://cdn.belmontbeautysalon.net/site/navbar-toggler-icon.png" height="20" width="20" alt="" />
+          <img src={CDN_URL + "/site/navbar-toggler-icon.png"} height="20" width="20" alt="" />
         </Navbar.Toggle>
         <Navbar.Collapse id="navbar" className="navbar-collapse collapse">
           <Nav id="top-menu" className="nav navbar-nav navbar-right">
