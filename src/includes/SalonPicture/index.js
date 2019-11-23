@@ -21,11 +21,7 @@ class SalonPicture extends Component {
                                 background: `url('${item.original}') no-repeat center center`, backgroundPosition: "center",
                                 backgroundSize: "cover",
                             }}
-                        >
-                            <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.48)', color: '#FFF', fontSize: 16, width: '30%', bottom: 150, right: 0, position: 'absolute' }}>
-                                <span>{item.title}</span>
-                            </div>
-                        </div>
+                        />
                     ))}
                 </MySlider>
             </div>

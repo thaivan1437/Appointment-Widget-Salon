@@ -71,7 +71,9 @@
 .slider2 a.previousButton > svg, .slider2 a.nextButton > svg {
 	height: 60px;
 	width: 60px;
-	
+	border-width: 1px;
+	background-color: #FFF;
+	border-radius: 15px;
 }
 .slider2 a.previousButton, .slider2 a.nextButton {
 	font-size: 60px;
