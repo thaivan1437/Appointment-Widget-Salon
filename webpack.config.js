@@ -66,6 +66,7 @@ module.exports = {
     }),
     new CopyPlugin([
       { from: path.join(__dirname, 'src', 'static', 'icons'), to: 'icons' },
+      { from: path.join(__dirname, 'src', 'static', 'fonts'), to: 'fonts' },
     ]),
   ],
   devServer: {
