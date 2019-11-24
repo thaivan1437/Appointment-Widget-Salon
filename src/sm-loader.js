@@ -1,3 +1,5 @@
+import { CONFIGS } from '@environment';
+
 (function(attrName, m, r, c) {
   var s = {};
   var n = {};
@@ -36,4 +38,9 @@
   m.attachEvent
     ? m.attachEvent('onmessage', w)
     : m.addEventListener('message', w, !1);
-})('data-sm', window, document, 'widgets.js');
+})(
+  'data-sm',
+  window,
+  document,
+  `https://widgets.salonmanager.${CONFIGS.domainExtension}/widgets.js`
+);
