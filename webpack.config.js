@@ -7,13 +7,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 process.env.NODE_ENV = argv.buildEnv || 'development';
 
+const version = require('./package.json').version;
+
 module.exports = {
   entry: {
     widgets: 'index.js',
     'sm-loader': 'sm-loader.js',
   },
   output: {
-    path: path.resolve('build'),
+    path: path.resolve('build', version),
     filename: '[name].js',
   },
   resolve: {
