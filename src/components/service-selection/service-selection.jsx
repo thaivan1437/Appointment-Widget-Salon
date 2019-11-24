@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { S } from './service-selection.styles';
+import { CONFIGS } from '@environment';
 
 const ServiceSelection = ({
   initialValue = [],
@@ -35,8 +36,8 @@ const ServiceSelection = ({
             <S.IconContainer
               src={
                 selectedCategory === category
-                  ? 'https://widgets.salonmanager.net/assets/icons/radio_on.png'
-                  : 'https://widgets.salonmanager.net/assets/icons/radio_off.png'
+                  ? `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/radio_on.png`
+                  : `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/radio_off.png`
               }
             />
             <div>{category}</div>
@@ -68,8 +69,8 @@ const ServiceSelection = ({
               <S.IconContainer
                 src={
                   selectedServicesIds.indexOf(service.id) !== -1
-                    ? 'https://widgets.salonmanager.net/assets/icons/icon_checked.png'
-                    : 'https://widgets.salonmanager.net/assets/icons/icon_unchecked.png'
+                    ? `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/icon_checked.png`
+                    : `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/icon_unchecked.png`
                 }
               />
               <div>{service.name}</div>

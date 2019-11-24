@@ -4,6 +4,7 @@ import WidgetView from '@components/widget-view';
 import 'common/fonts.css';
 import httpUtil from 'common/HttpUtil';
 import * as Sentry from '@sentry/browser';
+import { CONFIGS } from '@environment';
 
 window.initWidget = function(d, appId) {
   var rootElement = document.createElement('div');
@@ -25,7 +26,7 @@ window.initWidget = function(d, appId) {
     httpUtil
       .makeRequest({
         method: 'GET',
-        url: `https://configs.widgets.salonmanager.net/${appId}.json`,
+        url: `https://configs.widgets.salonmanager.${CONFIGS.domainExtension}/${appId}.json`,
       })
       .then(response => {
         const configData = response.data;
@@ -92,7 +93,7 @@ window.initWidget = function(d, appId) {
         httpUtil
           .makeRequest({
             method: 'HEAD',
-            url: `https://configs.widgets.salonmanager.net/${appId}.json`,
+            url: `https://configs.widgets.salonmanager.${CONFIGS.domainExtension}/${appId}.json`,
           })
           .then(response => {
             const lmTimestamp = toTimestamp(response.headers['last-modified']);

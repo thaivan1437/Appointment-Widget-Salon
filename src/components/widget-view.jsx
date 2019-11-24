@@ -15,6 +15,8 @@ import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
 import { COLOR_SCHEMA } from 'common/constants';
 
+import { CONFIGS } from '@environment';
+
 const FALLBACK_COLOR = 'red';
 
 export const ColorContext = React.createContext(COLOR_SCHEMA[FALLBACK_COLOR]);
@@ -454,7 +456,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 }}
               >
                 Next
-                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg"></img>
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
               </CommonStyles.Button>
             </ButtonWrapper4>
           </>
@@ -484,7 +488,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 onClick={() => setSelectedStep(3)}
               >
                 Next
-                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg"></img>
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
               </CommonStyles.Button>
             </ButtonWrapper>
           </>
@@ -526,7 +532,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 onClick={() => setSelectedStep(4)}
               >
                 Next
-                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg" />
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
               </CommonStyles.Button>
             </ButtonWrapper3>
           </>
@@ -556,8 +564,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 disabled={selectedServices.length < 1}
                 onClick={() => setSelectedStep(5)}
               >
-                Next
-                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg"></img>
+                Next{' '}
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
               </CommonStyles.Button>
             </ButtonWrapper2>
           </>
@@ -587,12 +597,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   httpUtil
                     .makeRequest({
                       method: 'POST',
-                      url: `https://salon.api.salonmanager.net/v1/widgets/${appId}/appointment`,
+                      url: `https://salon.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/widgets/${appId}/appointment`,
                       data,
                       headers: {
-                        'x-api-key': 'lONqBGLAQ53dEtWmBXzamigKpGU9TTx7FBkLaf57',
-                        appToken: '82711411-fc9b-11e9-9000-3b3f222744c9',
-                        'x-app-version': 'v1.0.1@20190610',
+                        'x-api-key': CONFIGS.xApiKey,
+                        'x-app-version': CONFIGS.xAppVersion,
                       },
                     })
                     .then(() => {
@@ -605,8 +614,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
               >
                 {showLoading ? (
                   <img
-                    src="https://widgets.salonmanager.net/assets/icons/spinner.png"
                     id="spinner"
+                    src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/spinner.png`}
                   />
                 ) : (
                   'Request an Appointment'
@@ -625,12 +634,15 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 {
                   'By requesting an appointment, you agree to receive text messages and to our '
                 }
-                <a href="https://salonmanager.com/terms-of-use" target="_blank">
+                <a
+                  href={`https://salonmanager.${CONFIGS.domainExtension}/terms-of-use`}
+                  target="_blank"
+                >
                   Terms of Use
                 </a>
                 {' and '}
                 <a
-                  href="https://salonmanager.com/privacy-policy"
+                  href={`https://salonmanager.${CONFIGS.domainExtension}/privacy-policy`}
                   target="_blank"
                 >
                   Privacy Policy
@@ -665,17 +677,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <ImageWrapper
               onClick={() => setShowModal(true)}
-              src={`https://widgets.salonmanager.net/assets/icons/${folderName}/appointments.png`}
+              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/appointments.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.net/assets/icons/${folderName}/pricing.png`}
+              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/pricing.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.net/assets/icons/${folderName}/promotions.png`}
+              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/promotions.png`}
             />
           ) : null}
         </WidgetViewWrapper>
@@ -692,7 +704,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
             {renderContent()}
             <ModalStyles.ModalFooter>
               powered by
-              <FooterLink href="https://salonmanager.net" target="_blank">
+              <FooterLink
+                href={`https://salonmanager.${CONFIGS.domainExtension}`}
+                target="_blank"
+              >
                 Salon Manager
               </FooterLink>
             </ModalStyles.ModalFooter>
