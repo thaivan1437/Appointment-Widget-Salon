@@ -65,8 +65,14 @@ module.exports = {
       inject: false,
     }),
     new CopyPlugin([
-      { from: path.join(__dirname, 'src', 'static', 'icons'), to: 'icons' },
-      { from: path.join(__dirname, 'src', 'static', 'fonts'), to: 'fonts' },
+      {
+        from: path.join(__dirname, 'src', 'static', 'icons'),
+        to: 'assets/icons',
+      },
+      {
+        from: path.join(__dirname, 'src', 'static', 'fonts'),
+        to: 'assets/fonts',
+      },
     ]),
   ],
   devServer: {
