@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import ArrowIcon from '@assets/arrow.svg';
-
 import DayPicker from '@components/day-picker/day-picker';
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { COLORS, INPUT_COLORS } from '../common/colors';
@@ -16,7 +14,6 @@ import ServiceSelection from '@components/service-selection/service-selection';
 import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
 import { COLOR_SCHEMA } from 'common/constants';
-import Spinner from '@assets/spinner.png';
 
 const FALLBACK_COLOR = 'red';
 
@@ -457,7 +454,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 }}
               >
                 Next
-                <img src={ArrowIcon}></img>
+                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg"></img>
               </CommonStyles.Button>
             </ButtonWrapper4>
           </>
@@ -487,7 +484,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 onClick={() => setSelectedStep(3)}
               >
                 Next
-                <img src={ArrowIcon}></img>
+                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg"></img>
               </CommonStyles.Button>
             </ButtonWrapper>
           </>
@@ -529,7 +526,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 onClick={() => setSelectedStep(4)}
               >
                 Next
-                <img src={ArrowIcon} />
+                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg" />
               </CommonStyles.Button>
             </ButtonWrapper3>
           </>
@@ -560,7 +557,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 onClick={() => setSelectedStep(5)}
               >
                 Next
-                <img src={ArrowIcon}></img>
+                <img src="https://widgets.salonmanager.net/assets/icons/arrow.svg"></img>
               </CommonStyles.Button>
             </ButtonWrapper2>
           </>
@@ -607,7 +604,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 }}
               >
                 {showLoading ? (
-                  <img src={Spinner} id="spinner" />
+                  <img
+                    src="https://widgets.salonmanager.net/assets/icons/spinner.png"
+                    id="spinner"
+                  />
                 ) : (
                   'Request an Appointment'
                 )}
@@ -665,17 +665,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <ImageWrapper
               onClick={() => setShowModal(true)}
-              src={`https://widgets.salonmanager.net/icons/${folderName}/appointments.png`}
+              src={`https://widgets.salonmanager.net/assets/icons/${folderName}/appointments.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.net/icons/${folderName}/pricing.png`}
+              src={`https://widgets.salonmanager.net/assets/icons/${folderName}/pricing.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.net/icons/${folderName}/promotions.png`}
+              src={`https://widgets.salonmanager.net/assets/icons/${folderName}/promotions.png`}
             />
           ) : null}
         </WidgetViewWrapper>

@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { S } from './service-selection.styles';
 
-import CheckIcon from '@assets/icon_checked.png';
-import UncheckIcon from '@assets/icon_unchecked.png';
-import RadioOn from '@assets/radio_on.png';
-import RadioOf from '@assets/radio_off.png';
-
-const ServiceSelection = ({ initialValue = [], onServiceSelected, serviceList = {} }) => {
+const ServiceSelection = ({
+  initialValue = [],
+  onServiceSelected,
+  serviceList = {},
+}) => {
   const [selectedCategory, setSelectedCategory] = useState();
   const [selectedServicesIds, setSelectedServicesIds] = useState([]);
   const [selectedServices, setSelectedServices] = useState(initialValue || []);
@@ -34,7 +33,11 @@ const ServiceSelection = ({ initialValue = [], onServiceSelected, serviceList = 
             selected={selectedCategory === category}
           >
             <S.IconContainer
-              src={selectedCategory === category ? RadioOn : RadioOf}
+              src={
+                selectedCategory === category
+                  ? 'https://widgets.salonmanager.net/assets/icons/radio_on.png'
+                  : 'https://widgets.salonmanager.net/assets/icons/radio_off.png'
+              }
             />
             <div>{category}</div>
           </S.CategoryItem>
@@ -65,8 +68,8 @@ const ServiceSelection = ({ initialValue = [], onServiceSelected, serviceList = 
               <S.IconContainer
                 src={
                   selectedServicesIds.indexOf(service.id) !== -1
-                    ? CheckIcon
-                    : UncheckIcon
+                    ? 'https://widgets.salonmanager.net/assets/icons/icon_checked.png'
+                    : 'https://widgets.salonmanager.net/assets/icons/icon_unchecked.png'
                 }
               />
               <div>{service.name}</div>
