@@ -7,7 +7,7 @@ import { CONFIGS } from '@environment';
 
   function e() {
     s.f = r.createElement('iframe');
-    s.f.style.cssText = 'width:0;height:0; border: none';
+    s.f.style.cssText = 'width:0;height:0;border:none;z-index:2147483647;';
     s.f.src = 'about:blank';
     r.body.insertBefore(s.f, r.body.firstChild);
 

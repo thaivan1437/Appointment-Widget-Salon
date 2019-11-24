@@ -224,7 +224,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [errors, setErrors] = useState({ userName: false, userPhone: false });
 
   const [frameStyle, setFrameStyle] = useState({
-    common: 'position:fixed;bottom:0px;right:0px;border:none;',
+    common:
+      'position:fixed;bottom:0px;right:0px;border:none;z-index:2147483647;',
     position: null,
     orientation: 'width:0;height:0;',
   });
