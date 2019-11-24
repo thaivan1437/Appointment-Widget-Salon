@@ -317,7 +317,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         data: {
           showModal,
           style:
-            'position: fixed; width: 100%; height: 100%;bottom: 0px;right: 0px;border:none;',
+            'position:fixed;width:100%;height:100%;bottom:0px;right:0px;border:none;z-index:2147483647;',
         },
       });
     } else if (!isInit) {
