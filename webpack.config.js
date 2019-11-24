@@ -4,6 +4,7 @@ const JS_JSX_PATTERN = /\.jsx?$/;
 const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 process.env.NODE_ENV = argv.buildEnv || 'development';
 
@@ -63,6 +64,9 @@ module.exports = {
       template: path.join(__dirname, 'src', 'index.html'),
       inject: false,
     }),
+    new CopyPlugin([
+      { from: path.join(__dirname, 'src', 'static', 'icons'), to: 'icons' },
+    ]),
   ],
   devServer: {
     port: 5555,
