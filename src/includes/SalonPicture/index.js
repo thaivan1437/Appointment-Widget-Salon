@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import sliderData from './salonPictureData'
-import MySlider from 'react-animated-slider';
+import MySlider from './slider';
 import '../../assets/css/horizontal.css';
 
 class SalonPicture extends Component {
@@ -16,6 +16,7 @@ class SalonPicture extends Component {
                 <MySlider className={`slider2`}>
                     {sliderData.map((item, index) => (
                         <div
+                            className="slide2"
                             key={index}
                             style={{
                                 background: `url('${item.original}') no-repeat center center`, backgroundPosition: "center",

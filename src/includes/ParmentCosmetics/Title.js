@@ -12,7 +12,8 @@ class Title extends Component {
     }
 
     render() {
-        return <Row style={{marginTop:100}}>
+        return <div id={this.props.id}>
+        <Row style={{marginTop:100}}>
             <Col className="col-md-4">
                 <Animated animationIn="fadeInLeft" animationOut="fadeOut" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
                     <div style={myStyle.line} />
@@ -30,6 +31,7 @@ class Title extends Component {
                 </Animated>
             </Col>
         </Row>
+        </div>
     }
 }
 

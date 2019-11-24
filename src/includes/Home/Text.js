@@ -21,7 +21,7 @@ Looking for top hair & color services? Belmont Beauty Salon offers high-quality 
                         
                         We welcome walk-ins any day of the week. For a fair and reasonable price, you can enjoy a day filled with R&R (Rest and Relaxation) at our professional salon.
                         
-                        We are specialized in Haircut & Color, Kids Haircut, Manicure & Pedicure, Waxing, Facial, Threading, Microblading Eyebrows, Ombré Powder Eyebrows, Permanent Makeup Eyebrows, Lips & Eyeliners services.
+                        We are specialized in Haircut & Color, Kids Haircut, Manicure & Pedicure, Waxing, Facial, Threading, <a href="/parment-cosmetics#MICROBLADING">Microblading Eyebrows</a>, <a href="/parment-cosmetics#OMBRE">Ombré Powder Eyebrows</a>, <a href="/parment-cosmetics#MAKEUP">Permanent Makeup Eyebrows</a>, <a href="/parment-cosmetics#LIPS">Lips</a> & <a href="/parment-cosmetics#EYELINERS">Eyeliners</a> services.
              <br /> <br />
             <b>NEW! Say Hello To Microblading</b> <br />
             <b>A Natural Semi-permanent Brow Treatment That Looks Like Real Hair </b><br />
