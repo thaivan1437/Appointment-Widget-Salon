@@ -13,7 +13,7 @@ const version = require('./package.json').version;
 module.exports = {
   entry: {
     widgets: 'index.js',
-    'sm-loader': 'sm-loader.js',
+    loader: 'sm-loader.js',
   },
   output: {
     path: path.resolve('build', version),
