@@ -9,6 +9,7 @@
     "react": "^16.11.0",
     "react-animated-css": "^1.2.1",
     "react-animated-slider": "^1.1.4",
+    "react-app-polyfill": "^1.0.4",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-device-detect": "^1.9.10",
     "react-dom": "^16.11.0",
@@ -33,12 +34,13 @@
       ">0.2%",
       "not dead",
       "not op_mini all",
-      "ie >= 9"
+      "ie 11"
     ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
-      "last 1 safari version"
+      "last 1 safari version",
+      "ie 11"
     ]
   },
   "devDependencies": {
