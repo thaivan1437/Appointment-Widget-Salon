@@ -616,7 +616,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 {showLoading ? (
                   <img
                     id="spinner"
-                    src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/spinner.png`}
+                    src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/spinner.png`}
                   />
                 ) : (
                   'Request an Appointment'
@@ -678,17 +678,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <ImageWrapper
               onClick={() => setShowModal(true)}
-              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/appointments.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/appointments.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/pricing.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/pricing.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/promotions.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
             />
           ) : null}
         </WidgetViewWrapper>
