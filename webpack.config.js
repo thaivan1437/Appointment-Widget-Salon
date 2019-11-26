@@ -7,23 +7,29 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 process.env.NODE_ENV = argv.buildEnv || 'development';
 
+const version = require('./package.json').version;
+
 module.exports = {
   entry: {
-    manager: './src/widgets/manager.jsx',
-    appointment: './src/widgets/appointment.jsx',
-    pricing: './src/widgets/pricing.jsx',
-    'special-offer': './src/widgets/special-offer.jsx',
+    widgets: 'index.js',
+    loader: 'loader.js',
   },
   output: {
-    path: path.resolve('dist'),
-    filename: 'widget_[name]_bundle.js',
+    path: path.resolve('build', version),
+    filename: '[name].js',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
       '@components': path.resolve(__dirname, 'src', 'components'),
-      '@assets': path.resolve(__dirname, 'src', 'assets'),
+      '@environment': path.resolve(
+        __dirname,
+        'src',
+        'environments',
+        process.env.NODE_ENV + '.js'
+      ),
     },
+    modules: [path.resolve(__dirname, 'src'), 'node_modules'],
   },
   module: {
     rules: [
@@ -55,7 +61,7 @@ module.exports = {
       filename: 'index.html',
       template: path.join(__dirname, 'src', 'index.html'),
       inject: false,
-    }),
+    })
   ],
   devServer: {
     port: 5555,

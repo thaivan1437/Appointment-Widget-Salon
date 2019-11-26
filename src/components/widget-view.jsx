@@ -1,142 +1,53 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-import AppointmentIcon from '@assets/icon_widgets_appointment.png';
-import PricingIcon from '@assets/icon_widgets_pricing.png';
-import PromotionsIcon from '@assets/icon_widgets_promotions.png';
+import DayPicker from '@components/day-picker/day-picker';
+import CustomRodal from '@components/custom-rodal/custom-rodal';
+import { COLORS, INPUT_COLORS } from '../common/colors';
 
-import CloseDialogIcon from '@assets/icon_dialog_close.png';
+import { S as CommonStyles } from 'common/styles';
+import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 
-import 'rodal/lib/rodal.css';
-import Rodal from 'rodal';
+import Counter from '@components/counter/counter';
+import TimePicker from '@components/time-picker/time-picker';
+import ServiceSelection from '@components/service-selection/service-selection';
+import { getDisplayDateString, getRequestDateString } from 'common/utils';
+import httpUtil from 'common/HttpUtil';
+import { COLOR_SCHEMA } from 'common/constants';
 
-import DayPicker from '@components/day-picker';
-import { COLORS } from '../common/colors';
+import { CONFIGS } from '@environment';
 
-import { AppointmentInput, ShortCenteredInput } from '../common/styles';
+const FALLBACK_COLOR = 'red';
 
-import Counter from '@components/counter';
+export const ColorContext = React.createContext(COLOR_SCHEMA[FALLBACK_COLOR]);
 
 const WidgetViewWrapper = styled.div`
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
+  position: absolute;
 
-  width: ${props => (props.vertical ? '65px' : 'auto')};
+  width: ${props => (props.vertical ? '90px' : 'auto')};
 
-  top: ${props => (props.top ? '5px' : 'auto')};
-  left: ${props => (props.left ? '5px' : 'auto')};
-  right: ${props => (props.right ? '5px' : 'auto')};
-  bottom: ${props => (props.bottom ? '5px' : 'auto')};
+  top: ${props => (props.top ? '10px' : 'auto')};
+  left: ${props => (props.left ? '10px' : 'auto')};
+  right: ${props => (props.right ? '10px' : 'auto')};
+  bottom: ${props => (props.bottom ? '10px' : 'auto')};
 `;
 
 const ImageWrapper = styled.img`
-  width: 65px;
-  height: 65px;
+  width: 90px;
+  height: 90px;
   cursor: pointer;
-`;
-
-// TODO remove after demo
-const OptionsWrapper = styled.div`
-  width: 175px;
-  margin: 100px auto;
-`;
-
-//
-// const CloseIcon = styled.div`
-//   width: 72px;
-//   height: 72px;
-//   background: red;
-//
-//   border-top-left-radius: 10px;
-// `;
-// const CloseInner = styled.div`
-//   width: 100px;
-//   height: 50px;
-//   background: white;
-//
-//   position: absolute;
-//   transform: rotate(-45deg);
-// `;
-// TODO move styles to global style
-const CustomRodal = styled(Rodal)`
-  .rodal-dialog {
-    padding: 0;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.2);
-  }
-`;
-
-const CloseIcon = styled.img`
-  position: absolute;
-  left: 0;
-  top: 0;
-  cursor: pointer;
-`;
-
-const ModalContentWrapper = styled.div`
-  display: flex;
-  height: 100%;
-`;
-const ModalContentContainer = styled.div`
-  flex: 2;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  padding: 50px 0 68px;
-`;
-const ModalInformationContainer = styled.div`
-  flex: 1;
-  background-color: ${COLORS.ALABASTER};
-  border-left-width: 1px;
-  border-left-style: solid;
-  border-left-color: ${COLORS.MERCURY};
-`;
-
-const DialogCycle = styled.div`
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  border-radius: 30px;
-  background-color: ${COLORS.MERCURY};
-
-  left: 585px;
-
-  top: ${props => (props.top ? '-15px' : 'auto')};
-  bottom: ${props => (props.bottom ? '-15px' : 'auto')};
-`;
-
-const WidgetFooter = styled.div`
-  position: fixed;
-  bottom: 0;
-  border-top-width: 2px;
-  border-top-style: dotted;
-  border-color: ${COLORS.MERCURY};
-  width: 500px;
-  color: ${COLORS.MERCURY};
-  font-size: 12px;
-
-  padding: 10px 0;
-  margin-bottom: 30px;
-`;
-
-const WidgetStepTitle = styled.div`
-  width: 400px;
-  font-size: 24px;
-  margin-bottom: 20px;
 `;
 
 const InputWrapper = styled.div`
-  width: 320px;
-  margin-bottom: 16px;
+  margin-top: 20px;
+
+  width: 400px;
 `;
 
 const InlineInformation = styled.span`
   padding: 0 10px;
-  color: ${COLORS.DOVE_GRAY};
+  color: ${INPUT_COLORS.TEXT_COLOR};
+  font-size: 22px;
 `;
 
 const CounterWrapper = styled.div`
@@ -144,109 +55,708 @@ const CounterWrapper = styled.div`
   align-items: center;
 `;
 
-const WidgetView = () => {
-  // Demo section should remove
+const ButtonWrapper = styled.div`
+  align-self: flex-end;
+  margin: 47px 50px 0 0;
+
+  display: flex;
+  align-items: center;
+`;
+
+// TODO move common styles file
+const ButtonWrapper2 = styled(ButtonWrapper)`
+  margin-top: 17px;
+`;
+
+const ButtonWrapper4 = styled(ButtonWrapper)`
+  margin-top: -4px;
+`;
+
+const ButtonWrapper3 = styled(ButtonWrapper)`
+  margin-top: 37px;
+`;
+
+const DayPickerWrapper = styled.div`
+  margin: 42px 0;
+`;
+
+const ConfirmMessage = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  color: ${COLORS.DOVE_GRAY};
+  font-size: 20px;
+`;
+
+const TimePickerLabel = styled.div`
+  margin-right: 40px;
+`;
+
+const TimePickerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 450px;
+`;
+
+const LineContainer = styled.div`
+  border: 1px dashed #e2e2e2;
+  width: 500px;
+  margin: 16px 0px;
+`;
+
+const BackButton = styled.div`
+  color: ${COLORS.DOVE_GRAY};
+  cursor: pointer;
+  margin-right: 15px;
+`;
+
+const FooterLink = styled.a`
+  text-decoration: none;
+  color: ${COLORS.STORM_GRAY};
+
+  padding: 0 3px;
+
+  :hover {
+    font-weight: 500;
+  }
+`;
+
+const AppointmentInfo = styled.div`
+  color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
+  padding: 0 20px 8px;
+  font-size: 20px;
+
+  text-align: ${props => (props.header ? 'center' : 'left')};
+`;
+
+const FirstStepMessage = styled(AppointmentInfo)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  height: 100%;
+  font-size: 24px;
+  text-align: center;
+`;
+
+const InformationWrapper = styled.div`
+  margin-top: 16px;
+`;
+
+const EditAppointment = styled.div`
+  color: ${COLORS.DOVE_GRAY};
+
+  margin: 30px 0;
+
+  cursor: pointer;
+
+  :hover {
+    text-decoration: underline;
+  }
+
+  ${props =>
+    props.disabled
+      ? 'opacity: 0.4; pointer-events: none; user-select:none;'
+      : null}
+`;
+const ConfirmationStepWrapper = styled.div`
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+`;
+
+const FormWrapper = styled.div`
+  border: 1px solid ${INPUT_COLORS.BORDER};
+  border-radius: 10px;
+`;
+
+const SeparatorLine = styled.div`
+  border-bottom-color: ${INPUT_COLORS.BORDER};
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+`;
+
+const UpToLabel = styled.span`
+  font-size: 16px;
+  margin-left: 10px;
+  color: ${COLORS.DOVE_GRAY};
+`;
+
+const PolicyContainer = styled.div`
+  position: absolute;
+  bottom: 90px;
+  color: ${COLORS.DOVE_GRAY};
+  width: 400px;
+
+  a,
+  a:visited {
+    color: ${COLORS.DOVE_GRAY};
+  }
+`;
+
+const showWidgetButton = (widgetName, registeredWidgets) => {
+  return Array.isArray(registeredWidgets)
+    ? registeredWidgets.indexOf(widgetName) !== -1
+    : false;
+};
+
+const WidgetView = ({ widgetConfig, appId }) => {
   const [left, setLeft] = useState(false);
-  const [right, setRight] = useState(true);
-  const [top, setTop] = useState(true);
+  const [right, setRight] = useState(false);
+  const [top, setTop] = useState(false);
   const [bottom, setBottom] = useState(false);
-  const [vertical, setVertical] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [selectedStep, setSelectedStep] = useState(1);
+  const [userName, setUserName] = useState('');
+  const [userPhone, setUserPhone] = useState('');
+  const [userCount, setUserCount] = useState(1);
+  const [selectedDate, setSelectedDate] = useState();
+  const [selectedTime1, setSelectedTime1] = useState();
+  const [selectedTime2, setSelectedTime2] = useState();
+  const [selectedServices, setSelectedServices] = useState([]);
+  const [color, setColor] = useState(COLOR_SCHEMA[FALLBACK_COLOR]);
+  const [folderName, setFolderName] = useState();
+
+  const [errors, setErrors] = useState({ userName: false, userPhone: false });
+
+  const [frameStyle, setFrameStyle] = useState({
+    common:
+      'position:fixed;bottom:0px;right:0px;border:none;z-index:2147483647;',
+    position: null,
+    orientation: 'width:0;height:0;',
+  });
+
+  const [isInit, setIsInit] = useState(true);
+  const [showLoading, setShowLoading] = useState(false);
+
+  useEffect(() => {
+    switch (widgetConfig.position) {
+      case 'TOP_LEFT':
+        setTop(true);
+        setLeft(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'top:0;left:0',
+        }));
+        break;
+
+      case 'TOP_RIGHT':
+        setTop(true);
+        setRight(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'top:0;right:0',
+        }));
+        break;
+
+      case 'BOTTOM_LEFT':
+        setBottom(true);
+        setLeft(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'bottom:0;left:0',
+        }));
+        break;
+
+      case 'BOTTOM_RIGHT':
+        setBottom(true);
+        setRight(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'bottom:0;right:0',
+        }));
+        break;
+      default:
+        setRight(true);
+        setBottom(true);
+        setFrameStyle(prev => ({
+          ...prev,
+          position: 'bottom:0;right:0',
+        }));
+    }
+
+    const color =
+      COLOR_SCHEMA[widgetConfig.style] || COLOR_SCHEMA[FALLBACK_COLOR];
+    setColor(color);
+    setFolderName(
+      COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
+    );
+
+    const size = (widgetConfig.widgets.length || 1) * 90;
+
+    setFrameStyle(prev => ({
+      ...prev,
+      orientation: `width: ${
+        widgetConfig.orientation === 'VERTICAL' ? '100px' : size + 10 + 'px'
+      };height: ${
+        widgetConfig.orientation === 'VERTICAL' ? size + 10 + 'px' : '100px'
+      };`,
+    }));
+  }, []);
+
+  useEffect(() => {
+    if (!showModal) {
+      setSelectedStep(1);
+      setUserName('');
+      setUserPhone('');
+      setUserCount(1);
+      setSelectedDate();
+      setSelectedTime1();
+      setSelectedTime2();
+      setSelectedServices([]);
+      setShowLoading(false);
+    }
+
+    if (showModal) {
+      parent.postMessage({
+        type: 'showModal',
+        data: {
+          showModal,
+          style:
+            'position:fixed;width:100%;height:100%;bottom:0px;right:0px;border:none;z-index:2147483647;',
+        },
+      });
+    } else if (!isInit) {
+      setTimeout(() => {
+        parent.postMessage({
+          type: 'showModal',
+          data: {
+            showModal,
+            style: getFrameStyle(),
+          },
+        });
+      }, 300);
+    } else {
+      setIsInit(false);
+    }
+  }, [showModal]);
+
+  useEffect(() => {
+    const style = getFrameStyle();
+
+    parent.postMessage({
+      type: 'init',
+      data: {
+        style,
+      },
+    });
+  }, [frameStyle]);
+
+  const getFrameStyle = () => {
+    return frameStyle.common + frameStyle.orientation + frameStyle.position;
+  };
+
+  const getHourString = selectedTimeObject => {
+    const hourString =
+      selectedTimeObject.selectedHour
+        .split(' ')
+        .join(':' + selectedTimeObject.selectedMinute) || '';
+
+    return hourString.toLowerCase();
+  };
+
+  const renderContent = () => {
+    switch (selectedStep) {
+      case 1:
+        return (
+          <>
+            <ModalStyles.ModalStepTitle>Me</ModalStyles.ModalStepTitle>
+            <FormWrapper>
+              <CommonStyles.Input
+                value={userName}
+                hasError={errors.userName}
+                onChange={event => {
+                  const { value } = event.target;
+
+                  if (errors.userName && value.length >= 2) {
+                    setErrors(prev => ({
+                      ...prev,
+                      userName: false,
+                    }));
+                  }
+
+                  if (value.length <= 32) {
+                    setUserName(value);
+                  }
+                }}
+                placeholder="Enter name"
+                hasValue={userName.length > 0}
+              ></CommonStyles.Input>
+              <SeparatorLine />
+              <CommonStyles.Input
+                value={userPhone}
+                hasError={errors.userPhone}
+                onChange={event => {
+                  const { value } = event.target;
+                  //TODO move validation separate file
+                  let processedValue = value.replace(/[^\d]/g, '');
+
+                  if (processedValue.length <= 10) {
+                    const formatterPattern1 = '($1';
+                    const formatterPattern2 = '($1) $2';
+                    const formatterPattern3 = '($1) $2-$3';
+
+                    let selectedPattern = formatterPattern1;
+
+                    if (processedValue.length > 3) {
+                      selectedPattern = formatterPattern2;
+                    }
+
+                    if (processedValue.length > 6) {
+                      selectedPattern = formatterPattern3;
+                    }
+
+                    processedValue = processedValue.replace(
+                      /(\d{1,3})(\d{0,3})(\d{0,4})/,
+                      selectedPattern
+                    );
+
+                    if (errors.userPhone && processedValue.length === 14) {
+                      setErrors(prev => ({
+                        ...prev,
+                        userPhone: false,
+                      }));
+                    }
+
+                    setUserPhone(processedValue);
+                  }
+                }}
+                placeholder="Enter phone number (000) 000-0000"
+                hasValue={userPhone.length > 0}
+              ></CommonStyles.Input>
+            </FormWrapper>
+            <InputWrapper>
+              <CounterWrapper>
+                <Counter
+                  initialValue={userCount}
+                  countChange={newCount => {
+                    setUserCount(newCount);
+                  }}
+                />
+                <InlineInformation>
+                  {userCount === 1 ? 'person' : 'people'}
+                </InlineInformation>
+              </CounterWrapper>
+            </InputWrapper>
+            <ButtonWrapper4>
+              <CommonStyles.Button
+                color={color}
+                onClick={() => {
+                  if (userName.length < 2 || userPhone.length !== 14) {
+                    setErrors({
+                      userName: userName.length < 2,
+                      userPhone: userPhone.length !== 14,
+                    });
+                  } else {
+                    setSelectedStep(2);
+                  }
+                }}
+              >
+                Next
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
+              </CommonStyles.Button>
+            </ButtonWrapper4>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <ModalStyles.ModalStepTitle>
+              Appointment Date
+            </ModalStyles.ModalStepTitle>
+
+            <DayPickerWrapper>
+              <DayPicker
+                initialValue={selectedDate}
+                selectedDateChange={value => {
+                  setSelectedDate(value);
+                }}
+              />
+            </DayPickerWrapper>
+            <ButtonWrapper>
+              <BackButton onClick={() => setSelectedStep(1)}>
+                {'< Back'}
+              </BackButton>
+              <CommonStyles.Button
+                color={color}
+                disabled={!(selectedDate && selectedDate.dateValue)}
+                onClick={() => setSelectedStep(3)}
+              >
+                Next
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
+              </CommonStyles.Button>
+            </ButtonWrapper>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <ModalStyles.ModalStepTitle>
+              Preferred Time
+            </ModalStyles.ModalStepTitle>
+            <TimePickerWrapper>
+              <TimePickerLabel>Option 1</TimePickerLabel>
+              <TimePicker
+                onTimeSelected={time => {
+                  setSelectedTime1(time);
+                }}
+                initialValue={selectedTime1}
+              />
+            </TimePickerWrapper>
+
+            <LineContainer />
+            <TimePickerWrapper>
+              <TimePickerLabel>Option 2</TimePickerLabel>
+              <TimePicker
+                onTimeSelected={time => {
+                  setSelectedTime2(time);
+                }}
+                initialValue={selectedTime2}
+              />
+            </TimePickerWrapper>
+
+            <ButtonWrapper3>
+              <BackButton onClick={() => setSelectedStep(2)}>
+                {'< Back'}
+              </BackButton>
+              <CommonStyles.Button
+                color={color}
+                disabled={!(selectedTime1 && selectedTime2)}
+                onClick={() => setSelectedStep(4)}
+              >
+                Next
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
+              </CommonStyles.Button>
+            </ButtonWrapper3>
+          </>
+        );
+
+      case 4:
+        return (
+          <>
+            <ModalStyles.ModalStepTitle>
+              Desired Services
+              <UpToLabel>(up to 4 Services)</UpToLabel>
+            </ModalStyles.ModalStepTitle>
+            <ServiceSelection
+              serviceList={widgetConfig.widgetData.appointments}
+              initialValue={selectedServices}
+              onServiceSelected={services => {
+                setSelectedServices(services);
+              }}
+            />
+
+            <ButtonWrapper2>
+              <BackButton onClick={() => setSelectedStep(3)}>
+                {'< Back'}
+              </BackButton>
+              <CommonStyles.Button
+                color={color}
+                disabled={selectedServices.length < 1}
+                onClick={() => setSelectedStep(5)}
+              >
+                Next{' '}
+                <img
+                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                ></img>
+              </CommonStyles.Button>
+            </ButtonWrapper2>
+          </>
+        );
+
+      case 5:
+        return (
+          <>
+            <ConfirmationStepWrapper>
+              <CommonStyles.AppointmentButton
+                color={color}
+                disabled={showLoading}
+                onClick={() => {
+                  const data = {
+                    customerName: userName,
+                    customerPhoneNumber: `+1${userPhone.replace(/[^\d]/g, '')}`,
+                    numberOfPeople: userCount,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    date: getRequestDateString(selectedDate.dateValue),
+                    time1: getHourString(selectedTime1),
+                    time2: getHourString(selectedTime2),
+                    services: [...selectedServices],
+                  };
+
+                  setShowLoading(true);
+
+                  httpUtil
+                    .makeRequest({
+                      method: 'POST',
+                      url: `https://salon.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/widgets/${appId}/appointment`,
+                      data,
+                      headers: {
+                        'x-api-key': CONFIGS.xApiKey,
+                        'x-app-version': CONFIGS.xAppVersion,
+                      },
+                    })
+                    .then(() => {
+                      setSelectedStep(6);
+                    })
+                    .finally(() => {
+                      setShowLoading(false);
+                    });
+                }}
+              >
+                {showLoading ? (
+                  <img
+                    id="spinner"
+                    src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/spinner.png`}
+                  />
+                ) : (
+                  'Request an Appointment'
+                )}
+              </CommonStyles.AppointmentButton>
+              <EditAppointment
+                disabled={showLoading}
+                onClick={() => {
+                  setSelectedStep(1);
+                }}
+              >
+                Edit Details
+              </EditAppointment>
+
+              <PolicyContainer>
+                {
+                  'By requesting an appointment, you agree to receive text messages and to our '
+                }
+                <a
+                  href={`https://salonmanager.${CONFIGS.domainExtension}/terms-of-use`}
+                  target="_blank"
+                >
+                  Terms of Use
+                </a>
+                {' and '}
+                <a
+                  href={`https://salonmanager.${CONFIGS.domainExtension}/privacy-policy`}
+                  target="_blank"
+                >
+                  Privacy Policy
+                </a>
+              </PolicyContainer>
+            </ConfirmationStepWrapper>
+          </>
+        );
+
+      case 6:
+        return (
+          <ConfirmMessage>
+            We will confirm your appointment by text message
+          </ConfirmMessage>
+        );
+
+      default:
+        return <div>Invalid Step</div>;
+    }
+  };
 
   return (
     <>
-      {/*TODO: remove after demo*/}
-      <OptionsWrapper>
-        <div
-          onChange={e => {
-            const isLeft = e.target.value === 'left';
-
-            setLeft(isLeft);
-            setRight(!isLeft);
-          }}
+      {(top || left || bottom || right) && folderName ? (
+        <WidgetViewWrapper
+          top={top}
+          right={right}
+          bottom={bottom}
+          left={left}
+          vertical={widgetConfig.orientation === 'VERTICAL'}
         >
-          <input type="radio" name="Group1" value="left" /> Left
-          <input type="radio" name="Group1" value="right" defaultChecked />{' '}
-          Right
-        </div>
+          {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
+            <ImageWrapper
+              onClick={() => setShowModal(true)}
+              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/appointments.png`}
+            />
+          ) : null}
+          {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
+            <ImageWrapper
+              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/pricing.png`}
+            />
+          ) : null}
+          {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
+            <ImageWrapper
+              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/promotions.png`}
+            />
+          ) : null}
+        </WidgetViewWrapper>
+      ) : null}
 
-        <div
-          onChange={e => {
-            const isBottom = e.target.value === 'bottom';
-
-            setBottom(isBottom);
-            setTop(!isBottom);
-          }}
-        >
-          <input type="radio" name="Group2" value="top" defaultChecked /> Top
-          <input type="radio" name="Group2" value="bottom" /> Bottom
-        </div>
-
-        <div
-          onChange={e => {
-            const isVertical = e.target.value === 'vertical';
-            setVertical(isVertical);
-          }}
-        >
-          <input type="radio" name="Group3" value="horizontal" defaultChecked />{' '}
-          Horizontal
-          <input type="radio" name="Group3" value="vertical" />
-          Vertical
-        </div>
-      </OptionsWrapper>
-      <WidgetViewWrapper
-        top={top}
-        right={right}
-        bottom={bottom}
-        left={left}
-        vertical={vertical}
-      >
-        <ImageWrapper
-          onClick={() => setShowModal(true)}
-          src={AppointmentIcon}
-        />
-        <ImageWrapper onClick={() => setShowModal(true)} src={PricingIcon} />
-        <ImageWrapper onClick={() => setShowModal(true)} src={PromotionsIcon} />
-      </WidgetViewWrapper>
-
-      <DayPicker />
       {/*TODO: (refactor) move content separate component*/}
       <CustomRodal
-        visible={showModal}
-        animation="flip"
-        closeMaskOnClick={false}
-        showCloseButton={false}
-        width={900}
-        height={420}
-        onClose={() => setShowModal(false)}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        selectedStyle={folderName}
       >
-        <CloseIcon
-          src={CloseDialogIcon}
-          role="button"
-          onClick={() => setShowModal(false)}
-        />
-        <DialogCycle top />
-        <DialogCycle bottom />
+        <ColorContext.Provider value={color}>
+          <ModalStyles.ModalContentContainer>
+            {renderContent()}
+            <ModalStyles.ModalFooter>
+              powered by
+              <FooterLink
+                href={`https://salonmanager.${CONFIGS.domainExtension}`}
+                target="_blank"
+              >
+                Salon Manager
+              </FooterLink>
+            </ModalStyles.ModalFooter>
+          </ModalStyles.ModalContentContainer>
+          <ModalStyles.ModalInformationContainer>
+            {selectedStep === 1 ? (
+              <FirstStepMessage>
+                Your appointment details will appear here
+              </FirstStepMessage>
+            ) : null}
 
-        <ModalContentWrapper>
-          <ModalContentContainer>
-            <WidgetStepTitle>About Me</WidgetStepTitle>
-            <InputWrapper>
-              <AppointmentInput placeholder="Enter name"></AppointmentInput>
-            </InputWrapper>
-            <InputWrapper>
-              <AppointmentInput placeholder="Enter phone number"></AppointmentInput>
-            </InputWrapper>
-            <InputWrapper>
-              <CounterWrapper>
-                <Counter />
-                <InlineInformation>Number of people</InlineInformation>
-              </CounterWrapper>
-            </InputWrapper>
-            <WidgetFooter>powered by Salon Manager</WidgetFooter>
-          </ModalContentContainer>
-          <ModalInformationContainer />
-        </ModalContentWrapper>
+            {selectedStep > 1 ? (
+              <>
+                <AppointmentInfo header>Appointment Details</AppointmentInfo>
+                <InformationWrapper>
+                  <AppointmentInfo>{userName}</AppointmentInfo>
+                  <AppointmentInfo>{userPhone}</AppointmentInfo>
+                  <AppointmentInfo>
+                    {userCount} {userCount === 1 ? 'Person' : 'People'}
+                  </AppointmentInfo>
+                </InformationWrapper>
+              </>
+            ) : null}
+
+            {selectedStep > 2 ? (
+              <InformationWrapper>
+                <AppointmentInfo>
+                  {getDisplayDateString(selectedDate.dateValue)}
+                </AppointmentInfo>
+                {selectedStep > 3 ? (
+                  <AppointmentInfo>
+                    {`${getHourString(selectedTime1)} / ${getHourString(
+                      selectedTime2
+                    )}`}
+                  </AppointmentInfo>
+                ) : null}
+              </InformationWrapper>
+            ) : null}
+
+            {selectedStep > 4 ? (
+              <InformationWrapper>
+                {selectedServices.map(service => (
+                  <AppointmentInfo>{service.name}</AppointmentInfo>
+                ))}
+              </InformationWrapper>
+            ) : null}
+          </ModalStyles.ModalInformationContainer>
+        </ColorContext.Provider>
       </CustomRodal>
     </>
   );

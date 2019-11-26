@@ -1,55 +1,70 @@
 import styled from 'styled-components';
-import { COLORS } from './colors';
+import { COLORS, INPUT_COLORS } from './colors';
 
-export const AppointmentInput = styled.input`
-  width: 300px;
-  font-size: 16px;
-  border-radius: 5px;
+export const S = {};
 
-  padding: 8px;
-  border: 1px solid ${COLORS.MERCURY};
+S.Input = styled.input`
+  width: 400px;
+  font-size: 22px;
+  border-radius: 10px;
 
-  color: ${COLORS.DOVE_GRAY};
+  padding: 12px;
+  border: none;
 
-  line-height: 1.5;
+  color: ${props => (props.hasError ? COLORS.MONZA : INPUT_COLORS.TEXT_COLOR)};
+
+  line-height: 2;
+
+  text-transform: ${props => (props.hasValue ? 'capitalize' : 'none')};
 
   :focus,
   :hover {
-    border-color: ${COLORS.MONZA};
     outline: 0;
+  }
+
+  ::placeholder {
+    color: ${props => (props.hasError ? COLORS.MONZA : INPUT_COLORS.HIT_TEXT)};
   }
 `;
 
-export const ShortCenteredInput = styled(AppointmentInput)`
-  width: 40px;
-  text-align: center;
-`;
+S.Button = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-export const AppointmentTimeInput = styled(AppointmentInput)`
-  width: 92px;
-`;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: ${props => props.color};
 
-export const SendButton = styled.button`
-  padding: 5px;
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid ${COLORS.SILVER_CHALICE};
-  background: ${COLORS.MANDY};
+  font-size: 16px;
+  font-family: inherit;
 
-  margin: 10px 0;
-
-  height: 35px;
   color: white;
 
   :focus {
-    border-color: ${COLORS.MANDY};
-
     outline: 0;
   }
 
   :hover {
-    background-color: ${COLORS.CABARET};
-    font-weight: bold;
     cursor: pointer;
   }
+
+  ${props =>
+    props.disabled
+      ? 'opacity: 0.4; pointer-events: none; user-select:none; background-color: #747883;'
+      : null}
+`;
+
+S.AppointmentButton = styled(S.Button)`
+  font-size: 20px;
+  line-height: 2;
+  width: 310px;
+  height: 56px;
+  position: relative;
+
+  ${props =>
+    props.disabled
+      ? `opacity:1;filter:brightness(0.85);background-color:${props.color};`
+      : null}
 `;

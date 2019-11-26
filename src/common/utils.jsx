@@ -9,6 +9,32 @@ export const getTimeString = date =>
     ? date.toLocaleTimeString('en-US')
     : '';
 
+export const getDisplayDateString = date => {
+  return date && typeof date.toLocaleTimeString === 'function'
+    ? date.toLocaleDateString('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : null;
+};
+
+export const getRequestDateString = date => {
+  if (date && typeof date.toLocaleTimeString === 'function') {
+    const parsedDate = date
+      .toLocaleDateString('en-US', {
+        month: 'numeric',
+        day: 'numeric',
+        year: 'numeric',
+      })
+      .split('/');
+
+    return `${parsedDate[2]}${parsedDate[0]}${parsedDate[1]}`;
+  } else {
+    return null;
+  }
+};
+
 const addDays = (date, days) => {
   const tempDate = new Date(date);
   return tempDate.setDate(tempDate.getDate() + days);
@@ -20,8 +46,6 @@ const addMonth = (date, month) => {
 };
 
 const sliderDateObj = date => {
-  date.toDateString('en-US', { month: 'short', weekday: 'short' });
-
   return {
     day: date.toLocaleDateString('en-US', { day: '2-digit' }),
     weekday: date
