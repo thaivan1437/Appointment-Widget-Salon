@@ -312,23 +312,29 @@ const WidgetView = ({ widgetConfig, appId }) => {
     }
 
     if (showModal) {
-      parent.postMessage({
-        type: 'showModal',
-        data: {
-          showModal,
-          style:
-            'position:fixed;width:100%;height:100%;bottom:0px;right:0px;border:none;z-index:2147483647;',
-        },
-      });
-    } else if (!isInit) {
-      setTimeout(() => {
-        parent.postMessage({
+      parent.postMessage(
+        {
           type: 'showModal',
           data: {
             showModal,
-            style: getFrameStyle(),
+            style:
+              'position:fixed;width:100%;height:100%;bottom:0px;right:0px;border:none;z-index:2147483647;',
           },
-        });
+        },
+        '*'
+      );
+    } else if (!isInit) {
+      setTimeout(() => {
+        parent.postMessage(
+          {
+            type: 'showModal',
+            data: {
+              showModal,
+              style: getFrameStyle(),
+            },
+          },
+          '*'
+        );
       }, 300);
     } else {
       setIsInit(false);
@@ -338,12 +344,15 @@ const WidgetView = ({ widgetConfig, appId }) => {
   useEffect(() => {
     const style = getFrameStyle();
 
-    parent.postMessage({
-      type: 'init',
-      data: {
-        style,
+    parent.postMessage(
+      {
+        type: 'init',
+        data: {
+          style,
+        },
       },
-    });
+      '*'
+    );
   }, [frameStyle]);
 
   const getFrameStyle = () => {
