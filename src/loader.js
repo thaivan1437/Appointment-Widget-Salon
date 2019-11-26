@@ -14,15 +14,20 @@ import { CONFIGS } from '@environment';
     n.m = s.f.contentWindow;
     n.r = s.f.contentWindow.document;
 
-    s.s = r.createElement('script');
-    s.s.type = 'text/javascript';
-    s.s.defer = !0;
-    s.s.src = c;
-    s.s.onload = function() {
-      n.m.initWidget(n.r, l);
-    };
+    m.setTimeout(function() {
+      n.m = s.f.contentWindow;
+      n.r = s.f.contentWindow.document || s.f.contentDocument;
 
-    n.r.head.appendChild(s.s);
+      s.s = r.createElement('script');
+      s.s.type = 'text/javascript';
+      s.s.defer = true;
+      s.s.src = c;
+      s.s.onload = function() {
+        n.m.initWidget(n.r, l);
+      };
+
+      n.r.head.appendChild(s.s);
+    }, 500);
   }
 
   function w(x) {
