@@ -5,7 +5,7 @@ import Cards from "./Cards";
 import cardData from "./cardData"
 
 
-class Parment extends Component {
+class Permanent extends Component {
     constructor(props) {
         super(props)
 
@@ -39,4 +39,4 @@ const myStyle = {
     }
 }
 
-export default Parment;
+export default Permanent;

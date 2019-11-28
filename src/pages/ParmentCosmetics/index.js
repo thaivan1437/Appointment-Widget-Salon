@@ -1,17 +1,17 @@
-import React, {Fragment} from 'react';
+import React, { Fragment } from 'react';
 
 import Navbar from '../../includes/NavBar'
 import Footer from '../../includes/Footer'
-import ParmentContent from '../../includes/ParmentCosmetics';
+import PermanentContent from '../../includes/PermanentCosmetics';
 
-function ParmentCosmetics() {
+function PermanentCosmetics() {
   return (
     <Fragment>
       <Navbar />
-      <ParmentContent />
+      <PermanentContent />
       <Footer />
-      </Fragment>
-        );
-      }
-      
-  export default ParmentCosmetics;
+    </Fragment>
+  );
+}
+
+export default PermanentCosmetics;
