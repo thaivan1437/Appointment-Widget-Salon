@@ -17,7 +17,7 @@ class Permanent extends Component {
     render() {
         return <Container style={{ paddingTop: 100, marginBottom: 200 }}>
             <center>
-                <img src="https://cdn.belmontbeautysalon.net/site/PermanentCosmetics/permanent_top.png" style={{ margin: 30 }} />
+                <img src={CDN_URL + "/site/PermanentCosmetics/permanent_top.png"} style={{ margin: 30 }} />
             </center>
             <Title header="MICROBLADING EYEBROWS" id="MICROBLADING" />
             <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent1.jpg"} top={5} reverse={false} text="Microblading (also know as eyebrow embroidery or feathering) originated in Far East Asia. This method is the finest form of eyebrow tattooing using a pen-like device with disposable microblade attached to stroke very thin lines of pigment into the skin. These thin lines flow in the same direction as your own hairs, and create the most natural results. This method is different from the traditional tattoo done by machine." />
