@@ -36,8 +36,8 @@ const ServiceSelection = ({
             <S.IconContainer
               src={
                 selectedCategory === category
-                  ? `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/radio_on.png`
-                  : `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/radio_off.png`
+                  ? `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/radio_on.png`
+                  : `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/radio_off.png`
               }
             />
             <div>{category}</div>
@@ -69,8 +69,8 @@ const ServiceSelection = ({
               <S.IconContainer
                 src={
                   selectedServicesIds.indexOf(service.id) !== -1
-                    ? `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/icon_checked.png`
-                    : `https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/icon_unchecked.png`
+                    ? `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/icon_checked.png`
+                    : `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/icon_unchecked.png`
                 }
               />
               <div>{service.name}</div>

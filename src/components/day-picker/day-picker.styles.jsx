@@ -7,6 +7,7 @@ S.DayPickerWrapper = styled.div`
   width: 400px;
   margin: 0 auto;
   position: relative;
+  height: 80px;
 
   *:focus {
     outline: 0;

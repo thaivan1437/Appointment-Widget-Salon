@@ -18,7 +18,7 @@ const CustomRodal = ({ children, showModal, setShowModal, selectedStyle }) => {
       </S.CloseIconText>
       {selectedStyle ? (
         <S.CloseIcon
-          src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${selectedStyle}/close-button.png`}
+          src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${selectedStyle}/close-button.png`}
           role="button"
           onClick={() => setShowModal(false)}
         />

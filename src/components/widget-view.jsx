@@ -312,23 +312,29 @@ const WidgetView = ({ widgetConfig, appId }) => {
     }
 
     if (showModal) {
-      parent.postMessage({
-        type: 'showModal',
-        data: {
-          showModal,
-          style:
-            'position:fixed;width:100%;height:100%;bottom:0px;right:0px;border:none;z-index:2147483647;',
-        },
-      });
-    } else if (!isInit) {
-      setTimeout(() => {
-        parent.postMessage({
+      parent.postMessage(
+        {
           type: 'showModal',
           data: {
             showModal,
-            style: getFrameStyle(),
+            style:
+              'position:fixed;width:100%;height:100%;bottom:0px;right:0px;border:none;z-index:2147483647;',
           },
-        });
+        },
+        '*'
+      );
+    } else if (!isInit) {
+      setTimeout(() => {
+        parent.postMessage(
+          {
+            type: 'showModal',
+            data: {
+              showModal,
+              style: getFrameStyle(),
+            },
+          },
+          '*'
+        );
       }, 300);
     } else {
       setIsInit(false);
@@ -338,12 +344,15 @@ const WidgetView = ({ widgetConfig, appId }) => {
   useEffect(() => {
     const style = getFrameStyle();
 
-    parent.postMessage({
-      type: 'init',
-      data: {
-        style,
+    parent.postMessage(
+      {
+        type: 'init',
+        data: {
+          style,
+        },
       },
-    });
+      '*'
+    );
   }, [frameStyle]);
 
   const getFrameStyle = () => {
@@ -458,7 +467,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               >
                 Next
                 <img
-                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper4>
@@ -490,7 +499,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               >
                 Next
                 <img
-                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper>
@@ -534,7 +543,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               >
                 Next
                 <img
-                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper3>
@@ -567,7 +576,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               >
                 Next{' '}
                 <img
-                  src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/arrow.svg`}
+                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper2>
@@ -598,7 +607,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   httpUtil
                     .makeRequest({
                       method: 'POST',
-                      url: `https://salon.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/widgets/${appId}/appointment`,
+                      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/widgets/${appId}/appointment`,
                       data,
                       headers: {
                         'x-api-key': CONFIGS.xApiKey,
@@ -616,7 +625,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 {showLoading ? (
                   <img
                     id="spinner"
-                    src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/spinner.png`}
+                    src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/spinner.png`}
                   />
                 ) : (
                   'Request an Appointment'
@@ -678,17 +687,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <ImageWrapper
               onClick={() => setShowModal(true)}
-              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/appointments.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/appointments.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/pricing.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/pricing.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <ImageWrapper
-              src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/assets/icons/${folderName}/promotions.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
             />
           ) : null}
         </WidgetViewWrapper>
