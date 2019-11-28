@@ -6,7 +6,7 @@ const menuItem = [
 },
 {
     "title" : "Permanent Cosmetics",
-    "route" : "/parment-cosmetics",
+    "route" : "/permanent-cosmetics",
     "target": ""
 },
 {
@@ -21,12 +21,12 @@ const menuItem = [
 },
 {
     "title" : "Salon's Pictures",
-    "route" : "/salon-picture",
+    "route" : "/photo-gallery",
     "target": ""
 },
 {
     "title" : "Contact",
-    "route" : "/contact",
+    "route" : "/contact-us",
     "target": ""
 },
 {
