@@ -6,7 +6,7 @@ import './assets/css/style.css';
 import './assets/css/bootstrap.min.css';
 
 import Home from "./pages/Home";
-import ParmentCosmetics from "./pages/ParmentCosmetics";
+import PermanentCosmetics from "./pages/PermanentCosmetics";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import SalonPicture from "./pages/SalonPicture";
@@ -39,4 +39,22 @@ class App extends React.Component {
   }
 }
 
+<<<<<<< HEAD
 export default App;
+=======
+function App() {
+  return (
+    <Router>
+    <Switch>
+    <Route exact path='/' component={Home} />
+    <Route exact path='/permanent-cosmetics' component={PermanentCosmetics} />
+    <Route exact path='/about-us' component={AboutUs} />
+    <Route exact path='/contact' component={Contact} />
+    <Route exact path='/salon-picture' component={SalonPicture} />
+    </Switch>
+  </Router>
+        );
+      }
+      
+  export default App;
+>>>>>>> eb86ca485b12019e3ef56ecd9748400d4edaa6fe
