@@ -17,6 +17,7 @@ const path = (/#!(\/.*)$/.exec(history.location.hash) || [])[1];
 if (path) {
   history.replace(path);
 }
+
 class App extends React.Component {
   componentDidMount() {
     const script = document.createElement("script");
@@ -29,7 +30,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/permanent-cosmetics' component={ParmentCosmetics} />
+          <Route exact path='/permanent-cosmetics' component={PermanentCosmetics} />
           <Route exact path='/about-us' component={AboutUs} />
           <Route exact path='/contact-us' component={Contact} />
           <Route exact path='/photo-gallery' component={SalonPicture} />
@@ -39,22 +40,4 @@ class App extends React.Component {
   }
 }
 
-<<<<<<< HEAD
 export default App;
-=======
-function App() {
-  return (
-    <Router>
-    <Switch>
-    <Route exact path='/' component={Home} />
-    <Route exact path='/permanent-cosmetics' component={PermanentCosmetics} />
-    <Route exact path='/about-us' component={AboutUs} />
-    <Route exact path='/contact' component={Contact} />
-    <Route exact path='/salon-picture' component={SalonPicture} />
-    </Switch>
-  </Router>
-        );
-      }
-      
-  export default App;
->>>>>>> eb86ca485b12019e3ef56ecd9748400d4edaa6fe
