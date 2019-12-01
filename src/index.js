@@ -12,9 +12,11 @@ window.initWidget = function(d, appId) {
   d.body.appendChild(rootElement);
 
   function init(configData, id) {
-    Sentry.init({
-      dsn: 'https://21d4a1621eed4d63bf372f2e17869753@sentry.io/1826350',
-    });
+    if (!CONFIGS.isLocal) {
+      Sentry.init({
+        dsn: 'https://21d4a1621eed4d63bf372f2e17869753@sentry.io/1826350',
+      });
+    }
 
     ReactDOM.render(
       <WidgetView widgetConfig={configData} appId={id} />,
