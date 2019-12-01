@@ -211,6 +211,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [bottom, setBottom] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPricingModal, setShowPricingModal] = useState(false);
+  const [showWorkingHoursModal, setShowWorkingHoursModal] = useState(false);
   const [selectedStep, setSelectedStep] = useState(1);
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
@@ -287,7 +288,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
       COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
     );
 
-    const size = (widgetConfig.widgets.length || 1) * 90;
+    // TODO: Remove +1 when working hours control added
+    const size = ((widgetConfig.widgets.length || 1) + 1) * 90;
 
     setFrameStyle(prev => ({
       ...prev,
@@ -318,6 +320,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
   useEffect(() => {
     setIFrameStyle(showPricingModal);
   }, [showPricingModal]);
+
+  useEffect(() => {
+    setIFrameStyle(showWorkingHoursModal);
+  }, [showWorkingHoursModal]);
 
   // TODO: move util
   const setIFrameStyle = modalKey => {
@@ -711,9 +717,15 @@ const WidgetView = ({ widgetConfig, appId }) => {
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
             />
           ) : null}
+          {/*TODO: add control*/}
+          <ImageWrapper
+            onClick={() => setShowWorkingHoursModal(true)}
+            src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/working-hours.png`}
+          />
         </WidgetViewWrapper>
       ) : null}
 
+      {/*Appointment*/}
       {/*TODO: (refactor) move content separate component*/}
       <CustomRodal
         showModal={showModal}
@@ -778,10 +790,34 @@ const WidgetView = ({ widgetConfig, appId }) => {
           </ModalStyles.ModalInformationContainer>
         </ColorContext.Provider>
       </CustomRodal>
-
+      {/*Pricing*/}
       <CustomRodal
         showModal={showPricingModal}
         setShowModal={setShowPricingModal}
+        selectedStyle={folderName}
+      >
+        <ColorContext.Provider value={color}>
+          <ModalStyles.ModalContentContainer>
+            Content goes here
+            <ModalStyles.ModalFooter>
+              powered by
+              <FooterLink
+                href={`https://salonmanager.${CONFIGS.domainExtension}`}
+                target="_blank"
+              >
+                Salon Manager
+              </FooterLink>
+            </ModalStyles.ModalFooter>
+          </ModalStyles.ModalContentContainer>
+          <ModalStyles.ModalInformationContainer>
+            <FirstStepMessage>Content goes here</FirstStepMessage>
+          </ModalStyles.ModalInformationContainer>
+        </ColorContext.Provider>
+      </CustomRodal>
+      {/*Working hours*/}
+      <CustomRodal
+        showModal={showWorkingHoursModal}
+        setShowModal={setShowWorkingHoursModal}
         selectedStyle={folderName}
       >
         <ColorContext.Provider value={color}>
