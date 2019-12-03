@@ -59,7 +59,7 @@ const CounterWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   align-self: flex-end;
-  margin: 47px 50px 0 0;
+  margin: 41px 50px 0 0;
 
   display: flex;
   align-items: center;
@@ -67,15 +67,15 @@ const ButtonWrapper = styled.div`
 
 // TODO move common styles file
 const ButtonWrapper2 = styled(ButtonWrapper)`
-  margin-top: 17px;
+  margin-top: 11px;
 `;
 
 const ButtonWrapper4 = styled(ButtonWrapper)`
-  margin-top: -4px;
+  margin-top: -10px;
 `;
 
 const ButtonWrapper3 = styled(ButtonWrapper)`
-  margin-top: 37px;
+  margin-top: 31px;
 `;
 
 const DayPickerWrapper = styled.div`
