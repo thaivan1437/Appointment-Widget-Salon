@@ -70,6 +70,12 @@ const Pricing = ({
     setServiceList(serviceList);
   }, [selectedCategory]);
 
+  useEffect(() => {
+    if (!showPricingModal) {
+      setSelectedCategory(null);
+    }
+  }, [showPricingModal]);
+
   return (
     <CustomRodal
       showModal={showPricingModal}
