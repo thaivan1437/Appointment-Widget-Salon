@@ -787,6 +787,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setShowPricingModal={setShowPricingModal}
         folderName={folderName}
         color={color}
+        pricingList={widgetConfig.widgetData.pricings}
       />
       {/*Working hours*/}
       <WorkingHours
