@@ -16,6 +16,8 @@ import httpUtil from 'common/HttpUtil';
 import { COLOR_SCHEMA } from 'common/constants';
 
 import { CONFIGS } from '@environment';
+import Pricing from '../widgets/pricing';
+import WorkingHours from '../widgets/working-hours';
 
 const FALLBACK_COLOR = 'red';
 
@@ -108,17 +110,6 @@ const BackButton = styled.div`
   color: ${COLORS.DOVE_GRAY};
   cursor: pointer;
   margin-right: 15px;
-`;
-
-const FooterLink = styled.a`
-  text-decoration: none;
-  color: ${COLORS.STORM_GRAY};
-
-  padding: 0 3px;
-
-  :hover {
-    font-weight: 500;
-  }
 `;
 
 const AppointmentInfo = styled.div`
@@ -737,12 +728,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
             {renderContent()}
             <ModalStyles.ModalFooter>
               powered by
-              <FooterLink
+              <ModalStyles.FooterLink
                 href={`https://salonmanager.${CONFIGS.domainExtension}`}
                 target="_blank"
               >
                 Salon Manager
-              </FooterLink>
+              </ModalStyles.FooterLink>
             </ModalStyles.ModalFooter>
           </ModalStyles.ModalContentContainer>
           <ModalStyles.ModalInformationContainer>
@@ -791,53 +782,19 @@ const WidgetView = ({ widgetConfig, appId }) => {
         </ColorContext.Provider>
       </CustomRodal>
       {/*Pricing*/}
-      <CustomRodal
-        showModal={showPricingModal}
-        setShowModal={setShowPricingModal}
-        selectedStyle={folderName}
-      >
-        <ColorContext.Provider value={color}>
-          <ModalStyles.ModalContentContainer>
-            Content goes here
-            <ModalStyles.ModalFooter>
-              powered by
-              <FooterLink
-                href={`https://salonmanager.${CONFIGS.domainExtension}`}
-                target="_blank"
-              >
-                Salon Manager
-              </FooterLink>
-            </ModalStyles.ModalFooter>
-          </ModalStyles.ModalContentContainer>
-          <ModalStyles.ModalInformationContainer>
-            <FirstStepMessage>Content goes here</FirstStepMessage>
-          </ModalStyles.ModalInformationContainer>
-        </ColorContext.Provider>
-      </CustomRodal>
+      <Pricing
+        showPricingModal={showPricingModal}
+        setShowPricingModal={setShowPricingModal}
+        folderName={folderName}
+        color={color}
+      />
       {/*Working hours*/}
-      <CustomRodal
-        showModal={showWorkingHoursModal}
-        setShowModal={setShowWorkingHoursModal}
-        selectedStyle={folderName}
-      >
-        <ColorContext.Provider value={color}>
-          <ModalStyles.ModalContentContainer>
-            Content goes here
-            <ModalStyles.ModalFooter>
-              powered by
-              <FooterLink
-                href={`https://salonmanager.${CONFIGS.domainExtension}`}
-                target="_blank"
-              >
-                Salon Manager
-              </FooterLink>
-            </ModalStyles.ModalFooter>
-          </ModalStyles.ModalContentContainer>
-          <ModalStyles.ModalInformationContainer>
-            <FirstStepMessage>Content goes here</FirstStepMessage>
-          </ModalStyles.ModalInformationContainer>
-        </ColorContext.Provider>
-      </CustomRodal>
+      <WorkingHours
+        showWorkingHoursModal={showWorkingHoursModal}
+        setShowWorkingHoursModal={setShowWorkingHoursModal}
+        folderName={folderName}
+        color={color}
+      />
     </>
   );
 };

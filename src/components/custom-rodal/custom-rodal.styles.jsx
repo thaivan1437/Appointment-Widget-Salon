@@ -94,3 +94,14 @@ S.ModalStepTitle = styled.div`
   font-size: 24px;
   margin-bottom: 20px;
 `;
+
+S.FooterLink = styled.a`
+  text-decoration: none;
+  color: ${COLORS.STORM_GRAY};
+
+  padding: 0 3px;
+
+  :hover {
+    font-weight: 500;
+  }
+`;
