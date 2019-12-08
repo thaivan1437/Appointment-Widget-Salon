@@ -86,7 +86,6 @@ S.ModalFooter = styled.div`
   font-size: 12px;
 
   padding: 10px 0;
-  margin-bottom: 30px;
 `;
 
 S.ModalStepTitle = styled.div`
