@@ -6,6 +6,7 @@ const ServiceSelection = ({
   initialValue = [],
   onServiceSelected,
   serviceList = {},
+  setErrors,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState();
   const [selectedServicesIds, setSelectedServicesIds] = useState([]);
@@ -55,8 +56,18 @@ const ServiceSelection = ({
                 if (tempSelectedServicesIds.indexOf(service.id) === -1) {
                   if (tempSelectedServicesIds.length < 4) {
                     tempSelectedServices.push(service);
+                  } else {
+                    setErrors(prev => ({
+                      ...prev,
+                      upToLabel: true,
+                    }));
                   }
                 } else {
+                  setErrors(prev => ({
+                    ...prev,
+                    upToLabel: false,
+                  }));
+
                   tempSelectedServices.splice(
                     tempSelectedServicesIds.indexOf(service.id),
                     1

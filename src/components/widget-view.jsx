@@ -174,9 +174,11 @@ const SeparatorLine = styled.div`
 `;
 
 const UpToLabel = styled.span`
-  font-size: 16px;
+  font-size: ${props => (props.hasError ? '20px' : '16px')};
   margin-left: 10px;
-  color: ${COLORS.DOVE_GRAY};
+  color: ${props => (props.hasError ? 'red' : COLORS.DOVE_GRAY)};
+  transition: font-size 0.5s ease;
+  font-weight: ${props => (props.hasError ? 500 : 400)};
 `;
 
 const PolicyContainer = styled.div`
@@ -216,7 +218,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [color, setColor] = useState(COLOR_SCHEMA[FALLBACK_COLOR]);
   const [folderName, setFolderName] = useState();
 
-  const [errors, setErrors] = useState({ userName: false, userPhone: false });
+  const [errors, setErrors] = useState({
+    userName: false,
+    userPhone: false,
+    upToLabel: false,
+  });
 
   const [frameStyle, setFrameStyle] = useState({
     common:
@@ -564,9 +570,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
           <>
             <ModalStyles.ModalStepTitle>
               Desired Services
-              <UpToLabel>(up to 4 Services)</UpToLabel>
+              <UpToLabel hasError={errors.upToLabel}>
+                (up to 4 Services)
+              </UpToLabel>
             </ModalStyles.ModalStepTitle>
             <ServiceSelection
+              setErrors={setErrors}
               serviceList={widgetConfig.widgetData.appointments}
               initialValue={selectedServices}
               onServiceSelected={services => {
