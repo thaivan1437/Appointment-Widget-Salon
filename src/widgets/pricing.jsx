@@ -2,38 +2,62 @@ import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { CONFIGS } from '../environments/development';
 import React, { useState, useEffect } from 'react';
-import { ColorContext } from '@components/widget-view';
+import { ColorContext, FirstStepMessage } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
 
 const MainCategoryButton = styled.div`
-  width: 250px;
-  border-radius: 5px;
-  border: 1px solid ${COLORS.MERCURY};
-  background-color: ${props =>
-    props.selected ? props.color : COLORS.ALABASTER};
-  cursor: pointer;
-  margin-bottom: 20px;
-  font-size: 20px;
-  padding: 12px;
-  color: ${props => (props.selected ? COLORS.WHITE : COLORS.DOVE_GRAY)};
-  text-align: center;
+  display: flex;
+  align-items: center;
 
-  :hover {
-    background-color: ${props =>
-      props.selected ? props.color : COLORS.MERCURY};
+  width: 300px;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 5px 0;
+  color: ${COLORS.DOVE_GRAY};
+
+  :hover,
+  &.selected {
+    font-size: 24px;
+    font-weight: 500;
+
+    .list-cycle {
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+    }
   }
 `;
 
 const MainCategoryListWrapper = styled.div`
   overflow: auto;
   padding: 0 50px;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${COLORS.STORM_GRAY};
+  }
 `;
 
+// margin and padding for scroll position
 const ServiceListWrapper = styled.div`
   overflow: auto;
   width: 100%;
-  padding: 0 20px;
+  margin: 0 20px;
+  padding: 0 30px;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${COLORS.STORM_GRAY};
+  }
 `;
 
 const ServiceName = styled.div`
@@ -44,14 +68,31 @@ const ServiceName = styled.div`
 
 const PriceItem = styled.div`
   color: ${COLORS.SILVER_CHALICE};
-  padding-left: 16px;
-  margin-bottom: 4px;
+  padding: 6px 20px 0;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const PricingModalInformationContainer = styled(
   ModalStyles.ModalInformationContainer
 )`
   display: flex;
+`;
+
+const ListCycle = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 12px;
+  background-color: ${props => props.color};
+
+  margin-right: 8px;
+`;
+
+const ListItemWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
 `;
 
 const Pricing = ({
@@ -81,25 +122,27 @@ const Pricing = ({
       showModal={showPricingModal}
       setShowModal={setShowPricingModal}
       selectedStyle={folderName}
+      halfMode={true}
     >
       <ColorContext.Provider value={color}>
-        <ModalStyles.ModalContentContainer>
+        <ModalStyles.HalfModalContent>
           <MainCategoryListWrapper>
             {mainCategoryList && mainCategoryList.length > 0
               ? mainCategoryList.map(a => (
                   <MainCategoryButton
-                    selected={a === selectedCategory}
+                    className={a === selectedCategory ? 'selected' : ''}
                     color={color}
                     onClick={() => {
                       setSelectedCategory(a);
                     }}
                   >
+                    <ListCycle className="list-cycle" color={color} />
                     {a}
                   </MainCategoryButton>
                 ))
               : 'No Service Available'}
           </MainCategoryListWrapper>
-          <ModalStyles.ModalFooter>
+          <ModalStyles.HalfModelFooter>
             powered by
             <ModalStyles.FooterLink
               href={`https://salonmanager.${CONFIGS.domainExtension}`}
@@ -107,28 +150,43 @@ const Pricing = ({
             >
               Salon Manager
             </ModalStyles.FooterLink>
-          </ModalStyles.ModalFooter>
-        </ModalStyles.ModalContentContainer>
+          </ModalStyles.HalfModelFooter>
+        </ModalStyles.HalfModalContent>
         <PricingModalInformationContainer>
           <ServiceListWrapper>
-            {serviceList && serviceList.length > 0
-              ? serviceList.map(service => (
-                  <>
+            {serviceList && serviceList.length > 0 ? (
+              serviceList.map(service => (
+                <>
+                  <ListItemWrapper>
                     <ServiceName>{service.name}</ServiceName>
-                    {service.variations && service.variations.length > 0
-                      ? service.variations.map(variation => (
-                          <PriceItem>
+                    {service.variations && service.variations.length === 1 ? (
+                      <ServiceName>
+                        {service.variations[0].price.currencySymbol}
+                        {service.variations[0].price.amount}
+                      </ServiceName>
+                    ) : null}
+                  </ListItemWrapper>
+                  {service.variations && service.variations.length > 1
+                    ? service.variations.map(variation => (
+                        <PriceItem>
+                          <div>
                             {variation.name === 'Regular'
                               ? variation.name.toLowerCase()
                               : variation.name}
-                            - {variation.price.currencySymbol}
+                          </div>
+
+                          <div>
+                            {variation.price.currencySymbol}
                             {variation.price.amount}
-                          </PriceItem>
-                        ))
-                      : null}
-                  </>
-                ))
-              : null}
+                          </div>
+                        </PriceItem>
+                      ))
+                    : null}
+                </>
+              ))
+            ) : (
+              <FirstStepMessage>Prices will appear here</FirstStepMessage>
+            )}
           </ServiceListWrapper>
         </PricingModalInformationContainer>
       </ColorContext.Provider>

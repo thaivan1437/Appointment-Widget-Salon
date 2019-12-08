@@ -120,7 +120,7 @@ const AppointmentInfo = styled.div`
   text-align: ${props => (props.header ? 'center' : 'left')};
 `;
 
-const FirstStepMessage = styled(AppointmentInfo)`
+export const FirstStepMessage = styled(AppointmentInfo)`
   display: flex;
   align-items: center;
   justify-content: center;
