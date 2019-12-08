@@ -63,6 +63,8 @@ S.CategoryItem = styled(BaseItem)``;
 S.ServiceItem = styled(BaseItem)``;
 
 S.IconContainer = styled.img`
+  flex-shrink: 0;
+
   width: 24px;
   height: 24px;
 
