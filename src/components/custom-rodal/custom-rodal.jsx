@@ -2,7 +2,13 @@ import React from 'react';
 import { S } from '@components/custom-rodal/custom-rodal.styles';
 import { CONFIGS } from '@environment';
 
-const CustomRodal = ({ children, showModal, setShowModal, selectedStyle }) => {
+const CustomRodal = ({
+  children,
+  showModal,
+  setShowModal,
+  selectedStyle,
+  halfMode,
+}) => {
   return (
     <S.CustomRodal
       visible={showModal}
@@ -23,8 +29,9 @@ const CustomRodal = ({ children, showModal, setShowModal, selectedStyle }) => {
           onClick={() => setShowModal(false)}
         />
       ) : null}
-      <S.DialogCycle top />
-      <S.DialogCycle bottom />
+
+      {halfMode ? <S.HalfModalDialogCycle top /> : <S.DialogCycle top />}
+      {halfMode ? <S.HalfModalDialogCycle bottom /> : <S.DialogCycle bottom />}
 
       <S.ModalContentWrapper>{children}</S.ModalContentWrapper>
     </S.CustomRodal>
