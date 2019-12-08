@@ -117,6 +117,8 @@ const AppointmentInfo = styled.div`
   padding: 0 20px 8px;
   font-size: 20px;
 
+  text-transform: ${props => (props.userName ? 'capitalize' : 'none')};
+
   text-align: ${props => (props.header ? 'center' : 'left')};
 `;
 
@@ -747,7 +749,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <>
                 <AppointmentInfo header>Appointment Details</AppointmentInfo>
                 <InformationWrapper>
-                  <AppointmentInfo>{userName}</AppointmentInfo>
+                  <AppointmentInfo userName>{userName}</AppointmentInfo>
                   <AppointmentInfo>{userPhone}</AppointmentInfo>
                   <AppointmentInfo>
                     {userCount} {userCount === 1 ? 'Person' : 'People'}
