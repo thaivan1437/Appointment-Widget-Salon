@@ -18,6 +18,7 @@ import { COLOR_SCHEMA } from 'common/constants';
 import { CONFIGS } from '@environment';
 import Pricing from '../widgets/pricing';
 import WorkingHours from '../widgets/working-hours';
+import Promotions from '../widgets/promotions';
 
 const FALLBACK_COLOR = 'red';
 
@@ -207,6 +208,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [showModal, setShowModal] = useState(false);
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [showWorkingHoursModal, setShowWorkingHoursModal] = useState(false);
+  const [showPromotionsModal, setShowPromotionsModal] = useState(false);
   const [selectedStep, setSelectedStep] = useState(1);
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
@@ -287,8 +289,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
       COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
     );
 
-    // TODO: Remove +1 when working hours control added
-    const size = ((widgetConfig.widgets.length || 1) + 1) * 90;
+    // TODO: Remove +2 when working hours control added
+    const size = ((widgetConfig.widgets.length || 1) + 2) * 90;
 
     setFrameStyle(prev => ({
       ...prev,
@@ -323,6 +325,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
   useEffect(() => {
     setIFrameStyle(showWorkingHoursModal);
   }, [showWorkingHoursModal]);
+
+  useEffect(() => {
+    setIFrameStyle(showPromotionsModal);
+  }, [showPromotionsModal]);
 
   // TODO: move util
   const setIFrameStyle = modalKey => {
@@ -714,8 +720,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/pricing.png`}
             />
           ) : null}
-          {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
+          {/*TODO: open control when service ready*/}
+          {//showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ||
+          true ? (
             <ImageWrapper
+              onClick={() => setShowPromotionsModal(true)}
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
             />
           ) : null}
@@ -806,6 +815,23 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setShowWorkingHoursModal={setShowWorkingHoursModal}
         folderName={folderName}
         color={color}
+      />
+      {/*Promotions*/}
+      {/*TODO: Remove mock and get data from service*/}
+      <Promotions
+        showPromotionsModal={showPromotionsModal}
+        setShowPromotionsModal={setShowPromotionsModal}
+        folderName={folderName}
+        color={color}
+        promotionData={{
+          promotionTitle: '15% OFF',
+          promotionCode: 'BELMONT-XMAS',
+          promotionDesc:
+            ' for X/Y products Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non',
+          expiryDate: 'December 23, 2019',
+          description:
+            'This cannot be combined with other offers. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non eleifend ante.',
+        }}
       />
     </>
   );

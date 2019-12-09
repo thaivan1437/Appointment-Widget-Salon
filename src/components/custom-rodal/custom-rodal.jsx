@@ -8,6 +8,7 @@ const CustomRodal = ({
   setShowModal,
   selectedStyle,
   halfMode,
+  width,
 }) => {
   return (
     <S.CustomRodal
@@ -15,7 +16,7 @@ const CustomRodal = ({
       animation="flip"
       closeMaskOnClick={false}
       showCloseButton={false}
-      width={900}
+      width={width || 900}
       height={420}
       onClose={() => setShowModal(false)}
     >
@@ -30,8 +31,12 @@ const CustomRodal = ({
         />
       ) : null}
 
-      {halfMode ? <S.HalfModalDialogCycle top /> : <S.DialogCycle top />}
-      {halfMode ? <S.HalfModalDialogCycle bottom /> : <S.DialogCycle bottom />}
+      {width ? null : (
+        <>
+          {halfMode ? <S.HalfModalDialogCycle top /> : <S.DialogCycle top />}
+          {halfMode ? <S.HalfModalDialogCycle bottom /> : <S.DialogCycle bottom />}
+        </>
+      )}
 
       <S.ModalContentWrapper>{children}</S.ModalContentWrapper>
     </S.CustomRodal>
