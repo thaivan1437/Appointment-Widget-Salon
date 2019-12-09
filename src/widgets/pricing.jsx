@@ -15,6 +15,7 @@ const MainCategoryButton = styled.div`
   font-size: 20px;
   padding: 5px 0;
   color: ${COLORS.DOVE_GRAY};
+  transition: font-size 0.5s ease;
 
   :hover,
   &.selected {
@@ -84,6 +85,8 @@ const ListCycle = styled.div`
   height: 12px;
   border-radius: 12px;
   background-color: ${props => props.color};
+
+  transition: all 0.5s ease;
 
   margin-right: 8px;
 `;
