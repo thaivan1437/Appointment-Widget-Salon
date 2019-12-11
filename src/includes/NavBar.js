@@ -7,6 +7,7 @@ import { CDN_URL } from "../env";
 class NavBar extends Component {
   state = {
     isTop: true,
+    isToggle:false
   };
   componentDidMount() {
     document.addEventListener('scroll', () => {
@@ -24,12 +25,12 @@ class NavBar extends Component {
   }
   render() {
     return <div id="header">
-      <Navbar className={this.state.isTop ? "navbar navbar-fixed-top" : "navbar navbar-fixed-top scrolled"} fixed="top" expand="lg">
+      <Navbar className={this.state.isTop ? `navbar navbar-fixed-top ${this.state.isToggle ? "scrolled" : ""}` : "navbar navbar-fixed-top scrolled"} fixed="top" expand="lg">
         {/* <Navbar className={"navbar navbar-fixed-top scrolled"}> */}
         <Navbar.Brand className='navbar-brand' href="/">
           <Image src={CDN_URL + "/site/logo.png"} style={{ width: 200 }} className='logo-brand ml-sm-5 img-fluid' />
         </Navbar.Brand>
-        <Navbar.Toggle style={{ border: 0 }}>
+        <Navbar.Toggle style={{ border: 0 }} onClick={() => {this.setState({isToggle:!this.state.isToggle})}}>
           <img src={CDN_URL + "/site/navbar-toggler-icon.png"} height="20" width="20" alt="" />
         </Navbar.Toggle>
         <Navbar.Collapse id="navbar" className="navbar-collapse collapse">
