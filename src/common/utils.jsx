@@ -55,16 +55,28 @@ const sliderDateObj = date => {
   };
 };
 
-export const getDates = () => {
+export const getDates = (holidays = []) => {
   const dateArray = [];
+  const holidayArray = [];
 
   let currentDate = new Date();
   const stopDate = addMonth(currentDate, 1);
 
+  if (holidays.length > 0) {
+    holidays.map(holiday => {
+      holidayArray.push(getRequestDateString(new Date(holiday.date)));
+    });
+  }
+
   while (currentDate <= stopDate) {
     const tempDate = new Date(currentDate);
+    const dateString = getRequestDateString(tempDate);
 
-    dateArray.push({ dateValue: tempDate, ...sliderDateObj(tempDate) });
+    dateArray.push({
+      dateValue: tempDate,
+      ...sliderDateObj(tempDate),
+      isHoliday: holidayArray.indexOf(dateString) !== -1,
+    });
     currentDate = addDays(currentDate, 1);
   }
 

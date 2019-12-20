@@ -55,6 +55,8 @@ S.DayItem = styled.div`
     background-color: ${props => (props.selected ? props.color : COLORS.ALTO)};
     cursor: pointer;
   }
+
+  ${props => (props.isHoliday ? 'background: #D6D6D6;opacity: 0.5;' : null)}
 `;
 
 S.DayValue = styled.div`

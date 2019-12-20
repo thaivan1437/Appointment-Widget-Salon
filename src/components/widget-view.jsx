@@ -507,6 +507,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 selectedDateChange={value => {
                   setSelectedDate(value);
                 }}
+                holidays={
+                  widgetConfig.widgetData &&
+                  widgetConfig.widgetData.businessHours &&
+                  widgetConfig.widgetData.businessHours.holidays
+                }
               />
             </DayPickerWrapper>
             <ButtonWrapper>
