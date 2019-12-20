@@ -5,6 +5,8 @@ import React from 'react';
 import { ColorContext } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
+import { getDisplayDateString } from 'common/utils';
+import Slider from 'react-slick';
 
 const BaseContentStyle = styled.div`
   color: ${COLORS.DOVE_GRAY};
@@ -22,16 +24,69 @@ const PromotionDesc = styled(BaseContentStyle)`
 `;
 
 const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
-  justify-content: space-around;
-  padding: 50px;
+  padding: 40px 50px;
+
+  *:focus {
+    outline: 0;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: ${props => props.color};
+    font-size: 45px;
+  }
+  .slick-arrow:not(.slick-disabled):before {
+    opacity: 1;
+  }
+
+  .slick-prev,
+  .slick-next {
+    width: 45px;
+    height: 45px;
+  }
+  .slick-next {
+    right: -40px;
+  }
+
+  .slick-prev {
+    left: -40px;
+  }
 `;
+
+const PromotionSlider = styled(Slider)`
+  width: 100%;
+  width: 500px;
+  height: 320px;
+`;
+
+const PromotionItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+`;
+
+const NoPromotion = styled.div`
+  text-align: center;
+  font-size: 30px;
+  padding: 50px 0;
+  color: ${COLORS.DOVE_GRAY};
+`;
+
+const PromotionItem = styled.div``;
+
+const SETTINGS = {
+  dots: false,
+  infinite: false,
+};
 
 const Promotions = ({
   showPromotionsModal,
   setShowPromotionsModal,
   folderName,
   color,
-  promotionData,
+  promotionData = [],
 }) => {
   return (
     <CustomRodal
@@ -41,16 +96,32 @@ const Promotions = ({
       width={600}
     >
       <ColorContext.Provider value={color}>
-        <CustomModalContent>
-          <PromotionTitle> {promotionData.promotionTitle} </PromotionTitle>
-          <PromotionCode> {promotionData.promotionCode} </PromotionCode>
-          <PromotionDesc> {promotionData.promotionDesc} </PromotionDesc>
-          {/*TODO: check date format later*/}
-          <BaseContentStyle>
-            {' '}
-            Expire Date: {promotionData.expiryDate}{' '}
-          </BaseContentStyle>
-          <BaseContentStyle> {promotionData.description} </BaseContentStyle>
+        <CustomModalContent color={color}>
+          <PromotionSlider {...SETTINGS}>
+            {promotionData.length > 0 ? (
+              promotionData.map(promotion => (
+                <PromotionItem>
+                  <PromotionItemWrapper>
+                    <PromotionTitle>{promotion.title}</PromotionTitle>
+                    <PromotionCode>{promotion.promoCode}</PromotionCode>
+                    <PromotionDesc>{promotion.shortDescription}</PromotionDesc>
+                    <BaseContentStyle>
+                      {`From ${getDisplayDateString(
+                        new Date(promotion.fromDate)
+                      )} to ${getDisplayDateString(
+                        new Date(promotion.toDate)
+                      )}`}
+                    </BaseContentStyle>
+                    <BaseContentStyle>
+                      {promotion.longDescription}
+                    </BaseContentStyle>
+                  </PromotionItemWrapper>
+                </PromotionItem>
+              ))
+            ) : (
+              <NoPromotion>There is no promotion available :(</NoPromotion>
+            )}
+          </PromotionSlider>
           <ModalStyles.ModalFooter>
             powered by
             <ModalStyles.FooterLink

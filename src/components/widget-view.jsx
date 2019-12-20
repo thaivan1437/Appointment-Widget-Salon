@@ -824,15 +824,35 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setShowPromotionsModal={setShowPromotionsModal}
         folderName={folderName}
         color={color}
-        promotionData={{
-          promotionTitle: '15% OFF',
-          promotionCode: 'BELMONT-XMAS',
-          promotionDesc:
-            ' for X/Y products Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non',
-          expiryDate: 'December 23, 2019',
-          description:
-            'This cannot be combined with other offers. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non eleifend ante.',
-        }}
+        promotionData={[
+          {
+            fromDate: 1577199195000,
+            toDate: 1577371995000,
+            title: 'Christmas Offer 1',
+            longDescription:
+              'Enjoy 50% off on all services this Christmas season',
+            promoCode: 'XMAS-50',
+            shortDescription: '50% off on all services',
+          },
+          {
+            fromDate: 1577199195000,
+            toDate: 1577371995000,
+            title: 'Christmas Offer 2',
+            longDescription:
+              'Enjoy 50% off on all services this Christmas season',
+            promoCode: 'XMAS-50',
+            shortDescription: '50% off on all services',
+          },
+          {
+            fromDate: 1577199195000,
+            toDate: 1577371995000,
+            title: 'Christmas Offer 3',
+            longDescription:
+              'Enjoy 50% off on all services this Christmas season',
+            promoCode: 'XMAS-50',
+            shortDescription: '50% off on all services',
+          },
+        ]}
       />
     </>
   );
