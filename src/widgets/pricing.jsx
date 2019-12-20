@@ -164,8 +164,8 @@ const Pricing = ({
                     <ServiceName>{service.name}</ServiceName>
                     {service.variations && service.variations.length === 1 ? (
                       <ServiceName>
-                        {service.variations[0].price_money.symbol}
-                        {service.variations[0].price_money.amount}
+                        {service.variations[0].priceMoney.symbol}
+                        {service.variations[0].priceMoney.amount}
                       </ServiceName>
                     ) : null}
                   </ListItemWrapper>
@@ -179,8 +179,8 @@ const Pricing = ({
                           </div>
 
                           <div>
-                            {variation.price_money.symbol}
-                            {variation.price_money.amount}
+                            {variation.priceMoney.symbol}
+                            {variation.priceMoney.amount}
                           </div>
                         </PriceItem>
                       ))
