@@ -289,8 +289,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
       COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
     );
 
-    // TODO: Remove +2 when working hours control added
-    const size = ((widgetConfig.widgets.length || 1) + 2) * 90;
+    // TODO: Remove +1 when promotions control added
+    const size = ((widgetConfig.widgets.length || 1) + 1) * 90;
 
     setFrameStyle(prev => ({
       ...prev,
@@ -728,11 +728,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
             />
           ) : null}
-          {/*TODO: add control*/}
-          <ImageWrapper
-            onClick={() => setShowWorkingHoursModal(true)}
-            src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/working-hours.png`}
-          />
+          {showWidgetButton('WIDGET_BUSINESS_HOURS', widgetConfig.widgets) ? (
+            <ImageWrapper
+              onClick={() => setShowWorkingHoursModal(true)}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/working-hours.png`}
+            />
+          ) : null}
         </WidgetViewWrapper>
       ) : null}
 
