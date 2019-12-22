@@ -134,7 +134,7 @@ export const FirstStepMessage = styled(AppointmentInfo)`
 `;
 
 const InformationWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 10px;
 `;
 
 const EditAppointment = styled.div`
@@ -192,6 +192,14 @@ const PolicyContainer = styled.div`
   a:visited {
     color: ${COLORS.DOVE_GRAY};
   }
+`;
+
+const AppointmentPromotionCode = styled.div`
+  position: absolute;
+  bottom: 75px;
+  left: 100px;
+  font-size: 20px;
+  color: ${INPUT_COLORS.TEXT_COLOR};
 `;
 
 const showWidgetButton = (widgetName, registeredWidgets) => {
@@ -509,6 +517,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper4>
+            {selectedPromotionCode ? (
+              <AppointmentPromotionCode>
+                Promo Code: {selectedPromotionCode}
+              </AppointmentPromotionCode>
+            ) : null}
           </>
         );
       case 2:
@@ -637,7 +650,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 color={color}
                 disabled={showLoading}
                 onClick={() => {
-                  const data = {
+                  let data = {
                     customerName: userName,
                     customerPhoneNumber: `+1${userPhone.replace(/[^\d]/g, '')}`,
                     numberOfPeople: userCount,
@@ -647,6 +660,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     time2: getHourString(selectedTime2),
                     services: [...selectedServices],
                   };
+
+                  if (selectedPromotionCode) {
+                    data = { ...data, promoId: selectedPromotionCode };
+                  }
 
                   setShowLoading(true);
 
@@ -793,6 +810,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   <AppointmentInfo>
                     {userCount} {userCount === 1 ? 'Person' : 'People'}
                   </AppointmentInfo>
+                  {selectedPromotionCode ? (
+                    <AppointmentInfo>
+                      Promo Code: {selectedPromotionCode}
+                    </AppointmentInfo>
+                  ) : null}
                 </InformationWrapper>
               </>
             ) : null}
