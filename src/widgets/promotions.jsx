@@ -79,6 +79,11 @@ const ClickableContent = styled.span`
   cursor: pointer;
 `;
 
+const BoldDate = styled.span`
+  font-weight: 500;
+  color: #a0a0a0;
+`;
+
 const SETTINGS = {
   dots: false,
   infinite: false,
@@ -117,11 +122,18 @@ const Promotions = ({
                       </BaseContentStyle>
                     </div>
                     <BaseContentStyle color={COLORS.SILVER_CHALICE}>
-                      {`valid from ${getDisplayDateString(
-                        new Date(promotion.fromDate)
-                      )} to ${getDisplayDateString(
-                        new Date(promotion.toDate)
-                      )}`}
+                      {'valid from '}
+                      <BoldDate>
+                        {getDisplayDateString(new Date(promotion.fromDate), {
+                          month: 'short',
+                        })}
+                      </BoldDate>
+                      {' to '}
+                      <BoldDate>
+                        {getDisplayDateString(new Date(promotion.toDate), {
+                          month: 'short',
+                        })}
+                      </BoldDate>
                     </BaseContentStyle>
                     <BaseContentStyle>
                       click

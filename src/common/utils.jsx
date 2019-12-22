@@ -9,12 +9,12 @@ export const getTimeString = date =>
     ? date.toLocaleTimeString('en-US')
     : '';
 
-export const getDisplayDateString = date => {
+export const getDisplayDateString = (date, type = {}) => {
   return date && typeof date.toLocaleTimeString === 'function'
     ? date.toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
+        month: type.month || 'long',
+        day: type.day || 'numeric',
+        year: type.year || 'numeric',
       })
     : null;
 };
@@ -84,7 +84,7 @@ export const getDates = (holidays = []) => {
 };
 
 // WORKING HOURS
-export const colorWeekend = (index,color) => {
+export const colorWeekend = (index, color) => {
   switch (index) {
     case 5:
       return '#1fab83';
