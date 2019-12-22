@@ -96,9 +96,9 @@ const HolidayDateItem = styled.div`
   justify-content: space-between;
 `;
 
-const WorkingHours = ({
-  showWorkingHoursModal,
-  setShowWorkingHoursModal,
+const BusinessHours = ({
+  showBusinessHoursModal,
+  setShowBusinessHoursModal,
   folderName,
   color,
   businessHours,
@@ -106,8 +106,8 @@ const WorkingHours = ({
   // console.log(businessHours.customMessage.toString().length)
   return (
     <CustomRodal
-      showModal={showWorkingHoursModal}
-      setShowModal={setShowWorkingHoursModal}
+      showModal={showBusinessHoursModal}
+      setShowModal={setShowBusinessHoursModal}
       selectedStyle={folderName}
     >
       <ColorContext.Provider value={color}>
@@ -209,4 +209,4 @@ const WorkingHours = ({
   );
 };
 
-export default WorkingHours;
+export default BusinessHours;

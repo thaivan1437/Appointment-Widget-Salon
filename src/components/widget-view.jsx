@@ -17,7 +17,7 @@ import { COLOR_SCHEMA } from 'common/constants';
 
 import { CONFIGS } from '@environment';
 import Pricing from '../widgets/pricing';
-import WorkingHours from '../widgets/working-hours';
+import BusinessHours from '../widgets/business-hours';
 import Promotions from '../widgets/promotions';
 
 const FALLBACK_COLOR = 'red';
@@ -207,7 +207,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [bottom, setBottom] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showPricingModal, setShowPricingModal] = useState(false);
-  const [showWorkingHoursModal, setShowWorkingHoursModal] = useState(false);
+  const [showBusinessHoursModal, setShowBusinessHoursModal] = useState(false);
   const [showPromotionsModal, setShowPromotionsModal] = useState(false);
   const [selectedStep, setSelectedStep] = useState(1);
   const [userName, setUserName] = useState('');
@@ -322,8 +322,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
   }, [showPricingModal]);
 
   useEffect(() => {
-    setIFrameStyle(showWorkingHoursModal);
-  }, [showWorkingHoursModal]);
+    setIFrameStyle(showBusinessHoursModal);
+  }, [showBusinessHoursModal]);
 
   useEffect(() => {
     setIFrameStyle(showPromotionsModal);
@@ -732,8 +732,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
           ) : null}
           {showWidgetButton('WIDGET_BUSINESS_HOURS', widgetConfig.widgets) ? (
             <ImageWrapper
-              onClick={() => setShowWorkingHoursModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/working-hours.png`}
+              onClick={() => setShowBusinessHoursModal(true)}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/business-hours.png`}
             />
           ) : null}
         </WidgetViewWrapper>
@@ -812,10 +812,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
         color={color}
         pricingList={widgetConfig.widgetData.pricings}
       />
-      {/*Working hours*/}
-      <WorkingHours
-        showWorkingHoursModal={showWorkingHoursModal}
-        setShowWorkingHoursModal={setShowWorkingHoursModal}
+      {/*Business hours*/}
+      <BusinessHours
+        showBusinessHoursModal={showBusinessHoursModal}
+        setShowBusinessHoursModal={setShowBusinessHoursModal}
         folderName={folderName}
         color={color}
         businessHours={widgetConfig.widgetData.businessHours}
