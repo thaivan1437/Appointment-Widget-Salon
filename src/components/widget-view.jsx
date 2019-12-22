@@ -565,7 +565,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         return (
           <>
             <ModalStyles.ModalStepTitle>
-              Preferred Time
+              Preferred Times
             </ModalStyles.ModalStepTitle>
             <TimePickerWrapper>
               <TimePickerLabel>Option 1</TimePickerLabel>
