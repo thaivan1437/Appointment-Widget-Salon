@@ -9,7 +9,7 @@ import { COLORS } from 'common/colors';
 
 const MainContent = styled.div`
   display: table;
-  padding: 0 50px;
+  padding: 0 120px;
 `;
 const MainRow = styled.div`
   display: table-row;
@@ -38,6 +38,8 @@ const ItemCell = styled.div`
   background-color: #e8e8e8;
   padding: 5px;
   text-align: center;
+  vertical-align:middle;
+  font-size:14px;
 `;
 const ItemCellWhite = styled.div`
   display: table-cell;
@@ -49,13 +51,15 @@ const ItemCellWhite = styled.div`
   padding-top: 5px;
 `;
 const SplitTitle = styled.div`
+  display: flex;
+  padding: 0px;
   margin-left: 15px;
 `;
 const HolidayItem = styled.div`
   display: flex;
   font-size: 16px;
-  padding-top: 10px;
-  padding-left: 10px;
+  padding-top: 15px;
+  padding-left: 20px;
 `;
 const HolidayTitle = styled.div`
   color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
@@ -91,7 +95,7 @@ const ListCycle = styled.div`
 `;
 const HolidayDateItem = styled.div`
   color: ${COLORS.SILVER_CHALICE};
-  padding: 6px 27px 0;
+  padding: 2px 35px 0;
   display: flex;
   justify-content: space-between;
 `;
@@ -115,6 +119,7 @@ const BusinessHours = ({
           <ModalStyles.ModalStepTitle>
             <SplitTitle>Business Hours</SplitTitle>
           </ModalStyles.ModalStepTitle>
+        <HolidayListWrapper>
           <MainContent>
             <MainRow>
               <ItemCellWhite></ItemCellWhite>
@@ -163,6 +168,7 @@ const BusinessHours = ({
                 })
               : null}
           </MainContent>
+          </HolidayListWrapper>
           <ModalStyles.ModalFooter>
             powered by
             <ModalStyles.FooterLink
