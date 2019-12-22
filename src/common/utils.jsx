@@ -82,3 +82,15 @@ export const getDates = (holidays = []) => {
 
   return dateArray;
 };
+
+// WORKING HOURS
+export const colorWeekend = (index,color) => {
+  switch (index) {
+    case 5:
+      return '#1fab83';
+    case 6:
+      return '#1fab83';
+    default:
+      return color;
+  }
+};

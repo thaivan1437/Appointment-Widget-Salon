@@ -821,6 +821,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setShowWorkingHoursModal={setShowWorkingHoursModal}
         folderName={folderName}
         color={color}
+        businessHours={widgetConfig.widgetData.businessHours}
       />
       {/*Promotions*/}
       {/*TODO: Remove mock and get data from service*/}
