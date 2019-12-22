@@ -138,7 +138,7 @@ const InformationWrapper = styled.div`
 `;
 
 const EditAppointment = styled.div`
-  color: ${COLORS.DOVE_GRAY};
+  color: ${props => props.color || COLORS.DOVE_GRAY};
 
   margin: 30px 0;
 
@@ -695,6 +695,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 )}
               </CommonStyles.AppointmentButton>
               <EditAppointment
+                color={color}
                 disabled={showLoading}
                 onClick={() => {
                   setSelectedStep(1);
