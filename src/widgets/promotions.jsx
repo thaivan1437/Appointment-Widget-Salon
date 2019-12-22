@@ -10,7 +10,11 @@ import Slider from 'react-slick';
 
 const BaseContentStyle = styled.div`
   color: ${props => (props.color ? props.color : COLORS.DOVE_GRAY)};
-  ${props => (props.clickable ? 'cursor: pointer' : null)}
+
+  :hover {
+    text-decoration: ${props => (props.clickable ? 'underline' : 'none')};
+    cursor: ${props => (props.clickable ? 'pointer' : 'auto')};
+ 
 `;
 
 const PromotionTitle = styled(BaseContentStyle)`
