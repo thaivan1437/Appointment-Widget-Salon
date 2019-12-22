@@ -10,6 +10,7 @@ import Slider from 'react-slick';
 
 const BaseContentStyle = styled.div`
   color: ${props => (props.color ? props.color : COLORS.DOVE_GRAY)};
+  ${props => (props.clickable ? 'cursor: pointer' : null)}
 `;
 
 const PromotionTitle = styled(BaseContentStyle)`
@@ -75,9 +76,6 @@ const NoPromotion = styled.div`
 `;
 
 const PromotionItem = styled.div``;
-const ClickableContent = styled.span`
-  cursor: pointer;
-`;
 
 const BoldDate = styled.span`
   font-weight: 500;
@@ -148,16 +146,14 @@ const Promotions = ({
                         })}
                       </BoldDate>
                     </BaseContentStyle>
-                    <BaseContentStyle>
-                      click
-                      <ClickableContent
-                        onClick={() => {
-                          makeAnAppointmentClick(promotion.promoCode);
-                        }}
-                      >
-                        {' here '}
-                      </ClickableContent>
-                      to making an appointment using this offer
+                    <BaseContentStyle
+                      onClick={() => {
+                        makeAnAppointmentClick(promotion.promoCode);
+                      }}
+                      color={color}
+                      clickable={true}
+                    >
+                      click here to making an appointment using this offer
                     </BaseContentStyle>
                   </PromotionItemWrapper>
                 </PromotionItem>
