@@ -397,13 +397,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
     return frameStyle.common + frameStyle.orientation + frameStyle.position;
   };
 
-  const getHourString = selectedTimeObject => {
+  const getHourString = (selectedTimeObject, display = false) => {
     const hourString =
       selectedTimeObject.selectedHour
         .split(' ')
-        .join(':' + selectedTimeObject.selectedMinute) || '';
+        .join(
+          display
+            ? ':' + selectedTimeObject.selectedMinute + ' '
+            : ':' + selectedTimeObject.selectedMinute
+        ) || '';
 
-    return hourString.toLowerCase();
+    return display ? hourString : hourString.toLowerCase();
   };
 
   const makeAnAppointmentClick = promotionCode => {
@@ -827,8 +831,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 </AppointmentInfo>
                 {selectedStep > 3 ? (
                   <AppointmentInfo>
-                    {`${getHourString(selectedTime1)} / ${getHourString(
-                      selectedTime2
+                    {`${getHourString(selectedTime1, true)} / ${getHourString(
+                      selectedTime2,
+                      true
                     )}`}
                   </AppointmentInfo>
                 ) : null}

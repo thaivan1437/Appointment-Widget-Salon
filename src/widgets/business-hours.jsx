@@ -38,8 +38,8 @@ const ItemCell = styled.div`
   background-color: #e8e8e8;
   padding: 5px;
   text-align: center;
-  vertical-align:middle;
-  font-size:14px;
+  vertical-align: middle;
+  font-size: 14px;
 `;
 const ItemCellWhite = styled.div`
   display: table-cell;
@@ -98,7 +98,21 @@ const HolidayDateItem = styled.div`
   padding: 2px 35px 0;
   display: flex;
   justify-content: space-between;
+  font-size: 14px;
 `;
+
+const getTime = timeString => {
+  const timeStringLength = (timeString || '').length;
+
+  if (timeStringLength > 0) {
+    const timeValue = timeString.slice(0, timeStringLength - 2);
+    const timeText = timeString.slice(-2);
+
+    return `${timeValue} ${timeText.toUpperCase()}`;
+  } else {
+    return timeString;
+  }
+};
 
 const BusinessHours = ({
   showBusinessHoursModal,
@@ -119,55 +133,57 @@ const BusinessHours = ({
           <ModalStyles.ModalStepTitle>
             <SplitTitle>Business Hours</SplitTitle>
           </ModalStyles.ModalStepTitle>
-        <HolidayListWrapper>
-          <MainContent>
-            <MainRow>
-              <ItemCellWhite></ItemCellWhite>
-              <TitleCell>Open</TitleCell>
-              <TitleCell>Close</TitleCell>
-            </MainRow>
-            {parseInt(businessHours.periods.length) > 0
-              ? businessHours.periods.map((item, index) => {
-                  // console.log(openTimeStart(item.hours[0]['openTime'],item.hours[0]['closeTime']))
-                  return (
-                    <MainRow>
-                      <ItemCell
-                        style={{
-                          backgroundColor: colorWeekend(index, color),
-                          color: '#FFF',
-                          borderTopLeftRadius: 10,
-                          borderBottomLeftRadius: 10,
-                          width: 50,
-                        }}
-                      >
-                        {item.day}
-                      </ItemCell>
-                      <ItemCell>
-                        {item.hours[0]['openTime']}
-                        {item.hours.length > 1 ? (
-                          <>
-                            <br /> {item.hours[1]['openTime']}
-                          </>
-                        ) : null}
-                      </ItemCell>
-                      <ItemCell
-                        style={{
-                          borderBottomRightRadius:
-                            index === businessHours.periods.length - 1 ? 10 : 0,
-                        }}
-                      >
-                        {item.hours[0]['closeTime']}
-                        {item.hours.length > 1 ? (
-                          <>
-                            <br /> {item.hours[1]['closeTime']}
-                          </>
-                        ) : null}
-                      </ItemCell>
-                    </MainRow>
-                  );
-                })
-              : null}
-          </MainContent>
+          <HolidayListWrapper>
+            <MainContent>
+              <MainRow>
+                <ItemCellWhite></ItemCellWhite>
+                <TitleCell>Open</TitleCell>
+                <TitleCell>Close</TitleCell>
+              </MainRow>
+              {parseInt(businessHours.periods.length) > 0
+                ? businessHours.periods.map((item, index) => {
+                    // console.log(openTimeStart(item.hours[0]['openTime'],item.hours[0]['closeTime']))
+                    return (
+                      <MainRow>
+                        <ItemCell
+                          style={{
+                            backgroundColor: colorWeekend(index, color),
+                            color: '#FFF',
+                            borderTopLeftRadius: 10,
+                            borderBottomLeftRadius: 10,
+                            width: 50,
+                          }}
+                        >
+                          {item.day}
+                        </ItemCell>
+                        <ItemCell>
+                          {getTime(item.hours[0]['openTime'])}
+                          {item.hours.length > 1 ? (
+                            <>
+                              <br /> {getTime(item.hours[1]['openTime'])}
+                            </>
+                          ) : null}
+                        </ItemCell>
+                        <ItemCell
+                          style={{
+                            borderBottomRightRadius:
+                              index === businessHours.periods.length - 1
+                                ? 10
+                                : 0,
+                          }}
+                        >
+                          {getTime(item.hours[0]['closeTime'])}
+                          {item.hours.length > 1 ? (
+                            <>
+                              <br /> {getTime(item.hours[1]['closeTime'])}
+                            </>
+                          ) : null}
+                        </ItemCell>
+                      </MainRow>
+                    );
+                  })
+                : null}
+            </MainContent>
           </HolidayListWrapper>
           <ModalStyles.ModalFooter>
             powered by
