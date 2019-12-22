@@ -196,7 +196,7 @@ const PolicyContainer = styled.div`
 
 const AppointmentPromotionCode = styled.div`
   position: absolute;
-  bottom: 75px;
+  bottom: 70px;
   left: 100px;
   font-size: 20px;
   color: ${INPUT_COLORS.TEXT_COLOR};
