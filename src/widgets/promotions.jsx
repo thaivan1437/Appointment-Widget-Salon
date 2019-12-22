@@ -1,7 +1,7 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { CONFIGS } from '../environments/development';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { ColorContext } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
@@ -97,6 +97,19 @@ const Promotions = ({
   promotionData = [],
   makeAnAppointmentClick,
 }) => {
+  const sliderRef = useRef();
+
+  useEffect(() => {
+    if (
+      !showPromotionsModal &&
+      sliderRef &&
+      sliderRef.current &&
+      sliderRef.current.slickGoTo
+    ) {
+      sliderRef.current.slickGoTo(0);
+    }
+  }, [showPromotionsModal]);
+
   return (
     <CustomRodal
       showModal={showPromotionsModal}
@@ -106,7 +119,7 @@ const Promotions = ({
     >
       <ColorContext.Provider value={color}>
         <CustomModalContent color={color}>
-          <PromotionSlider {...SETTINGS}>
+          <PromotionSlider {...SETTINGS} ref={sliderRef}>
             {promotionData.length > 0 ? (
               promotionData.map(promotion => (
                 <PromotionItem>
