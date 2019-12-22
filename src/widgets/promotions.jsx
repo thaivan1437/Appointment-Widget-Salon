@@ -9,7 +9,7 @@ import { getDisplayDateString } from 'common/utils';
 import Slider from 'react-slick';
 
 const BaseContentStyle = styled.div`
-  color: ${COLORS.DOVE_GRAY};
+  color: ${props => (props.color ? props.color : COLORS.DOVE_GRAY)};
 `;
 
 const PromotionTitle = styled(BaseContentStyle)`
@@ -75,6 +75,9 @@ const NoPromotion = styled.div`
 `;
 
 const PromotionItem = styled.div``;
+const ClickableContent = styled.span`
+  cursor: pointer;
+`;
 
 const SETTINGS = {
   dots: false,
@@ -87,6 +90,7 @@ const Promotions = ({
   folderName,
   color,
   promotionData = [],
+  makeAnAppointmentClick,
 }) => {
   return (
     <CustomRodal
@@ -104,16 +108,31 @@ const Promotions = ({
                   <PromotionItemWrapper>
                     <PromotionTitle>{promotion.title}</PromotionTitle>
                     <PromotionCode>{promotion.promoCode}</PromotionCode>
-                    <PromotionDesc>{promotion.shortDescription}</PromotionDesc>
-                    <BaseContentStyle>
-                      {`From ${getDisplayDateString(
+                    <div>
+                      <PromotionDesc>
+                        {promotion.shortDescription}
+                      </PromotionDesc>
+                      <BaseContentStyle>
+                        {promotion.longDescription}
+                      </BaseContentStyle>
+                    </div>
+                    <BaseContentStyle color={COLORS.SILVER_CHALICE}>
+                      {`valid from ${getDisplayDateString(
                         new Date(promotion.fromDate)
                       )} to ${getDisplayDateString(
                         new Date(promotion.toDate)
                       )}`}
                     </BaseContentStyle>
                     <BaseContentStyle>
-                      {promotion.longDescription}
+                      click
+                      <ClickableContent
+                        onClick={() => {
+                          makeAnAppointmentClick(promotion.promoCode);
+                        }}
+                      >
+                        {' here '}
+                      </ClickableContent>
+                      to making an appointment using this offer
                     </BaseContentStyle>
                   </PromotionItemWrapper>
                 </PromotionItem>

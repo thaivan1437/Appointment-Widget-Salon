@@ -219,6 +219,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [color, setColor] = useState(COLOR_SCHEMA[FALLBACK_COLOR]);
   const [folderName, setFolderName] = useState();
+  const [selectedPromotionCode, setSelectedPromotionCode] = useState();
 
   const [errors, setErrors] = useState({
     userName: false,
@@ -312,6 +313,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       setSelectedTime2();
       setSelectedServices([]);
       setShowLoading(false);
+      setSelectedPromotionCode();
     }
 
     setIFrameStyle(showModal);
@@ -328,6 +330,14 @@ const WidgetView = ({ widgetConfig, appId }) => {
   useEffect(() => {
     setIFrameStyle(showPromotionsModal);
   }, [showPromotionsModal]);
+
+  useEffect(() => {
+    if (selectedPromotionCode) {
+      setTimeout(() => {
+        setShowModal(true);
+      }, 300);
+    }
+  }, [selectedPromotionCode]);
 
   // TODO: move util
   const setIFrameStyle = modalKey => {
@@ -386,6 +396,14 @@ const WidgetView = ({ widgetConfig, appId }) => {
         .join(':' + selectedTimeObject.selectedMinute) || '';
 
     return hourString.toLowerCase();
+  };
+
+  const makeAnAppointmentClick = promotionCode => {
+    setShowPromotionsModal(false);
+
+    setTimeout(() => {
+      setSelectedPromotionCode(promotionCode);
+    }, 300);
   };
 
   const renderContent = () => {
@@ -827,6 +845,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         folderName={folderName}
         color={color}
         promotionData={widgetConfig.widgetData.promotions}
+        makeAnAppointmentClick={makeAnAppointmentClick}
       />
     </>
   );
