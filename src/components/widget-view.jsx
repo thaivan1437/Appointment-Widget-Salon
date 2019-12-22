@@ -289,8 +289,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       COLOR_SCHEMA[widgetConfig.style] ? widgetConfig.style : FALLBACK_COLOR
     );
 
-    // TODO: Remove +1 when promotions control added
-    const size = ((widgetConfig.widgets.length || 1) + 1) * 90;
+    const size = (widgetConfig.widgets.length || 1) * 90;
 
     setFrameStyle(prev => ({
       ...prev,
@@ -725,9 +724,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/pricing.png`}
             />
           ) : null}
-          {/*TODO: open control when service ready*/}
-          {//showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ||
-          true ? (
+          {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <ImageWrapper
               onClick={() => setShowPromotionsModal(true)}
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
@@ -824,41 +821,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
         businessHours={widgetConfig.widgetData.businessHours}
       />
       {/*Promotions*/}
-      {/*TODO: Remove mock and get data from service*/}
       <Promotions
         showPromotionsModal={showPromotionsModal}
         setShowPromotionsModal={setShowPromotionsModal}
         folderName={folderName}
         color={color}
-        promotionData={[
-          {
-            fromDate: 1577199195000,
-            toDate: 1577371995000,
-            title: 'Christmas Offer 1',
-            longDescription:
-              'Enjoy 50% off on all services this Christmas season',
-            promoCode: 'XMAS-50',
-            shortDescription: '50% off on all services',
-          },
-          {
-            fromDate: 1577199195000,
-            toDate: 1577371995000,
-            title: 'Christmas Offer 2',
-            longDescription:
-              'Enjoy 50% off on all services this Christmas season',
-            promoCode: 'XMAS-50',
-            shortDescription: '50% off on all services',
-          },
-          {
-            fromDate: 1577199195000,
-            toDate: 1577371995000,
-            title: 'Christmas Offer 3',
-            longDescription:
-              'Enjoy 50% off on all services this Christmas season',
-            promoCode: 'XMAS-50',
-            shortDescription: '50% off on all services',
-          },
-        ]}
+        promotionData={widgetConfig.widgetData.promotions}
       />
     </>
   );
