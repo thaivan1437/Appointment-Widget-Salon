@@ -94,3 +94,18 @@ export const colorWeekend = (index, color) => {
       return color;
   }
 };
+
+// Format amount like this
+// 1050 --> $10.50
+// 1000 --> $10
+export const formatAmount = amount => {
+  const formattedAmount = amount / 100;
+
+  if (amount % 100 > 0) {
+    const amountText = formattedAmount + '00';
+    const splittedAmount = amountText.split('.');
+    return `${splittedAmount[0]}.${splittedAmount[1].slice(0, 2)}`;
+  } else {
+    return formattedAmount;
+  }
+};

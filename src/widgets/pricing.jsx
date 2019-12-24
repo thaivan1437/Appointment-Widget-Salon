@@ -6,6 +6,7 @@ import { ColorContext, FirstStepMessage } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
 import sortBy from 'lodash.sortby';
+import { formatAmount } from 'common/utils';
 
 const MainCategoryButton = styled.div`
   display: flex;
@@ -169,7 +170,11 @@ const Pricing = ({
                       <ServiceName>
                         {service.variations[0].priceMoney.symbol &&
                         service.variations[0].priceMoney.amount
-                          ? `${service.variations[0].priceMoney.symbol}${service.variations[0].priceMoney.amount}`
+                          ? `${
+                              service.variations[0].priceMoney.symbol
+                            }${formatAmount(
+                              service.variations[0].priceMoney.amount
+                            )}`
                           : 'Call Us'}
                       </ServiceName>
                     ) : null}
@@ -186,7 +191,9 @@ const Pricing = ({
                           <div>
                             {variation.priceMoney.amount &&
                             variation.priceMoney.symbol
-                              ? `${variation.priceMoney.symbol}${variation.priceMoney.amount}`
+                              ? `${variation.priceMoney.symbol}${formatAmount(
+                                  variation.priceMoney.amount
+                                )}`
                               : 'Call Us'}
                           </div>
                         </PriceItem>
