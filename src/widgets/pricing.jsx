@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { ColorContext, FirstStepMessage } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
+import sortBy from 'lodash.sortby';
 
 const MainCategoryButton = styled.div`
   display: flex;
@@ -105,13 +106,15 @@ const Pricing = ({
   color,
   pricingList = {},
 }) => {
-  const mainCategoryList = Object.keys(pricingList);
+  const mainCategoryList = Object.keys(pricingList).sort();
   const [selectedCategory, setSelectedCategory] = useState();
   const [serviceList, setServiceList] = useState([]);
 
   useEffect(() => {
     const serviceList = pricingList[selectedCategory] || [];
-    setServiceList(serviceList);
+    const sortedServiceList = sortBy([...serviceList], ['name']);
+
+    setServiceList(sortedServiceList);
   }, [selectedCategory]);
 
   useEffect(() => {
