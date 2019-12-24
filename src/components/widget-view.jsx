@@ -110,10 +110,12 @@ const LineContainer = styled.div`
 
 const LineText = styled.div`
   position: absolute;
-  top: -10px;
-  left: 241px;
-  padding: 0 5px;
-  line-height: 20px;
+  top: -11px;
+  left: 243px;
+  border: 1px solid #e2e2e2;
+  padding: 2px;
+  line-height: 1;
+  width: 20px;
   color: ${COLORS.SILVER_CHALICE};
   background-color: ${COLORS.WHITE};
 `;
