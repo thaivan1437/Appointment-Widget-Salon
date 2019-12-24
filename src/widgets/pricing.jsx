@@ -167,8 +167,10 @@ const Pricing = ({
                     <ServiceName>{service.name}</ServiceName>
                     {service.variations && service.variations.length === 1 ? (
                       <ServiceName>
-                        {service.variations[0].priceMoney.symbol}
-                        {service.variations[0].priceMoney.amount}
+                        {service.variations[0].priceMoney.symbol &&
+                        service.variations[0].priceMoney.amount
+                          ? `${service.variations[0].priceMoney.symbol}${service.variations[0].priceMoney.amount}`
+                          : 'Call Us'}
                       </ServiceName>
                     ) : null}
                   </ListItemWrapper>
@@ -182,8 +184,10 @@ const Pricing = ({
                           </div>
 
                           <div>
-                            {variation.priceMoney.symbol}
-                            {variation.priceMoney.amount}
+                            {variation.priceMoney.amount &&
+                            variation.priceMoney.symbol
+                              ? `${variation.priceMoney.symbol}${variation.priceMoney.amount}`
+                              : 'Call Us'}
                           </div>
                         </PriceItem>
                       ))
