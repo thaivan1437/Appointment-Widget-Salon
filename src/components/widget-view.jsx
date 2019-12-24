@@ -116,7 +116,7 @@ const BackButton = styled.div`
 const AppointmentInfo = styled.div`
   color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
   padding: 0 20px 8px;
-  font-size: 20px;
+  font-size: 19px;
 
   text-transform: ${props => (props.userName ? 'capitalize' : 'none')};
 
