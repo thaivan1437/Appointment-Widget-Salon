@@ -162,7 +162,7 @@ const Promotions = ({
                       }}
                       color={color}
                     >
-                      click here to making an appointment using this offer
+                      click here to make an appointment using this offer
                     </ClickableContent>
                   </PromotionItemWrapper>
                 </PromotionItem>
