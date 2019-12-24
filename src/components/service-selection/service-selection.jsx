@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { S } from './service-selection.styles';
 import { CONFIGS } from '@environment';
 
+import sortBy from 'lodash.sortBy';
+
 const ServiceSelection = ({
   initialValue = [],
   onServiceSelected,
@@ -12,7 +14,13 @@ const ServiceSelection = ({
   const [selectedServicesIds, setSelectedServicesIds] = useState([]);
   const [selectedServices, setSelectedServices] = useState(initialValue || []);
 
-  const categories = Object.keys(serviceList);
+  const categories = Object.keys(serviceList).sort();
+
+  const sortedServiceList = { ...serviceList };
+
+  categories.forEach(category => {
+    sortedServiceList[category] = sortBy(sortedServiceList[category], ['name']);
+  });
 
   useEffect(() => {
     setSelectedCategory(categories[0]);
@@ -46,8 +54,8 @@ const ServiceSelection = ({
         ))}
       </S.ServiceCategoryContainer>
       <S.ServiceServicesContainer>
-        {serviceList[selectedCategory] &&
-          serviceList[selectedCategory].map(service => (
+        {sortedServiceList[selectedCategory] &&
+        sortedServiceList[selectedCategory].map(service => (
             <S.ServiceItem
               onClick={() => {
                 const tempSelectedServicesIds = [...selectedServicesIds];
