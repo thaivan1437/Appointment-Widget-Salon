@@ -10,11 +10,14 @@ import Slider from 'react-slick';
 
 const BaseContentStyle = styled.div`
   color: ${props => (props.color ? props.color : COLORS.DOVE_GRAY)};
+  text-align: center;
+`;
 
+const ClickableContent = styled(BaseContentStyle)`
   :hover {
-    text-decoration: ${props => (props.clickable ? 'underline' : 'none')};
-    cursor: ${props => (props.clickable ? 'pointer' : 'auto')};
- 
+    text-decoration: underline;
+    cursor: pointer;
+  }
 `;
 
 const PromotionTitle = styled(BaseContentStyle)`
@@ -80,6 +83,9 @@ const NoPromotion = styled.div`
 `;
 
 const PromotionItem = styled.div``;
+const GroupWrapper = styled.div`
+  padding: 0 24px;
+`;
 
 const BoldDate = styled.span`
   font-weight: 500;
@@ -128,14 +134,14 @@ const Promotions = ({
                   <PromotionItemWrapper>
                     <PromotionTitle>{promotion.title}</PromotionTitle>
                     <PromotionCode>{promotion.promoCode}</PromotionCode>
-                    <div>
+                    <GroupWrapper>
                       <PromotionDesc>
                         {promotion.shortDescription}
                       </PromotionDesc>
                       <BaseContentStyle>
                         {promotion.longDescription}
                       </BaseContentStyle>
-                    </div>
+                    </GroupWrapper>
                     <BaseContentStyle color={COLORS.SILVER_CHALICE}>
                       {'valid from '}
                       <BoldDate>
@@ -150,15 +156,14 @@ const Promotions = ({
                         })}
                       </BoldDate>
                     </BaseContentStyle>
-                    <BaseContentStyle
+                    <ClickableContent
                       onClick={() => {
                         makeAnAppointmentClick(promotion.promoCode);
                       }}
                       color={color}
-                      clickable={true}
                     >
                       click here to making an appointment using this offer
-                    </BaseContentStyle>
+                    </ClickableContent>
                   </PromotionItemWrapper>
                 </PromotionItem>
               ))
