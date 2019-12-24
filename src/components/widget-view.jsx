@@ -227,7 +227,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [color, setColor] = useState(COLOR_SCHEMA[FALLBACK_COLOR]);
   const [folderName, setFolderName] = useState();
-  const [selectedPromotionCode, setSelectedPromotionCode] = useState();
+  const [selectedPromotion, setSelectedPromotion] = useState();
 
   const [errors, setErrors] = useState({
     userName: false,
@@ -321,7 +321,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       setSelectedTime2();
       setSelectedServices([]);
       setShowLoading(false);
-      setSelectedPromotionCode();
+      setSelectedPromotion();
     }
 
     setIFrameStyle(showModal);
@@ -340,12 +340,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
   }, [showPromotionsModal]);
 
   useEffect(() => {
-    if (selectedPromotionCode) {
+    if (selectedPromotion) {
       setTimeout(() => {
         setShowModal(true);
       }, 300);
     }
-  }, [selectedPromotionCode]);
+  }, [selectedPromotion]);
 
   // TODO: move util
   const setIFrameStyle = modalKey => {
@@ -410,11 +410,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
     return display ? hourString : hourString.toLowerCase();
   };
 
-  const makeAnAppointmentClick = promotionCode => {
+  const makeAnAppointmentClick = promotion => {
     setShowPromotionsModal(false);
 
     setTimeout(() => {
-      setSelectedPromotionCode(promotionCode);
+      setSelectedPromotion(promotion);
     }, 300);
   };
 
@@ -521,9 +521,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper4>
-            {selectedPromotionCode ? (
+            {selectedPromotion ? (
               <AppointmentPromotionCode>
-                Promo Code: {selectedPromotionCode}
+                Promo Code: {selectedPromotion.promoCode}
               </AppointmentPromotionCode>
             ) : null}
           </>
@@ -665,8 +665,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     services: [...selectedServices],
                   };
 
-                  if (selectedPromotionCode) {
-                    data = { ...data, promoId: selectedPromotionCode };
+                  if (selectedPromotion) {
+                    const { promoId } = selectedPromotion;
+                    data = { ...data, promoId };
                   }
 
                   setShowLoading(true);
@@ -815,9 +816,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   <AppointmentInfo>
                     {userCount} {userCount === 1 ? 'Person' : 'People'}
                   </AppointmentInfo>
-                  {selectedPromotionCode ? (
+                  {selectedPromotion ? (
                     <AppointmentInfo>
-                      Promo Code: {selectedPromotionCode}
+                      Promo Code: {selectedPromotion.promoCode}
                     </AppointmentInfo>
                   ) : null}
                 </InformationWrapper>

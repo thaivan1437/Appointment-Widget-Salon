@@ -158,7 +158,7 @@ const Promotions = ({
                     </BaseContentStyle>
                     <ClickableContent
                       onClick={() => {
-                        makeAnAppointmentClick(promotion.promoCode);
+                        makeAnAppointmentClick(promotion);
                       }}
                       color={color}
                     >
