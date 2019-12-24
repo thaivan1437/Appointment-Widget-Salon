@@ -102,9 +102,20 @@ const TimePickerWrapper = styled.div`
 `;
 
 const LineContainer = styled.div`
+  position: relative;
   border: 1px dashed #e2e2e2;
   width: 500px;
   margin: 16px 0px;
+`;
+
+const LineText = styled.div`
+  position: absolute;
+  top: -10px;
+  left: 241px;
+  padding: 0 5px;
+  line-height: 20px;
+  color: ${COLORS.SILVER_CHALICE};
+  background-color: ${COLORS.WHITE};
 `;
 
 const BackButton = styled.div`
@@ -581,7 +592,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
               />
             </TimePickerWrapper>
 
-            <LineContainer />
+            <LineContainer>
+              <LineText>OR</LineText>
+            </LineContainer>
             <TimePickerWrapper>
               <TimePickerLabel>Option 2</TimePickerLabel>
               <TimePicker
