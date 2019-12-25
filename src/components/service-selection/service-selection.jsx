@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { S } from './service-selection.styles';
 import { CONFIGS } from '@environment';
 
-import sortBy from 'lodash.sortBy';
+import sortBy from 'lodash.sortby';
 
 const ServiceSelection = ({
   initialValue = [],
