@@ -13,7 +13,7 @@ import TimePicker from '@components/time-picker/time-picker';
 import ServiceSelection from '@components/service-selection/service-selection';
 import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
-import { COLOR_SCHEMA } from 'common/constants';
+import { COLOR_SCHEMA, USERNAME_REGEX } from 'common/constants';
 
 import { CONFIGS } from '@environment';
 import Pricing from '../widgets/pricing';
@@ -443,16 +443,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 hasError={errors.userName}
                 onChange={event => {
                   const { value } = event.target;
+                  const replacedValue = value.replace(USERNAME_REGEX, '');
 
-                  if (errors.userName && value.length >= 2) {
+                  if (errors.userName && replacedValue.length >= 2) {
                     setErrors(prev => ({
                       ...prev,
                       userName: false,
                     }));
                   }
 
-                  if (value.length <= 32) {
-                    setUserName(value);
+                  if (replacedValue.length <= 32) {
+                    setUserName(replacedValue);
                   }
                 }}
                 placeholder="Enter name"
