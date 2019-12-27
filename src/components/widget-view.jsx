@@ -19,6 +19,7 @@ import { CONFIGS } from '@environment';
 import Pricing from '../widgets/pricing';
 import BusinessHours from '../widgets/business-hours';
 import Promotions from '../widgets/promotions';
+import sortBy from 'lodash.sortby';
 
 const FALLBACK_COLOR = 'red';
 
@@ -640,7 +641,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
               serviceList={widgetConfig.widgetData.appointments}
               initialValue={selectedServices}
               onServiceSelected={services => {
-                setSelectedServices(services);
+                const sortedList = sortBy(services, ['name']);
+
+                setSelectedServices(sortedList);
               }}
             />
 
