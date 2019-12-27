@@ -586,7 +586,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               Preferred Times
             </ModalStyles.ModalStepTitle>
             <TimePickerWrapper>
-              <TimePickerLabel>Option 1</TimePickerLabel>
+              <TimePickerLabel>1st Choice</TimePickerLabel>
               <TimePicker
                 onTimeSelected={time => {
                   setSelectedTime1(time);
@@ -599,7 +599,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <LineText>OR</LineText>
             </LineContainer>
             <TimePickerWrapper>
-              <TimePickerLabel>Option 2</TimePickerLabel>
+              <TimePickerLabel>2nd Choice</TimePickerLabel>
               <TimePicker
                 onTimeSelected={time => {
                   setSelectedTime2(time);
