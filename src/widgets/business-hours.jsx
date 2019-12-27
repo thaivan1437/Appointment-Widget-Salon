@@ -125,8 +125,9 @@ const PhoneWrapper = styled.div`
   align-items: center;
   margin: 0 0 10px 15px;
   width: 400px;
+  font-size: 14px;
 
-  color: ${props => props.color};
+  color: ${COLORS.SILVER_CHALICE};
 `;
 
 const getTime = timeString => {
@@ -169,16 +170,16 @@ const BusinessHours = ({
         <BusinessHoursContent>
           <BusinessHoursTitle>Business Hours</BusinessHoursTitle>
           {businessPhone ? (
-            <PhoneWrapper color={color}>
+            <PhoneWrapper>
               <PhoneContent href={`tel:${businessPhone}`} color={color}>
                 {getFormattedPhone(businessPhone)}
               </PhoneContent>
-              {`${
+              {`(${
                 businessHours.businessPhone &&
                 businessHours.businessPhone.canSMS
                   ? 'can'
                   : 'cannot'
-              } receive SMS/text message`}
+              } receive SMS/text message)`}
             </PhoneWrapper>
           ) : null}
           <HolidayListWrapper>
