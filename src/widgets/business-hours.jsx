@@ -157,10 +157,16 @@ const BusinessHours = ({
                           {item.day}
                         </ItemCell>
                         <ItemCell>
-                          {getTime(item.hours[0]['openTime'])}
+                          {getTime(
+                            (item.hours[0] && item.hours[0]['openTime']) || '—'
+                          )}
                           {item.hours.length > 1 ? (
                             <>
-                              <br /> {getTime(item.hours[1]['openTime'])}
+                              <br />{' '}
+                              {getTime(
+                                (item.hours[1] && item.hours[1]['openTime']) ||
+                                  '—'
+                              )}
                             </>
                           ) : null}
                         </ItemCell>
@@ -172,10 +178,16 @@ const BusinessHours = ({
                                 : 0,
                           }}
                         >
-                          {getTime(item.hours[0]['closeTime'])}
+                          {getTime(
+                            (item.hours[0] && item.hours[0]['closeTime']) || '—'
+                          )}
                           {item.hours.length > 1 ? (
                             <>
-                              <br /> {getTime(item.hours[1]['closeTime'])}
+                              <br />{' '}
+                              {getTime(
+                                (item.hours[1] && item.hours[1]['closeTime']) ||
+                                  '—'
+                              )}
                             </>
                           ) : null}
                         </ItemCell>
