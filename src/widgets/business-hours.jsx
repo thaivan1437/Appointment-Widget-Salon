@@ -6,6 +6,7 @@ import { ColorContext } from '@components/widget-view';
 import { colorWeekend } from '../common/utils';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
+import { PHONE_REGEX } from '../common/constants';
 
 const MainContent = styled.div`
   display: table;
@@ -50,11 +51,7 @@ const ItemCellWhite = styled.div`
   height: 20px;
   padding-top: 5px;
 `;
-const SplitTitle = styled.div`
-  display: flex;
-  padding: 0px;
-  margin-left: 15px;
-`;
+
 const HolidayItem = styled.div`
   display: flex;
   font-size: 16px;
@@ -101,6 +98,37 @@ const HolidayDateItem = styled.div`
   font-size: 14px;
 `;
 
+const BusinessHoursTitle = styled(ModalStyles.ModalStepTitle)`
+  padding: 0px;
+  margin: 0 0 10px 15px;
+`;
+
+const BusinessHoursContent = styled(ModalStyles.ModalContentContainer)`
+  padding: 40px 0;
+`;
+
+const PhoneContent = styled.a`
+  color: ${props => props.color};
+  text-decoration: none;
+  font-weight: 500;
+
+  padding-right: 5px;
+  font-size: 20px;
+
+  :hover {
+    text-decoration: underline;
+  }
+`;
+
+const PhoneWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0 10px 15px;
+  width: 400px;
+
+  color: ${props => props.color};
+`;
+
 const getTime = timeString => {
   const timeStringLength = (timeString || '').length;
 
@@ -114,6 +142,12 @@ const getTime = timeString => {
   }
 };
 
+const getFormattedPhone = phoneString => {
+  return phoneString && phoneString.length > 0
+    ? phoneString.replace(PHONE_REGEX, '($2) $3-$4')
+    : null;
+};
+
 const BusinessHours = ({
   showBusinessHoursModal,
   setShowBusinessHoursModal,
@@ -121,7 +155,10 @@ const BusinessHours = ({
   color,
   businessHours,
 }) => {
-  // console.log(businessHours.customMessage.toString().length)
+  const businessPhone =
+    (businessHours.businessPhone && businessHours.businessPhone.phoneNumber) ||
+    '';
+
   return (
     <CustomRodal
       showModal={showBusinessHoursModal}
@@ -129,10 +166,21 @@ const BusinessHours = ({
       selectedStyle={folderName}
     >
       <ColorContext.Provider value={color}>
-        <ModalStyles.ModalContentContainer>
-          <ModalStyles.ModalStepTitle>
-            <SplitTitle>Business Hours</SplitTitle>
-          </ModalStyles.ModalStepTitle>
+        <BusinessHoursContent>
+          <BusinessHoursTitle>Business Hours</BusinessHoursTitle>
+          {businessPhone ? (
+            <PhoneWrapper color={color}>
+              <PhoneContent href={`tel:${businessPhone}`} color={color}>
+                {getFormattedPhone(businessPhone)}
+              </PhoneContent>
+              {`${
+                businessHours.businessPhone &&
+                businessHours.businessPhone.canSMS
+                  ? 'can'
+                  : 'cannot'
+              } receive SMS/text message`}
+            </PhoneWrapper>
+          ) : null}
           <HolidayListWrapper>
             <MainContent>
               <MainRow>
@@ -206,7 +254,7 @@ const BusinessHours = ({
               Salon Manager
             </ModalStyles.FooterLink>
           </ModalStyles.ModalFooter>
-        </ModalStyles.ModalContentContainer>
+        </BusinessHoursContent>
         <HolidayModalInformationContainer>
           <HolidayListWrapper>
             <HolidayTitle header>Holidays and Closed Days</HolidayTitle>
