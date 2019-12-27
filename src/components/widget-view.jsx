@@ -336,6 +336,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
       setSelectedServices([]);
       setShowLoading(false);
       setSelectedPromotion();
+      setErrors({
+        userName: false,
+        userPhone: false,
+        upToLabel: false,
+      });
     }
 
     setIFrameStyle(showModal);
