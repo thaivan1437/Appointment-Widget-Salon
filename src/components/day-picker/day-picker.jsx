@@ -19,6 +19,7 @@ const SETTINGS = {
 const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
   const [selectedDate, setSelectedDate] = useState();
   const [dates, setDates] = useState([]);
+  const [showErrorContainer, setShowErrorContainer] = useState(false);
 
   useEffect(() => {
     setDates(getDates(holidays));
@@ -53,6 +54,12 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
                     selectedDate.day === dateItem.day &&
                     selectedDate.month === dateItem.month
                   }
+                  onMouseEnter={() => {
+                    setShowErrorContainer(dateItem.isHoliday);
+                  }}
+                  onMouseLeave={() => {
+                    setShowErrorContainer(false);
+                  }}
                   isHoliday={dateItem.isHoliday}
                   onClick={() => {
                     !dateItem.isHoliday && handleDateChange(dateItem);
@@ -65,6 +72,9 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
               </div>
             ))}
           </Slider>
+          {!showErrorContainer ? (
+            <S.ErrorContainer>We are closed on this date</S.ErrorContainer>
+          ) : null}
         </S.DayPickerWrapper>
       )}
     </ColorContext.Consumer>

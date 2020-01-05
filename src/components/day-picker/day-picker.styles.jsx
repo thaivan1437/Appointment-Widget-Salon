@@ -56,10 +56,7 @@ S.DayItem = styled.div`
     cursor: pointer;
   }
 
-  ${props =>
-    props.isHoliday
-      ? 'background: #D6D6D6;opacity: 0.5;cursor: not-allowed!important;'
-      : null}
+  ${props => (props.isHoliday ? 'background: #D6D6D6;opacity: 0.5;' : null)}
 `;
 
 S.DayValue = styled.div`
@@ -78,4 +75,10 @@ S.BoxBackground = styled.div`
   left: -5px;
   right: -5px;
   border-radius: 4px;
+`;
+
+S.ErrorContainer = styled.div`
+  text-align: center;
+  color: ${COLORS.MONZA};
+  padding-top: 10px;
 `;
