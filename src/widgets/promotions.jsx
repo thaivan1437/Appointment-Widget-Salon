@@ -26,6 +26,7 @@ const PromotionTitle = styled(BaseContentStyle)`
 const PromotionCode = styled(BaseContentStyle)`
   font-size: 35px;
   font-weight: 500;
+  user-select: text;
 `;
 const PromotionDesc = styled(BaseContentStyle)`
   font-size: 24px;
