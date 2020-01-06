@@ -72,7 +72,7 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
               </div>
             ))}
           </Slider>
-          {!showErrorContainer ? (
+          {showErrorContainer ? (
             <S.ErrorContainer>We are closed on this date</S.ErrorContainer>
           ) : null}
         </S.DayPickerWrapper>

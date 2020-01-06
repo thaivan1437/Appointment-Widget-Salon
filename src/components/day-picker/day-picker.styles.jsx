@@ -56,7 +56,10 @@ S.DayItem = styled.div`
     cursor: pointer;
   }
 
-  ${props => (props.isHoliday ? 'background: #D6D6D6;opacity: 0.5;' : null)}
+  ${props =>
+    props.isHoliday
+      ? 'background: #D6D6D6;opacity: 0.5;cursor: initial!important;'
+      : null}
 `;
 
 S.DayValue = styled.div`
