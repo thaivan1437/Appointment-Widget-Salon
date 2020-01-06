@@ -223,6 +223,20 @@ const showWidgetButton = (widgetName, registeredWidgets) => {
     : false;
 };
 
+const getValidPromotions = (promotions = []) => {
+  const promArray = [];
+  const today = new Date();
+  const todayTime = today.getTime();
+
+  promotions.forEach(promotion => {
+    if (promotion.toDate > todayTime) {
+      promArray.push(promotion);
+    }
+  });
+
+  return promArray;
+};
+
 const WidgetView = ({ widgetConfig, appId }) => {
   const [left, setLeft] = useState(false);
   const [right, setRight] = useState(false);
@@ -902,7 +916,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setShowPromotionsModal={setShowPromotionsModal}
         folderName={folderName}
         color={color}
-        promotionData={widgetConfig.widgetData.promotions}
+        promotionData={getValidPromotions(widgetConfig.widgetData.promotions)}
         makeAnAppointmentClick={makeAnAppointmentClick}
       />
     </>

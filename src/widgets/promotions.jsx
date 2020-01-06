@@ -79,7 +79,7 @@ const PromotionItemWrapper = styled.div`
 const NoPromotion = styled.div`
   text-align: center;
   font-size: 30px;
-  padding: 50px 0;
+  padding: 152px 0;
   color: ${COLORS.DOVE_GRAY};
 `;
 
