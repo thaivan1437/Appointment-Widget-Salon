@@ -93,7 +93,8 @@ const ConfirmMessage = styled.div`
 `;
 
 const TimePickerLabel = styled.div`
-  margin-right: 40px;
+  margin-right: 30px;
+  width: 80px;
 `;
 
 const TimePickerWrapper = styled.div`
@@ -112,7 +113,7 @@ const LineContainer = styled.div`
 const LineText = styled.div`
   position: absolute;
   top: -11px;
-  left: 243px;
+  left: 252px;
   border: 1px solid #e2e2e2;
   padding: 2px;
   line-height: 1;
