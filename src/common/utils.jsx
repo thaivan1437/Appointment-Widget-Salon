@@ -29,7 +29,10 @@ export const getRequestDateString = date => {
       })
       .split('/');
 
-    return `${parsedDate[2]}${parsedDate[0]}${parsedDate[1]}`;
+    const month = '0' + parsedDate[0];
+    const day = '0' + parsedDate[1];
+
+    return `${parsedDate[2]}${month.slice(-2)}${day.slice(-2)}`;
   } else {
     return null;
   }
