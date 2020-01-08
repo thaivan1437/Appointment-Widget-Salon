@@ -169,7 +169,7 @@ const Promotions = ({
                 </PromotionItem>
               ))
             ) : (
-              <NoPromotion>There is no promotion available :(</NoPromotion>
+              <NoPromotion>There are no promotions available :(</NoPromotion>
             )}
           </PromotionSlider>
           <ModalStyles.ModalFooter>
