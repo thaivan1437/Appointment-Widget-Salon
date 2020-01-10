@@ -115,6 +115,13 @@ const Pricing = ({
     const serviceList = pricingList[selectedCategory] || [];
     const sortedServiceList = sortBy([...serviceList], ['name']);
 
+    if (sortedServiceList.length > 0) {
+      sortedServiceList.forEach(service => {
+        const sortedVariations = sortBy([...service.variations], ['name']);
+        service.variations = sortedVariations;
+      });
+    }
+
     setServiceList(sortedServiceList);
   }, [selectedCategory]);
 
