@@ -18,7 +18,7 @@ class ContactInclude extends Component {
                     width="100%"
                     height="460"
                     style={
-                        {borderWidth:0, marginTop:isMobile ? 85 : 112, display:block, background:'#000', border:none, height:'100vh',width:'100%'}
+                        {borderWidth:0, marginTop:isMobile ? 85 : 112, display:block, background:'#000', border:none, height:'70vh',width:'100%'}
                     }>
                 </iframe>
     }
