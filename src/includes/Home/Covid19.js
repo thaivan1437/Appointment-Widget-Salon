@@ -62,7 +62,7 @@ class Covid19 extends Component {
                                         <img src={CDN_URL + '/site/Covid-19/img-3.png'} alt="" />
                                     </div>
                                     <div className="covid__text d-flex align-items-center">
-                                        We will take your temperature using a touchless infra-red thermometer.
+                                        We serve our customers with one-time use disposable capes.
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ class Covid19 extends Component {
                                         <img src={CDN_URL + '/site/Covid-19/img-4.png'} alt="" />
                                     </div>
                                     <div className="covid__text d-flex align-items-center">
-                                        We will take your temperature using a touchless infra-red thermometer.
+                                        We will ask some screening questions relating to COVID-19 symptoms.
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +82,7 @@ class Covid19 extends Component {
                                         <img src={CDN_URL + '/site/Covid-19/img-5.png'} alt="" />
                                     </div>
                                     <div className="covid__text d-flex align-items-center">
-                                        We will take your temperature using a touchless infra-red thermometer.
+                                        Social distancing in effect maintain 6 feet of distance at all times.
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +92,7 @@ class Covid19 extends Component {
                                         <img src={CDN_URL + '/site/Covid-19/img-6.png'} alt="" />
                                     </div>
                                     <div className="covid__text d-flex align-items-center">
-                                        We will take your temperature using a touchless infra-red thermometer.
+                                        Magazines and coffee/tea no longer available in the waiting room.
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@ class Covid19 extends Component {
                                         <img src={CDN_URL + '/site/Covid-19/img-7.png'} alt="" />
                                     </div>
                                     <div className="covid__text d-flex align-items-center">
-                                        We will take your temperature using a touchless infra-red thermometer.
+                                        Please use hand sanitizer upon entering the salon, restroom and rooms.
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ class Covid19 extends Component {
                                     <img src={CDN_URL + '/site/Covid-19/img-8.png'} alt="" />
                                 </div>
                                 <div className="covid__text d-flex align-items-center">
-                                    We will take your temperature using a touchless infra-red thermometer.
+                                    Only customers with appointments and one guardian permitted into the salon.
                                 </div>
                             </div>
                             </div>
@@ -122,7 +122,7 @@ class Covid19 extends Component {
                                         <img src={CDN_URL + '/site/Covid-19/img-9.png'} alt="" />
                                     </div>
                                     <div className="covid__text d-flex align-items-center">
-                                        We will take your temperature using a touchless infra-red thermometer.
+                                        Please allow us enough time for enhanced disinfection between customers.
                                     </div>
                                 </div>
                             </div>
@@ -132,7 +132,7 @@ class Covid19 extends Component {
                                         <img src={CDN_URL + '/site/Covid-19/img-10.png'} alt="" />
                                     </div>
                                     <div className="covid__text d-flex align-items-center">
-                                        We will take your temperature using a touchless infra-red thermometer.
+                                        Please reschedule if anyone in your household has been sick in the last 2 weeks.
                                     </div>
                                 </div>
                             </div>
