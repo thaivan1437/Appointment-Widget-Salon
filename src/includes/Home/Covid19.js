@@ -27,8 +27,6 @@ class Covid19 extends Component {
                                 <div className="colvid__desc">
                                     Please contact us for an appointment if you are not yet scheduled.
                                     <br />
-                                    FOR YOUR SAFETY, WE DO NOT ACCEPT ANY WALK-INS AT THIS TIME.
-                                    <br />
                                     We are transitioning our environment to the new normal for your safety.
                                 </div>
                             </div>
