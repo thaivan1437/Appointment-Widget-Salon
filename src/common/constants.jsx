@@ -12,3 +12,6 @@ export const COLOR_SCHEMA = {
   green: '#53d86a',
   red: '#ff004a',
 };
+
+export const PHONE_REGEX = /^(\+1)?(\d{3})(\d{3})(\d{4})/g;
+export const USERNAME_REGEX = /[^a-zA-Z ]/g;

@@ -56,6 +56,10 @@ S.DialogCycle = styled.div`
   bottom: ${props => (props.bottom ? '-15px' : 'auto')};
 `;
 
+S.HalfModalDialogCycle = styled(S.DialogCycle)`
+  left: 435px;
+`;
+
 S.ModalContentContainer = styled.div`
   flex: 2;
 
@@ -64,6 +68,10 @@ S.ModalContentContainer = styled.div`
   align-items: center;
 
   padding: 50px 0 68px;
+`;
+
+S.HalfModalContent = styled(S.ModalContentContainer)`
+  flex: 1;
 `;
 
 S.ModalInformationContainer = styled.div`
@@ -86,11 +94,25 @@ S.ModalFooter = styled.div`
   font-size: 12px;
 
   padding: 10px 0;
-  margin-bottom: 30px;
+`;
+
+S.HalfModelFooter = styled(S.ModalFooter)`
+  width: 350px;
 `;
 
 S.ModalStepTitle = styled.div`
   width: 400px;
   font-size: 24px;
   margin-bottom: 20px;
+`;
+
+S.FooterLink = styled.a`
+  text-decoration: none;
+  color: ${COLORS.STORM_GRAY};
+
+  padding: 0 3px;
+
+  :hover {
+    font-weight: 500;
+  }
 `;

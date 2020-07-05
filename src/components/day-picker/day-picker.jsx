@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 
-import { getDates } from '../../common/utils';
+import { getDates } from 'common/utils';
 import { S } from 'components/day-picker/day-picker.styles';
 import { ColorContext } from '@components/widget-view';
 
@@ -16,12 +16,13 @@ const SETTINGS = {
   slidesToScroll: 6,
 };
 
-const DayPicker = ({ selectedDateChange, initialValue }) => {
+const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
   const [selectedDate, setSelectedDate] = useState();
   const [dates, setDates] = useState([]);
+  const [showErrorContainer, setShowErrorContainer] = useState(false);
 
   useEffect(() => {
-    setDates(getDates());
+    setDates(getDates(holidays));
   }, []);
 
   useEffect(() => {
@@ -53,8 +54,15 @@ const DayPicker = ({ selectedDateChange, initialValue }) => {
                     selectedDate.day === dateItem.day &&
                     selectedDate.month === dateItem.month
                   }
+                  onMouseEnter={() => {
+                    setShowErrorContainer(dateItem.isHoliday);
+                  }}
+                  onMouseLeave={() => {
+                    setShowErrorContainer(false);
+                  }}
+                  isHoliday={dateItem.isHoliday}
                   onClick={() => {
-                    handleDateChange(dateItem);
+                    !dateItem.isHoliday && handleDateChange(dateItem);
                   }}
                 >
                   <S.DayInfo>{dateItem.month}</S.DayInfo>
@@ -64,6 +72,9 @@ const DayPicker = ({ selectedDateChange, initialValue }) => {
               </div>
             ))}
           </Slider>
+          {showErrorContainer ? (
+            <S.ErrorContainer>We are closed on this date</S.ErrorContainer>
+          ) : null}
         </S.DayPickerWrapper>
       )}
     </ColorContext.Consumer>

@@ -32,7 +32,7 @@ S.Button = styled.button`
   justify-content: center;
   align-items: center;
 
-  padding: 8px 20px;
+  padding: 13px 20px;
   border-radius: 10px;
   border: none;
   background-color: ${props => props.color};
@@ -58,7 +58,6 @@ S.Button = styled.button`
 
 S.AppointmentButton = styled(S.Button)`
   font-size: 20px;
-  line-height: 2;
   width: 310px;
   height: 56px;
   position: relative;

@@ -18,7 +18,7 @@ const HOURS = [
   '7 PM',
 ];
 
-const MINUTES = ['00', '15', '30', '45'];
+const MINUTES = ['00', '10', '20', '30', '40', '50'];
 
 const TimePicker = ({ onTimeSelected, initialValue }) => {
   const [showHourSelection, setShowHourSelection] = useState(false);
@@ -95,8 +95,9 @@ const TimePicker = ({ onTimeSelected, initialValue }) => {
                       </S.OptionItem>
                     ))
                   : null}
-                {showMinutesSelection
-                  ? MINUTES.map(value => (
+                {showMinutesSelection ? (
+                  <S.MinuteWrapper>
+                    {MINUTES.map(value => (
                       <S.OptionItem
                         color={color}
                         key={`option_${value}`}
@@ -108,8 +109,9 @@ const TimePicker = ({ onTimeSelected, initialValue }) => {
                       >
                         {value}
                       </S.OptionItem>
-                    ))
-                  : null}
+                    ))}
+                  </S.MinuteWrapper>
+                ) : null}
               </S.SelectionOptionContainer>
             ) : null}
           </S.TimePickerWrapper>

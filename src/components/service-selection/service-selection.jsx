@@ -2,16 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { S } from './service-selection.styles';
 import { CONFIGS } from '@environment';
 
+import sortBy from 'lodash.sortby';
+
 const ServiceSelection = ({
   initialValue = [],
   onServiceSelected,
   serviceList = {},
+  setErrors,
 }) => {
   const [selectedCategory, setSelectedCategory] = useState();
   const [selectedServicesIds, setSelectedServicesIds] = useState([]);
   const [selectedServices, setSelectedServices] = useState(initialValue || []);
 
-  const categories = Object.keys(serviceList);
+  const categories = Object.keys(serviceList).sort();
+
+  const sortedServiceList = { ...serviceList };
+
+  categories.forEach(category => {
+    sortedServiceList[category] = sortBy(sortedServiceList[category], ['name']);
+  });
 
   useEffect(() => {
     setSelectedCategory(categories[0]);
@@ -45,8 +54,8 @@ const ServiceSelection = ({
         ))}
       </S.ServiceCategoryContainer>
       <S.ServiceServicesContainer>
-        {serviceList[selectedCategory] &&
-          serviceList[selectedCategory].map(service => (
+        {sortedServiceList[selectedCategory] &&
+        sortedServiceList[selectedCategory].map(service => (
             <S.ServiceItem
               onClick={() => {
                 const tempSelectedServicesIds = [...selectedServicesIds];
@@ -55,8 +64,18 @@ const ServiceSelection = ({
                 if (tempSelectedServicesIds.indexOf(service.id) === -1) {
                   if (tempSelectedServicesIds.length < 4) {
                     tempSelectedServices.push(service);
+                  } else {
+                    setErrors(prev => ({
+                      ...prev,
+                      upToLabel: true,
+                    }));
                   }
                 } else {
+                  setErrors(prev => ({
+                    ...prev,
+                    upToLabel: false,
+                  }));
+
                   tempSelectedServices.splice(
                     tempSelectedServicesIds.indexOf(service.id),
                     1

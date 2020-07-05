@@ -9,12 +9,12 @@ export const getTimeString = date =>
     ? date.toLocaleTimeString('en-US')
     : '';
 
-export const getDisplayDateString = date => {
+export const getDisplayDateString = (date, type = {}) => {
   return date && typeof date.toLocaleTimeString === 'function'
     ? date.toLocaleDateString('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
+        month: type.month || 'long',
+        day: type.day || 'numeric',
+        year: type.year || 'numeric',
       })
     : null;
 };
@@ -29,7 +29,10 @@ export const getRequestDateString = date => {
       })
       .split('/');
 
-    return `${parsedDate[2]}${parsedDate[0]}${parsedDate[1]}`;
+    const month = '0' + parsedDate[0];
+    const day = '0' + parsedDate[1];
+
+    return `${parsedDate[2]}${month.slice(-2)}${day.slice(-2)}`;
   } else {
     return null;
   }
@@ -55,18 +58,57 @@ const sliderDateObj = date => {
   };
 };
 
-export const getDates = () => {
+export const getDates = (holidays = []) => {
   const dateArray = [];
+  const holidayArray = [];
 
   let currentDate = new Date();
   const stopDate = addMonth(currentDate, 1);
 
+  if (holidays.length > 0) {
+    holidays.map(holiday => {
+      holidayArray.push(getRequestDateString(new Date(holiday.date)));
+    });
+  }
+
   while (currentDate <= stopDate) {
     const tempDate = new Date(currentDate);
+    const dateString = getRequestDateString(tempDate);
 
-    dateArray.push({ dateValue: tempDate, ...sliderDateObj(tempDate) });
+    dateArray.push({
+      dateValue: tempDate,
+      ...sliderDateObj(tempDate),
+      isHoliday: holidayArray.indexOf(dateString) !== -1,
+    });
     currentDate = addDays(currentDate, 1);
   }
 
   return dateArray;
+};
+
+// WORKING HOURS
+export const colorWeekend = (index, color) => {
+  switch (index) {
+    case 5:
+      return '#1fab83';
+    case 6:
+      return '#1fab83';
+    default:
+      return color;
+  }
+};
+
+// Format amount like this
+// 1050 --> $10.50
+// 1000 --> $10
+export const formatAmount = amount => {
+  const formattedAmount = amount / 100;
+
+  if (amount % 100 > 0) {
+    const amountText = formattedAmount + '00';
+    const splittedAmount = amountText.split('.');
+    return `${splittedAmount[0]}.${splittedAmount[1].slice(0, 2)}`;
+  } else {
+    return formattedAmount;
+  }
 };

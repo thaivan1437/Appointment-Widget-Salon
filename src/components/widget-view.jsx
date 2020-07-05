@@ -13,9 +13,13 @@ import TimePicker from '@components/time-picker/time-picker';
 import ServiceSelection from '@components/service-selection/service-selection';
 import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
-import { COLOR_SCHEMA } from 'common/constants';
+import { COLOR_SCHEMA, USERNAME_REGEX } from 'common/constants';
 
 import { CONFIGS } from '@environment';
+import Pricing from '../widgets/pricing';
+import BusinessHours from '../widgets/business-hours';
+import Promotions from '../widgets/promotions';
+import sortBy from 'lodash.sortby';
 
 const FALLBACK_COLOR = 'red';
 
@@ -57,7 +61,7 @@ const CounterWrapper = styled.div`
 
 const ButtonWrapper = styled.div`
   align-self: flex-end;
-  margin: 47px 50px 0 0;
+  margin: 41px 50px 0 0;
 
   display: flex;
   align-items: center;
@@ -65,15 +69,15 @@ const ButtonWrapper = styled.div`
 
 // TODO move common styles file
 const ButtonWrapper2 = styled(ButtonWrapper)`
-  margin-top: 17px;
+  margin-top: 11px;
 `;
 
 const ButtonWrapper4 = styled(ButtonWrapper)`
-  margin-top: -4px;
+  margin-top: -10px;
 `;
 
 const ButtonWrapper3 = styled(ButtonWrapper)`
-  margin-top: 37px;
+  margin-top: 31px;
 `;
 
 const DayPickerWrapper = styled.div`
@@ -89,7 +93,8 @@ const ConfirmMessage = styled.div`
 `;
 
 const TimePickerLabel = styled.div`
-  margin-right: 40px;
+  margin-right: 30px;
+  width: 80px;
 `;
 
 const TimePickerWrapper = styled.div`
@@ -99,9 +104,22 @@ const TimePickerWrapper = styled.div`
 `;
 
 const LineContainer = styled.div`
+  position: relative;
   border: 1px dashed #e2e2e2;
   width: 500px;
   margin: 16px 0px;
+`;
+
+const LineText = styled.div`
+  position: absolute;
+  top: -11px;
+  left: 252px;
+  border: 1px solid #e2e2e2;
+  padding: 2px;
+  line-height: 1;
+  width: 20px;
+  color: ${COLORS.SILVER_CHALICE};
+  background-color: ${COLORS.WHITE};
 `;
 
 const BackButton = styled.div`
@@ -110,26 +128,17 @@ const BackButton = styled.div`
   margin-right: 15px;
 `;
 
-const FooterLink = styled.a`
-  text-decoration: none;
-  color: ${COLORS.STORM_GRAY};
-
-  padding: 0 3px;
-
-  :hover {
-    font-weight: 500;
-  }
-`;
-
 const AppointmentInfo = styled.div`
   color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
   padding: 0 20px 8px;
-  font-size: 20px;
+  font-size: 19px;
+
+  text-transform: ${props => (props.userName ? 'capitalize' : 'none')};
 
   text-align: ${props => (props.header ? 'center' : 'left')};
 `;
 
-const FirstStepMessage = styled(AppointmentInfo)`
+export const FirstStepMessage = styled(AppointmentInfo)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -140,11 +149,11 @@ const FirstStepMessage = styled(AppointmentInfo)`
 `;
 
 const InformationWrapper = styled.div`
-  margin-top: 16px;
+  margin-top: 10px;
 `;
 
 const EditAppointment = styled.div`
-  color: ${COLORS.DOVE_GRAY};
+  color: ${props => props.color || COLORS.DOVE_GRAY};
 
   margin: 30px 0;
 
@@ -181,9 +190,11 @@ const SeparatorLine = styled.div`
 `;
 
 const UpToLabel = styled.span`
-  font-size: 16px;
+  font-size: ${props => (props.hasError ? '20px' : '16px')};
   margin-left: 10px;
-  color: ${COLORS.DOVE_GRAY};
+  color: ${props => (props.hasError ? 'red' : COLORS.DOVE_GRAY)};
+  transition: font-size 0.5s ease;
+  font-weight: ${props => (props.hasError ? 500 : 400)};
 `;
 
 const PolicyContainer = styled.div`
@@ -198,10 +209,32 @@ const PolicyContainer = styled.div`
   }
 `;
 
+const AppointmentPromotionCode = styled.div`
+  position: absolute;
+  bottom: 70px;
+  left: 100px;
+  font-size: 20px;
+  color: ${INPUT_COLORS.TEXT_COLOR};
+`;
+
 const showWidgetButton = (widgetName, registeredWidgets) => {
   return Array.isArray(registeredWidgets)
     ? registeredWidgets.indexOf(widgetName) !== -1
     : false;
+};
+
+const getValidPromotions = (promotions = []) => {
+  const promArray = [];
+  const today = new Date();
+  const todayTime = today.getTime();
+
+  promotions.forEach(promotion => {
+    if (promotion.toDate > todayTime) {
+      promArray.push(promotion);
+    }
+  });
+
+  return promArray;
 };
 
 const WidgetView = ({ widgetConfig, appId }) => {
@@ -210,6 +243,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [top, setTop] = useState(false);
   const [bottom, setBottom] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showPricingModal, setShowPricingModal] = useState(false);
+  const [showBusinessHoursModal, setShowBusinessHoursModal] = useState(false);
+  const [showPromotionsModal, setShowPromotionsModal] = useState(false);
   const [selectedStep, setSelectedStep] = useState(1);
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
@@ -220,8 +256,13 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [selectedServices, setSelectedServices] = useState([]);
   const [color, setColor] = useState(COLOR_SCHEMA[FALLBACK_COLOR]);
   const [folderName, setFolderName] = useState();
+  const [selectedPromotion, setSelectedPromotion] = useState();
 
-  const [errors, setErrors] = useState({ userName: false, userPhone: false });
+  const [errors, setErrors] = useState({
+    userName: false,
+    userPhone: false,
+    upToLabel: false,
+  });
 
   const [frameStyle, setFrameStyle] = useState({
     common:
@@ -309,14 +350,45 @@ const WidgetView = ({ widgetConfig, appId }) => {
       setSelectedTime2();
       setSelectedServices([]);
       setShowLoading(false);
+      setSelectedPromotion();
+      setErrors({
+        userName: false,
+        userPhone: false,
+        upToLabel: false,
+      });
     }
 
-    if (showModal) {
+    setIFrameStyle(showModal);
+  }, [showModal]);
+
+  useEffect(() => {
+    setIFrameStyle(showPricingModal);
+  }, [showPricingModal]);
+
+  useEffect(() => {
+    setIFrameStyle(showBusinessHoursModal);
+  }, [showBusinessHoursModal]);
+
+  useEffect(() => {
+    setIFrameStyle(showPromotionsModal);
+  }, [showPromotionsModal]);
+
+  useEffect(() => {
+    if (selectedPromotion) {
+      setTimeout(() => {
+        setShowModal(true);
+      }, 300);
+    }
+  }, [selectedPromotion]);
+
+  // TODO: move util
+  const setIFrameStyle = modalKey => {
+    if (modalKey) {
       parent.postMessage(
         {
           type: 'showModal',
           data: {
-            showModal,
+            showModal: modalKey,
             style:
               'position:fixed;width:100%;height:100%;bottom:0px;right:0px;border:none;z-index:2147483647;',
           },
@@ -329,7 +401,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
           {
             type: 'showModal',
             data: {
-              showModal,
+              showModal: modalKey,
               style: getFrameStyle(),
             },
           },
@@ -339,7 +411,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
     } else {
       setIsInit(false);
     }
-  }, [showModal]);
+  };
 
   useEffect(() => {
     const style = getFrameStyle();
@@ -359,13 +431,25 @@ const WidgetView = ({ widgetConfig, appId }) => {
     return frameStyle.common + frameStyle.orientation + frameStyle.position;
   };
 
-  const getHourString = selectedTimeObject => {
+  const getHourString = (selectedTimeObject, display = false) => {
     const hourString =
       selectedTimeObject.selectedHour
         .split(' ')
-        .join(':' + selectedTimeObject.selectedMinute) || '';
+        .join(
+          display
+            ? ':' + selectedTimeObject.selectedMinute + ' '
+            : ':' + selectedTimeObject.selectedMinute
+        ) || '';
 
-    return hourString.toLowerCase();
+    return display ? hourString : hourString.toLowerCase();
+  };
+
+  const makeAnAppointmentClick = promotion => {
+    setShowPromotionsModal(false);
+
+    setTimeout(() => {
+      setSelectedPromotion(promotion);
+    }, 300);
   };
 
   const renderContent = () => {
@@ -380,16 +464,17 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 hasError={errors.userName}
                 onChange={event => {
                   const { value } = event.target;
+                  const replacedValue = value.replace(USERNAME_REGEX, '');
 
-                  if (errors.userName && value.length >= 2) {
+                  if (errors.userName && replacedValue.length >= 2) {
                     setErrors(prev => ({
                       ...prev,
                       userName: false,
                     }));
                   }
 
-                  if (value.length <= 32) {
-                    setUserName(value);
+                  if (replacedValue.length <= 32) {
+                    setUserName(replacedValue);
                   }
                 }}
                 placeholder="Enter name"
@@ -471,6 +556,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper4>
+            {selectedPromotion ? (
+              <AppointmentPromotionCode>
+                Promo Code: {selectedPromotion.promoCode}
+              </AppointmentPromotionCode>
+            ) : null}
           </>
         );
       case 2:
@@ -486,6 +576,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 selectedDateChange={value => {
                   setSelectedDate(value);
                 }}
+                holidays={
+                  widgetConfig.widgetData &&
+                  widgetConfig.widgetData.businessHours &&
+                  widgetConfig.widgetData.businessHours.holidays
+                }
               />
             </DayPickerWrapper>
             <ButtonWrapper>
@@ -509,10 +604,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
         return (
           <>
             <ModalStyles.ModalStepTitle>
-              Preferred Time
+              Preferred Times
             </ModalStyles.ModalStepTitle>
             <TimePickerWrapper>
-              <TimePickerLabel>Option 1</TimePickerLabel>
+              <TimePickerLabel>
+                1<sup>st</sup> Choice
+              </TimePickerLabel>
               <TimePicker
                 onTimeSelected={time => {
                   setSelectedTime1(time);
@@ -521,9 +618,13 @@ const WidgetView = ({ widgetConfig, appId }) => {
               />
             </TimePickerWrapper>
 
-            <LineContainer />
+            <LineContainer>
+              <LineText>OR</LineText>
+            </LineContainer>
             <TimePickerWrapper>
-              <TimePickerLabel>Option 2</TimePickerLabel>
+              <TimePickerLabel>
+                2<sup>nd</sup> Choice
+              </TimePickerLabel>
               <TimePicker
                 onTimeSelected={time => {
                   setSelectedTime2(time);
@@ -555,13 +656,18 @@ const WidgetView = ({ widgetConfig, appId }) => {
           <>
             <ModalStyles.ModalStepTitle>
               Desired Services
-              <UpToLabel>(up to 4 Services)</UpToLabel>
+              <UpToLabel hasError={errors.upToLabel}>
+                (up to 4 Services)
+              </UpToLabel>
             </ModalStyles.ModalStepTitle>
             <ServiceSelection
+              setErrors={setErrors}
               serviceList={widgetConfig.widgetData.appointments}
               initialValue={selectedServices}
               onServiceSelected={services => {
-                setSelectedServices(services);
+                const sortedList = sortBy(services, ['name']);
+
+                setSelectedServices(sortedList);
               }}
             />
 
@@ -591,7 +697,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 color={color}
                 disabled={showLoading}
                 onClick={() => {
-                  const data = {
+                  let data = {
                     customerName: userName,
                     customerPhoneNumber: `+1${userPhone.replace(/[^\d]/g, '')}`,
                     numberOfPeople: userCount,
@@ -599,8 +705,16 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     date: getRequestDateString(selectedDate.dateValue),
                     time1: getHourString(selectedTime1),
                     time2: getHourString(selectedTime2),
-                    services: [...selectedServices],
+                    services: selectedServices.map(service => ({
+                      categoryItemId: service.id,
+                      categoryId: service.categoryId,
+                    })),
                   };
+
+                  if (selectedPromotion) {
+                    const { promoId } = selectedPromotion;
+                    data = { ...data, promoId };
+                  }
 
                   setShowLoading(true);
 
@@ -632,6 +746,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 )}
               </CommonStyles.AppointmentButton>
               <EditAppointment
+                color={color}
                 disabled={showLoading}
                 onClick={() => {
                   setSelectedStep(1);
@@ -692,17 +807,26 @@ const WidgetView = ({ widgetConfig, appId }) => {
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
             <ImageWrapper
+              onClick={() => setShowPricingModal(true)}
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/pricing.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <ImageWrapper
+              onClick={() => setShowPromotionsModal(true)}
               src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
+            />
+          ) : null}
+          {showWidgetButton('WIDGET_BUSINESS_HOURS', widgetConfig.widgets) ? (
+            <ImageWrapper
+              onClick={() => setShowBusinessHoursModal(true)}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/business-hours.png`}
             />
           ) : null}
         </WidgetViewWrapper>
       ) : null}
 
+      {/*Appointment*/}
       {/*TODO: (refactor) move content separate component*/}
       <CustomRodal
         showModal={showModal}
@@ -714,12 +838,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
             {renderContent()}
             <ModalStyles.ModalFooter>
               powered by
-              <FooterLink
+              <ModalStyles.FooterLink
                 href={`https://salonmanager.${CONFIGS.domainExtension}`}
                 target="_blank"
               >
                 Salon Manager
-              </FooterLink>
+              </ModalStyles.FooterLink>
             </ModalStyles.ModalFooter>
           </ModalStyles.ModalContentContainer>
           <ModalStyles.ModalInformationContainer>
@@ -733,11 +857,16 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <>
                 <AppointmentInfo header>Appointment Details</AppointmentInfo>
                 <InformationWrapper>
-                  <AppointmentInfo>{userName}</AppointmentInfo>
+                  <AppointmentInfo userName>{userName}</AppointmentInfo>
                   <AppointmentInfo>{userPhone}</AppointmentInfo>
                   <AppointmentInfo>
                     {userCount} {userCount === 1 ? 'Person' : 'People'}
                   </AppointmentInfo>
+                  {selectedPromotion ? (
+                    <AppointmentInfo>
+                      Promo Code: {selectedPromotion.promoCode}
+                    </AppointmentInfo>
+                  ) : null}
                 </InformationWrapper>
               </>
             ) : null}
@@ -749,8 +878,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 </AppointmentInfo>
                 {selectedStep > 3 ? (
                   <AppointmentInfo>
-                    {`${getHourString(selectedTime1)} / ${getHourString(
-                      selectedTime2
+                    {`${getHourString(selectedTime1, true)} / ${getHourString(
+                      selectedTime2,
+                      true
                     )}`}
                   </AppointmentInfo>
                 ) : null}
@@ -767,6 +897,31 @@ const WidgetView = ({ widgetConfig, appId }) => {
           </ModalStyles.ModalInformationContainer>
         </ColorContext.Provider>
       </CustomRodal>
+      {/*Pricing*/}
+      <Pricing
+        showPricingModal={showPricingModal}
+        setShowPricingModal={setShowPricingModal}
+        folderName={folderName}
+        color={color}
+        pricingList={widgetConfig.widgetData.pricings}
+      />
+      {/*Business hours*/}
+      <BusinessHours
+        showBusinessHoursModal={showBusinessHoursModal}
+        setShowBusinessHoursModal={setShowBusinessHoursModal}
+        folderName={folderName}
+        color={color}
+        businessHours={widgetConfig.widgetData.businessHours}
+      />
+      {/*Promotions*/}
+      <Promotions
+        showPromotionsModal={showPromotionsModal}
+        setShowPromotionsModal={setShowPromotionsModal}
+        folderName={folderName}
+        color={color}
+        promotionData={getValidPromotions(widgetConfig.widgetData.promotions)}
+        makeAnAppointmentClick={makeAnAppointmentClick}
+      />
     </>
   );
 };

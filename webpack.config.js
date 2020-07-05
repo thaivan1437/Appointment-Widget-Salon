@@ -5,7 +5,9 @@ const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-process.env.NODE_ENV = argv.buildEnv || 'development';
+const isLocal = argv.buildEnv === 'local';
+
+process.env.NODE_ENV = isLocal ? 'development' : argv.buildEnv || 'development';
 
 const version = require('./package.json').version;
 
@@ -26,7 +28,7 @@ module.exports = {
         __dirname,
         'src',
         'environments',
-        process.env.NODE_ENV + '.js'
+        isLocal ? 'local.js' : process.env.NODE_ENV + '.js'
       ),
     },
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
@@ -61,7 +63,7 @@ module.exports = {
       filename: 'index.html',
       template: path.join(__dirname, 'src', 'index.html'),
       inject: false,
-    })
+    }),
   ],
   devServer: {
     port: 5555,

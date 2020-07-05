@@ -135,3 +135,9 @@ S.TimePickerOverlay = styled.div`
   right: 0;
   left: 0;
 `;
+
+S.MinuteWrapper = styled.div`
+  display: flex;
+  width: 300px;
+  flex-wrap: wrap;
+`;

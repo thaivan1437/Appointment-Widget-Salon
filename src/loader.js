@@ -47,5 +47,7 @@ import { CONFIGS } from '@environment';
   'data-sm',
   window,
   document,
-  `https://widgets.salonmanager.${CONFIGS.domainExtension}/widgets.js`
+  CONFIGS.isLocal
+    ? 'widgets.js'
+    : `https://widgets.salonmanager.${CONFIGS.domainExtension}/widgets.js`
 );
