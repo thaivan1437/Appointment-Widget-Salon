@@ -1,4 +1,4 @@
 module.exports = {
   domainExtension: 'net',
-  widgetAppId: "d1067a20-bcd5-11ea-878f-bf7773cf8336",
+  widgetAppId: "961cd910-cbba-11ea-8399-6b1fa1793cfd",
 };
