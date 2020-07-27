@@ -314,7 +314,8 @@ const BusinessHours = ({
                   );
                 })
               : null}
-            {businessHours.customMessage.toString().length > 0 ? (
+            {businessHours.customMessage &&
+            businessHours.customMessage.toString().length > 0 ? (
               <HolidayItem style={{ color: color }}>
                 {businessHours.customMessage}
               </HolidayItem>
