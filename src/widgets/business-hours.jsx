@@ -205,70 +205,81 @@ const BusinessHours = ({
               } receive SMS/text message)`}
             </PhoneWrapper>
           ) : null}
-          <HolidayListWrapper>
-            <MainContent>
-              <MainRow>
-                <ItemCellWhite></ItemCellWhite>
-                <TitleCell>Open</TitleCell>
-                <TitleCell>Close</TitleCell>
-              </MainRow>
-              {parseInt(businessHours.periods.length) > 0
-                ? businessHours.periods.map((item, index) => {
-                    // console.log(openTimeStart(item.hours[0]['openTime'],item.hours[0]['closeTime']))
-                    return (
-                      <MainRow>
-                        <ItemCell
-                          style={{
-                            backgroundColor: colorWeekend(index, color),
-                            color: '#FFF',
-                            borderTopLeftRadius: 10,
-                            borderBottomLeftRadius: 10,
-                            width: 50,
-                          }}
-                        >
-                          {item.day}
-                        </ItemCell>
-                        <ItemCell>
-                          {getTime(
-                            (item.hours[0] && item.hours[0]['openTime']) || '—'
-                          )}
-                          {item.hours.length > 1 ? (
-                            <>
-                              <br />{' '}
-                              {getTime(
-                                (item.hours[1] && item.hours[1]['openTime']) ||
-                                  '—'
-                              )}
-                            </>
-                          ) : null}
-                        </ItemCell>
-                        <ItemCell
-                          style={{
-                            borderBottomRightRadius:
-                              index === businessHours.periods.length - 1
-                                ? 10
-                                : 0,
-                          }}
-                        >
-                          {getTime(
-                            (item.hours[0] && item.hours[0]['closeTime']) || '—'
-                          )}
-                          {item.hours.length > 1 ? (
-                            <>
-                              <br />{' '}
-                              {getTime(
-                                (item.hours[1] && item.hours[1]['closeTime']) ||
-                                  '—'
-                              )}
-                            </>
-                          ) : null}
-                        </ItemCell>
-                      </MainRow>
-                    );
-                  })
-                : null}
-            </MainContent>
-          </HolidayListWrapper>
+          {businessHours.periods ? (
+            <HolidayListWrapper>
+              <MainContent>
+                <MainRow>
+                  <ItemCellWhite></ItemCellWhite>
+                  <TitleCell>Open</TitleCell>
+                  <TitleCell>Close</TitleCell>
+                </MainRow>
+                {businessHours.periods &&
+                parseInt(businessHours.periods.length) > 0
+                  ? businessHours.periods.map((item, index) => {
+                      // console.log(openTimeStart(item.hours[0]['openTime'],item.hours[0]['closeTime']))
+                      return (
+                        <MainRow>
+                          <ItemCell
+                            style={{
+                              backgroundColor: colorWeekend(index, color),
+                              color: '#FFF',
+                              borderTopLeftRadius: 10,
+                              borderBottomLeftRadius: 10,
+                              width: 50,
+                            }}
+                          >
+                            {item.day}
+                          </ItemCell>
+                          <ItemCell>
+                            {getTime(
+                              (item.hours[0] && item.hours[0]['openTime']) ||
+                                '—'
+                            )}
+                            {item.hours.length > 1 ? (
+                              <>
+                                <br />{' '}
+                                {getTime(
+                                  (item.hours[1] &&
+                                    item.hours[1]['openTime']) ||
+                                    '—'
+                                )}
+                              </>
+                            ) : null}
+                          </ItemCell>
+                          <ItemCell
+                            style={{
+                              borderBottomRightRadius:
+                                index === businessHours.periods.length - 1
+                                  ? 10
+                                  : 0,
+                            }}
+                          >
+                            {getTime(
+                              (item.hours[0] && item.hours[0]['closeTime']) ||
+                                '—'
+                            )}
+                            {item.hours.length > 1 ? (
+                              <>
+                                <br />{' '}
+                                {getTime(
+                                  (item.hours[1] &&
+                                    item.hours[1]['closeTime']) ||
+                                    '—'
+                                )}
+                              </>
+                            ) : null}
+                          </ItemCell>
+                        </MainRow>
+                      );
+                    })
+                  : null}
+              </MainContent>
+            </HolidayListWrapper>
+          ) : (
+            businessHours.fullDay && (
+              <BusinessHoursTitle>We open 24/7</BusinessHoursTitle>
+            )
+          )}
           <ModalStyles.ModalFooter>
             powered by
             <ModalStyles.FooterLink
