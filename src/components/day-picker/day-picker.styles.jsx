@@ -34,6 +34,10 @@ S.DayPickerWrapper = styled.div`
   .slick-prev {
     left: -50px;
   }
+  @media (max-width: 768px) {
+    width: 220px;
+    font-size: 18px;
+  }
 `;
 S.DayItem = styled.div`
   display: flex;

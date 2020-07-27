@@ -11,6 +11,9 @@ import { PHONE_REGEX } from '../common/constants';
 const MainContent = styled.div`
   display: table;
   padding: 0 120px;
+  @media (max-width: 768px) {
+    padding: 0 30px;
+  }
 `;
 const MainRow = styled.div`
   display: table-row;
@@ -41,6 +44,10 @@ const ItemCell = styled.div`
   text-align: center;
   vertical-align: middle;
   font-size: 14px;
+  @media (max-width: 768px) {
+    width: 120px;
+    padding: 1px;
+  }
 `;
 const ItemCellWhite = styled.div`
   display: table-cell;
@@ -57,6 +64,9 @@ const HolidayItem = styled.div`
   font-size: 16px;
   padding-top: 15px;
   padding-left: 20px;
+  @media (max-width: 768px) {
+    padding-top: 5px;
+  }
 `;
 const HolidayTitle = styled.div`
   color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
@@ -80,6 +90,10 @@ const HolidayListWrapper = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: ${COLORS.STORM_GRAY};
+  }
+  @media (max-width: 768px) {
+    height: 190px;
+    overflow: scroll;
   }
 `;
 const ListCycle = styled.div`
@@ -118,6 +132,9 @@ const PhoneContent = styled.a`
   :hover {
     text-decoration: underline;
   }
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const PhoneWrapper = styled.div`
@@ -128,6 +145,12 @@ const PhoneWrapper = styled.div`
   font-size: 14px;
 
   color: ${COLORS.SILVER_CHALICE};
+
+  @media (max-width: 768px) {
+    width: 300px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 const getTime = timeString => {

@@ -7,19 +7,25 @@ import Slider from 'react-slick';
 import { getDates } from 'common/utils';
 import { S } from 'components/day-picker/day-picker.styles';
 import { ColorContext } from '@components/widget-view';
+import { useMediaQuery } from 'react-responsive';
 
 const SETTINGS = {
   dots: false,
   infinite: false,
   speed: 500,
-  slidesToShow: 6,
-  slidesToScroll: 6,
 };
 
 const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
   const [selectedDate, setSelectedDate] = useState();
   const [dates, setDates] = useState([]);
   const [showErrorContainer, setShowErrorContainer] = useState(false);
+
+  const isTablet = useMediaQuery({
+    query: '(min-width: 768px) and (max-width: 1024px)',
+  });
+  const isMobile = useMediaQuery({
+    query: '(max-width: 768px)',
+  });
 
   useEffect(() => {
     setDates(getDates(holidays));
@@ -45,7 +51,11 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
     <ColorContext.Consumer>
       {color => (
         <S.DayPickerWrapper color={color}>
-          <Slider {...SETTINGS}>
+          <Slider
+            {...SETTINGS}
+            slidesToShow={isTablet ? 6 : isMobile ? 3 : 6}
+            slidesToScroll={isTablet ? 6 : isMobile ? 3 : 6}
+          >
             {dates.map(dateItem => (
               <div key={`${dateItem.day}_${dateItem.month}`}>
                 <S.DayItem

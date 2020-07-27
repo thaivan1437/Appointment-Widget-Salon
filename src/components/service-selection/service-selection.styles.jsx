@@ -15,6 +15,10 @@ S.ServiceSelectionContainer = styled.div`
   padding: 16px;
 
   color: ${COLORS.DOVE_GRAY};
+
+  @media (max-width: 768px) {
+    width: 300px;
+  }
 `;
 
 S.ServiceCategoryContainer = styled.div`
@@ -69,4 +73,8 @@ S.IconContainer = styled.img`
   height: 24px;
 
   margin-right: 8px;
+  @media (max-width: 768px) {
+    width: 16;
+    height: 16px;
+  }
 `;

@@ -168,49 +168,51 @@ const Pricing = ({
         </ModalStyles.HalfModalContent>
         <PricingModalInformationContainer>
           <ServiceListWrapper>
-            {serviceList && serviceList.length > 0 ? (
-              serviceList.map(service => (
-                <>
-                  <ListItemWrapper>
-                    <ServiceName>{service.name}</ServiceName>
-                    {service.variations && service.variations.length === 1 ? (
-                      <ServiceName>
-                        {service.variations[0].priceMoney.symbol &&
-                        service.variations[0].priceMoney.amount
-                          ? `${
-                              service.variations[0].priceMoney.symbol
-                            }${formatAmount(
-                              service.variations[0].priceMoney.amount
-                            )}`
-                          : 'Call Us'}
-                      </ServiceName>
-                    ) : null}
-                  </ListItemWrapper>
-                  {service.variations && service.variations.length > 1
-                    ? service.variations.map(variation => (
-                        <PriceItem>
-                          <div>
-                            {variation.name === 'Regular'
-                              ? variation.name.toLowerCase()
-                              : variation.name}
-                          </div>
+            <ModalStyles.ModalDetailContentContainer>
+              {serviceList && serviceList.length > 0 ? (
+                serviceList.map(service => (
+                  <>
+                    <ListItemWrapper>
+                      <ServiceName>{service.name}</ServiceName>
+                      {service.variations && service.variations.length === 1 ? (
+                        <ServiceName>
+                          {service.variations[0].priceMoney.symbol &&
+                          service.variations[0].priceMoney.amount
+                            ? `${
+                                service.variations[0].priceMoney.symbol
+                              }${formatAmount(
+                                service.variations[0].priceMoney.amount
+                              )}`
+                            : 'Call Us'}
+                        </ServiceName>
+                      ) : null}
+                    </ListItemWrapper>
+                    {service.variations && service.variations.length > 1
+                      ? service.variations.map(variation => (
+                          <PriceItem>
+                            <div>
+                              {variation.name === 'Regular'
+                                ? variation.name.toLowerCase()
+                                : variation.name}
+                            </div>
 
-                          <div>
-                            {variation.priceMoney.amount &&
-                            variation.priceMoney.symbol
-                              ? `${variation.priceMoney.symbol}${formatAmount(
-                                  variation.priceMoney.amount
-                                )}`
-                              : 'Call Us'}
-                          </div>
-                        </PriceItem>
-                      ))
-                    : null}
-                </>
-              ))
-            ) : (
-              <FirstStepMessage>Prices will appear here</FirstStepMessage>
-            )}
+                            <div>
+                              {variation.priceMoney.amount &&
+                              variation.priceMoney.symbol
+                                ? `${variation.priceMoney.symbol}${formatAmount(
+                                    variation.priceMoney.amount
+                                  )}`
+                                : 'Call Us'}
+                            </div>
+                          </PriceItem>
+                        ))
+                      : null}
+                  </>
+                ))
+              ) : (
+                <FirstStepMessage>Prices will appear here</FirstStepMessage>
+              )}
+            </ModalStyles.ModalDetailContentContainer>
           </ServiceListWrapper>
         </PricingModalInformationContainer>
       </ColorContext.Provider>

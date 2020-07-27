@@ -22,14 +22,23 @@ const ClickableContent = styled(BaseContentStyle)`
 
 const PromotionTitle = styled(BaseContentStyle)`
   font-size: 30px;
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `;
 const PromotionCode = styled(BaseContentStyle)`
   font-size: 35px;
   font-weight: 500;
   user-select: text;
+  @media (max-width: 768px) {
+    font-size: 28px;
+  }
 `;
 const PromotionDesc = styled(BaseContentStyle)`
   font-size: 24px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
@@ -66,6 +75,9 @@ const PromotionSlider = styled(Slider)`
   width: 100%;
   width: 500px;
   height: 320px;
+  @media (max-width: 768px) {
+    width: 300px;
+  }
 `;
 
 const PromotionItemWrapper = styled.div`

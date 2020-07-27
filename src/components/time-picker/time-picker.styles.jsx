@@ -54,6 +54,9 @@ S.SelectionText = styled.div`
 
 S.SelectionValue = styled.div`
   font-size: 30px;
+  @media (max-width: 768px) {
+    font-size: 22px;
+  }
 `;
 
 S.TimePickerWrapper = styled.div`

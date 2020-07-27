@@ -46,12 +46,19 @@ const InputWrapper = styled.div`
   margin-top: 20px;
 
   width: 400px;
+  @media (max-width: 768px) {
+    width: 300px;
+    margin-top: 10px;
+  }
 `;
 
 const InlineInformation = styled.span`
   padding: 0 10px;
   color: ${INPUT_COLORS.TEXT_COLOR};
   font-size: 22px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
 `;
 
 const CounterWrapper = styled.div`
@@ -74,6 +81,9 @@ const ButtonWrapper2 = styled(ButtonWrapper)`
 
 const ButtonWrapper4 = styled(ButtonWrapper)`
   margin-top: -10px;
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const ButtonWrapper3 = styled(ButtonWrapper)`
@@ -95,12 +105,18 @@ const ConfirmMessage = styled.div`
 const TimePickerLabel = styled.div`
   margin-right: 30px;
   width: 80px;
+  @media (max-width: 768px) {
+    margin-right: 10px;
+  }
 `;
 
 const TimePickerWrapper = styled.div`
   display: flex;
   align-items: center;
   width: 450px;
+  @media (max-width: 768px) {
+    width: 300px;
+  }
 `;
 
 const LineContainer = styled.div`
@@ -206,6 +222,13 @@ const PolicyContainer = styled.div`
   a,
   a:visited {
     color: ${COLORS.DOVE_GRAY};
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    bottom: 360px;
+  }
+  @media (max-width: 768px) {
+    bottom: 300px;
+    width: 300px;
   }
 `;
 
@@ -847,53 +870,55 @@ const WidgetView = ({ widgetConfig, appId }) => {
             </ModalStyles.ModalFooter>
           </ModalStyles.ModalContentContainer>
           <ModalStyles.ModalInformationContainer>
-            {selectedStep === 1 ? (
-              <FirstStepMessage>
-                Your appointment details will appear here
-              </FirstStepMessage>
-            ) : null}
+            <ModalStyles.ModalDetailContentContainer>
+              {selectedStep === 1 ? (
+                <FirstStepMessage>
+                  Your appointment details will appear here
+                </FirstStepMessage>
+              ) : null}
 
-            {selectedStep > 1 ? (
-              <>
-                <AppointmentInfo header>Appointment Details</AppointmentInfo>
-                <InformationWrapper>
-                  <AppointmentInfo userName>{userName}</AppointmentInfo>
-                  <AppointmentInfo>{userPhone}</AppointmentInfo>
-                  <AppointmentInfo>
-                    {userCount} {userCount === 1 ? 'Person' : 'People'}
-                  </AppointmentInfo>
-                  {selectedPromotion ? (
+              {selectedStep > 1 ? (
+                <>
+                  <AppointmentInfo header>Appointment Details</AppointmentInfo>
+                  <InformationWrapper>
+                    <AppointmentInfo userName>{userName}</AppointmentInfo>
+                    <AppointmentInfo>{userPhone}</AppointmentInfo>
                     <AppointmentInfo>
-                      Promo Code: {selectedPromotion.promoCode}
+                      {userCount} {userCount === 1 ? 'Person' : 'People'}
+                    </AppointmentInfo>
+                    {selectedPromotion ? (
+                      <AppointmentInfo>
+                        Promo Code: {selectedPromotion.promoCode}
+                      </AppointmentInfo>
+                    ) : null}
+                  </InformationWrapper>
+                </>
+              ) : null}
+
+              {selectedStep > 2 ? (
+                <InformationWrapper>
+                  <AppointmentInfo>
+                    {getDisplayDateString(selectedDate.dateValue)}
+                  </AppointmentInfo>
+                  {selectedStep > 3 ? (
+                    <AppointmentInfo>
+                      {`${getHourString(selectedTime1, true)} / ${getHourString(
+                        selectedTime2,
+                        true
+                      )}`}
                     </AppointmentInfo>
                   ) : null}
                 </InformationWrapper>
-              </>
-            ) : null}
+              ) : null}
 
-            {selectedStep > 2 ? (
-              <InformationWrapper>
-                <AppointmentInfo>
-                  {getDisplayDateString(selectedDate.dateValue)}
-                </AppointmentInfo>
-                {selectedStep > 3 ? (
-                  <AppointmentInfo>
-                    {`${getHourString(selectedTime1, true)} / ${getHourString(
-                      selectedTime2,
-                      true
-                    )}`}
-                  </AppointmentInfo>
-                ) : null}
-              </InformationWrapper>
-            ) : null}
-
-            {selectedStep > 4 ? (
-              <InformationWrapper>
-                {selectedServices.map(service => (
-                  <AppointmentInfo>{service.name}</AppointmentInfo>
-                ))}
-              </InformationWrapper>
-            ) : null}
+              {selectedStep > 4 ? (
+                <InformationWrapper>
+                  {selectedServices.map(service => (
+                    <AppointmentInfo>{service.name}</AppointmentInfo>
+                  ))}
+                </InformationWrapper>
+              ) : null}
+            </ModalStyles.ModalDetailContentContainer>
           </ModalStyles.ModalInformationContainer>
         </ColorContext.Provider>
       </CustomRodal>

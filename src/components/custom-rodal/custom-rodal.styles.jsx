@@ -23,6 +23,10 @@ S.CloseIcon = styled.img`
   cursor: pointer;
   width: 72px;
   height: 72px;
+  @media (max-width: 768px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 S.CloseIconText = styled.div`
@@ -36,11 +40,22 @@ S.CloseIconText = styled.div`
 
   user-select: none;
   cursor: pointer;
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 1px;
+    top: 9px;
+  }
 `;
 
 S.ModalContentWrapper = styled.div`
   display: flex;
   height: 100%;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    flex-direction: column;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 S.DialogCycle = styled.div`
@@ -54,6 +69,14 @@ S.DialogCycle = styled.div`
 
   top: ${props => (props.top ? '-15px' : 'auto')};
   bottom: ${props => (props.bottom ? '-15px' : 'auto')};
+  @media (min-width: 768px) and (max-width: 1024px) {
+    top: 345px;
+    left: ${props => (props.top ? '-15px' : '585px')};
+  }
+  @media (max-width: 768px) {
+    top: 345px;
+    left: ${props => (props.top ? '-15px' : '345px')};
+  }
 `;
 
 S.HalfModalDialogCycle = styled(S.DialogCycle)`
@@ -68,8 +91,28 @@ S.ModalContentContainer = styled.div`
   align-items: center;
 
   padding: 50px 0 68px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    padding: 20px 0 40px;
+    flex: 1 1;
+    min-height: 300px;
+  }
+  @media (max-width: 768px) {
+    padding: 40px 0 20px;
+    flex: 1 1;
+    min-height: 300px;
+  }
 `;
-
+S.ModalDetailContentContainer = styled.div`
+  overflow: scroll;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    max-height: 220px;
+    padding-right: 10px;
+  }
+  @media (max-width: 768px) {
+    max-height: 190px;
+    padding-right: 10px;
+  }
+`;
 S.HalfModalContent = styled(S.ModalContentContainer)`
   flex: 1;
 `;
@@ -94,16 +137,34 @@ S.ModalFooter = styled.div`
   font-size: 12px;
 
   padding: 10px 0;
+  @media (max-width: 768px) {
+    width: 300px;
+  }
 `;
 
 S.HalfModelFooter = styled(S.ModalFooter)`
   width: 350px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    width: 500px;
+  }
+  @media (max-width: 768px) {
+    width: 300px;
+  }
 `;
 
 S.ModalStepTitle = styled.div`
   width: 400px;
   font-size: 24px;
   margin-bottom: 20px;
+  @media (min-width: 768px) and (max-width: 1024px) {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 768px) {
+    width: 300px;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
 `;
 
 S.FooterLink = styled.a`

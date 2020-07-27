@@ -25,6 +25,10 @@ S.Input = styled.input`
   ::placeholder {
     color: ${props => (props.hasError ? COLORS.MONZA : INPUT_COLORS.HIT_TEXT)};
   }
+  @media (max-width: 768px) {
+    width: 300px;
+    font-size: 14px;
+  }
 `;
 
 S.Button = styled.button`
