@@ -238,6 +238,15 @@ const AppointmentPromotionCode = styled.div`
   left: 100px;
   font-size: 20px;
   color: ${INPUT_COLORS.TEXT_COLOR};
+  @media (min-width: 768px) and (max-width: 1024px) {
+    bottom: 345px;
+  }
+  @media (max-width: 768px) {
+    position: unset;
+    margin-left: 32px;
+    margin-top: 10px;
+    align-self: flex-start;
+  }
 `;
 
 const showWidgetButton = (widgetName, registeredWidgets) => {
@@ -559,6 +568,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 </InlineInformation>
               </CounterWrapper>
             </InputWrapper>
+            {selectedPromotion ? (
+              <AppointmentPromotionCode>
+                Promo Code: {selectedPromotion.promoCode}
+              </AppointmentPromotionCode>
+            ) : null}
             <ButtonWrapper4>
               <CommonStyles.Button
                 color={color}
@@ -579,11 +593,6 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 ></img>
               </CommonStyles.Button>
             </ButtonWrapper4>
-            {selectedPromotion ? (
-              <AppointmentPromotionCode>
-                Promo Code: {selectedPromotion.promoCode}
-              </AppointmentPromotionCode>
-            ) : null}
           </>
         );
       case 2:

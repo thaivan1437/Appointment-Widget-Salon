@@ -30,6 +30,7 @@ const PromotionCode = styled(BaseContentStyle)`
   font-size: 35px;
   font-weight: 500;
   user-select: text;
+  color: black;
   @media (max-width: 768px) {
     font-size: 28px;
   }
@@ -102,7 +103,7 @@ const GroupWrapper = styled.div`
 
 const BoldDate = styled.span`
   font-weight: 500;
-  color: #a0a0a0;
+  color: black;
 `;
 
 const SETTINGS = {
@@ -175,7 +176,7 @@ const Promotions = ({
                       }}
                       color={color}
                     >
-                      click here to make an appointment using this offer
+                      Click here to make an appointment using this offer
                     </ClickableContent>
                   </PromotionItemWrapper>
                 </PromotionItem>

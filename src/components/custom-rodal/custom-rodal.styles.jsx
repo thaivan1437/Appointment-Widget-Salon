@@ -103,13 +103,14 @@ S.ModalContentContainer = styled.div`
   }
 `;
 S.ModalDetailContentContainer = styled.div`
-  overflow: scroll;
   @media (min-width: 768px) and (max-width: 1024px) {
     max-height: 220px;
     padding-right: 10px;
+    overflow: scroll;
   }
   @media (max-width: 768px) {
-    max-height: 190px;
+    overflow: scroll;
+    max-height: 180px;
     padding-right: 10px;
   }
 `;
