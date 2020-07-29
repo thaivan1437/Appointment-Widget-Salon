@@ -186,7 +186,7 @@ const Promotions = ({
             )}
           </PromotionSlider>
           <ModalStyles.ModalFooter>
-            powered by
+            Powered by
             <ModalStyles.FooterLink
               href={`https://salonmanager.${CONFIGS.domainExtension}`}
               target="_blank"

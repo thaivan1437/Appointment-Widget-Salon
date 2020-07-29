@@ -157,7 +157,7 @@ const Pricing = ({
               : 'No Service Available'}
           </MainCategoryListWrapper>
           <ModalStyles.HalfModelFooter>
-            powered by
+            Powered by
             <ModalStyles.FooterLink
               href={`https://salonmanager.${CONFIGS.domainExtension}`}
               target="_blank"

@@ -148,7 +148,7 @@ const AppointmentInfo = styled.div`
   color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
   padding: 0 20px 8px;
   font-size: 19px;
-
+  font-weight: 500;
   text-transform: ${props => (props.userName ? 'capitalize' : 'none')};
 
   text-align: ${props => (props.header ? 'center' : 'left')};
@@ -869,7 +869,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
           <ModalStyles.ModalContentContainer>
             {renderContent()}
             <ModalStyles.ModalFooter>
-              powered by
+              Powered by
               <ModalStyles.FooterLink
                 href={`https://salonmanager.${CONFIGS.domainExtension}`}
                 target="_blank"

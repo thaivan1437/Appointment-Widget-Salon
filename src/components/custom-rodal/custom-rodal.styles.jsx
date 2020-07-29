@@ -24,8 +24,8 @@ S.CloseIcon = styled.img`
   width: 72px;
   height: 72px;
   @media (max-width: 768px) {
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
   }
 `;
 
@@ -42,7 +42,7 @@ S.CloseIconText = styled.div`
   cursor: pointer;
   @media (max-width: 768px) {
     font-size: 12px;
-    padding: 1px;
+    padding: 5px;
     top: 9px;
   }
 `;
@@ -157,13 +157,14 @@ S.ModalStepTitle = styled.div`
   width: 400px;
   font-size: 24px;
   margin-bottom: 20px;
+  font-weight: 500;
   @media (min-width: 768px) and (max-width: 1024px) {
-    font-size: 18px;
+    font-size: 22px;
     margin-bottom: 10px;
   }
   @media (max-width: 768px) {
     width: 300px;
-    font-size: 18px;
+    font-size: 22px;
     margin-bottom: 10px;
   }
 `;
