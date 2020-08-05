@@ -197,6 +197,7 @@ const ConfirmationStepWrapper = styled.div`
 const FormWrapper = styled.div`
   border: 1px solid ${INPUT_COLORS.BORDER};
   border-radius: 10px;
+  background-color: ${INPUT_COLORS.BACKGROUND_COLOR};
 `;
 
 const SeparatorLine = styled.div`
@@ -551,7 +552,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     setUserPhone(processedValue);
                   }
                 }}
-                placeholder="Enter phone number (000) 000-0000"
+                placeholder="Enter phone (000) 000-0000"
                 hasValue={userPhone.length > 0}
               ></CommonStyles.Input>
             </FormWrapper>

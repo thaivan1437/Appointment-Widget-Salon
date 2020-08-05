@@ -12,6 +12,7 @@ S.Input = styled.input`
   border: none;
 
   color: ${props => (props.hasError ? COLORS.MONZA : INPUT_COLORS.TEXT_COLOR)};
+  background-color: ${INPUT_COLORS.BACKGROUND_COLOR};
 
   line-height: 2;
 
@@ -27,7 +28,7 @@ S.Input = styled.input`
   }
   @media (max-width: 768px) {
     width: 300px;
-    font-size: 16px;
+    font-size: 20px;
   }
 `;
 

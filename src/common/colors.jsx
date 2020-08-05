@@ -18,7 +18,8 @@ export const COLORS = {
 };
 
 export const INPUT_COLORS = {
-  HIT_TEXT: '#C4C4C6',
+  HIT_TEXT: '#BABBC0',
   TEXT_COLOR: '#5F6A7D',
   BORDER: '#CCCCCC',
+  BACKGROUND_COLOR: '#F1F2F7',
 };
