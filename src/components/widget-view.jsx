@@ -127,6 +127,9 @@ const LineContainer = styled.div`
   border: 1px dashed #e2e2e2;
   width: 500px;
   margin: 16px 0px;
+  @media (max-width: 768px) {
+    width: 360px;
+  }
 `;
 
 const LineText = styled.div`
@@ -139,6 +142,9 @@ const LineText = styled.div`
   width: 20px;
   color: ${COLORS.SILVER_CHALICE};
   background-color: ${COLORS.WHITE};
+  @media (max-width: 768px) {
+    left: 207px;
+  }
 `;
 
 const BackButton = styled.div`
