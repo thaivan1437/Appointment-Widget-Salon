@@ -244,19 +244,22 @@ const PolicyContainer = styled.div`
 
 const AppointmentPromotionCode = styled.div`
   position: absolute;
+  display: flex;
   bottom: 70px;
   left: 100px;
-  font-size: 20px;
+  font-size: 22px;
   color: ${INPUT_COLORS.TEXT_COLOR};
   @media (min-width: 768px) and (max-width: 1024px) {
     bottom: 345px;
   }
   @media (max-width: 768px) {
-    position: unset;
-    margin-left: 32px;
-    margin-top: 10px;
-    align-self: flex-start;
+    font-size: 18px;
+    bottom: 270px;
+    left: 30px;
   }
+`;
+const PromotionCode = styled.div`
+  font-weight: 500;
 `;
 
 const showWidgetButton = (widgetName, registeredWidgets) => {
@@ -580,7 +583,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
             </InputWrapper>
             {selectedPromotion ? (
               <AppointmentPromotionCode>
-                Promo Code: {selectedPromotion.promoCode}
+                Promo code:&nbsp;
+                <PromotionCode>{selectedPromotion.promoCode}</PromotionCode>
               </AppointmentPromotionCode>
             ) : null}
             <ButtonWrapper4>
@@ -907,7 +911,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     </AppointmentInfo>
                     {selectedPromotion ? (
                       <AppointmentInfo>
-                        Promo Code: {selectedPromotion.promoCode}
+                        Promo code: {selectedPromotion.promoCode}
                       </AppointmentInfo>
                     ) : null}
                   </InformationWrapper>
