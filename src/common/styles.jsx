@@ -37,12 +37,12 @@ S.Button = styled.button`
   justify-content: center;
   align-items: center;
 
-  padding: 13px 20px;
+  padding: 16px 20px;
   border-radius: 10px;
   border: none;
   background-color: ${props => props.color};
 
-  font-size: 16px;
+  font-size: 20px;
   font-family: inherit;
 
   color: white;

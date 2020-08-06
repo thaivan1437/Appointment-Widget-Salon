@@ -72,6 +72,9 @@ const ButtonWrapper = styled.div`
 
   display: flex;
   align-items: center;
+  @media (max-width: 768px) {
+    margin: 41px 30px 0 0;
+  }
 `;
 
 // TODO move common styles file

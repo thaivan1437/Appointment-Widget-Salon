@@ -92,7 +92,7 @@ const HolidayListWrapper = styled.div`
     background: ${COLORS.STORM_GRAY};
   }
   @media (max-width: 768px) {
-    height: 190px;
+    height: 180px;
     overflow: scroll;
   }
 `;
