@@ -6,6 +6,7 @@ import { ColorContext } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
 import { getDisplayDateString } from 'common/utils';
+import { S as CommonStyles } from 'common/styles';
 import Slider from 'react-slick';
 
 const BaseContentStyle = styled.div`
@@ -14,10 +15,32 @@ const BaseContentStyle = styled.div`
 `;
 
 const ClickableContent = styled(BaseContentStyle)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 16px 18px;
+  border-radius: 30px;
+  border: none;
+  background-color: ${props => props.color};
+
+  font-size: 20px;
+  font-family: inherit;
+
+  color: white;
+
+  :focus {
+    outline: 0;
+  }
+
   :hover {
-    text-decoration: underline;
     cursor: pointer;
   }
+
+  ${props =>
+    props.disabled
+      ? 'opacity: 0.4; pointer-events: none; user-select:none; background-color: #747883;'
+      : null}
 `;
 
 const PromotionTitle = styled(BaseContentStyle)`
@@ -171,12 +194,12 @@ const Promotions = ({
                       </BoldDate>
                     </BaseContentStyle>
                     <ClickableContent
+                      color={color}
                       onClick={() => {
                         makeAnAppointmentClick(promotion);
                       }}
-                      color={color}
                     >
-                      Click here to make an appointment using this offer
+                      Click here to redeem the offer
                     </ClickableContent>
                   </PromotionItemWrapper>
                 </PromotionItem>
