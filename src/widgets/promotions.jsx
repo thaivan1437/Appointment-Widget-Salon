@@ -20,7 +20,7 @@ const ClickableContent = styled(BaseContentStyle)`
   align-items: center;
 
   padding: 16px 18px;
-  border-radius: 30px;
+  border-radius: 10px;
   border: none;
   background-color: ${props => props.color};
 

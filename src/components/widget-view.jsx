@@ -583,8 +583,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
             </InputWrapper>
             {selectedPromotion ? (
               <AppointmentPromotionCode>
-                Promo code:&nbsp;
-                <PromotionCode>{selectedPromotion.promoCode}</PromotionCode>
+                <PromotionCode>Promo code:&nbsp;</PromotionCode>
+                {selectedPromotion.promoCode}
               </AppointmentPromotionCode>
             ) : null}
             <ButtonWrapper4>
