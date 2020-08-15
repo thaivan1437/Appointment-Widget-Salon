@@ -21,9 +21,6 @@ const MainCategoryButton = styled.div`
 
   :hover,
   &.selected {
-    font-size: 24px;
-    font-weight: 500;
-
     .list-cycle {
       width: 16px;
       height: 16px;
