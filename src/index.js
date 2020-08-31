@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import WidgetView from '@components/widget-view';
 import 'common/fonts.css';
 import httpUtil from 'common/HttpUtil';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 import { CONFIGS } from '@environment';
 
 window.initWidget = function(d, appId) {
@@ -14,7 +15,11 @@ window.initWidget = function(d, appId) {
   function init(configData, id) {
     if (!CONFIGS.isLocal) {
       Sentry.init({
-        dsn: 'https://21d4a1621eed4d63bf372f2e17869753@sentry.io/1826350',
+        dsn: "https://21d4a1621eed4d63bf372f2e17869753@o257892.ingest.sentry.io/1826350",
+        integrations: [
+          new Integrations.BrowserTracing(),
+        ],
+        tracesSampleRate: 1.0,
       });
     }
 
