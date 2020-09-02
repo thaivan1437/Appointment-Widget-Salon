@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Nav, Image } from "react-bootstrap";
 import menuDatas from './menu'
 import { Animated } from "react-animated-css";
+import Link from 'next/link'
 import { CDN_URL } from "../env";
 
 class NavBar extends Component {
@@ -37,19 +38,23 @@ class NavBar extends Component {
           <Nav id="top-menu" className="nav navbar-nav navbar-right">
             {
               menuDatas.map((item, index) => {
-                return <Nav.Link
+                return <Link
                   key={index}
                   href={item.route}
-                  target={item.target}
                   style={{ marginTop: 10, flexDirection: 'row' }}
-                  onMouseOver={() => { this.onMouseOver(index) }}
-                  onMouseOut={this.onMouseOut}
                 >
-                  {item.title}
-                  <Animated animationIn="fadeInLeft" animationOut="fadeOut" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
-                    <div style={{ width: "100%", height: 2, backgroundColor: index === this.state.activeIndex ? '#CF003C' : 'transparent' }} />
-                  </Animated>
-                </Nav.Link>
+                  <a target={item.target}
+                    onMouseOver={() => { this.onMouseOver(index) }}
+                    onMouseOut={this.onMouseOut}
+                    className={'nav-link'}
+                  >
+                    {item.title}
+                    <Animated animationIn="fadeInLeft" animationOut="fadeOut" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
+                      <div style={{ width: "100%", height: 2, backgroundColor: index === this.state.activeIndex ? '#CF003C' : 'transparent' }} />
+                    </Animated>
+                  </a>
+                  
+                </Link>
               })
             }
           </Nav>

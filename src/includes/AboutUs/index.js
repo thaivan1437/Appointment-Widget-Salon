@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import Cards from "./Cards";
 import cardData from "./cardData"
 
+import classes from './AboutUs.scss'
+
 
 class Permanent extends Component {
     constructor(props) {
@@ -14,7 +16,7 @@ class Permanent extends Component {
     }
 
     render() {
-        return <Container style={{ paddingTop: 100, marginBottom: 200 }}>
+        return <Container className={classes.container}>
             <Row>
                 <Col style={myStyle.sloganText}>"Our salon is completely remodeled and under new management"</Col>
             </Row>

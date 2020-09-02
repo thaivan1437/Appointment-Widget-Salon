@@ -30,7 +30,7 @@ class Cards extends Component {
 const myStyle = {
     cardBody: {
         color: '#1D3557',
-        fontSize: 23
+        fontSize: 20
     },
     cardCol: {
         marginTop: 50,

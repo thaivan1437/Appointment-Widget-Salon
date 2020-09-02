@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, } from "react-bootstrap";
+// import dynamic from 'next/dynamic'
 import sliderData from './sliderData'
-import {Animated} from "react-animated-css";
+import { Animated } from "react-animated-css";
 import MySlider from 'react-animated-slider';
 import { isMobile } from "react-device-detect";
 import '../../assets/css/horizontal.css';
@@ -11,8 +12,16 @@ class Slider extends Component {
         super(props)
 
         this.state = {
+            showAnimated: false
         }
     }
+
+    componentDidMount() {
+        this.setState({
+            showAnimated: true
+        })
+    }
+
     sliderRender = () => {
 
         return  <div className="banner-info">
@@ -45,9 +54,10 @@ class Slider extends Component {
                 </div>
     }
     render() {
+        const { showAnimated } = this.state
         return  <section className="page-slider">
                     <div className={`slider`}>
-                        {this.sliderRender()}
+                        {showAnimated && this.sliderRender()}
                         <MySlider autoplay={3000}>
                             {sliderData.map((item, index) => (
                                 <div

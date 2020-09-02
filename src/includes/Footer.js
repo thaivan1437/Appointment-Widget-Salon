@@ -14,7 +14,7 @@ class myFooter extends Component {
                 style={{
                     color: '#000',
                     fontWeight: 'lighter',
-                    marginLeft: 20,
+                    // marginLeft: 20,
                     textAlign: 'center'
                 }}>
                     <font color="#CF003C"

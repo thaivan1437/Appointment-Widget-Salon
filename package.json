@@ -6,6 +6,7 @@
     "@sentry/browser": "^5.9.1",
     "bootstrap": "^4.3.1",
     "history": "^4.10.1",
+    "next": "^9.5.3",
     "react": "^16.11.0",
     "react-animated-css": "^1.2.1",
     "react-animated-slider": "^1.1.4",
@@ -14,7 +15,11 @@
     "react-device-detect": "^1.9.10",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "node-sass": "^4.13.0",
+    "mini-css-extract-plugin": "^0.9.0"
   },
   "scripts": {
     "start": "npm run package:prepare && node inject-widget.js --buildEnv=development && npm run dev",
@@ -24,7 +29,10 @@
     "build:dev": "webpack -p --buildEnv=development",
     "build:prod": "webpack -p --buildEnv=production",
     "dist:dev": "npm run package:prepare && npm run build:dev && node inject-widget.js --buildEnv=development",
-    "dist:prod": "npm run package:prepare && npm run build:prod && node inject-gtm.js && node inject-widget.js --buildEnv=production"
+    "dist:prod": "npm run package:prepare && npm run build:prod && node inject-gtm.js && node inject-widget.js --buildEnv=production",
+    "next-dev": "npm run package:prepare && node inject-widget.js --buildEnv=development && next dev",
+    "next-build": "next build",
+    "next-start": "next start"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,6 +52,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/node": "^7.0.0",
     "@babel/core": "^7.7.2",
     "@babel/plugin-proposal-class-properties": "^7.7.0",
     "@babel/preset-env": "^7.7.1",
@@ -59,6 +69,7 @@
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.9.0",
-    "yargs": "^14.0.0"
+    "yargs": "^14.0.0",
+    "webpack-filter-warnings-plugin": "^1.2.1"
   }
 }
