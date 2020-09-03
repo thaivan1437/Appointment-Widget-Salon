@@ -24,11 +24,11 @@ class Permanent extends Component {
             <Title header="OMBRE POWDER EYEBROWS" id="OMBRE" />
             <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent2.jpg"} top={0} reverse={true} text="Ombre Powder Brows is a form of tattooing, but it is different from the traditional method. It is a more modern method because it is surface work meaning it is on the epidermis layer of the skin. The technique is described by its name-the results are more powdery and fluffy with a faded front and a crisp tail and it looks like you have a makeup on! Since it does not penetrate deep into the dermis layer of the skin, the results will last up to 1-3 years depending on skin type and lifestyle." />
             <Title header="PERMANENT MAKEUP EYEBROWS" id="MAKEUP" />
-            <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent3.jpg"} top={70} reverse={false} text="Permanent makeup is a cosmetic technique which employs tattoos (permanent pigmentation of the dermis) as a means of producing designs that resemble makeup, such as eyebrows." />
+            <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent3.jpg"} top={isMobile ? 0 : 0} reverse={false} text="Permanent makeup is a cosmetic technique which employs tattoos (permanent pigmentation of the dermis) as a means of producing designs that resemble makeup, such as eyebrows." />
             <Title header="PERMANENT MAKEUP LIPS" id="LIPS" />
-            <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent4.jpg"} top={isMobile ? 0 : 70} reverse={true} text="Permanent makeup is a cosmetic technique which employs tattoos (permanent pigmentation of the dermis) as a means of producing designs that resemble makeup,such as lips." />
+            <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent4.jpg"} top={isMobile ? 0 : 0} reverse={true} text="Permanent makeup is a cosmetic technique which employs tattoos (permanent pigmentation of the dermis) as a means of producing designs that resemble makeup,such as lips." />
             <Title header="PERMANENT MAKEUP EYELINERS" id="EYELINERS" />
-            <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent5.jpg"} top={70} reverse={false} text="Permanent makeup is a cosmetic technique which employs tattoos (permanent pigmentation of the dermis) as a means of producing designs that resemble makeup, such as eye-lining." />
+            <Body imgUrl={CDN_URL + "/site/PermanentCosmetics/permanent5.jpg"} top={isMobile ? 0 : 0} reverse={false} text="Permanent makeup is a cosmetic technique which employs tattoos (permanent pigmentation of the dermis) as a means of producing designs that resemble makeup, such as eye-lining." />
         </Container>
     }
 }

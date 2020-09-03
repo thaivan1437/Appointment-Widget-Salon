@@ -14,10 +14,10 @@ class Body extends Component {
     render() {
         return this.props.reverse === false ?
         <Row style={{marginTop:50}}>
-                <Col className="col-md-5 col-sm-12">
+                <Col md={5} sm={12} >
                     <img src={this.props.imgUrl} className={classes.img} alt='img'/>
                 </Col>
-                <Col className="col-md-7 col-sm-12" style={{fontSize:23}}>
+                <Col md={7} sm={12} style={{fontSize:23}}>
                 <p style={{marginTop:this.props.top}}>
                {this.props.text}
                 </p>
@@ -25,12 +25,12 @@ class Body extends Component {
             </Row>
             :
             <Row style={{marginTop:50}}>
-                <Col className="col-md-7 col-sm-12" style={{fontSize:23}}>
+                <Col md={7} sm={12} style={{fontSize:23}}>
                 <p style={{marginTop:this.props.top}}>
-               {this.props.text}
+                    {this.props.text}
                 </p>
                 </Col>
-                <Col className="col-md-5 col-sm-12">
+                <Col md={5} sm={12}>
                     <img src={this.props.imgUrl} className={classes.img} alt='img' />
                 </Col>
             </Row>
