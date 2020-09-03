@@ -9,7 +9,7 @@ class MyApp extends App {
     return <div>
       <Head>
         <title>Belmont Beauty Salon</title>
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
       </Head>
       <Component {...pageProps} />
     </div>
