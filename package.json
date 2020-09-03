@@ -32,7 +32,8 @@
     "dist:prod": "npm run package:prepare && npm run build:prod && node inject-gtm.js && node inject-widget.js --buildEnv=production",
     "next-dev": "npm run package:prepare && node inject-widget.js --buildEnv=development && next dev",
     "next-build": "next build",
-    "next-start": "next start"
+    "next-start": "next start",
+    "export": "next export"
   },
   "eslintConfig": {
     "extends": "react-app"
