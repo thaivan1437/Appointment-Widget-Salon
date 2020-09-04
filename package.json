@@ -12,7 +12,9 @@
     "prettier:fix": "prettier --write src/**/*.{js,jsx}"
   },
   "dependencies": {
-    "@sentry/browser": "^5.19.0",
+    "@sentry/browser": "^5.22.3",
+    "@sentry/react": "^5.22.3",
+    "@sentry/tracing": "^5.22.3",
     "axios": "^0.19.2",
     "lodash.sortby": "^4.7.0",
     "react": "^16.13.1",
