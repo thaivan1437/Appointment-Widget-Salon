@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { isMobile } from "react-device-detect";
 import { CDN_URL } from "../../env";
