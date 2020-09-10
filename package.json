@@ -33,7 +33,8 @@
     "next-dev": "npm run package:prepare && node inject-widget.js --buildEnv=development && next dev",
     "next-build": "next build",
     "next-start": "next start",
-    "export": "next export"
+    "export": "next export",
+    "build:ci": "NODE_ENV=$env next build"
   },
   "eslintConfig": {
     "extends": "react-app"
