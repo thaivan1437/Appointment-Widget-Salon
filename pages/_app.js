@@ -2,6 +2,13 @@ import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 
+import { SENTRY_URL } from '../src/env'
+
+import * as Sentry from '@sentry/browser'
+
+Sentry.init({
+  dsn: SENTRY_URL
+})
 
 class MyApp extends App {
   render() {

@@ -2,8 +2,9 @@ const withSass = require('@zeit/next-sass')
 const withCss = require('@zeit/next-css')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
+const withSourceMaps = require('@zeit/next-source-maps')();
 
-module.exports = withCss(withSass({
+module.exports = withSourceMaps(withCss(withSass({
   cssModules: true,
   cssLoaderOptions: {
     importLoaders: 1,
@@ -22,4 +23,4 @@ module.exports = withCss(withSass({
     )
     return config;
   }
-}))
+})))
