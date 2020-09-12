@@ -3,6 +3,7 @@ import { S } from './service-selection.styles';
 import { CONFIGS } from '@environment';
 
 import sortBy from 'lodash.sortby';
+import find from 'lodash.find';
 
 const ServiceSelection = ({
   initialValue = [],
@@ -13,21 +14,31 @@ const ServiceSelection = ({
   const [selectedCategory, setSelectedCategory] = useState();
   const [selectedServicesIds, setSelectedServicesIds] = useState([]);
   const [selectedServices, setSelectedServices] = useState(initialValue || []);
+  const [selectedItems, setSelectedItems] = useState([]);
 
-  const categories = Object.keys(serviceList).sort();
+  const categories = serviceList.map((item) => item.category.name).sort();
 
-  const sortedServiceList = { ...serviceList };
-
-  categories.forEach(category => {
-    sortedServiceList[category] = sortBy(sortedServiceList[category], ['name']);
+  const sortedServiceList = [...serviceList];
+  sortedServiceList.forEach((item, index) => {
+    sortedServiceList[index].categoryItems = sortBy(item.categoryItems, [
+      'name',
+    ]);
   });
+
+  useEffect(() => {
+    const listItems = find(
+      sortedServiceList,
+      (item) => item.category.name === selectedCategory
+    );
+    setSelectedItems(listItems);
+  }, [selectedCategory]);
 
   useEffect(() => {
     setSelectedCategory(categories[0]);
   }, []);
 
   useEffect(() => {
-    setSelectedServicesIds(selectedServices.map(service => service.id));
+    setSelectedServicesIds(selectedServices.map((service) => service.id));
 
     onServiceSelected(selectedServices);
   }, [selectedServices]);
@@ -35,7 +46,7 @@ const ServiceSelection = ({
   return (
     <S.ServiceSelectionContainer>
       <S.ServiceCategoryContainer>
-        {categories.map(category => (
+        {categories.map((category) => (
           <S.CategoryItem
             onClick={() => {
               setSelectedCategory(category);
@@ -54,8 +65,10 @@ const ServiceSelection = ({
         ))}
       </S.ServiceCategoryContainer>
       <S.ServiceServicesContainer>
-        {sortedServiceList[selectedCategory] &&
-        sortedServiceList[selectedCategory].map(service => (
+        {selectedItems &&
+          selectedItems.categoryItems &&
+          selectedItems.categoryItems.length > 0 &&
+          selectedItems.categoryItems.map((service) => (
             <S.ServiceItem
               onClick={() => {
                 const tempSelectedServicesIds = [...selectedServicesIds];
@@ -65,13 +78,13 @@ const ServiceSelection = ({
                   if (tempSelectedServicesIds.length < 4) {
                     tempSelectedServices.push(service);
                   } else {
-                    setErrors(prev => ({
+                    setErrors((prev) => ({
                       ...prev,
                       upToLabel: true,
                     }));
                   }
                 } else {
-                  setErrors(prev => ({
+                  setErrors((prev) => ({
                     ...prev,
                     upToLabel: false,
                   }));

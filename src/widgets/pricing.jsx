@@ -6,6 +6,7 @@ import { ColorContext, FirstStepMessage } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
 import sortBy from 'lodash.sortby';
+import find from 'lodash.find';
 import { formatAmount } from 'common/utils';
 
 const MainCategoryButton = styled.div`
@@ -83,7 +84,7 @@ const ListCycle = styled.div`
   width: 12px;
   height: 12px;
   border-radius: 12px;
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
 
   transition: all 0.5s ease;
 
@@ -104,16 +105,20 @@ const Pricing = ({
   color,
   pricingList = {},
 }) => {
-  const mainCategoryList = Object.keys(pricingList).sort();
+  const mainCategoryList = pricingList.map((item) => item.category.name).sort();
   const [selectedCategory, setSelectedCategory] = useState();
   const [serviceList, setServiceList] = useState([]);
 
   useEffect(() => {
-    const serviceList = pricingList[selectedCategory] || [];
-    const sortedServiceList = sortBy([...serviceList], ['name']);
+    const serviceList =
+      find(pricingList, (item) => item.category.name === selectedCategory) ||
+      [];
+    const sortedServiceList = serviceList.categoryItems
+      ? sortBy([...serviceList.categoryItems], ['name'])
+      : [];
 
     if (sortedServiceList.length > 0) {
-      sortedServiceList.forEach(service => {
+      sortedServiceList.forEach((service) => {
         const sortedVariations = sortBy([...service.variations], ['name']);
         service.variations = sortedVariations;
       });
@@ -139,8 +144,9 @@ const Pricing = ({
         <ModalStyles.HalfModalContent>
           <MainCategoryListWrapper>
             {mainCategoryList && mainCategoryList.length > 0
-              ? mainCategoryList.map(a => (
+              ? mainCategoryList.map((a) => (
                   <MainCategoryButton
+                    key={a}
                     className={a === selectedCategory ? 'selected' : ''}
                     color={color}
                     onClick={() => {
@@ -168,26 +174,26 @@ const Pricing = ({
             <div>
               <ModalStyles.ModalDetailContentContainer>
                 {serviceList && serviceList.length > 0 ? (
-                  serviceList.map(service => (
+                  serviceList.map((service) => (
                     <>
                       <ListItemWrapper>
                         <ServiceName>{service.name}</ServiceName>
                         {service.variations &&
                         service.variations.length === 1 ? (
                           <ServiceName>
-                            {service.variations[0].priceMoney.symbol &&
-                            service.variations[0].priceMoney.amount
+                            {service.variations[0].price_money.symbol &&
+                            service.variations[0].price_money.amount
                               ? `${
-                                  service.variations[0].priceMoney.symbol
+                                  service.variations[0].price_money.symbol
                                 }${formatAmount(
-                                  service.variations[0].priceMoney.amount
+                                  service.variations[0].price_money.amount
                                 )}`
                               : 'Call Us'}
                           </ServiceName>
                         ) : null}
                       </ListItemWrapper>
                       {service.variations && service.variations.length > 1
-                        ? service.variations.map(variation => (
+                        ? service.variations.map((variation) => (
                             <PriceItem>
                               <div>
                                 {variation.name === 'Regular'
@@ -196,12 +202,12 @@ const Pricing = ({
                               </div>
 
                               <div>
-                                {variation.priceMoney.amount &&
-                                variation.priceMoney.symbol
+                                {variation.price_money.amount &&
+                                variation.price_money.symbol
                                   ? `${
-                                      variation.priceMoney.symbol
+                                      variation.price_money.symbol
                                     }${formatAmount(
-                                      variation.priceMoney.amount
+                                      variation.price_money.amount
                                     )}`
                                   : 'Call Us'}
                               </div>

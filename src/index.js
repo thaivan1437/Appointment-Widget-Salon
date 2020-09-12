@@ -7,7 +7,7 @@ import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import { CONFIGS, SENTRY_DSN } from '@environment';
 
-window.initWidget = function(d, appId) {
+window.initWidget = function (d, appId) {
   var rootElement = document.createElement('div');
   rootElement.setAttribute('id', 'widget-root');
   d.body.appendChild(rootElement);
@@ -29,93 +29,88 @@ window.initWidget = function(d, appId) {
   }
 
   function getConfigFromService() {
-    httpUtil
-      .makeRequest({
-        method: 'GET',
-        url: `https://configs.widgets.salonmanager.${CONFIGS.domainExtension}/${appId}.json`,
-      })
-      .then(response => {
-        const configData = response.data;
-        const lm = toTimestamp(response.headers['last-modified']);
-
-        setLM(lm);
-        setConfig({
-          ...configData,
-          'lm-checker': lm,
-        });
-
+    const appointmentsData = httpUtil.makeRequest({
+      method: 'GET',
+      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/appointment-services/${appId}?debug=true`,
+      headers: {
+        'x-api-key': CONFIGS.xApiKey,
+        'time-zone': CONFIGS.timeZone,
+        'x-app-version': CONFIGS.xAppVersion,
+      },
+    });
+    const pricingData = httpUtil.makeRequest({
+      method: 'GET',
+      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/pricing-services/${appId}`,
+      headers: {
+        'x-api-key': CONFIGS.xApiKey,
+        'time-zone': CONFIGS.timeZone,
+        'x-app-version': CONFIGS.xAppVersion,
+      },
+    });
+    const configsData = httpUtil.makeRequest({
+      method: 'GET',
+      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/configs/${appId}`,
+      headers: {
+        'x-api-key': CONFIGS.xApiKey,
+        'time-zone': CONFIGS.timeZone,
+        'x-app-version': CONFIGS.xAppVersion,
+      },
+    });
+    const businessHourData = httpUtil.makeRequest({
+      method: 'GET',
+      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/business-hours/${appId}`,
+      headers: {
+        'x-api-key': CONFIGS.xApiKey,
+        'time-zone': CONFIGS.timeZone,
+        'x-app-version': CONFIGS.xAppVersion,
+      },
+    });
+    const promotionsData = httpUtil.makeRequest({
+      method: 'GET',
+      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/promotions/${appId}`,
+      headers: {
+        'x-api-key': CONFIGS.xApiKey,
+        'time-zone': CONFIGS.timeZone,
+        'x-app-version': CONFIGS.xAppVersion,
+      },
+    });
+    Promise.all([
+      appointmentsData,
+      pricingData,
+      configsData,
+      businessHourData,
+      promotionsData,
+    ])
+      .then((result) => {
+        const { style, orientation, position } = result[2].data.data;
+        const widgets = [
+          'WIDGET_APPOINTMENT',
+          'WIDGET_PRICING',
+          'WIDGET_BUSINESS_HOURS',
+          'WIDGET_PROMOTIONS',
+        ];
+        const appointments = result[0].data.data;
+        const promotions = result[4].data.data;
+        const businessHours = result[3].data.data;
+        const pricings = result[1].data.data;
+        const configData = {
+          style,
+          orientation,
+          position,
+          widgets,
+          widgetData: {
+            appointments,
+            promotions,
+            businessHours,
+            pricings,
+          },
+        };
         init(configData, appId);
-      });
-  }
-
-  function setConfig(config) {
-    try {
-      localStorage.setItem('sm.config', JSON.stringify(config));
-    } catch (e) {
-      console.log('widget config not stored :(', e);
-    }
-  }
-
-  function getConfig() {
-    try {
-      const config = localStorage.getItem('sm.config');
-      return JSON.parse(config);
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function setLM(data) {
-    try {
-      sessionStorage.setItem('sm.lm', data);
-    } catch (e) {
-      console.log('widget config not stored :(', e);
-    }
-  }
-
-  function getLM() {
-    try {
-      const config = sessionStorage.getItem('sm.lm');
-      return config;
-    } catch (e) {
-      return null;
-    }
-  }
-
-  function toTimestamp(strDate) {
-    const datum = Date.parse(strDate);
-    return datum / 1000;
+      })
+      .catch((error) => console.log(`error in promises ${error}`));
   }
 
   (function f() {
-    const configData = getConfig();
-
-    if (configData) {
-      const lm = getLM();
-
-      if (lm && configData['lm-checker'] == lm) {
-        init(configData, appId);
-      } else if (!lm) {
-        httpUtil
-          .makeRequest({
-            method: 'HEAD',
-            url: `https://configs.widgets.salonmanager.${CONFIGS.domainExtension}/${appId}.json`,
-          })
-          .then(response => {
-            const lmTimestamp = toTimestamp(response.headers['last-modified']);
-            setLM(lmTimestamp);
-
-            if (configData['lm-checker'] == lmTimestamp) {
-              init(configData, appId);
-            } else {
-              getConfigFromService();
-            }
-          });
-      } else {
-        getConfigFromService();
-      }
-    } else {
-      getConfigFromService();
-    }
+    getConfigFromService();
   })();
 };

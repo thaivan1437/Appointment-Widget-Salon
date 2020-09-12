@@ -69,10 +69,11 @@ const HolidayItem = styled.div`
   }
 `;
 const HolidayTitle = styled.div`
-  color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
+  color: ${(props) =>
+    props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
   padding: 0 20px 8px;
   font-size: 20px;
-  text-align: ${props => (props.header ? 'center' : 'left')};
+  text-align: ${(props) => (props.header ? 'center' : 'left')};
 `;
 const HolidayModalInformationContainer = styled(
   ModalStyles.ModalInformationContainer
@@ -100,7 +101,7 @@ const ListCycle = styled.div`
   width: 8px;
   height: 8px;
   border-radius: 12px;
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
   margin-top: 6px;
   margin-right: 8px;
 `;
@@ -122,7 +123,7 @@ const BusinessHoursContent = styled(ModalStyles.ModalContentContainer)`
 `;
 
 const PhoneContent = styled.a`
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   text-decoration: none;
   font-weight: 500;
 
@@ -153,7 +154,7 @@ const PhoneWrapper = styled.div`
   }
 `;
 
-const getTime = timeString => {
+const getTime = (timeString) => {
   const timeStringLength = (timeString || '').length;
 
   if (timeStringLength > 0) {
@@ -166,7 +167,7 @@ const getTime = timeString => {
   }
 };
 
-const getFormattedPhone = phoneString => {
+const getFormattedPhone = (phoneString) => {
   return phoneString && phoneString.length > 0
     ? phoneString.replace(PHONE_REGEX, '($2) $3-$4')
     : null;

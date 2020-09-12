@@ -10,7 +10,7 @@ import { S as CommonStyles } from 'common/styles';
 import Slider from 'react-slick';
 
 const BaseContentStyle = styled.div`
-  color: ${props => (props.color ? props.color : COLORS.DOVE_GRAY)};
+  color: ${(props) => (props.color ? props.color : COLORS.DOVE_GRAY)};
   text-align: center;
 `;
 
@@ -22,7 +22,7 @@ const ClickableContent = styled(BaseContentStyle)`
   padding: 16px 18px;
   border-radius: 10px;
   border: none;
-  background-color: ${props => props.color};
+  background-color: ${(props) => props.color};
 
   font-size: 20px;
   font-family: inherit;
@@ -37,7 +37,7 @@ const ClickableContent = styled(BaseContentStyle)`
     cursor: pointer;
   }
 
-  ${props =>
+  ${(props) =>
     props.disabled
       ? 'opacity: 0.4; pointer-events: none; user-select:none; background-color: #747883;'
       : null}
@@ -74,7 +74,7 @@ const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
 
   .slick-prev:before,
   .slick-next:before {
-    color: ${props => props.color};
+    color: ${(props) => props.color};
     font-size: 45px;
   }
   .slick-arrow:not(.slick-disabled):before {
@@ -122,6 +122,9 @@ const NoPromotion = styled.div`
 const PromotionItem = styled.div``;
 const GroupWrapper = styled.div`
   padding: 0 24px;
+  @media (max-width: 768px) {
+    min-height: 80px;
+  }
 `;
 
 const BoldDate = styled.span`
@@ -166,8 +169,8 @@ const Promotions = ({
         <CustomModalContent color={color}>
           <PromotionSlider {...SETTINGS} ref={sliderRef}>
             {promotionData.length > 0 ? (
-              promotionData.map(promotion => (
-                <PromotionItem>
+              promotionData.map((promotion) => (
+                <PromotionItem key={promotion.id}>
                   <PromotionItemWrapper>
                     <PromotionTitle>{promotion.title}</PromotionTitle>
                     <PromotionCode>{promotion.promoCode}</PromotionCode>

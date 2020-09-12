@@ -16,6 +16,7 @@
     "@sentry/react": "^5.22.3",
     "@sentry/tracing": "^5.22.3",
     "axios": "^0.20.0",
+    "lodash.find": "^4.6.0",
     "lodash.sortby": "^4.7.0",
     "react": "^16.13.1",
     "react-datepicker": "^3.1.3",
