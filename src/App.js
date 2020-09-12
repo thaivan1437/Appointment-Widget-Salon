@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { CONFIGS } from '@environment';
 import { createBrowserHistory } from 'history';
-import './assets/css/style.css';
-import './assets/css/bootstrap.min.css';
 
 import Home from "./pages/Home";
 import PermanentCosmetics from "./pages/PermanentCosmetics";

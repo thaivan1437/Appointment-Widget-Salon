@@ -17,9 +17,6 @@
     "/": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/css/styles.chunk.css",
-      "styles.css",
-      "static/chunks/styles.js",
       "static/chunks/pages/index.js"
     ],
     "/_app": [
@@ -32,13 +29,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/about-us": [
+    "/contact-us": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/css/styles.chunk.css",
-      "styles.css",
-      "static/chunks/styles.js",
-      "static/chunks/pages/about-us.js"
+      "static/chunks/pages/contact-us.js"
     ]
   },
   "ampFirstPages": []

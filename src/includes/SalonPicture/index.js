@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import sliderData from './salonPictureData'
 import MySlider from './slider';
-import '../../assets/css/horizontal.css';
 
 class SalonPicture extends Component {
     constructor(props) {

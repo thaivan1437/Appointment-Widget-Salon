@@ -5,7 +5,6 @@ import sliderData from './sliderData'
 import { Animated } from "react-animated-css";
 import MySlider from 'react-animated-slider';
 import { isMobile } from "react-device-detect";
-import '../../assets/css/horizontal.css';
 
 class Slider extends Component {
     constructor(props) {
