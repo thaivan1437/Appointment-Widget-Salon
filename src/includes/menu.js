@@ -1,6 +1,6 @@
 const menuItem = [
 {
-    "title" : "Home",
+    "title" : "testHome",
     "route" : "/",
     "target": ""
 },
