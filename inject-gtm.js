@@ -8,8 +8,6 @@ const options = {
 };
 
 try {
-    const results = replace.sync(options);
-    console.log('Replacement results:',  results);
+    replace.sync(options);
 } catch (error) {
-    console.error('Error occurred:', error);
 } 

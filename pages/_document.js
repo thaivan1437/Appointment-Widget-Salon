@@ -1,6 +1,10 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import * as Sentry from '@sentry/browser'
+import developmentExtension from '../src/environments/development'
+import productionExtension from '../src/environments/production'
+
+const CONFIGS = process.env.PUBLIC_NEXT_ENV === 'development' ? developmentExtension : productionExtension
 
 process.on('unhandledRejection', err => {
   Sentry.captureException(err)
@@ -38,6 +42,17 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="/lib/css/horizontal.css"
           />
+          { process.env.NODE_ENV === 'production'
+            && <>
+              <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135985682-1" />
+              <script dangerouslySetInnerHTML={{ __html: `
+                window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)} gtag(\'js\',new Date()); gtag(\'config\',\'UA-135985682-1\');
+              ` }}
+              />
+            </>
+          }
+         
+          <script src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/loader.js`} data-sm={CONFIGS.widgetAppId}></script>
         </Head>
         <body>
           <Main />

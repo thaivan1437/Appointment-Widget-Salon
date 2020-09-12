@@ -36,14 +36,6 @@
       "static/chunks/main.js",
       "static/chunks/webpack.js",
       "static/chunks/pages/next/dist/pages/_error.js"
-    ],
-    "/permanent-cosmetics": [
-      "static/chunks/main.js",
-      "static/chunks/webpack.js",
-      "static/css/styles.chunk.css",
-      "styles.css",
-      "static/chunks/styles.js",
-      "static/chunks/pages/permanent-cosmetics.js"
     ]
   },
   "ampFirstPages": []
