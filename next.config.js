@@ -10,6 +10,9 @@ module.exports = withSourceMaps(withCss(withSass({
     importLoaders: 1,
     localIdentName: '[local]___[hash:base64:5]',
   },
+  env: {
+    PUBLIC_NEXT_ENV: process.env.PUBLIC_NEXT_ENV
+  },
   webpack: (config) => {
     config.plugins.push(
       new MiniCssExtractPlugin({

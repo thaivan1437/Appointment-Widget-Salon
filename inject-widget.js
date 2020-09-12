@@ -15,7 +15,7 @@ const configPath = path.resolve(
 const CONFIGS = require(configPath);
 
 const options = {
-    files: 'build/index.html',
+    files: 'public/index.html',
     from: '</body>',
     to: '<script src="https://widgets.salonmanager.'+ CONFIGS.domainExtension +'/loader.js" data-sm="'+CONFIGS.widgetAppId+'"></script></body>'
 };
