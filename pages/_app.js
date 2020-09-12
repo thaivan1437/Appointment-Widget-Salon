@@ -6,11 +6,6 @@ import { SENTRY_URL } from '../src/env'
 
 import * as Sentry from '@sentry/browser'
 
-// import developmentExtension from '../src/environments/development'
-// import productionExtension from '../src/environments/production'
-
-// const CONFIGS = process.env.PUBLIC_NEXT_ENV === 'development' ? developmentExtension : productionExtension
-
 Sentry.init({
   dsn: SENTRY_URL
 })
@@ -37,7 +32,6 @@ class MyApp extends App {
         <meta property="og:description" content='Belmont Beauty Salon' />
         <meta name="keywords" content="Salon,Beauty" />
         <meta name="author" content="Salon Manager" />
-        {/* <script src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/loader.js`} data-sm={CONFIGS.widgetAppId}></script> */}
       </Head>
       <Component {...pageProps} />
     </div>
