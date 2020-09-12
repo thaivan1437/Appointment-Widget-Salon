@@ -42,7 +42,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="/lib/css/horizontal.css"
           />
-          { process.env.NODE_ENV === 'production'
+          { process.env.PUBLIC_NEXT_ENV === 'production'
             && <>
               <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135985682-1" />
               <script dangerouslySetInnerHTML={{ __html: `
