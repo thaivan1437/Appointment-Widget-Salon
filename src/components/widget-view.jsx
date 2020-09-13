@@ -358,11 +358,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
     }
 
     const color =
-      COLOR_SCHEMA[widgetConfig.style.toLowerCase()] ||
+      (widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]) ||
       COLOR_SCHEMA[FALLBACK_COLOR];
     setColor(color);
     setFolderName(
-      COLOR_SCHEMA[widgetConfig.style.toLowerCase()]
+      widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]
         ? widgetConfig.style.toLowerCase()
         : FALLBACK_COLOR
     );

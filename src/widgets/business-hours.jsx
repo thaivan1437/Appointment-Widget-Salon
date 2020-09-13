@@ -294,7 +294,8 @@ const BusinessHours = ({
         <HolidayModalInformationContainer>
           <HolidayListWrapper>
             <HolidayTitle header>Holidays and Closed Days</HolidayTitle>
-            {parseInt(businessHours.holidays.length) > 0
+            {businessHours.holidays &&
+            parseInt(businessHours.holidays.length) > 0
               ? businessHours.holidays.map((holidayItem, holidayIndex) => {
                   var date_options = {
                     year: 'numeric',
