@@ -28,6 +28,11 @@ S.Input = styled.input`
     color: ${(props) =>
       props.hasError ? COLORS.ERROR : INPUT_COLORS.HIT_TEXT};
   }
+  ::-moz-placeholder {
+    color: ${(props) =>
+      props.hasError ? COLORS.ERROR : INPUT_COLORS.HIT_TEXT};
+    opacity: 1;
+  }
   @media (max-width: 768px) {
     width: 300px;
     font-size: 20px;
