@@ -39,7 +39,7 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
     }
   }, [dates]);
 
-  const handleDateChange = dateItem => {
+  const handleDateChange = (dateItem) => {
     setSelectedDate(dateItem);
 
     if (selectedDateChange) {
@@ -49,14 +49,14 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
 
   return (
     <ColorContext.Consumer>
-      {color => (
+      {(color) => (
         <S.DayPickerWrapper color={color}>
           <Slider
             {...SETTINGS}
-            slidesToShow={isTablet ? 6 : isMobile ? 3 : 6}
-            slidesToScroll={isTablet ? 6 : isMobile ? 3 : 6}
+            slidesToShow={isTablet ? 5 : isMobile ? 3 : 5}
+            slidesToScroll={isTablet ? 5 : isMobile ? 3 : 5}
           >
-            {dates.map(dateItem => (
+            {dates.map((dateItem) => (
               <div key={`${dateItem.day}_${dateItem.month}`}>
                 <S.DayItem
                   color={color}

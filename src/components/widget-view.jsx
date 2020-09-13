@@ -28,12 +28,12 @@ export const ColorContext = React.createContext(COLOR_SCHEMA[FALLBACK_COLOR]);
 const WidgetViewWrapper = styled.div`
   position: absolute;
 
-  width: ${props => (props.vertical ? '90px' : 'auto')};
+  width: ${(props) => (props.vertical ? '90px' : 'auto')};
 
-  top: ${props => (props.top ? '10px' : 'auto')};
-  left: ${props => (props.left ? '10px' : 'auto')};
-  right: ${props => (props.right ? '10px' : 'auto')};
-  bottom: ${props => (props.bottom ? '10px' : 'auto')};
+  top: ${(props) => (props.top ? '10px' : 'auto')};
+  left: ${(props) => (props.left ? '10px' : 'auto')};
+  right: ${(props) => (props.right ? '10px' : 'auto')};
+  bottom: ${(props) => (props.bottom ? '10px' : 'auto')};
 `;
 
 const ImageWrapper = styled.img`
@@ -49,15 +49,6 @@ const InputWrapper = styled.div`
   @media (max-width: 768px) {
     width: 300px;
     margin-top: 10px;
-  }
-`;
-
-const InlineInformation = styled.span`
-  padding: 0 10px;
-  color: ${INPUT_COLORS.TEXT_COLOR};
-  font-size: 22px;
-  @media (max-width: 768px) {
-    font-size: 18px;
   }
 `;
 
@@ -154,13 +145,14 @@ const BackButton = styled.div`
 `;
 
 const AppointmentInfo = styled.div`
-  color: ${props => (props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE)};
+  color: ${(props) =>
+    props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
   padding: 0 20px 8px;
   font-size: 19px;
   font-weight: 500;
-  text-transform: ${props => (props.userName ? 'capitalize' : 'none')};
+  text-transform: ${(props) => (props.userName ? 'capitalize' : 'none')};
 
-  text-align: ${props => (props.header ? 'center' : 'left')};
+  text-align: ${(props) => (props.header ? 'center' : 'left')};
 `;
 
 export const FirstStepMessage = styled(AppointmentInfo)`
@@ -178,7 +170,7 @@ const InformationWrapper = styled.div`
 `;
 
 const EditAppointment = styled.div`
-  color: ${props => props.color || COLORS.DOVE_GRAY};
+  color: ${(props) => props.color || COLORS.DOVE_GRAY};
 
   margin: 30px 0;
 
@@ -188,7 +180,7 @@ const EditAppointment = styled.div`
     text-decoration: underline;
   }
 
-  ${props =>
+  ${(props) =>
     props.disabled
       ? 'opacity: 0.4; pointer-events: none; user-select:none;'
       : null}
@@ -216,11 +208,11 @@ const SeparatorLine = styled.div`
 `;
 
 const UpToLabel = styled.span`
-  font-size: ${props => (props.hasError ? '20px' : '16px')};
+  font-size: ${(props) => (props.hasError ? '20px' : '16px')};
   margin-left: 10px;
-  color: ${props => (props.hasError ? 'red' : COLORS.DOVE_GRAY)};
+  color: ${(props) => (props.hasError ? 'red' : COLORS.DOVE_GRAY)};
   transition: font-size 0.5s ease;
-  font-weight: ${props => (props.hasError ? 500 : 400)};
+  font-weight: ${(props) => (props.hasError ? 500 : 400)};
 `;
 
 const PolicyContainer = styled.div`
@@ -273,7 +265,7 @@ const getValidPromotions = (promotions = []) => {
   const today = new Date();
   const todayTime = today.getTime();
 
-  promotions.forEach(promotion => {
+  promotions.forEach((promotion) => {
     if (promotion.toDate > todayTime) {
       promArray.push(promotion);
     }
@@ -324,7 +316,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       case 'TOP_LEFT':
         setTop(true);
         setLeft(true);
-        setFrameStyle(prev => ({
+        setFrameStyle((prev) => ({
           ...prev,
           position: 'top:0;left:0',
         }));
@@ -333,7 +325,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       case 'TOP_RIGHT':
         setTop(true);
         setRight(true);
-        setFrameStyle(prev => ({
+        setFrameStyle((prev) => ({
           ...prev,
           position: 'top:0;right:0',
         }));
@@ -342,7 +334,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       case 'BOTTOM_LEFT':
         setBottom(true);
         setLeft(true);
-        setFrameStyle(prev => ({
+        setFrameStyle((prev) => ({
           ...prev,
           position: 'bottom:0;left:0',
         }));
@@ -351,7 +343,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       case 'BOTTOM_RIGHT':
         setBottom(true);
         setRight(true);
-        setFrameStyle(prev => ({
+        setFrameStyle((prev) => ({
           ...prev,
           position: 'bottom:0;right:0',
         }));
@@ -359,7 +351,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       default:
         setRight(true);
         setBottom(true);
-        setFrameStyle(prev => ({
+        setFrameStyle((prev) => ({
           ...prev,
           position: 'bottom:0;right:0',
         }));
@@ -374,7 +366,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
 
     const size = (widgetConfig.widgets.length || 1) * 90;
 
-    setFrameStyle(prev => ({
+    setFrameStyle((prev) => ({
       ...prev,
       orientation: `width: ${
         widgetConfig.orientation === 'VERTICAL' ? '100px' : size + 10 + 'px'
@@ -427,7 +419,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
   }, [selectedPromotion]);
 
   // TODO: move util
-  const setIFrameStyle = modalKey => {
+  const setIFrameStyle = (modalKey) => {
     if (modalKey) {
       parent.postMessage(
         {
@@ -489,7 +481,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
     return display ? hourString : hourString.toLowerCase();
   };
 
-  const makeAnAppointmentClick = promotion => {
+  const makeAnAppointmentClick = (promotion) => {
     setShowPromotionsModal(false);
 
     setTimeout(() => {
@@ -507,12 +499,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <CommonStyles.Input
                 value={userName}
                 hasError={errors.userName}
-                onChange={event => {
+                onChange={(event) => {
                   const { value } = event.target;
                   const replacedValue = value.replace(USERNAME_REGEX, '');
 
                   if (errors.userName && replacedValue.length >= 2) {
-                    setErrors(prev => ({
+                    setErrors((prev) => ({
                       ...prev,
                       userName: false,
                     }));
@@ -529,7 +521,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <CommonStyles.Input
                 value={userPhone}
                 hasError={errors.userPhone}
-                onChange={event => {
+                onChange={(event) => {
                   const { value } = event.target;
                   //TODO move validation separate file
                   let processedValue = value.replace(/[^\d]/g, '');
@@ -555,7 +547,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     );
 
                     if (errors.userPhone && processedValue.length === 14) {
-                      setErrors(prev => ({
+                      setErrors((prev) => ({
                         ...prev,
                         userPhone: false,
                       }));
@@ -572,13 +564,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <CounterWrapper>
                 <Counter
                   initialValue={userCount}
-                  countChange={newCount => {
+                  countChange={(newCount) => {
                     setUserCount(newCount);
                   }}
                 />
-                <InlineInformation>
-                  {userCount === 1 ? 'person' : 'people'}
-                </InlineInformation>
               </CounterWrapper>
             </InputWrapper>
             {selectedPromotion ? (
@@ -619,7 +608,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
             <DayPickerWrapper>
               <DayPicker
                 initialValue={selectedDate}
-                selectedDateChange={value => {
+                selectedDateChange={(value) => {
                   setSelectedDate(value);
                 }}
                 holidays={
@@ -657,7 +646,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 1<sup>st</sup> Choice
               </TimePickerLabel>
               <TimePicker
-                onTimeSelected={time => {
+                onTimeSelected={(time) => {
                   setSelectedTime1(time);
                 }}
                 initialValue={selectedTime1}
@@ -672,7 +661,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 2<sup>nd</sup> Choice
               </TimePickerLabel>
               <TimePicker
-                onTimeSelected={time => {
+                onTimeSelected={(time) => {
                   setSelectedTime2(time);
                 }}
                 initialValue={selectedTime2}
@@ -710,7 +699,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
               setErrors={setErrors}
               serviceList={widgetConfig.widgetData.appointments}
               initialValue={selectedServices}
-              onServiceSelected={services => {
+              onServiceSelected={(services) => {
                 const sortedList = sortBy(services, ['name']);
 
                 setSelectedServices(sortedList);
@@ -751,7 +740,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     date: getRequestDateString(selectedDate.dateValue),
                     time1: getHourString(selectedTime1),
                     time2: getHourString(selectedTime2),
-                    services: selectedServices.map(service => ({
+                    services: selectedServices.map((service) => ({
                       categoryItemId: service.id,
                       categoryId: service.categoryId,
                     })),
@@ -772,6 +761,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                       headers: {
                         'x-api-key': CONFIGS.xApiKey,
                         'x-app-version': CONFIGS.xAppVersion,
+                        'time-zone': CONFIGS.timeZone,
                       },
                     })
                     .then(() => {
@@ -936,7 +926,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
 
               {selectedStep > 4 ? (
                 <InformationWrapper>
-                  {selectedServices.map(service => (
+                  {selectedServices.map((service) => (
                     <AppointmentInfo>{service.name}</AppointmentInfo>
                   ))}
                 </InformationWrapper>

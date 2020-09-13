@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { COUNT_ACTIONS, COUNTER_MAX_LIMIT } from '../../common/constants';
 import { S } from './counter.styles';
+import styled from 'styled-components';
+import { COLORS, INPUT_COLORS } from '../../common/colors';
+
+const InlineInformation = styled.span`
+  padding: 0 10px;
+  color: ${INPUT_COLORS.TEXT_COLOR};
+  font-size: 22px;
+  @media (max-width: 768px) {
+    font-size: 18px;
+  }
+`;
 
 const Counter = ({ countChange, initialValue }) => {
   const [count, setCount] = useState(initialValue || 1);
 
   // TODO: add callback props
-  const setCountHandler = actionType => {
+  const setCountHandler = (actionType) => {
     if (actionType === COUNT_ACTIONS.DECREASE && count > 1) {
       const newCount = count - 1;
       setCount(newCount);
@@ -36,7 +47,12 @@ const Counter = ({ countChange, initialValue }) => {
       >
         —
       </S.CountDown>
-      <S.CountText>{count}</S.CountText>
+      <S.CountText>
+        {count}
+        <InlineInformation>
+          {count === 1 ? 'person' : 'people'}
+        </InlineInformation>
+      </S.CountText>
       <S.CountUp
         onClick={() => {
           setCountHandler(COUNT_ACTIONS.INCREASE);
