@@ -10,7 +10,7 @@ const CountBase = styled.div`
   text-align: center;
   cursor: pointer;
   user-select: none;
-  background-color: ${COLORS.ALABASTER};
+  background-color: ${INPUT_COLORS.BACKGROUND_COLOR};
   border: 1px solid ${COLORS.MERCURY};
 `;
 
@@ -30,6 +30,8 @@ S.CountText = styled.div`
   line-height: 54px;
   text-align: center;
   box-shadow: 0 0 0 1px ${COLORS.SHADOW};
+  font-size: 21px;
+  background-color: ${COLORS.ALABASTER};
 `;
 
 S.CounterWrapper = styled.div`

@@ -12,9 +12,10 @@ export const COLORS = {
   MERCURY: '#E2E2E2',
   GALLERY: '#EEEEEE',
   ALTO: '#D6D6D6',
-  MONZA: '#FF004A',
+  MONZA: '#EA3350',
   STORM_GRAY: '#747883',
   SILVER: '#C8C8C8',
+  ERROR: '#EA3350',
 };
 
 export const INPUT_COLORS = {

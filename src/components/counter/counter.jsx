@@ -49,9 +49,8 @@ const Counter = ({ countChange, initialValue }) => {
       </S.CountDown>
       <S.CountText>
         {count}
-        <InlineInformation>
-          {count === 1 ? 'person' : 'people'}
-        </InlineInformation>
+        &nbsp;
+        {count === 1 ? 'person' : 'people'}
       </S.CountText>
       <S.CountUp
         onClick={() => {
