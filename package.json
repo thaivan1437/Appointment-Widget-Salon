@@ -1,8 +1,9 @@
 {
   "name": "salon-manager-widgets",
   "version": "1.0.0",
+  "description": "Salon Manager Widgets",
   "scripts": {
-    "start": "npm run package:prepare && npm run dev",
+    "start": "npm run package:prepare && npm run local",
     "package:prepare": "npm install && npm run clean",
     "clean": "rm -rf build",
     "build": "webpack -p",
