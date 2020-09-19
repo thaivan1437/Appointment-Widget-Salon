@@ -5,8 +5,8 @@
     "start": "npm run package:prepare && npm run dev",
     "package:prepare": "npm install && npm run clean",
     "clean": "rm -rf build",
-    "dev": "webpack-dev-server --buildEnv=local",
     "build": "webpack -p",
+    "local": "webpack-dev-server --buildEnv=local",
     "dist:dev": "npm run package:prepare && npm run build -- --buildEnv=development",
     "dist:prod": "npm run package:prepare && npm run build -- --buildEnv=production",
     "prettier:fix": "prettier --write src/**/*.{js,jsx}"
