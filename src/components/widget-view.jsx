@@ -743,12 +743,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     preferTime1: getHourString(selectedTime1),
                     preferTime2: getHourString(selectedTime2),
                     selectedCategoryItemIds: selectedServices.map((service) => service.id),
+                    promotionId: selectedPromotion ? selectedPromotion.promoId : null
                   };
-
-                  if (selectedPromotion) {
-                    const { promoId } = selectedPromotion;
-                    data = { ...data, promotionId: promoId };
-                  }
 
                   setShowLoading(true);
 
