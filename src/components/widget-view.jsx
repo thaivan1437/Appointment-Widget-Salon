@@ -704,7 +704,6 @@ const WidgetView = ({ widgetConfig, appId }) => {
               initialValue={selectedServices}
               onServiceSelected={(services) => {
                 const sortedList = sortBy(services, ['name']);
-
                 setSelectedServices(sortedList);
               }}
             />
@@ -743,15 +742,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     date: getRequestDateString(selectedDate.dateValue),
                     time1: getHourString(selectedTime1),
                     time2: getHourString(selectedTime2),
-                    services: selectedServices.map((service) => ({
-                      categoryItemId: service.id,
-                      categoryId: service.categoryId,
-                    })),
+                    selectedCategoryItemId: selectedServices.map((service) => service.id),
                   };
 
                   if (selectedPromotion) {
                     const { promoId } = selectedPromotion;
-                    data = { ...data, promoId };
+                    data = { ...data, promotionId: promoId };
                   }
 
                   setShowLoading(true);
