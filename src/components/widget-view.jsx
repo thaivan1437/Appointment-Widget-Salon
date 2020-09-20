@@ -742,7 +742,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     date: getRequestDateString(selectedDate.dateValue),
                     preferTime1: getHourString(selectedTime1),
                     preferTime2: getHourString(selectedTime2),
-                    selectedCategoryItemId: selectedServices.map((service) => service.id),
+                    selectedCategoryItemIds: selectedServices.map((service) => service.id),
                   };
 
                   if (selectedPromotion) {
