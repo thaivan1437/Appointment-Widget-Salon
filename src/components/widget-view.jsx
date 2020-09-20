@@ -740,8 +740,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     numberOfPeople: userCount,
                     timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     date: getRequestDateString(selectedDate.dateValue),
-                    time1: getHourString(selectedTime1),
-                    time2: getHourString(selectedTime2),
+                    preferTime1: getHourString(selectedTime1),
+                    preferTime2: getHourString(selectedTime2),
                     selectedCategoryItemId: selectedServices.map((service) => service.id),
                   };
 
