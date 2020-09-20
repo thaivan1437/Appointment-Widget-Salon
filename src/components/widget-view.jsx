@@ -751,7 +751,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   httpUtil
                     .makeRequest({
                       method: 'POST',
-                      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/widgets/${appId}/appointment`,
+                      url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/appointment-services/${appId}`,
                       data,
                       headers: {
                         'x-api-key': CONFIGS.xApiKey,
