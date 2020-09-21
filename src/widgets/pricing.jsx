@@ -1,13 +1,13 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import { CONFIGS } from '../environments/development';
 import React, { useState, useEffect } from 'react';
 import { ColorContext, FirstStepMessage } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
-import sortBy from 'lodash.sortby';
-import find from 'lodash.find';
+import sortBy from 'lodash/sortby';
+import find from 'lodash/find';
 import { formatAmount } from 'common/utils';
+import { CONFIGS } from '../environments/development';
 
 const MainCategoryButton = styled.div`
   display: flex;

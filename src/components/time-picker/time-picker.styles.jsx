@@ -16,14 +16,14 @@ S.SelectionContainer = styled.div`
   padding: 8px;
 
   position: relative;
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.selected || props.hasValue ? COLORS.WHITE : COLORS.ALABASTER};
 
   cursor: pointer;
 
   &:after,
   &:before {
-    display: ${props => (props.selected ? 'block' : 'none')};
+    display: ${(props) => (props.selected ? 'block' : 'none')};
     top: 100%;
     left: 50%;
     border: solid transparent;
@@ -119,10 +119,10 @@ S.OptionItem = styled.div`
 
   border: 1px solid ${COLORS.MERCURY};
 
-  background-color: ${props =>
+  background-color: ${(props) =>
     props.selected ? props.color : COLORS.ALABASTER};
 
-  color: ${props => (props.selected ? COLORS.WHITE : 'inherit')};
+  color: ${(props) => (props.selected ? COLORS.WHITE : 'inherit')};
 
   cursor: pointer;
 

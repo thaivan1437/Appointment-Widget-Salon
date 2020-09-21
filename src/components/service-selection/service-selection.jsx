@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { S } from './service-selection.styles';
 import { CONFIGS } from '@environment';
-
-import sortBy from 'lodash.sortby';
-import find from 'lodash.find';
+import sortBy from 'lodash/sortBy';
+import find from 'lodash/find';
+import { S } from './service-selection.styles';
 
 const ServiceSelection = ({
   initialValue = [],
@@ -47,6 +46,7 @@ const ServiceSelection = ({
     <S.ServiceSelectionContainer>
       <S.ServiceCategoryContainer>
         {categories.map((category) => (
+          // eslint-disable-next-line react/jsx-key
           <S.CategoryItem
             onClick={() => {
               setSelectedCategory(category);
@@ -69,6 +69,7 @@ const ServiceSelection = ({
           selectedItems.categoryItems &&
           selectedItems.categoryItems.length > 0 &&
           selectedItems.categoryItems.map((service) => (
+            // eslint-disable-next-line react/jsx-key
             <S.ServiceItem
               onClick={() => {
                 const tempSelectedServicesIds = [...selectedServicesIds];

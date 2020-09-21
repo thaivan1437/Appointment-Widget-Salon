@@ -1,11 +1,11 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import { CONFIGS } from '../environments/development';
 import React from 'react';
 import { ColorContext } from '@components/widget-view';
-import { colorWeekend } from '../common/utils';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
+import { colorWeekend } from '../common/utils';
+import { CONFIGS } from '../environments/development';
 import { PHONE_REGEX } from '../common/constants';
 
 const MainContent = styled.div`
@@ -296,13 +296,13 @@ const BusinessHours = ({
             <HolidayTitle header>Holidays and Closed Days</HolidayTitle>
             {businessHours.holidays &&
             parseInt(businessHours.holidays.length) > 0
-              ? businessHours.holidays.map((holidayItem, holidayIndex) => {
-                  var date_options = {
+              ? businessHours.holidays.map((holidayItem) => {
+                  const date_options = {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   };
-                  let start_date = new Date(holidayItem.date);
+                  const start_date = new Date(holidayItem.date);
                   return (
                     <>
                       <HolidayItem>

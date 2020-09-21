@@ -43,20 +43,21 @@ class Manager extends Component {
     };
   }
 
+  // eslint-disable-next-line react/no-deprecated
   componentWillMount() {
     // write config to windows
     window.SMWS = {
       appId: exampleConfig.appId,
       cdnBaseUrl: exampleConfig.cdnBaseUrl,
       registerServices: exampleConfig.registeredWidgets.map(
-        item => item.widgetName
+        (item) => item.widgetName
       ),
     };
 
     this.setState({ widgetList: exampleConfig.registeredWidgets });
   }
 
-  createWidgetElement = widget => (
+  createWidgetElement = (widget) => (
     //TODO: if registered widget has config, must add widget root element
     <>
       <div
@@ -78,7 +79,7 @@ class Manager extends Component {
 
   render() {
     return this.state.widgetList
-      ? this.state.widgetList.map(widgetItem =>
+      ? this.state.widgetList.map((widgetItem) =>
           this.createWidgetElement(widgetItem)
         )
       : null;
