@@ -1,8 +1,6 @@
 import styled from 'styled-components';
-
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
-
 import { COLORS } from '../../common/colors';
 
 export const S = {};
@@ -67,15 +65,15 @@ S.DialogCycle = styled.div`
 
   left: 585px;
 
-  top: ${props => (props.top ? '-15px' : 'auto')};
-  bottom: ${props => (props.bottom ? '-15px' : 'auto')};
+  top: ${(props) => (props.top ? '-15px' : 'auto')};
+  bottom: ${(props) => (props.bottom ? '-15px' : 'auto')};
   @media (min-width: 768px) and (max-width: 1024px) {
     top: 345px;
-    left: ${props => (props.top ? '-15px' : '585px')};
+    left: ${(props) => (props.top ? '-15px' : '585px')};
   }
   @media (max-width: 768px) {
     top: 345px;
-    left: ${props => (props.top ? '-15px' : '345px')};
+    left: ${(props) => (props.top ? '-15px' : '345px')};
   }
 `;
 

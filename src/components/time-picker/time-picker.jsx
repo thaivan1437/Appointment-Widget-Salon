@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { S } from './time-picker.styles';
-
 import { ColorContext } from '@components/widget-view';
+import { S } from './time-picker.styles';
 
 const HOURS = [
   '8 AM',
@@ -51,7 +50,7 @@ const TimePicker = ({ onTimeSelected, initialValue }) => {
   return (
     <>
       <ColorContext.Consumer>
-        {color => (
+        {(color) => (
           <S.TimePickerWrapper>
             <S.SelectionContainer
               selected={showHourSelection}
@@ -81,7 +80,7 @@ const TimePicker = ({ onTimeSelected, initialValue }) => {
             {showHourSelection || showMinutesSelection ? (
               <S.SelectionOptionContainer>
                 {showHourSelection
-                  ? HOURS.map(value => (
+                  ? HOURS.map((value) => (
                       <S.OptionItem
                         color={color}
                         key={`option_${value}`}
@@ -97,7 +96,7 @@ const TimePicker = ({ onTimeSelected, initialValue }) => {
                   : null}
                 {showMinutesSelection ? (
                   <S.MinuteWrapper>
-                    {MINUTES.map(value => (
+                    {MINUTES.map((value) => (
                       <S.OptionItem
                         color={color}
                         key={`option_${value}`}
