@@ -2,7 +2,7 @@ export const CONFIGS = {
   domainExtension: 'net',
   version: 'v1',
   xApiKey: 'ZZdWN1vvlB8JWPzyhaRXM1bvjqpUx3sX3EEzPJau',
-  xAppVersion: 'v1.0.1@20190610',
+  xAppVersion: 'v1.0.0@20200920',
   timeZone: 'America/Los_Angeles',
   isLocal: false,
 };
