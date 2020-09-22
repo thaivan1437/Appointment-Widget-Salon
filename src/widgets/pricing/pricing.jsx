@@ -3,11 +3,11 @@ import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import React, { useState, useEffect } from 'react';
 import { ColorContext, FirstStepMessage } from '@components/widget-view';
 import styled from 'styled-components';
-import { COLORS } from 'common/colors';
+import { COLORS } from '@common/colors';
 import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
-import { formatAmount } from 'common/utils';
-import { CONFIGS } from '../environments/development';
+import { formatAmount } from '@common/utils';
+import { CONFIGS } from '@environment';
 
 const MainCategoryButton = styled.div`
   display: flex;

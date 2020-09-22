@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { COUNT_ACTIONS, COUNTER_MAX_LIMIT } from '@common/constants';
+import { INPUT_COLORS } from '@common/colors';
 import { S } from './counter.styles';
-import { COUNT_ACTIONS, COUNTER_MAX_LIMIT } from '../../common/constants';
-import { INPUT_COLORS } from '../../common/colors';
 
 // eslint-disable-next-line no-unused-vars
 const InlineInformation = styled.span`

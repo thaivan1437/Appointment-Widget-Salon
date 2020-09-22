@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import { getDates } from 'common/utils';
+import { getDates } from '@common/utils';
 import { S } from 'components/day-picker/day-picker.styles';
 import { ColorContext } from '@components/widget-view';
 import { useMediaQuery } from 'react-responsive';

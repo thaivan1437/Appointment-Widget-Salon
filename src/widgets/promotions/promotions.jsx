@@ -3,10 +3,10 @@ import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import React, { useRef, useEffect } from 'react';
 import { ColorContext } from '@components/widget-view';
 import styled from 'styled-components';
-import { COLORS } from 'common/colors';
-import { getDisplayDateString } from 'common/utils';
+import { COLORS } from '@common/colors';
+import { getDisplayDateString } from '@common/utils';
 import Slider from 'react-slick';
-import { CONFIGS } from '../environments/development';
+import { CONFIGS } from '@environment';
 
 const BaseContentStyle = styled.div`
   color: ${(props) => (props.color ? props.color : COLORS.DOVE_GRAY)};

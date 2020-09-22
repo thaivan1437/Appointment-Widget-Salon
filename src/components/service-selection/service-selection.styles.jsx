@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from 'common/colors';
+import { COLORS } from '@common/colors';
 
 export const S = {};
 
