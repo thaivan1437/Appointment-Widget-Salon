@@ -8,7 +8,7 @@ import { Integrations } from '@sentry/tracing';
 import { CONFIGS, SENTRY_DSN } from '@environment';
 
 window.initWidget = function (d, appId) {
-  var rootElement = document.createElement('div');
+  const rootElement = document.createElement('div');
   rootElement.setAttribute('id', 'widget-root');
   d.body.appendChild(rootElement);
 

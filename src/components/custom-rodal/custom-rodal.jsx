@@ -4,11 +4,17 @@ import { CONFIGS } from '@environment';
 import { useMediaQuery } from 'react-responsive';
 
 const CustomRodal = ({
+  // eslint-disable-next-line react/prop-types
   children,
+  // eslint-disable-next-line react/prop-types
   showModal,
+  // eslint-disable-next-line react/prop-types
   setShowModal,
+  // eslint-disable-next-line react/prop-types
   selectedStyle,
+  // eslint-disable-next-line react/prop-types
   halfMode,
+  // eslint-disable-next-line react/prop-types
   width,
 }) => {
   const isTablet = useMediaQuery({

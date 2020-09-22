@@ -1,9 +1,9 @@
 import { CONFIGS } from '@environment';
 
-(function(attrName, m, r, c) {
-  var s = {};
-  var n = {};
-  var l = document.currentScript.getAttribute(attrName);
+(function (attrName, m, r, c) {
+  const s = {};
+  const n = {};
+  const l = document.currentScript.getAttribute(attrName);
 
   function e() {
     s.f = r.createElement('iframe');
@@ -14,7 +14,7 @@ import { CONFIGS } from '@environment';
     n.m = s.f.contentWindow;
     n.r = s.f.contentWindow.document;
 
-    m.setTimeout(function() {
+    m.setTimeout(function () {
       n.m = s.f.contentWindow;
       n.r = s.f.contentWindow.document || s.f.contentDocument;
 
@@ -22,7 +22,7 @@ import { CONFIGS } from '@environment';
       s.s.type = 'text/javascript';
       s.s.defer = true;
       s.s.src = c;
-      s.s.onload = function() {
+      s.s.onload = function () {
         n.m.initWidget(n.r, l);
       };
 

@@ -1,10 +1,11 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+// eslint-disable-next-line import/order
 const argv = require('yargs').argv;
+
 const JS_JSX_PATTERN = /\.jsx?$/;
 const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 const isLocal = argv.buildEnv === 'local';
 
 process.env.NODE_ENV = isLocal ? 'development' : argv.buildEnv || 'development';
@@ -28,7 +29,7 @@ module.exports = {
         __dirname,
         'src',
         'environments',
-        isLocal ? 'local.js' : process.env.NODE_ENV + '.js'
+        isLocal ? 'local.js' : `${process.env.NODE_ENV}.js`
       ),
     },
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],

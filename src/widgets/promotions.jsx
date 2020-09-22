@@ -1,13 +1,12 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import { CONFIGS } from '../environments/development';
 import React, { useRef, useEffect } from 'react';
 import { ColorContext } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
 import { getDisplayDateString } from 'common/utils';
-import { S as CommonStyles } from 'common/styles';
 import Slider from 'react-slick';
+import { CONFIGS } from '../environments/development';
 
 const BaseContentStyle = styled.div`
   color: ${(props) => (props.color ? props.color : COLORS.DOVE_GRAY)};
