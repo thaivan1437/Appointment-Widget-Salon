@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
-import { COLORS } from '../../common/colors';
+import { COLORS } from '@common/colors';
 
 export const S = {};
 

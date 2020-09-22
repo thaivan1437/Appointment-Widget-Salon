@@ -6,9 +6,7 @@ const argv = require('yargs').argv;
 const JS_JSX_PATTERN = /\.jsx?$/;
 const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
-const isLocal = argv.buildEnv === 'local';
-
-process.env.NODE_ENV = isLocal ? 'development' : argv.buildEnv || 'development';
+const environment = argv.buildEnv || 'dev';
 
 const version = require('./package.json').version;
 
@@ -28,12 +26,13 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
+      '@common': path.resolve(__dirname, 'src', 'common'),
       '@components': path.resolve(__dirname, 'src', 'components'),
       '@environment': path.resolve(
         __dirname,
         'src',
         'environments',
-        isLocal ? 'local.js' : `${process.env.NODE_ENV}.js`
+        `.env.${environment}.js`
       ),
     },
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],

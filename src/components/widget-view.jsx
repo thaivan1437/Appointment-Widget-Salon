@@ -2,20 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import DayPicker from '@components/day-picker/day-picker';
 import CustomRodal from '@components/custom-rodal/custom-rodal';
-import { S as CommonStyles } from 'common/styles';
+import { S as CommonStyles } from '@common/styles';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import Counter from '@components/counter/counter';
 import TimePicker from '@components/time-picker/time-picker';
 import ServiceSelection from '@components/service-selection/service-selection';
-import { getDisplayDateString, getRequestDateString } from 'common/utils';
-import httpUtil from 'common/HttpUtil';
-import { COLOR_SCHEMA, USERNAME_REGEX } from 'common/constants';
+import { getDisplayDateString, getRequestDateString } from '@common/utils';
+import httpUtil from '@common/HttpUtil';
+import { COLOR_SCHEMA, USERNAME_REGEX } from '@common/constants';
 import { CONFIGS } from '@environment';
 import sortBy from 'lodash/sortBy';
-import Pricing from '../widgets/pricing';
-import BusinessHours from '../widgets/business-hours';
-import Promotions from '../widgets/promotions';
-import { COLORS, INPUT_COLORS } from '../common/colors';
+import { COLORS, INPUT_COLORS } from '@common/colors';
+import Pricing from '../widgets/pricing/pricing';
+import BusinessHours from '../widgets/business-hours/business-hours';
+import Promotions from '../widgets/promotions/promotions';
 
 const FALLBACK_COLOR = 'red';
 

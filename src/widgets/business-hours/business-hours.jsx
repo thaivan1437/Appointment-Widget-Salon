@@ -3,10 +3,10 @@ import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import React from 'react';
 import { ColorContext } from '@components/widget-view';
 import styled from 'styled-components';
-import { COLORS } from 'common/colors';
-import { colorWeekend } from '../common/utils';
-import { CONFIGS } from '../environments/development';
-import { PHONE_REGEX } from '../common/constants';
+import { COLORS } from '@common/colors';
+import { CONFIGS } from '@environment';
+import { colorWeekend } from '@common/utils';
+import { PHONE_REGEX } from '@common/constants';
 
 const MainContent = styled.div`
   display: table;
