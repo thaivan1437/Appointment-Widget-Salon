@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { ColorContext, FirstStepMessage } from '@components/widget-view';
 import styled from 'styled-components';
 import { COLORS } from 'common/colors';
-import sortBy from 'lodash/sortby';
+import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
 import { formatAmount } from 'common/utils';
 import { CONFIGS } from '../environments/development';

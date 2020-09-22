@@ -11,7 +11,7 @@ import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
 import { COLOR_SCHEMA, USERNAME_REGEX } from 'common/constants';
 import { CONFIGS } from '@environment';
-import sortBy from 'lodash/sortby';
+import sortBy from 'lodash/sortBy';
 import Pricing from '../widgets/pricing';
 import BusinessHours from '../widgets/business-hours';
 import Promotions from '../widgets/promotions';
@@ -730,7 +730,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 color={color}
                 disabled={showLoading}
                 onClick={() => {
-                  let data = {
+                  const data = {
                     customerName: userName,
                     customerPhoneNumber: `+1${userPhone.replace(/[^\d]/g, '')}`,
                     numberOfPeople: userCount,
@@ -738,8 +738,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     date: getRequestDateString(selectedDate.dateValue),
                     preferTime1: getHourString(selectedTime1),
                     preferTime2: getHourString(selectedTime2),
-                    selectedCategoryItemIds: selectedServices.map((service) => service.id),
-                    promotionId: selectedPromotion ? selectedPromotion.promoId : null
+                    selectedCategoryItemIds: selectedServices.map(
+                      (service) => service.id
+                    ),
+                    promotionId: selectedPromotion
+                      ? selectedPromotion.promoId
+                      : null,
                   };
 
                   setShowLoading(true);
