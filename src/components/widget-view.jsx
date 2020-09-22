@@ -1,25 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
 import DayPicker from '@components/day-picker/day-picker';
 import CustomRodal from '@components/custom-rodal/custom-rodal';
-import { COLORS, INPUT_COLORS } from '../common/colors';
-
 import { S as CommonStyles } from 'common/styles';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-
 import Counter from '@components/counter/counter';
 import TimePicker from '@components/time-picker/time-picker';
 import ServiceSelection from '@components/service-selection/service-selection';
 import { getDisplayDateString, getRequestDateString } from 'common/utils';
 import httpUtil from 'common/HttpUtil';
 import { COLOR_SCHEMA, USERNAME_REGEX } from 'common/constants';
-
 import { CONFIGS } from '@environment';
+import sortBy from 'lodash/sortby';
 import Pricing from '../widgets/pricing';
 import BusinessHours from '../widgets/business-hours';
 import Promotions from '../widgets/promotions';
-import sortBy from 'lodash.sortby';
+import { COLORS, INPUT_COLORS } from '../common/colors';
 
 const FALLBACK_COLOR = 'red';
 
@@ -372,9 +368,9 @@ const WidgetView = ({ widgetConfig, appId }) => {
     setFrameStyle((prev) => ({
       ...prev,
       orientation: `width: ${
-        widgetConfig.orientation === 'VERTICAL' ? '100px' : size + 10 + 'px'
+        widgetConfig.orientation === 'VERTICAL' ? '100px' : `${size + 10}px`
       };height: ${
-        widgetConfig.orientation === 'VERTICAL' ? size + 10 + 'px' : '100px'
+        widgetConfig.orientation === 'VERTICAL' ? `${size + 10}px` : '100px'
       };`,
     }));
   }, []);
@@ -477,8 +473,8 @@ const WidgetView = ({ widgetConfig, appId }) => {
         .split(' ')
         .join(
           display
-            ? ':' + selectedTimeObject.selectedMinute + ' '
-            : ':' + selectedTimeObject.selectedMinute
+            ? `:${selectedTimeObject.selectedMinute} `
+            : `:${selectedTimeObject.selectedMinute}`
         ) || '';
 
     return display ? hourString : hourString.toLowerCase();
@@ -793,6 +789,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 <a
                   href={`https://salonmanager.${CONFIGS.domainExtension}/terms-of-use`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Terms of Use
                 </a>
@@ -800,6 +797,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 <a
                   href={`https://salonmanager.${CONFIGS.domainExtension}/privacy-policy`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Privacy Policy
                 </a>

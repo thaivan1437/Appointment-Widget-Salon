@@ -1,0 +1,17 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-recommended-scss"],
+  "plugins": ["stylelint-declaration-strict-value"],
+  "rules": {
+    "property-no-vendor-prefix": true,
+    "no-descending-specificity": null,
+    "no-eol-whitespace": null,
+    "string-quotes": "single",
+    "scale-unlimited/declaration-strict-value": [
+      ["/color/", "background", "fill", "stroke"],
+      {"ignoreKeywords": ["currentColor", "transparent", "inherit"]}
+    ],
+    "selector-type-no-unknown": [true,
+      {"ignore": ["custom-elements"]}
+    ]
+  }
+}
