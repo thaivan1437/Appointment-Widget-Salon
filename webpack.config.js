@@ -17,6 +17,10 @@ module.exports = {
     widgets: 'index.js',
     loader: 'loader.js',
   },
+  performance: {
+    maxEntrypointSize: 1000000,
+    maxAssetSize: 1000000,
+  },
   output: {
     path: path.resolve('build', version),
     filename: '[name].js',
