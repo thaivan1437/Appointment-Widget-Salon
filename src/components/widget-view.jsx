@@ -756,7 +756,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                       headers: {
                         'x-api-key': CONFIGS.xApiKey,
                         'x-app-version': CONFIGS.xAppVersion,
-                        'time-zone': CONFIGS.timeZone,
+                        timeZone: CONFIGS.timeZone,
                       },
                     })
                     .then(() => {
