@@ -734,7 +734,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     customerName: userName,
                     customerPhoneNumber: `+1${userPhone.replace(/[^\d]/g, '')}`,
                     numberOfPeople: userCount,
-                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     date: getRequestDateString(selectedDate.dateValue),
                     preferTime1: getHourString(selectedTime1),
                     preferTime2: getHourString(selectedTime2),
