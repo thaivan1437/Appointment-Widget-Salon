@@ -74,6 +74,7 @@ window.initWidget = function (d, appId) {
         timeZone: CONFIGS.timeZone,
       },
     });
+
     Promise.all([
       appointmentsData,
       pricingData,
