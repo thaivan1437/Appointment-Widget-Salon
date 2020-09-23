@@ -34,8 +34,8 @@ window.initWidget = function (d, appId) {
       url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/appointment-services/${appId}?debug=true`,
       headers: {
         'x-api-key': CONFIGS.xApiKey,
-        'time-zone': CONFIGS.timeZone,
         'x-app-version': CONFIGS.xAppVersion,
+        timeZone: CONFIGS.timeZone,
       },
     });
     const pricingData = httpUtil.makeRequest({
@@ -43,8 +43,8 @@ window.initWidget = function (d, appId) {
       url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/pricing-services/${appId}`,
       headers: {
         'x-api-key': CONFIGS.xApiKey,
-        'time-zone': CONFIGS.timeZone,
         'x-app-version': CONFIGS.xAppVersion,
+        timeZone: CONFIGS.timeZone,
       },
     });
     const configsData = httpUtil.makeRequest({
@@ -52,8 +52,8 @@ window.initWidget = function (d, appId) {
       url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/configs/${appId}`,
       headers: {
         'x-api-key': CONFIGS.xApiKey,
-        'time-zone': CONFIGS.timeZone,
         'x-app-version': CONFIGS.xAppVersion,
+        timeZone: CONFIGS.timeZone,
       },
     });
     const businessHourData = httpUtil.makeRequest({
@@ -61,8 +61,8 @@ window.initWidget = function (d, appId) {
       url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/business-hours/${appId}`,
       headers: {
         'x-api-key': CONFIGS.xApiKey,
-        'time-zone': CONFIGS.timeZone,
         'x-app-version': CONFIGS.xAppVersion,
+        timeZone: CONFIGS.timeZone,
       },
     });
     const promotionsData = httpUtil.makeRequest({
@@ -70,8 +70,8 @@ window.initWidget = function (d, appId) {
       url: `https://widgets.api.salonmanager.${CONFIGS.domainExtension}/${CONFIGS.version}/promotions/${appId}`,
       headers: {
         'x-api-key': CONFIGS.xApiKey,
-        'time-zone': CONFIGS.timeZone,
         'x-app-version': CONFIGS.xAppVersion,
+        timeZone: CONFIGS.timeZone,
       },
     });
     Promise.all([
