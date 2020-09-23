@@ -202,7 +202,8 @@ const Pricing = ({
                               </div>
 
                               <div>
-                                {variation.price_money.amount &&
+                                {variation.price_money &&
+                                variation.price_money.amount &&
                                 variation.price_money.symbol
                                   ? `${
                                       variation.price_money.symbol

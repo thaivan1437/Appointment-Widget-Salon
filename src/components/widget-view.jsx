@@ -21,235 +21,6 @@ const FALLBACK_COLOR = 'red';
 
 export const ColorContext = React.createContext(COLOR_SCHEMA[FALLBACK_COLOR]);
 
-const WidgetViewWrapper = styled.div`
-  position: absolute;
-
-  width: ${(props) => (props.vertical ? '90px' : 'auto')};
-
-  top: ${(props) => (props.top ? '10px' : 'auto')};
-  left: ${(props) => (props.left ? '10px' : 'auto')};
-  right: ${(props) => (props.right ? '10px' : 'auto')};
-  bottom: ${(props) => (props.bottom ? '10px' : 'auto')};
-`;
-
-const ImageWrapper = styled.img`
-  width: 90px;
-  height: 90px;
-  cursor: pointer;
-`;
-
-const InputWrapper = styled.div`
-  margin-top: 20px;
-
-  width: 400px;
-  @media (max-width: 768px) {
-    width: 300px;
-    margin-top: 10px;
-  }
-`;
-
-const CounterWrapper = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const ButtonWrapper = styled.div`
-  align-self: flex-end;
-  margin: 41px 50px 0 0;
-
-  display: flex;
-  align-items: center;
-  @media (max-width: 768px) {
-    margin: 41px 30px 0 0;
-  }
-`;
-
-// TODO move common styles file
-const ButtonWrapper2 = styled(ButtonWrapper)`
-  margin-top: 11px;
-`;
-
-const ButtonWrapper4 = styled(ButtonWrapper)`
-  margin-top: -10px;
-  @media (max-width: 768px) {
-    margin-top: 10px;
-  }
-`;
-
-const ButtonWrapper3 = styled(ButtonWrapper)`
-  margin-top: 31px;
-`;
-
-const DayPickerWrapper = styled.div`
-  margin: 42px 0;
-`;
-
-const ConfirmMessage = styled.div`
-  display: flex;
-  flex: 1;
-  align-items: center;
-  color: ${COLORS.DOVE_GRAY};
-  font-size: 20px;
-`;
-
-const TimePickerLabel = styled.div`
-  margin-right: 30px;
-  width: 80px;
-  @media (max-width: 768px) {
-    margin-right: 10px;
-  }
-`;
-
-const TimePickerWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  width: 450px;
-  @media (max-width: 768px) {
-    width: 300px;
-  }
-`;
-
-const LineContainer = styled.div`
-  position: relative;
-  border: 1px dashed #e2e2e2;
-  width: 500px;
-  margin: 16px 0px;
-  @media (max-width: 768px) {
-    width: 360px;
-  }
-`;
-
-const LineText = styled.div`
-  position: absolute;
-  top: -11px;
-  left: 252px;
-  border: 1px solid #e2e2e2;
-  padding: 2px;
-  line-height: 1;
-  width: 20px;
-  color: ${COLORS.SILVER_CHALICE};
-  background-color: ${COLORS.WHITE};
-  @media (max-width: 768px) {
-    left: 207px;
-  }
-`;
-
-const BackButton = styled.div`
-  color: ${COLORS.DOVE_GRAY};
-  cursor: pointer;
-  margin-right: 15px;
-`;
-
-const AppointmentInfo = styled.div`
-  color: ${(props) =>
-    props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
-  padding: 0 20px 8px;
-  font-size: 19px;
-  font-weight: 500;
-  text-transform: ${(props) => (props.userName ? 'capitalize' : 'none')};
-
-  text-align: ${(props) => (props.header ? 'center' : 'left')};
-`;
-
-export const FirstStepMessage = styled(AppointmentInfo)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 24px;
-  height: 100%;
-  font-size: 24px;
-  text-align: center;
-`;
-
-const InformationWrapper = styled.div`
-  margin-top: 10px;
-`;
-
-const EditAppointment = styled.div`
-  color: ${(props) => props.color || COLORS.DOVE_GRAY};
-
-  margin: 30px 0;
-
-  cursor: pointer;
-
-  :hover {
-    text-decoration: underline;
-  }
-
-  ${(props) =>
-    props.disabled
-      ? 'opacity: 0.4; pointer-events: none; user-select:none;'
-      : null}
-`;
-const ConfirmationStepWrapper = styled.div`
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-`;
-
-const FormWrapper = styled.div`
-  border: 1px solid ${INPUT_COLORS.BORDER};
-  border-radius: 10px;
-  background-color: ${INPUT_COLORS.BACKGROUND_COLOR};
-`;
-
-const SeparatorLine = styled.div`
-  border-bottom-color: ${INPUT_COLORS.BORDER};
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-`;
-
-const UpToLabel = styled.span`
-  font-size: ${(props) => (props.hasError ? '20px' : '16px')};
-  margin-left: 10px;
-  color: ${(props) => (props.hasError ? 'red' : COLORS.DOVE_GRAY)};
-  transition: font-size 0.5s ease;
-  font-weight: ${(props) => (props.hasError ? 500 : 400)};
-`;
-
-const PolicyContainer = styled.div`
-  position: absolute;
-  bottom: 90px;
-  color: ${COLORS.DOVE_GRAY};
-  width: 400px;
-
-  a,
-  a:visited {
-    color: ${COLORS.DOVE_GRAY};
-  }
-  @media (min-width: 768px) and (max-width: 1024px) {
-    bottom: 360px;
-  }
-  @media (max-width: 768px) {
-    bottom: 300px;
-    width: 300px;
-  }
-`;
-
-const AppointmentPromotionCode = styled.div`
-  position: absolute;
-  display: flex;
-  bottom: 70px;
-  left: 100px;
-  font-size: 22px;
-  color: ${INPUT_COLORS.TEXT_COLOR};
-  @media (min-width: 768px) and (max-width: 1024px) {
-    bottom: 345px;
-  }
-  @media (max-width: 768px) {
-    font-size: 18px;
-    bottom: 270px;
-    left: 30px;
-  }
-`;
-const PromotionCode = styled.div`
-  font-weight: 500;
-`;
-
 const showWidgetButton = (widgetName, registeredWidgets) => {
   return Array.isArray(registeredWidgets)
     ? registeredWidgets.indexOf(widgetName) !== -1
@@ -960,5 +731,234 @@ const WidgetView = ({ widgetConfig, appId }) => {
     </>
   );
 };
+
+const WidgetViewWrapper = styled.div`
+  position: absolute;
+
+  width: ${(props) => (props.vertical ? '90px' : 'auto')};
+
+  top: ${(props) => (props.top ? '10px' : 'auto')};
+  left: ${(props) => (props.left ? '10px' : 'auto')};
+  right: ${(props) => (props.right ? '10px' : 'auto')};
+  bottom: ${(props) => (props.bottom ? '10px' : 'auto')};
+`;
+
+const ImageWrapper = styled.img`
+  width: 90px;
+  height: 90px;
+  cursor: pointer;
+`;
+
+const InputWrapper = styled.div`
+  margin-top: 20px;
+
+  width: 400px;
+  @media (max-width: 768px) {
+    width: 300px;
+    margin-top: 10px;
+  }
+`;
+
+const CounterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const ButtonWrapper = styled.div`
+  align-self: flex-end;
+  margin: 41px 50px 0 0;
+
+  display: flex;
+  align-items: center;
+  @media (max-width: 768px) {
+    margin: 41px 30px 0 0;
+  }
+`;
+
+// TODO move common styles file
+const ButtonWrapper2 = styled(ButtonWrapper)`
+  margin-top: 11px;
+`;
+
+const ButtonWrapper4 = styled(ButtonWrapper)`
+  margin-top: -10px;
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
+`;
+
+const ButtonWrapper3 = styled(ButtonWrapper)`
+  margin-top: 31px;
+`;
+
+const DayPickerWrapper = styled.div`
+  margin: 42px 0;
+`;
+
+const ConfirmMessage = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  color: ${COLORS.DOVE_GRAY};
+  font-size: 20px;
+`;
+
+const TimePickerLabel = styled.div`
+  margin-right: 30px;
+  width: 80px;
+  @media (max-width: 768px) {
+    margin-right: 10px;
+  }
+`;
+
+const TimePickerWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  width: 450px;
+  @media (max-width: 768px) {
+    width: 300px;
+  }
+`;
+
+const LineContainer = styled.div`
+  position: relative;
+  border: 1px dashed #e2e2e2;
+  width: 500px;
+  margin: 16px 0px;
+  @media (max-width: 768px) {
+    width: 360px;
+  }
+`;
+
+const LineText = styled.div`
+  position: absolute;
+  top: -11px;
+  left: 252px;
+  border: 1px solid #e2e2e2;
+  padding: 2px;
+  line-height: 1;
+  width: 20px;
+  color: ${COLORS.SILVER_CHALICE};
+  background-color: ${COLORS.WHITE};
+  @media (max-width: 768px) {
+    left: 207px;
+  }
+`;
+
+const BackButton = styled.div`
+  color: ${COLORS.DOVE_GRAY};
+  cursor: pointer;
+  margin-right: 15px;
+`;
+
+const AppointmentInfo = styled.div`
+  color: ${(props) =>
+    props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
+  padding: 0 20px 8px;
+  font-size: 19px;
+  font-weight: 500;
+  text-transform: ${(props) => (props.userName ? 'capitalize' : 'none')};
+
+  text-align: ${(props) => (props.header ? 'center' : 'left')};
+`;
+
+export const FirstStepMessage = styled(AppointmentInfo)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  height: 100%;
+  font-size: 24px;
+  text-align: center;
+`;
+
+const InformationWrapper = styled.div`
+  margin-top: 10px;
+`;
+
+const EditAppointment = styled.div`
+  color: ${(props) => props.color || COLORS.DOVE_GRAY};
+
+  margin: 30px 0;
+
+  cursor: pointer;
+
+  :hover {
+    text-decoration: underline;
+  }
+
+  ${(props) =>
+    props.disabled
+      ? 'opacity: 0.4; pointer-events: none; user-select:none;'
+      : null}
+`;
+const ConfirmationStepWrapper = styled.div`
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+`;
+
+const FormWrapper = styled.div`
+  border: 1px solid ${INPUT_COLORS.BORDER};
+  border-radius: 10px;
+  background-color: ${INPUT_COLORS.BACKGROUND_COLOR};
+`;
+
+const SeparatorLine = styled.div`
+  border-bottom-color: ${INPUT_COLORS.BORDER};
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+`;
+
+const UpToLabel = styled.span`
+  font-size: ${(props) => (props.hasError ? '20px' : '16px')};
+  margin-left: 10px;
+  color: ${(props) => (props.hasError ? 'red' : COLORS.DOVE_GRAY)};
+  transition: font-size 0.5s ease;
+  font-weight: ${(props) => (props.hasError ? 500 : 400)};
+`;
+
+const PolicyContainer = styled.div`
+  position: absolute;
+  bottom: 90px;
+  color: ${COLORS.DOVE_GRAY};
+  width: 400px;
+
+  a,
+  a:visited {
+    color: ${COLORS.DOVE_GRAY};
+  }
+  @media (min-width: 768px) and (max-width: 1024px) {
+    bottom: 360px;
+  }
+  @media (max-width: 768px) {
+    bottom: 300px;
+    width: 300px;
+  }
+`;
+
+const AppointmentPromotionCode = styled.div`
+  position: absolute;
+  display: flex;
+  bottom: 70px;
+  left: 100px;
+  font-size: 22px;
+  color: ${INPUT_COLORS.TEXT_COLOR};
+  @media (min-width: 768px) and (max-width: 1024px) {
+    bottom: 345px;
+  }
+  @media (max-width: 768px) {
+    font-size: 18px;
+    bottom: 270px;
+    left: 30px;
+  }
+`;
+const PromotionCode = styled.div`
+  font-weight: 500;
+`;
 
 export default WidgetView;
