@@ -13,9 +13,9 @@ import { COLOR_SCHEMA, USERNAME_REGEX } from '@common/constants';
 import { CONFIGS } from '@environment';
 import sortBy from 'lodash/sortBy';
 import { COLORS, INPUT_COLORS } from '@common/colors';
-import Pricing from '../widgets/pricing/pricing';
-import BusinessHours from '../widgets/business-hours/business-hours';
-import Promotions from '../widgets/promotions/promotions';
+import Pricing from '../modules/pricing/pricing';
+import BusinessHours from '../modules/business-hours/business-hours';
+import Promotions from '../modules/promotions/promotions';
 
 const FALLBACK_COLOR = 'red';
 
