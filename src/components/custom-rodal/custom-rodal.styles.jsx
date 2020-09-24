@@ -177,3 +177,12 @@ S.FooterLink = styled.a`
     font-weight: 500;
   }
 `;
+S.FooterLinkRight = styled.a`
+  text-decoration: none;
+  float: right;
+  color: #f8f8f8;
+
+  :hover {
+    font-weight: 400;
+  }
+`;

@@ -648,6 +648,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
               >
                 Salon Manager
               </ModalStyles.FooterLink>
+              <ModalStyles.FooterLinkRight>
+                ${CONFIGS.xAppVersion}
+              </ModalStyles.FooterLinkRight>
+
             </ModalStyles.ModalFooter>
           </ModalStyles.ModalContentContainer>
           <ModalStyles.ModalInformationContainer>
