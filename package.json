@@ -34,8 +34,10 @@
     "next-dev": "npm run package:prepare && PUBLIC_NEXT_ENV=development next dev",
     "next-build": "next build",
     "next-start": "next start",
-    "export": "PUBLIC_NEXT_ENV=development next export",
-    "build:ci": "PUBLIC_NEXT_ENV=development next build"
+    "export": "PUBLIC_NEXT_ENV=production next export",
+    "build:ci": "PUBLIC_NEXT_ENV=production next build",
+    "export-dev": "PUBLIC_NEXT_ENV=development next export",
+    "build-dev:ci": "PUBLIC_NEXT_ENV=development next build"
   },
   "eslintConfig": {
     "extends": "react-app"

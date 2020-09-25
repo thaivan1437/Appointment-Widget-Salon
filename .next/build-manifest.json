@@ -5,8 +5,8 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/9yAFeOriICbgIPNLeAKTh/_buildManifest.js",
-    "static/9yAFeOriICbgIPNLeAKTh/_ssgManifest.js"
+    "static/69TtNObVRQtjv_B2F4aOt/_buildManifest.js",
+    "static/69TtNObVRQtjv_B2F4aOt/_ssgManifest.js"
   ],
   "pages": {
     "/": [
@@ -51,7 +51,7 @@
       "static/chunks/commons.3a96fb0e29500b02f98a.js",
       "static/chunks/be9385f28e2719f5a343c2e9739caae0812a761a.b078663b3b3f76489228.js",
       "static/chunks/4b67c067ba54dfc7affeaf8bf028546f044b323c.2143051413ed7c5db6ca.js",
-      "static/chunks/pages/contact-us-62531a2fe505fdc58f19.js"
+      "static/chunks/pages/contact-us-d7027a7365a6f4d4500a.js"
     ],
     "/permanent-cosmetics": [
       "static/chunks/main-c423e13181483dd797b3.js",
