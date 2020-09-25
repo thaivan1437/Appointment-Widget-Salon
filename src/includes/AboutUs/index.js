@@ -18,7 +18,7 @@ class Permanent extends Component {
     render() {
         return <Container className={classes.container}>
             <Row>
-                <Col style={myStyle.sloganText}>"abcOur salon is completely remodeled and under new management"</Col>
+                <Col style={myStyle.sloganText}>"Our salon is completely remodeled and under new management"</Col>
             </Row>
             <Row>
             {
