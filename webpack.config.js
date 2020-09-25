@@ -6,6 +6,8 @@ const JS_JSX_PATTERN = /\.jsx?$/;
 const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
 module.exports = (env) => {
   return {
     entry: {
