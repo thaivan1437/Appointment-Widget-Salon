@@ -14,11 +14,11 @@ const InlineInformation = styled.span`
   }
 `;
 
-const Counter = ({ countChange, initialValue }) => {
+const Counter = ({ countChange, initialValue }: CounterProps) => {
   const [count, setCount] = useState(initialValue || 1);
 
   // TODO: add callback props
-  const setCountHandler = (actionType) => {
+  const setCountHandler = (actionType: String) => {
     if (actionType === COUNT_ACTIONS.DECREASE && count > 1) {
       const newCount = count - 1;
       setCount(newCount);
@@ -62,6 +62,11 @@ const Counter = ({ countChange, initialValue }) => {
       </S.CountUp>
     </S.CounterWrapper>
   );
+};
+
+export type CounterProps = {
+  countChange: (newCount: number) => void;
+  initialValue?: number;
 };
 
 export default Counter;
