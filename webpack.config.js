@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const version = require('./package.json').version;
 
-const JS_JSX_PATTERN = /\.jsx?$/;
+const JS_JSX_PATTERN = /\.(js|jsx|ts|tsx)$/;
 const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
 
@@ -26,7 +26,7 @@ module.exports = (env) => {
       filename: '[name].js',
     },
     resolve: {
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js', '.jsx', '.tsx', '.ts'],
       alias: {
         '@common': path.resolve(__dirname, 'src', 'common'),
         '@components': path.resolve(__dirname, 'src', 'components'),
