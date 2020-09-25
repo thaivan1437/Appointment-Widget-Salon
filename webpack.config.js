@@ -6,10 +6,13 @@ const JS_JSX_PATTERN = /\.jsx?$/;
 const CSS_PATTERN = /\.css$/i;
 const URL_LOADER_PATTERN = /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/;
 
+const isProd = process.env.NODE_ENV === 'production';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 module.exports = (env) => {
   return {
+    mode: isProd ? 'production' : 'development',
+    devtool: isProd ? 'eval-cheap-module-source-map' : 'source-map',
     entry: {
       widgets: 'index.js',
       loader: 'loader.js',
@@ -45,7 +48,17 @@ module.exports = (env) => {
         },
         {
           test: CSS_PATTERN,
-          use: ['style-loader', 'css-loader'],
+          use: [
+            {
+              loader: 'style-loader',
+            },
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
         },
         {
           test: URL_LOADER_PATTERN,
