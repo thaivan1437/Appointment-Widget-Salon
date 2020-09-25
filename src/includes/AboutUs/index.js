@@ -8,12 +8,6 @@ import classes from './AboutUs.scss'
 
 
 class Permanent extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-        }
-    }
 
     render() {
         return <Container className={classes.container}>
