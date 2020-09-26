@@ -174,8 +174,8 @@ const Pricing = ({
             <div>
               <ModalStyles.ModalDetailContentContainer>
                 {serviceList && serviceList.length > 0 ? (
-                  serviceList.map((service) => (
-                    <>
+                  serviceList.map((service, index) => (
+                    <div key={index}>
                       <ListItemWrapper>
                         <ServiceName>{service.name}</ServiceName>
                         {service.variations &&
@@ -193,8 +193,8 @@ const Pricing = ({
                         ) : null}
                       </ListItemWrapper>
                       {service.variations && service.variations.length > 1
-                        ? service.variations.map((variation) => (
-                            <PriceItem>
+                        ? service.variations.map((variation, index) => (
+                            <PriceItem key={index}>
                               <div>
                                 {variation.name === 'Regular'
                                   ? variation.name.toLowerCase()
@@ -215,7 +215,7 @@ const Pricing = ({
                             </PriceItem>
                           ))
                         : null}
-                    </>
+                    </div>
                   ))
                 ) : (
                   <FirstStepMessage>Prices will appear here</FirstStepMessage>

@@ -45,9 +45,9 @@ const ServiceSelection = ({
   return (
     <S.ServiceSelectionContainer>
       <S.ServiceCategoryContainer>
-        {categories.map((category) => (
-          // eslint-disable-next-line react/jsx-key
+        {categories.map((category, index) => (
           <S.CategoryItem
+            key={index}
             onClick={() => {
               setSelectedCategory(category);
             }}
@@ -68,9 +68,9 @@ const ServiceSelection = ({
         {selectedItems &&
           selectedItems.categoryItems &&
           selectedItems.categoryItems.length > 0 &&
-          selectedItems.categoryItems.map((service) => (
-            // eslint-disable-next-line react/jsx-key
+          selectedItems.categoryItems.map((service, index) => (
             <S.ServiceItem
+              key={index}
               onClick={() => {
                 const tempSelectedServicesIds = [...selectedServicesIds];
                 const tempSelectedServices = [...selectedServices];
