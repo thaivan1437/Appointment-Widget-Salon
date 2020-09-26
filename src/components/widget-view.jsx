@@ -651,7 +651,6 @@ const WidgetView = ({ widgetConfig, appId }) => {
               <ModalStyles.FooterLinkRight>
                 ${CONFIGS.xAppVersion}
               </ModalStyles.FooterLinkRight>
-
             </ModalStyles.ModalFooter>
           </ModalStyles.ModalContentContainer>
           <ModalStyles.ModalInformationContainer>
@@ -698,8 +697,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
 
               {selectedStep > 4 ? (
                 <InformationWrapper>
-                  {selectedServices.map((service) => (
-                    <AppointmentInfo>{service.name}</AppointmentInfo>
+                  {selectedServices.map((service, index) => (
+                    <AppointmentInfo key={index}>
+                      {service.name}
+                    </AppointmentInfo>
                   ))}
                 </InformationWrapper>
               ) : null}

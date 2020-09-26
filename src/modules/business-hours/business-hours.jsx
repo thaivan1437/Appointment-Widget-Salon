@@ -219,7 +219,7 @@ const BusinessHours = ({
                   ? businessHours.periods.map((item, index) => {
                       // console.log(openTimeStart(item.hours[0]['openTime'],item.hours[0]['closeTime']))
                       return (
-                        <MainRow>
+                        <MainRow key={index}>
                           <ItemCell
                             style={{
                               backgroundColor: colorWeekend(index, color),
@@ -296,7 +296,7 @@ const BusinessHours = ({
             <HolidayTitle header>Holidays and Closed Days</HolidayTitle>
             {businessHours.holidays &&
             parseInt(businessHours.holidays.length) > 0
-              ? businessHours.holidays.map((holidayItem) => {
+              ? businessHours.holidays.map((holidayItem, index) => {
                   const date_options = {
                     year: 'numeric',
                     month: 'long',
@@ -304,7 +304,7 @@ const BusinessHours = ({
                   };
                   const start_date = new Date(holidayItem.date);
                   return (
-                    <>
+                    <div key={index}>
                       <HolidayItem>
                         <ListCycle className="list-cycle" color={color} />
                         {holidayItem.name}
@@ -312,7 +312,7 @@ const BusinessHours = ({
                       <HolidayDateItem>
                         {start_date.toLocaleDateString('en-US', date_options)}
                       </HolidayDateItem>
-                    </>
+                    </div>
                   );
                 })
               : null}
