@@ -35,7 +35,7 @@ window.initWidget = function (d, appId) {
       headers: {
         'x-api-key': CONFIGS.xApiKey,
         'x-app-version': CONFIGS.xAppVersion,
-        timeZone: CONFIGS.timeZone,
+        timezone: CONFIGS.timeZone,
       },
     });
     const pricingData = httpUtil.makeRequest({
@@ -44,7 +44,7 @@ window.initWidget = function (d, appId) {
       headers: {
         'x-api-key': CONFIGS.xApiKey,
         'x-app-version': CONFIGS.xAppVersion,
-        timeZone: CONFIGS.timeZone,
+        timezone: CONFIGS.timeZone,
       },
     });
     const configsData = httpUtil.makeRequest({
@@ -53,7 +53,7 @@ window.initWidget = function (d, appId) {
       headers: {
         'x-api-key': CONFIGS.xApiKey,
         'x-app-version': CONFIGS.xAppVersion,
-        timeZone: CONFIGS.timeZone,
+        timezone: CONFIGS.timeZone,
       },
     });
     const businessHourData = httpUtil.makeRequest({
@@ -62,7 +62,7 @@ window.initWidget = function (d, appId) {
       headers: {
         'x-api-key': CONFIGS.xApiKey,
         'x-app-version': CONFIGS.xAppVersion,
-        timeZone: CONFIGS.timeZone,
+        timezone: CONFIGS.timeZone,
       },
     });
     const promotionsData = httpUtil.makeRequest({
@@ -71,7 +71,7 @@ window.initWidget = function (d, appId) {
       headers: {
         'x-api-key': CONFIGS.xApiKey,
         'x-app-version': CONFIGS.xAppVersion,
-        timeZone: CONFIGS.timeZone,
+        timezone: CONFIGS.timeZone,
       },
     });
 
