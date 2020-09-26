@@ -505,7 +505,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     customerName: userName,
                     customerPhoneNumber: `+1${userPhone.replace(/[^\d]/g, '')}`,
                     numberOfPeople: userCount,
-                    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                    timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
                     date: getRequestDateString(selectedDate.dateValue),
                     preferTime1: getHourString(selectedTime1),
                     preferTime2: getHourString(selectedTime2),
@@ -527,7 +527,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                       headers: {
                         'x-api-key': CONFIGS.xApiKey,
                         'x-app-version': CONFIGS.xAppVersion,
-                        timeZone: CONFIGS.timeZone,
+                        timezone: CONFIGS.timeZone,
                       },
                     })
                     .then(() => {
