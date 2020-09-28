@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import WidgetView from '@components/widget-view';
+import WidgetView from '@components/widget-view/widget-view';
 import '@common/fonts.css';
 import httpUtil from '@common/HttpUtil';
 import * as Sentry from '@sentry/react';
