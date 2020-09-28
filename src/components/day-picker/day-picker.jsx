@@ -4,7 +4,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { getDates } from '@common/utils';
 import { S } from 'components/day-picker/day-picker.styles';
-import { ColorContext } from '@components/widget-view';
+import { ColorContext } from '@components/widget-view/widget-view';
 import { useMediaQuery } from 'react-responsive';
 
 const SETTINGS = {

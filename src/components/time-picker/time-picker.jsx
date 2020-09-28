@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ColorContext } from '@components/widget-view';
+import { ColorContext } from '@components/widget-view/widget-view';
 import { S } from './time-picker.styles';
 
 const HOURS = [

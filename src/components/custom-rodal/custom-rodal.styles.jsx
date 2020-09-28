@@ -180,8 +180,7 @@ S.FooterLink = styled.a`
 S.FooterLinkRight = styled.a`
   text-decoration: none;
   float: right;
-  color: #f8f8f8;
-
+  color: #aaaaaa;
   :hover {
     font-weight: 400;
   }

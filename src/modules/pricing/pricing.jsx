@@ -1,7 +1,7 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import React, { useState, useEffect } from 'react';
-import { ColorContext, FirstStepMessage } from '@components/widget-view';
+import { ColorContext, FirstStepMessage } from '@components/widget-view/widget-view';
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 import sortBy from 'lodash/sortBy';
@@ -167,6 +167,9 @@ const Pricing = ({
             >
               Salon Manager
             </ModalStyles.FooterLink>
+            <ModalStyles.FooterLinkRight>
+              {CONFIGS.xAppVersion}
+            </ModalStyles.FooterLinkRight>
           </ModalStyles.HalfModelFooter>
         </ModalStyles.HalfModalContent>
         <PricingModalInformationContainer>

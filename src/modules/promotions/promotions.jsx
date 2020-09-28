@@ -1,7 +1,7 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import React, { useRef, useEffect } from 'react';
-import { ColorContext } from '@components/widget-view';
+import { ColorContext } from '@components/widget-view/widget-view';
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 import { getDisplayDateString } from '@common/utils';
@@ -218,6 +218,9 @@ const Promotions = ({
             >
               Salon Manager
             </ModalStyles.FooterLink>
+            <ModalStyles.FooterLinkRight>
+              {CONFIGS.xAppVersion}
+            </ModalStyles.FooterLinkRight>
           </ModalStyles.ModalFooter>
         </CustomModalContent>
       </ColorContext.Provider>
