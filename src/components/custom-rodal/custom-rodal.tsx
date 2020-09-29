@@ -1,20 +1,15 @@
-import React from 'react';
-import { S } from '@components/custom-rodal/custom-rodal.styles';
+import React, { FC } from 'react';
+// @ts-ignore
 import { CONFIGS } from '@environment';
 import { useMediaQuery } from 'react-responsive';
+import { S } from './custom-rodal.styles';
 
-const CustomRodal = ({
-  // eslint-disable-next-line react/prop-types
+const CustomRodal: FC<CustomRodalProps> = ({
   children,
-  // eslint-disable-next-line react/prop-types
   showModal,
-  // eslint-disable-next-line react/prop-types
   setShowModal,
-  // eslint-disable-next-line react/prop-types
   selectedStyle,
-  // eslint-disable-next-line react/prop-types
   halfMode,
-  // eslint-disable-next-line react/prop-types
   width,
 }) => {
   const isTablet = useMediaQuery({
@@ -58,6 +53,15 @@ const CustomRodal = ({
       <S.ModalContentWrapper>{children}</S.ModalContentWrapper>
     </S.CustomRodal>
   );
+};
+
+export type CustomRodalProps = {
+  children: any;
+  showModal: boolean;
+  setShowModal: (showModel: boolean) => void;
+  selectedStyle?: string;
+  halfMode: boolean;
+  width: number;
 };
 
 export default CustomRodal;
