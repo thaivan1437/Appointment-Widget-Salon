@@ -67,12 +67,12 @@ class Manager extends Component {
             ? STYLES[widget.config.position]
             : null
         }
-      ></div>
+      />
       <Helmet>
         <script
           src={`${window.SMWS.cdnBaseUrl}/widget_${widget.widgetName}_bundle.js`}
           async
-        ></script>
+        />
       </Helmet>
     </>
   );

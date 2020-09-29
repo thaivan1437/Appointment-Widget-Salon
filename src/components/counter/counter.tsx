@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 // @ts-ignore
 import { COUNT_ACTIONS, COUNTER_MAX_LIMIT } from '@common/constants';
@@ -6,7 +6,7 @@ import { COUNT_ACTIONS, COUNTER_MAX_LIMIT } from '@common/constants';
 import { INPUT_COLORS } from '@common/colors';
 import { S } from './counter.styles';
 
-// eslint-disable-next-line no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-unused-vars,no-unused-vars
 const InlineInformation = styled.span`
   padding: 0 10px;
   color: ${INPUT_COLORS.TEXT_COLOR};
@@ -16,7 +16,7 @@ const InlineInformation = styled.span`
   }
 `;
 
-const Counter = ({ countChange, initialValue }: CounterProps) => {
+const Counter: FC<CounterProps> = ({ countChange, initialValue }) => {
   const [count, setCount] = useState(initialValue || 1);
 
   // TODO: add callback props

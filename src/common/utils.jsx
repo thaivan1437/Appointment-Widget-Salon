@@ -58,6 +58,9 @@ const sliderDateObj = (date) => {
   };
 };
 
+/**
+ * @param {Holiday[]} holidays
+ */
 export const getDates = (holidays = []) => {
   const dateArray = [];
   const holidayArray = [];

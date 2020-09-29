@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
 import { getDates } from '@common/utils';
-import { S } from 'components/day-picker/day-picker.styles';
 import { ColorContext } from '@components/widget-view/widget-view';
 import { useMediaQuery } from 'react-responsive';
+import { Holiday } from 'types';
+import { S } from './day-picker.styles';
 
 const SETTINGS = {
   dots: false,
@@ -13,9 +14,15 @@ const SETTINGS = {
   speed: 500,
 };
 
-const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
-  const [selectedDate, setSelectedDate] = useState();
-  const [dates, setDates] = useState([]);
+const DayPicker: FC<DayPickerProps> = ({
+  selectedDateChange,
+  initialValue,
+  holidays,
+}) => {
+  const [selectedDate, setSelectedDate] = useState<
+    DatePickerDate | undefined
+  >();
+  const [dates, setDates] = useState<DatePickerDate[]>([]);
   const [showErrorContainer, setShowErrorContainer] = useState(false);
 
   const isTablet = useMediaQuery({
@@ -25,19 +32,17 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
     query: '(max-width: 768px)',
   });
 
-  useEffect(() => {
-    setDates(getDates(holidays));
-  }, []);
+  useEffect(() => setDates(getDates(holidays)), []);
 
   useEffect(() => {
     if (initialValue) {
       handleDateChange(initialValue);
     } else {
-      handleDateChange(dates[0] || {});
+      handleDateChange(dates[0] || undefined);
     }
   }, [dates]);
 
-  const handleDateChange = (dateItem) => {
+  const handleDateChange = (dateItem: DatePickerDate) => {
     setSelectedDate(dateItem);
 
     if (selectedDateChange) {
@@ -47,7 +52,7 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
 
   return (
     <ColorContext.Consumer>
-      {(color) => (
+      {(color: string) => (
         <S.DayPickerWrapper color={color}>
           <Slider
             {...SETTINGS}
@@ -59,8 +64,8 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
                 <S.DayItem
                   color={color}
                   selected={
-                    selectedDate.day === dateItem.day &&
-                    selectedDate.month === dateItem.month
+                    selectedDate?.day === dateItem.day &&
+                    selectedDate?.month === dateItem.month
                   }
                   onMouseEnter={() => {
                     setShowErrorContainer(dateItem.isHoliday);
@@ -87,6 +92,20 @@ const DayPicker = ({ selectedDateChange, initialValue, holidays }) => {
       )}
     </ColorContext.Consumer>
   );
+};
+
+export type DayPickerProps = {
+  selectedDateChange: (dateItem: DatePickerDate) => void;
+  initialValue: DatePickerDate;
+  holidays: Holiday[];
+};
+
+type DatePickerDate = {
+  isHoliday: boolean;
+  day: any;
+  weekday: any;
+  month: any;
+  dateValue: Date;
 };
 
 export default DayPicker;
