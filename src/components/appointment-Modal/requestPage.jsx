@@ -116,7 +116,7 @@ const ConfirmationStepWrapper = styled.div`
 
   display: flex;
   flex-direction: column;
-
+  margin: 60px 0;
   justify-content: center;
   align-items: center;
 `;
@@ -144,7 +144,7 @@ const PolicyContainer = styled.div`
 
   a,
   a:visited {
-    color: ${COLORS.DOVE_GRAY};
+    color: #0079be;
   }
   @media (min-width: 768px) and (max-width: 1024px) {
     bottom: 360px;

@@ -29,7 +29,12 @@ const MyEntry = (props) => {
           hasError={errors.userName}
           onChange={(event) => {
             const { value } = event.target;
-            const replacedValue = value.replace(USERNAME_REGEX, '');
+            const replacedValue = value
+              .replace(USERNAME_REGEX, '')
+              .toLowerCase()
+              .replace(/\b[a-z](?=[a-z]{2})/g, function (letter) {
+                return letter.toUpperCase();
+              });
 
             if (errors.userName && replacedValue.length >= 2) {
               setErrors((prev) => ({

@@ -6,6 +6,7 @@ import httpUtil from '@common/HttpUtil';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import { CONFIGS, SENTRY_DSN } from '@environment';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 window.initWidget = function (d, appId) {
   const rootElement = document.createElement('div');

@@ -282,10 +282,11 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   }
                 }}
               >
-                Next
+                Next &#8250;
+                {/* 
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                ></img> */}
               </CommonStyles.Button>
             </R.ButtonWrapper4>
           </>
@@ -300,17 +301,15 @@ const WidgetView = ({ widgetConfig, appId }) => {
             />
             <R.ButtonWrapper1>
               <R.BackButton onClick={() => setSelectedStep(1)}>
-                {'< Back'}
+                &lsaquo;
+                {' Back'}
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
                 disabled={!(selectedDate && selectedDate.dateValue)}
                 onClick={() => setSelectedStep(3)}
               >
-                Next
-                <img
-                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                Next &#8250;
               </CommonStyles.Button>
             </R.ButtonWrapper1>
           </>
@@ -318,6 +317,10 @@ const WidgetView = ({ widgetConfig, appId }) => {
       case 3:
         return (
           <>
+            <ModalStyles.ModalStepTitle>
+              Preferred Times
+            </ModalStyles.ModalStepTitle>
+
             <PrefferedTime
               selectedTime1={selectedTime1}
               setSelectedTime1={setSelectedTime1}
@@ -326,17 +329,18 @@ const WidgetView = ({ widgetConfig, appId }) => {
             />
             <R.ButtonWrapper3>
               <R.BackButton onClick={() => setSelectedStep(2)}>
-                {'< Back'}
+                &#8249;
+                {' Back'}
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
                 disabled={!(selectedTime1 && selectedTime2)}
                 onClick={() => setSelectedStep(4)}
               >
-                Next
-                <img
+                Next &#8250;
+                {/* <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                ></img> */}
               </CommonStyles.Button>
             </R.ButtonWrapper3>
           </>
@@ -354,17 +358,19 @@ const WidgetView = ({ widgetConfig, appId }) => {
             />
             <R.ButtonWrapper2>
               <R.BackButton onClick={() => setSelectedStep(3)}>
-                {'< Back'}
+                &lsaquo;
+                {' Back'}
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
                 disabled={selectedServices.length < 1}
                 onClick={() => setSelectedStep(5)}
               >
-                Next{' '}
+                Next &#8250;
+                {/* 
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                ></img> */}
               </CommonStyles.Button>
             </R.ButtonWrapper2>
           </>
