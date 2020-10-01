@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { COLORS } from '@common/colors';
 import TimePicker from '@components/time-picker/time-picker';
 
@@ -14,7 +13,6 @@ const PrefferedTime = (props) => {
 
   return (
     <div>
-      <ModalStyles.ModalStepTitle>Preferred Times</ModalStyles.ModalStepTitle>
       <TimePickerWrapper>
         <TimePickerLabel>
           1<sup>st</sup> Choice
@@ -49,6 +47,7 @@ const PrefferedTime = (props) => {
 const TimePickerWrapper = styled.div`
   display: flex;
   align-items: center;
+  margin-left: 45px;
   width: 450px;
   @media (max-width: 768px) {
     width: 300px;
@@ -73,11 +72,11 @@ const LineContainer = styled.div`
 const LineText = styled.div`
   position: absolute;
   top: -11px;
-  left: 252px;
+  left: 268px;
   border: 1px solid #e2e2e2;
   padding: 2px;
   line-height: 1;
-  width: 20px;
+  width: 25px;
   color: ${COLORS.SILVER_CHALICE};
   background-color: ${COLORS.WHITE};
   @media (max-width: 768px) {

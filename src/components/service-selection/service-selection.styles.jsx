@@ -39,7 +39,7 @@ S.ServiceServicesContainer = styled.div`
   flex: 1;
   overflow-x: hidden;
   overflow-y: scroll;
-
+  margin-left: 24px;
   ::-webkit-scrollbar {
     width: 10px;
     border-radius: 3px;
@@ -69,12 +69,27 @@ S.ServiceItem = styled(BaseItem)``;
 S.IconContainer = styled.img`
   flex-shrink: 0;
 
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 
   margin-right: 8px;
   @media (max-width: 768px) {
     width: 16;
     height: 16px;
+  }
+`;
+
+S.CircleIcon = styled.span`
+  height: 20px;
+  width: 20px;
+  background: red;
+  border-radius: 50px;
+  margin-right: 8px;
+  @media (max-width: 768px) {
+    width: 16px;
+    height: 16px;
+    background: red;
+    border-radius: 50%;
+    margin-right: 8px;
   }
 `;
