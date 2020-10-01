@@ -145,6 +145,10 @@ const Pricing = ({
     >
       <ColorContext.Provider value={color}>
         <ModalStyles.HalfModalContent>
+          <ModalStyles.ModalStepTitle style={{ marginLeft: '84px' }}>
+            Prices
+          </ModalStyles.ModalStepTitle>
+
           <MainCategoryListWrapper>
             {mainCategoryList && mainCategoryList.length > 0
               ? mainCategoryList.map((a) => (

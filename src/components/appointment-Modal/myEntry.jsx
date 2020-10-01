@@ -166,7 +166,7 @@ const SeparatorLine = styled.div`
 const AppointmentPromotionCode = styled.div`
   position: absolute;
   display: flex;
-  bottom: 70px;
+  bottom: 60px;
   left: 100px;
   font-size: 22px;
   color: ${INPUT_COLORS.TEXT_COLOR};
