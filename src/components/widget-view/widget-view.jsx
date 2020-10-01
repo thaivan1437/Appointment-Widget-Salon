@@ -282,7 +282,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                   }
                 }}
               >
-                Next &#8250;
+                Next&#65125;
                 {/* 
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
@@ -309,7 +309,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 disabled={!(selectedDate && selectedDate.dateValue)}
                 onClick={() => setSelectedStep(3)}
               >
-                Next &#8250;
+                Next&#65125;
               </CommonStyles.Button>
             </R.ButtonWrapper1>
           </>
@@ -337,7 +337,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 disabled={!(selectedTime1 && selectedTime2)}
                 onClick={() => setSelectedStep(4)}
               >
-                Next &#8250;
+                Next&#65125;
                 {/* <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
                 ></img> */}
@@ -366,7 +366,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 disabled={selectedServices.length < 1}
                 onClick={() => setSelectedStep(5)}
               >
-                Next &#8250;
+                Next&#65125;
                 {/* 
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
