@@ -98,7 +98,7 @@ export interface WidgetData {
   categoryPrices: CategoryPrice[];
 }
 
-export interface ConfigData extends AppConfig {
+export interface WidgetConfigData extends AppConfig {
   widgets: Widget[];
   widgetData: WidgetData;
 }

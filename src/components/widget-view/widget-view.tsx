@@ -9,16 +9,16 @@ import { COLOR_SCHEMA } from '@common/constants';
 // @ts-ignore
 import { CONFIGS } from '@environment';
 import { COLORS } from '@common/colors';
-import MyEntry from '@components/appointment-Modal/my-entry';
-import AppointmentDate from '@components/appointment-Modal/appointment-date';
-import PreferredTime from '@components/appointment-Modal/preffered-time';
-import DesiredService from '@components/appointment-Modal/desired-service';
-import RequestPage from '@components/appointment-Modal/request-page';
+import MyEntry from '@components/appointment-modal/my-entry';
+import AppointmentDate from '@components/appointment-modal/appointment-date';
+import PreferredTime from '@components/appointment-modal/preffered-time';
+import DesiredService from '@components/appointment-modal/desired-service';
+import RequestPage from '@components/appointment-modal/request-page';
 import Pricing from '@modules/pricing/pricing';
 import BusinessHours from '@modules/business-hours/business-hours';
 import Promotions from '@modules/promotions/promotions';
 import { DatePickerDate } from '@components/day-picker/day-picker';
-import { ConfigData, Promotion } from '../../types';
+import { WidgetConfigData, Promotion } from '../../types';
 
 const FALLBACK_COLOR = 'red';
 
@@ -551,7 +551,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
 };
 
 export type WidgetViewProps = {
-  widgetConfig: ConfigData;
+  widgetConfig: WidgetConfigData;
   appId: string;
 };
 
