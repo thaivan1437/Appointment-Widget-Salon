@@ -10,14 +10,12 @@ type EventTargetState<T> = { name: keyof T; value: string }
 
 type Opaque<K, T> = T & { __TYPE__: K }
 
-type AppConfig = DeepPartial<{
-}>
+type AppConfig = DeepPartial<{}>
 
 type PartialAppConfig = DeepPartial<AppConfig>
 
 interface Window {
-  AppConfig: AppConfig
-  fcWidget: typeof import('fcWidget')
+  initWidget: (document: Document, apId: string) => void
 }
 
 declare namespace NodeJS {

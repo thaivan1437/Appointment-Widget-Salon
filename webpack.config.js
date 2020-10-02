@@ -14,7 +14,7 @@ module.exports = (env) => {
     mode: isProd ? 'production' : 'development',
     devtool: isProd ? 'eval-cheap-module-source-map' : 'source-map',
     entry: {
-      widgets: 'index.js',
+      widgets: 'index.tsx',
       loader: 'loader.js',
     },
     performance: {
@@ -30,6 +30,7 @@ module.exports = (env) => {
       alias: {
         '@common': path.resolve(__dirname, 'src', 'common'),
         '@components': path.resolve(__dirname, 'src', 'components'),
+        '@modules': path.resolve(__dirname, 'src', 'modules'),
         '@environment': path.resolve(
           __dirname,
           'src',

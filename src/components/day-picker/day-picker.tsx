@@ -100,7 +100,7 @@ export type DayPickerProps = {
   holidays: Holiday[];
 };
 
-type DatePickerDate = {
+export type DatePickerDate = {
   isHoliday: boolean;
   day: any;
   weekday: any;

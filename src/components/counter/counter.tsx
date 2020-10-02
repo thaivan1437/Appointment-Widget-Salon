@@ -1,8 +1,6 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-// @ts-ignore
 import { COUNT_ACTIONS, COUNTER_MAX_LIMIT } from '@common/constants';
-// @ts-ignore
 import { INPUT_COLORS } from '@common/colors';
 import { S } from './counter.styles';
 

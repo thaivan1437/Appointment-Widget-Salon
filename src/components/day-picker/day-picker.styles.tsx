@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 
-export const S = {};
+export const S: any = {};
 
 S.DayPickerWrapper = styled.div`
   width: 400px;
@@ -39,7 +39,8 @@ S.DayPickerWrapper = styled.div`
     font-size: 18px;
   }
 `;
-S.DayItem = styled.div`
+
+S.DayItem = styled.div<{ selected: String; isHoliday: Boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;

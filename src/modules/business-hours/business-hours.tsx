@@ -1,12 +1,14 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import React from 'react';
+import React, { FC } from 'react';
 import { ColorContext } from '@components/widget-view/widget-view';
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
+// @ts-ignore
 import { CONFIGS } from '@environment';
 import { colorWeekend } from '@common/utils';
 import { PHONE_REGEX } from '@common/constants';
+import { WorkingHours } from '../../types';
 
 const MainContent = styled.div`
   display: table;
@@ -68,18 +70,23 @@ const HolidayItem = styled.div`
     padding-top: 5px;
   }
 `;
-const HolidayTitle = styled.div`
+
+export type HolidayTitleStyleProp = { header: boolean };
+
+const HolidayTitle = styled.div<HolidayTitleStyleProp>`
   color: ${(props) =>
     props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
   padding: 0 20px 8px;
   font-size: 20px;
   text-align: ${(props) => (props.header ? 'center' : 'left')};
 `;
+
 const HolidayModalInformationContainer = styled(
   ModalStyles.ModalInformationContainer
 )`
   display: flex;
 `;
+
 const HolidayListWrapper = styled.div`
   overflow: auto;
   width: 100%;
@@ -97,6 +104,7 @@ const HolidayListWrapper = styled.div`
     overflow: scroll;
   }
 `;
+
 const ListCycle = styled.div`
   width: 8px;
   height: 8px;
@@ -105,6 +113,7 @@ const ListCycle = styled.div`
   margin-top: 6px;
   margin-right: 8px;
 `;
+
 const HolidayDateItem = styled.div`
   color: ${COLORS.SILVER_CHALICE};
   padding: 2px 35px 0;
@@ -173,7 +182,7 @@ const getFormattedPhone = (phoneString) => {
     : null;
 };
 
-const BusinessHours = ({
+const BusinessHours: FC<BusinessHoursProps> = ({
   showBusinessHoursModal,
   setShowBusinessHoursModal,
   folderName,
@@ -214,8 +223,7 @@ const BusinessHours = ({
                   <TitleCell>Open</TitleCell>
                   <TitleCell>Close</TitleCell>
                 </MainRow>
-                {businessHours.periods &&
-                parseInt(businessHours.periods.length) > 0
+                {businessHours.periods && businessHours.periods.length > 0
                   ? businessHours.periods.map((item, index) => {
                       // console.log(openTimeStart(item.hours[0]['openTime'],item.hours[0]['closeTime']))
                       return (
@@ -297,8 +305,7 @@ const BusinessHours = ({
         <HolidayModalInformationContainer>
           <HolidayListWrapper>
             <HolidayTitle header>Holidays and Closed Days</HolidayTitle>
-            {businessHours.holidays &&
-            parseInt(businessHours.holidays.length) > 0
+            {businessHours.holidays && businessHours.holidays.length > 0
               ? businessHours.holidays.map((holidayItem, index) => {
                   const date_options = {
                     year: 'numeric',
@@ -330,6 +337,14 @@ const BusinessHours = ({
       </ColorContext.Provider>
     </CustomRodal>
   );
+};
+
+type BusinessHoursProps = {
+  showBusinessHoursModal: boolean;
+  setShowBusinessHoursModal: (show: boolean) => void;
+  folderName: string;
+  color: string;
+  businessHours: WorkingHours;
 };
 
 export default BusinessHours;

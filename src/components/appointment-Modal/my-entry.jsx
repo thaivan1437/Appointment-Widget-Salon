@@ -44,7 +44,7 @@ const MyEntry = (props) => {
           }}
           placeholder="Enter name"
           // hasValue={userName.length > 0}
-        ></CommonStyles.Input>
+        />
         <SeparatorLine />
         <CommonStyles.Input
           value={userPhone}
@@ -86,7 +86,7 @@ const MyEntry = (props) => {
           }}
           placeholder="Enter phone (000) 000-0000"
           // hasValue={userPhone.length > 0}
-        ></CommonStyles.Input>
+        />
       </FormWrapper>
       <InputWrapper>
         <CounterWrapper>

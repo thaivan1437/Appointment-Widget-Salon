@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import styled from 'styled-components';
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as CommonStyles } from '@common/styles';
@@ -6,16 +6,19 @@ import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { R } from '@components/widget-view/widget-view.styles';
 import { getDisplayDateString, getRequestDateString } from '@common/utils';
 import { COLOR_SCHEMA } from '@common/constants';
+// @ts-ignore
 import { CONFIGS } from '@environment';
 import { COLORS } from '@common/colors';
-import MyEntry from './../appointment-Modal/myEntry';
-import AppointmentDate from './../appointment-Modal/appointmentDate';
-import PrefferedTime from './../appointment-Modal/prefferedTime';
-import DesiredService from './../appointment-Modal/desiredService';
-import RequestPage from './../appointment-Modal/requestPage';
-import Pricing from './../../modules/pricing/pricing';
-import BusinessHours from './../../modules/business-hours/business-hours';
-import Promotions from './../../modules/promotions/promotions';
+import MyEntry from '@components/appointment-Modal/my-entry';
+import AppointmentDate from '@components/appointment-Modal/appointment-date';
+import PreferredTime from '@components/appointment-Modal/preffered-time';
+import DesiredService from '@components/appointment-Modal/desired-service';
+import RequestPage from '@components/appointment-Modal/request-page';
+import Pricing from '@modules/pricing/pricing';
+import BusinessHours from '@modules/business-hours/business-hours';
+import Promotions from '@modules/promotions/promotions';
+import { DatePickerDate } from '@components/day-picker/day-picker';
+import { ConfigData, Promotion } from '../../types';
 
 const FALLBACK_COLOR = 'red';
 
@@ -39,7 +42,7 @@ const getValidPromotions = (promotions = []) => {
   return promArray;
 };
 
-const WidgetView = ({ widgetConfig, appId }) => {
+const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
   const [left, setLeft] = useState(false);
   const [right, setRight] = useState(false);
   const [top, setTop] = useState(false);
@@ -52,15 +55,15 @@ const WidgetView = ({ widgetConfig, appId }) => {
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
   const [userCount, setUserCount] = useState(1);
-  const [selectedDate, setSelectedDate] = useState();
-  const [selectedTime1, setSelectedTime1] = useState();
-  const [selectedTime2, setSelectedTime2] = useState();
+  const [selectedDate, setSelectedDate] = useState<DatePickerDate>(null);
+  const [selectedTime1, setSelectedTime1] = useState(null);
+  const [selectedTime2, setSelectedTime2] = useState(null);
   const [selectedServices, setSelectedServices] = useState([]);
   const [color, setColor] = useState(COLOR_SCHEMA[FALLBACK_COLOR]);
-  const [folderName, setFolderName] = useState();
-  const [selectedPromotion, setSelectedPromotion] = useState();
+  const [folderName, setFolderName] = useState<string>();
+  const [selectedPromotion, setSelectedPromotion] = useState<Promotion>(null);
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<ErrorType>({
     userName: false,
     userPhone: false,
     upToLabel: false,
@@ -149,12 +152,12 @@ const WidgetView = ({ widgetConfig, appId }) => {
       setUserName('');
       setUserPhone('');
       setUserCount(1);
-      setSelectedDate();
-      setSelectedTime1();
-      setSelectedTime2();
+      setSelectedDate(null);
+      setSelectedTime1(null);
+      setSelectedTime2(null);
       setSelectedServices([]);
       setShowLoading(false);
-      setSelectedPromotion();
+      setSelectedPromotion(null);
       setErrors({
         userName: false,
         userPhone: false,
@@ -285,7 +288,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 Next
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                />
               </CommonStyles.Button>
             </R.ButtonWrapper4>
           </>
@@ -318,7 +321,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
       case 3:
         return (
           <>
-            <PrefferedTime
+            <PreferredTime
               selectedTime1={selectedTime1}
               setSelectedTime1={setSelectedTime1}
               selectedTime2={selectedTime2}
@@ -482,7 +485,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                     </AppointmentInfo>
                     {selectedPromotion ? (
                       <AppointmentInfo>
-                        Promo code: {selectedPromotion.promoCode}
+                        Promo code: {selectedPromotion?.promoCode}
                       </AppointmentInfo>
                     ) : null}
                   </R.InformationWrapper>
@@ -524,7 +527,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
         setShowPricingModal={setShowPricingModal}
         folderName={folderName}
         color={color}
-        pricingList={widgetConfig.widgetData.pricings}
+        pricingList={widgetConfig.widgetData.categoryPrices}
       />
       {/*Business hours*/}
       <BusinessHours
@@ -547,7 +550,14 @@ const WidgetView = ({ widgetConfig, appId }) => {
   );
 };
 
-const AppointmentInfo = styled.div`
+export type WidgetViewProps = {
+  widgetConfig: ConfigData;
+  appId: string;
+};
+
+type AppointmentInfoStyleProps = { header?: boolean; userName?: boolean };
+
+const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
   color: ${(props) =>
     props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
   padding: 0 20px 8px;
@@ -569,3 +579,9 @@ export const FirstStepMessage = styled(AppointmentInfo)`
 `;
 
 export default WidgetView;
+
+export type ErrorType = {
+  userName?: boolean;
+  userPhone?: boolean;
+  upToLabel?: boolean;
+};

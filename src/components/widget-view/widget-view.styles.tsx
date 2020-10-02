@@ -1,8 +1,16 @@
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 
-export const R = {};
-R.WidgetViewWrapper = styled.div`
+export const R: any = {};
+
+interface WidgetViewWrapperProps {
+  vertical: String;
+  top: String;
+  left: String;
+  right: String;
+  bottom: String;
+}
+R.WidgetViewWrapper = styled.div<WidgetViewWrapperProps>`
   position: absolute;
 
   width: ${(props) => (props.vertical ? '90px' : 'auto')};
