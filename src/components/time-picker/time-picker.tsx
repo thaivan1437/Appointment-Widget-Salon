@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
 import { ColorContext } from '@components/widget-view/widget-view';
 import { S } from './time-picker.styles';
 
@@ -19,12 +19,17 @@ const HOURS = [
 
 const MINUTES = ['00', '10', '20', '30', '40', '50'];
 
-const TimePicker = ({ onTimeSelected, initialValue }) => {
-  const [showHourSelection, setShowHourSelection] = useState(false);
-  const [showMinutesSelection, setShowMinutesSelection] = useState(false);
-  const [selectedHour, setSelectedHour] = useState();
-  const [selectedMinute, setSelectedMinute] = useState('_ _');
-  const [displayHour, setDisplayHour] = useState({ hour: '_ _', text: '' });
+const TimePicker: FC<TimePickerProps> = ({ onTimeSelected, initialValue }) => {
+  const [showHourSelection, setShowHourSelection] = useState<boolean>(false);
+  const [showMinutesSelection, setShowMinutesSelection] = useState<boolean>(
+    false
+  );
+  const [selectedHour, setSelectedHour] = useState<string>();
+  const [selectedMinute, setSelectedMinute] = useState<string>('_ _');
+  const [displayHour, setDisplayHour] = useState<{
+    hour: string;
+    text: string;
+  }>({ hour: '_ _', text: '' });
 
   useEffect(() => {
     if (selectedHour) {
@@ -126,6 +131,16 @@ const TimePicker = ({ onTimeSelected, initialValue }) => {
       ) : null}
     </>
   );
+};
+
+type SelectedTime = {
+  selectedHour: string;
+  selectedMinute: string;
+};
+
+export type TimePickerProps = {
+  onTimeSelected: (selectedTime: SelectedTime) => void;
+  initialValue: SelectedTime;
 };
 
 export default TimePicker;
