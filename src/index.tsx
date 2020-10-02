@@ -7,7 +7,7 @@ import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 // @ts-ignore
 import { CONFIGS, SENTRY_DSN } from '@environment';
-import { ConfigData, Widget } from './types';
+import { WidgetConfigData, Widget } from './types';
 
 window.initWidget = function (d, appId) {
   const rootElement = document.createElement('div');
@@ -86,7 +86,7 @@ window.initWidget = function (d, appId) {
     ])
       .then((result) => {
         const { style, orientation, position } = result[2].data.data;
-        const configData: ConfigData = {
+        const configData: WidgetConfigData = {
           style,
           orientation,
           position,

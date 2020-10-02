@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import DayPicker from '@components/day-picker/day-picker';
+import DayPicker, { DatePickerDate } from '@components/day-picker/day-picker';
+import { WidgetConfigData } from '../../types';
 
-const AppointmentDate = (props) => {
-  const { setSelectedDate, selectedDate, widgetConfig } = props;
-
+const AppointmentDate: FC<AppointmentDateProps> = ({
+  setSelectedDate,
+  selectedDate,
+  widgetConfig,
+}) => {
   return (
     <div>
       <ModalStyles.ModalStepTitle>Appointment Date</ModalStyles.ModalStepTitle>
@@ -27,8 +30,13 @@ const AppointmentDate = (props) => {
   );
 };
 
-// TODO move common styles file
+export type AppointmentDateProps = {
+  setSelectedDate: (date: DatePickerDate) => void;
+  selectedDate: DatePickerDate;
+  widgetConfig: WidgetConfigData;
+};
 
+// TODO move common styles file
 const DayPickerWrapper = styled.div`
   margin: 42px 0;
 `;
