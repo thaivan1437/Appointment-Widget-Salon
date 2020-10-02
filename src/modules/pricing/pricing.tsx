@@ -1,16 +1,16 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import React, { useState, useEffect } from 'react';
-import {
-  ColorContext,
-  FirstStepMessage,
-} from '@components/widget-view/widget-view';
+import React, { useState, useEffect, FC } from 'react';
+import { ColorContext } from '@components/widget-view/widget-view';
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
 import { formatAmount } from '@common/utils';
+// @ts-ignore
 import { CONFIGS } from '@environment';
+import { FirstStepMessage } from '@components/appointment-Modal/my-entry';
+import { CategoryPrice } from '../../types';
 
 const MainCategoryButton = styled.div`
   display: flex;
@@ -101,15 +101,15 @@ const ListItemWrapper = styled.div`
   padding-top: 10px;
 `;
 
-const Pricing = ({
+const Pricing: FC<PricingProps> = ({
   showPricingModal,
   setShowPricingModal,
   folderName,
   color,
-  pricingList = {},
+  pricingList = [],
 }) => {
   const mainCategoryList = pricingList.map((item) => item.category.name).sort();
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState<string>();
   const [serviceList, setServiceList] = useState([]);
 
   useEffect(() => {
@@ -233,6 +233,14 @@ const Pricing = ({
       </ColorContext.Provider>
     </CustomRodal>
   );
+};
+
+export type PricingProps = {
+  showPricingModal: boolean;
+  setShowPricingModal: (show: boolean) => void;
+  folderName: string;
+  color: string;
+  pricingList: CategoryPrice[];
 };
 
 export default Pricing;

@@ -3,7 +3,7 @@ import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
 import { COLORS } from '@common/colors';
 
-export const S = {};
+export const S: any = {};
 
 S.CustomRodal = styled(Rodal)`
   .rodal-dialog {
@@ -56,7 +56,7 @@ S.ModalContentWrapper = styled.div`
   }
 `;
 
-S.DialogCycle = styled.div`
+S.DialogCycle = styled.div<{ top: String; bottom: String }>`
   position: absolute;
   width: 30px;
   height: 30px;

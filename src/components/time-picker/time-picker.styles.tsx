@@ -4,8 +4,8 @@ import { COLORS } from '@common/colors';
 export const S: any = {};
 
 interface SelectionContainerProps {
-  selected: string;
-  hasValue: boolean;
+  selected: String;
+  hasValue: Boolean;
 }
 
 S.SelectionContainer = styled.div<SelectionContainerProps>`
@@ -111,8 +111,7 @@ S.SelectionOptionContainer = styled.div`
   align-items: flex-start;
 `;
 
-// eslint-disable-next-line no-undef
-S.OptionItem = styled.div<{ selected: string }>`
+S.OptionItem = styled.div<{ selected: String }>`
   width: 80px;
   margin-right: 8px;
   margin-bottom: 8px;

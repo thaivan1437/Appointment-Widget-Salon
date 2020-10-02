@@ -1,19 +1,25 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, FC } from 'react';
 import { ColorContext } from '@components/widget-view/widget-view';
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 import { getDisplayDateString } from '@common/utils';
 import Slider from 'react-slick';
+// @ts-ignore
 import { CONFIGS } from '@environment';
+import { Promotion } from '../../types';
 
+interface BaseContentStyleProps {
+  disabled?: boolean;
+  color: string;
+}
 const BaseContentStyle = styled.div`
   color: ${(props) => (props.color ? props.color : COLORS.DOVE_GRAY)};
   text-align: center;
 `;
 
-const ClickableContent = styled(BaseContentStyle)`
+const ClickableContent = styled(BaseContentStyle)<BaseContentStyleProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -136,7 +142,7 @@ const SETTINGS = {
   infinite: false,
 };
 
-const Promotions = ({
+const Promotions: FC<PromotionsProps> = ({
   showPromotionsModal,
   setShowPromotionsModal,
   folderName,
@@ -144,7 +150,7 @@ const Promotions = ({
   promotionData = [],
   makeAnAppointmentClick,
 }) => {
-  const sliderRef = useRef();
+  const sliderRef = useRef(null);
 
   useEffect(() => {
     if (
@@ -226,6 +232,15 @@ const Promotions = ({
       </ColorContext.Provider>
     </CustomRodal>
   );
+};
+
+export type PromotionsProps = {
+  showPromotionsModal: boolean;
+  setShowPromotionsModal: (show: boolean) => void;
+  folderName: string;
+  color: string;
+  promotionData: Promotion[];
+  makeAnAppointmentClick: (promotion: Promotion) => void;
 };
 
 export default Promotions;

@@ -2,7 +2,9 @@
   "env": {
     "browser": true,
     "node": true,
-    "es2021": true
+    "commonjs": true,
+    "es2021": true,
+    "es6": true
   },
   "extends": [
     "eslint:recommended",
@@ -70,40 +72,6 @@
         ".ts",
         ".tsx"
       ]
-    },
-    "import/resolver": {
-//      // use <root>/tsconfig.json
-//      "typescript": {
-//        "alwaysTryTypes": true // always try to resolve types under `<root>@types` directory even it doesn't contain any source code, like `@types/unist`
-//      }
-
-      // use <root>/path/to/folder/tsconfig.json
-//      "typescript": {
-//        "project": "tsconfig.json"
-//      }
-//
-//      // Multiple tsconfigs (Useful for monorepos)
-//
-//      // use a glob pattern
-//      "typescript": {
-//        "project": "packages/*/tsconfig.json"
-//      },
-//
-//      // use an array
-//      "typescript": {
-//        "project": [
-//          "packages/module-a/tsconfig.json",
-//          "packages/module-b/tsconfig.json"
-//        ]
-//      },
-//
-//      // use an array of glob patterns
-//      "typescript": {
-//        "project": [
-//          "packages/*/tsconfig.json",
-//          "other-packages/*/tsconfig.json"
-//        ]
-//      }
     },
     "react": {
       "createClass": "createReactClass",

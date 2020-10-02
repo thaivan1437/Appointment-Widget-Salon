@@ -60,8 +60,8 @@ export type CustomRodalProps = {
   showModal: boolean;
   setShowModal: (showModel: boolean) => void;
   selectedStyle?: string;
-  halfMode: boolean;
-  width: number;
+  halfMode?: boolean;
+  width?: number;
 };
 
 export default CustomRodal;

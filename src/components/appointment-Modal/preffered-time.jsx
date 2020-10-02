@@ -4,7 +4,7 @@ import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { COLORS } from '@common/colors';
 import TimePicker from '@components/time-picker/time-picker';
 
-const PrefferedTime = (props) => {
+const PreferredTime = (props) => {
   const {
     selectedTime1,
     setSelectedTime1,
@@ -85,4 +85,4 @@ const LineText = styled.div`
   }
 `;
 
-export default PrefferedTime;
+export default PreferredTime;

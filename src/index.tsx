@@ -5,7 +5,9 @@ import '@common/fonts.css';
 import httpUtil from '@common/HttpUtil';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
+// @ts-ignore
 import { CONFIGS, SENTRY_DSN } from '@environment';
+import { ConfigData, Widget } from './types';
 
 window.initWidget = function (d, appId) {
   const rootElement = document.createElement('div');
@@ -84,26 +86,21 @@ window.initWidget = function (d, appId) {
     ])
       .then((result) => {
         const { style, orientation, position } = result[2].data.data;
-        const widgets = [
-          'WIDGET_APPOINTMENT',
-          'WIDGET_PRICING',
-          'WIDGET_BUSINESS_HOURS',
-          'WIDGET_PROMOTIONS',
-        ];
-        const appointments = result[0].data.data;
-        const promotions = result[4].data.data;
-        const businessHours = result[3].data.data;
-        const pricings = result[1].data.data;
-        const configData = {
+        const configData: ConfigData = {
           style,
           orientation,
           position,
-          widgets,
+          widgets: [
+            Widget.WIDGET_APPOINTMENT,
+            Widget.WIDGET_PRICING,
+            Widget.WIDGET_BUSINESS_HOURS,
+            Widget.WIDGET_PROMOTIONS,
+          ],
           widgetData: {
-            appointments,
-            promotions,
-            businessHours,
-            pricings,
+            appointments: result[0].data.data,
+            promotions: result[4].data.data,
+            businessHours: result[3].data.data,
+            categoryPrices: result[1].data.data,
           },
         };
         init(configData, appId);
