@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 
-export const S = {};
+export const S: any = {};
 
-S.SelectionContainer = styled.div`
+interface SelectionContainerProps {
+  selected: string;
+  hasValue: boolean;
+}
+
+S.SelectionContainer = styled.div<SelectionContainerProps>`
   width: 120px;
   height: 70px;
   border-radius: 5px;
@@ -106,7 +111,8 @@ S.SelectionOptionContainer = styled.div`
   align-items: flex-start;
 `;
 
-S.OptionItem = styled.div`
+// eslint-disable-next-line no-undef
+S.OptionItem = styled.div<{ selected: string }>`
   width: 80px;
   margin-right: 8px;
   margin-bottom: 8px;

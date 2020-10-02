@@ -310,7 +310,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 Next
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                />
               </CommonStyles.Button>
             </R.ButtonWrapper1>
           </>
@@ -336,7 +336,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 Next
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                />
               </CommonStyles.Button>
             </R.ButtonWrapper3>
           </>
@@ -364,7 +364,7 @@ const WidgetView = ({ widgetConfig, appId }) => {
                 Next{' '}
                 <img
                   src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img>
+                />
               </CommonStyles.Button>
             </R.ButtonWrapper2>
           </>
