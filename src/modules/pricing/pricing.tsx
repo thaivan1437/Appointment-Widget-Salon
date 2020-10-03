@@ -9,8 +9,8 @@ import find from 'lodash/find';
 import { formatAmount } from '@common/utils';
 // @ts-ignore
 import { CONFIGS } from '@environment';
-import { FirstStepMessage } from '@components/appointment-Modal/my-entry';
-import { CategoryPrice } from '../../types';
+import { FirstStepMessage } from '@components/appointment-modal/my-entry';
+import { ProvidedService } from '../../types';
 
 const MainCategoryButton = styled.div`
   display: flex;
@@ -240,7 +240,7 @@ export type PricingProps = {
   setShowPricingModal: (show: boolean) => void;
   folderName: string;
   color: string;
-  pricingList: CategoryPrice[];
+  pricingList: ProvidedService[];
 };
 
 export default Pricing;

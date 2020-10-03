@@ -81,7 +81,7 @@ export interface Category {
   name: string;
 }
 
-export interface CategoryPrice {
+export interface ProvidedService {
   categoryItems: CategoryItem[];
   category: Category;
 }
@@ -95,7 +95,7 @@ export interface WidgetData {
   appointments: Appointment[];
   promotions: Promotion[];
   businessHours: WorkingHours;
-  categoryPrices: CategoryPrice[];
+  categoryPrices: ProvidedService[];
 }
 
 export interface WidgetConfigData extends AppConfig {

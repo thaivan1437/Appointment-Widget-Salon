@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 
-export const S = {};
+export const S: any = {};
 
 S.ServiceSelectionContainer = styled.div`
   * {

@@ -1,17 +1,22 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { COLORS } from '@common/colors';
 import TimePicker from '@components/time-picker/time-picker';
+import { SelectedTime } from '@components/widget-view/widget-view';
 
-const PreferredTime = (props) => {
-  const {
-    selectedTime1,
-    setSelectedTime1,
-    selectedTime2,
-    setSelectedTime2,
-  } = props;
-
+export type PreferredTimeProps = {
+  selectedTime1: SelectedTime;
+  setSelectedTime1: (time: SelectedTime) => void;
+  selectedTime2: SelectedTime;
+  setSelectedTime2: (time: SelectedTime) => void;
+};
+const PreferredTime: FC<PreferredTimeProps> = ({
+  selectedTime1,
+  setSelectedTime1,
+  selectedTime2,
+  setSelectedTime2,
+}) => {
   return (
     <div>
       <ModalStyles.ModalStepTitle>Preferred Times</ModalStyles.ModalStepTitle>
