@@ -56,8 +56,8 @@ const RequestPage: FC<RequestPageProps> = ({
               numberOfPeople: userCount,
               timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
               date: getRequestDateString(selectedDate.dateValue),
-              preferTime1: getHourString(selectedTime1),
-              preferTime2: getHourString(selectedTime2),
+              preferredTime1: getHourString(selectedTime1),
+              preferredTime2: getHourString(selectedTime2),
               selectedCategoryItemIds: selectedServices.map(
                 (service) => service.id
               ),
