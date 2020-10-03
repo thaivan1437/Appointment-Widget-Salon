@@ -3,6 +3,7 @@ import React, { useState, useEffect, FC } from 'react';
 import { CONFIGS } from '@environment';
 import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
+import { Collapse } from 'reactstrap';
 import { S } from './service-selection.styles';
 import { CategoryItem, ProvidedService } from '../../types';
 
@@ -12,10 +13,14 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
   serviceList = [],
   setErrors,
 }) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const toggle = () => setIsOpen(!isOpen);
+
   const [selectedCategory, setSelectedCategory] = useState<string>(null);
   const [selectedServicesIds, setSelectedServicesIds] = useState<string[]>([]);
   const [selectedServices, setSelectedServices] = useState(initialValue || []);
   const [selectedItems, setSelectedItems] = useState<ProvidedService>(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const categories = serviceList.map((item) => item.category.name).sort();
 
@@ -44,74 +49,99 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
     onServiceSelected(selectedServices);
   }, [selectedServices]);
 
+  function multipleCollaps(category) {
+    if (selectedCategories.includes(category)) {
+      const arr = selectedCategories.filter((ct) => ct != category);
+      // arr.push(category)
+      setSelectedCategories(arr);
+    } else {
+      let arr = [];
+      arr = [...selectedCategories];
+      arr.push(category);
+      setSelectedCategories(arr);
+    }
+  }
+  function selectedCategoriesCheck(category) {
+    if (selectedCategories.includes(category)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <S.ServiceSelectionContainer>
       <S.ServiceCategoryContainer>
-        {categories.map((category, index) => (
-          <S.CategoryItem
-            key={index}
-            onClick={() => {
-              setSelectedCategory(category);
-            }}
-            selected={selectedCategory === category}
-          >
-            <S.IconContainer
-              src={
-                selectedCategory === category
-                  ? `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/radio_on.png`
-                  : `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/radio_off.png`
-              }
-            />
-            <div>{category}</div>
-          </S.CategoryItem>
+        {serviceList.map((item, index) => (
+          <div key={index}>
+            <S.CategoryItem
+              onClick={() => {
+                toggle();
+                setSelectedCategory(item.category.name);
+                multipleCollaps(item.category.name);
+              }}
+              selected={selectedCategory === item.category.name}
+            >
+              <S.CircleIcon></S.CircleIcon>
+              <div>{item.category.name}</div>
+            </S.CategoryItem>
+
+            <Collapse isOpen={selectedCategoriesCheck(item.category.name)}>
+              <S.ServiceServicesContainer>
+                {selectedItems &&
+                  item.categoryItems &&
+                  item.categoryItems.length > 0 &&
+                  item.categoryItems.map((service, index) => (
+                    // eslint-disable-next-line react/jsx-key
+                    <S.ServiceItem
+                      key={index}
+                      onClick={() => {
+                        const tempSelectedServicesIds = [
+                          ...selectedServicesIds,
+                        ];
+                        const tempSelectedServices = [...selectedServices];
+
+                        if (
+                          tempSelectedServicesIds.indexOf(service.id) === -1
+                        ) {
+                          if (tempSelectedServicesIds.length < 4) {
+                            tempSelectedServices.push(service);
+                          } else {
+                            setErrors((prev) => ({
+                              ...prev,
+                              upToLabel: true,
+                            }));
+                          }
+                        } else {
+                          setErrors((prev) => ({
+                            ...prev,
+                            upToLabel: false,
+                          }));
+
+                          tempSelectedServices.splice(
+                            tempSelectedServicesIds.indexOf(service.id),
+                            1
+                          );
+                        }
+
+                        setSelectedServices(tempSelectedServices);
+                      }}
+                    >
+                      <S.IconContainer
+                        src={
+                          selectedServicesIds.indexOf(service.id) !== -1
+                            ? `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/icon_checked.png`
+                            : `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/radio_off.png`
+                        }
+                      />
+
+                      <div>{service.name}</div>
+                    </S.ServiceItem>
+                  ))}
+              </S.ServiceServicesContainer>
+            </Collapse>
+          </div>
         ))}
       </S.ServiceCategoryContainer>
-      <S.ServiceServicesContainer>
-        {selectedItems &&
-          selectedItems.categoryItems &&
-          selectedItems.categoryItems.length > 0 &&
-          selectedItems.categoryItems.map((service, index) => (
-            <S.ServiceItem
-              key={index}
-              onClick={() => {
-                const tempSelectedServicesIds = [...selectedServicesIds];
-                const tempSelectedServices = [...selectedServices];
-
-                if (tempSelectedServicesIds.indexOf(service.id) === -1) {
-                  if (tempSelectedServicesIds.length < 4) {
-                    tempSelectedServices.push(service);
-                  } else {
-                    setErrors((prev) => ({
-                      ...prev,
-                      upToLabel: true,
-                    }));
-                  }
-                } else {
-                  setErrors((prev) => ({
-                    ...prev,
-                    upToLabel: false,
-                  }));
-
-                  tempSelectedServices.splice(
-                    tempSelectedServicesIds.indexOf(service.id),
-                    1
-                  );
-                }
-
-                setSelectedServices(tempSelectedServices);
-              }}
-            >
-              <S.IconContainer
-                src={
-                  selectedServicesIds.indexOf(service.id) !== -1
-                    ? `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/icon_checked.png`
-                    : `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/icon_unchecked.png`
-                }
-              />
-              <div>{service.name}</div>
-            </S.ServiceItem>
-          ))}
-      </S.ServiceServicesContainer>
     </S.ServiceSelectionContainer>
   );
 };

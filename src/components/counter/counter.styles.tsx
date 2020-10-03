@@ -26,7 +26,7 @@ S.CountUp = styled(CountBase)`
 
 S.CountText = styled.div`
   width: 110px;
-  height: 54px;
+  height: 52px;
   line-height: 54px;
   text-align: center;
   box-shadow: 0 0 0 1px ${COLORS.SHADOW};

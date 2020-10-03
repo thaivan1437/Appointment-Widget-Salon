@@ -38,7 +38,7 @@ const ButtonWrapper = styled.div`
 
 // TODO move common styles file
 R.ButtonWrapper1 = styled(ButtonWrapper)`
-  margin-top: 11px;
+  margin-top: 55px;
 `;
 R.ButtonWrapper2 = styled(ButtonWrapper)`
   margin-top: 11px;

@@ -7,6 +7,7 @@ import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 // @ts-ignore
 import { CONFIGS, SENTRY_DSN } from '@environment';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { WidgetConfigData, Widget } from './types';
 
 window.initWidget = function (d, appId) {
