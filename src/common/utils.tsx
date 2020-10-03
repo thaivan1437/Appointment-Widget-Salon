@@ -9,7 +9,10 @@ export const getTimeString = (date) =>
     ? date.toLocaleTimeString('en-US')
     : '';
 
-export const getDisplayDateString = (date, type = {}) => {
+export const getDisplayDateString = (
+  date,
+  type: { month?: string; day?: string; year?: string } = {}
+) => {
   return date && typeof date.toLocaleTimeString === 'function'
     ? date.toLocaleDateString('en-US', {
         month: type.month || 'long',
@@ -43,9 +46,9 @@ const addDays = (date, days) => {
   return tempDate.setDate(tempDate.getDate() + days);
 };
 
-const addMonth = (date, month) => {
+const addMonth = (date, month): Date => {
   const tempDate = new Date(date);
-  return tempDate.setMonth(tempDate.getMonth() + month);
+  return new Date(tempDate.setMonth(tempDate.getMonth() + month));
 };
 
 const sliderDateObj = (date) => {
@@ -83,7 +86,7 @@ export const getDates = (holidays = []) => {
       ...sliderDateObj(tempDate),
       isHoliday: holidayArray.indexOf(dateString) !== -1,
     });
-    currentDate = addDays(currentDate, 1);
+    currentDate = new Date(addDays(currentDate, 1));
   }
 
   return dateArray;
