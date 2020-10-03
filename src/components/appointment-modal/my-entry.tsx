@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { S as CommonStyles } from '@common/styles';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { COLORS, INPUT_COLORS } from '@common/colors';
 import { USERNAME_REGEX } from '@common/constants';
 import Counter from '@components/counter/counter';
+import { Promotion } from '../../types';
 
-const MyEntry = (props) => {
-  const {
-    userName,
-    userPhone,
-    setUserName,
-    setUserPhone,
-    errors,
-    userCount,
-    setErrors,
-    selectedPromotion,
+export type MyEntryProps = {
+  userName: string;
+  userPhone: string;
+  setUserName: (userName: string) => any;
+  setUserPhone: (userPhone: string) => any;
+  userCount: number;
+  setUserCount: (userCount: number) => any;
+  selectedPromotion: Promotion;
+  errors: any;
+  setErrors: (errors: any) => any;
+};
 
-    setUserCount,
-  } = props;
-
+const MyEntry: FC<MyEntryProps> = ({
+  userName,
+  userPhone,
+  setUserName,
+  setUserPhone,
+  errors,
+  userCount,
+  setErrors,
+  selectedPromotion,
+  setUserCount,
+}) => {
   return (
     <div>
       <ModalStyles.ModalStepTitle>Me</ModalStyles.ModalStepTitle>
@@ -125,7 +135,13 @@ const CounterWrapper = styled.div`
   align-items: center;
 `;
 
-const AppointmentInfo = styled.div`
+interface AppointmentInfoStyleProps {
+  header: boolean;
+  userName: boolean;
+  children: string;
+}
+
+const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
   color: ${(props) =>
     props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
   padding: 0 20px 8px;

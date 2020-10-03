@@ -1,29 +1,48 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { COLORS } from '@common/colors';
 import { S as CommonStyles } from '@common/styles';
 import httpUtil from '@common/HttpUtil';
+// @ts-ignore
 import { CONFIGS } from '@environment';
+import { SelectedTime } from '@components/widget-view/widget-view';
+import { DatePickerDate } from '@components/day-picker/day-picker';
+import { CategoryItem, Promotion } from '../../types';
 
-const RequestPage = (props) => {
-  const {
-    color,
-    userName,
-    userPhone,
-    userCount,
-    getRequestDateString,
-    getHourString,
-    selectedDate,
-    selectedTime1,
-    selectedTime2,
-    selectedServices,
-    showLoading,
-    setSelectedStep,
-    setShowLoading,
-    selectedPromotion,
-    appId,
-  } = props;
-
+type RequestPageProps = {
+  color: string;
+  userName: string;
+  userPhone: string;
+  userCount: number;
+  getRequestDateString: (date: Date) => string;
+  getHourString: (time: SelectedTime) => string;
+  selectedDate: DatePickerDate;
+  selectedTime1: SelectedTime;
+  selectedTime2: SelectedTime;
+  selectedServices: CategoryItem[];
+  showLoading: boolean;
+  setSelectedStep: (id: number) => void;
+  setShowLoading: (loading: boolean) => void;
+  selectedPromotion: Promotion;
+  appId: string;
+};
+const RequestPage: FC<RequestPageProps> = ({
+  color,
+  userName,
+  userPhone,
+  userCount,
+  getRequestDateString,
+  getHourString,
+  selectedDate,
+  selectedTime1,
+  selectedTime2,
+  selectedServices,
+  showLoading,
+  setSelectedStep,
+  setShowLoading,
+  selectedPromotion,
+  appId,
+}) => {
   return (
     <div>
       <ConfirmationStepWrapper>
@@ -42,7 +61,7 @@ const RequestPage = (props) => {
               selectedCategoryItemIds: selectedServices.map(
                 (service) => service.id
               ),
-              promotionId: selectedPromotion ? selectedPromotion.promoId : null,
+              promotionId: selectedPromotion ? selectedPromotion.id : null,
             };
 
             setShowLoading(true);
@@ -109,8 +128,8 @@ const RequestPage = (props) => {
     </div>
   );
 };
-// TODO move common styles file
 
+// TODO move common styles file
 const ConfirmationStepWrapper = styled.div`
   flex: 1;
 
@@ -120,7 +139,12 @@ const ConfirmationStepWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const EditAppointment = styled.div`
+
+interface EditAppointmentStylProps {
+  color: string;
+  disabled: boolean;
+}
+const EditAppointment = styled.div<EditAppointmentStylProps>`
   color: ${(props) => props.color || COLORS.DOVE_GRAY};
 
   margin: 30px 0;

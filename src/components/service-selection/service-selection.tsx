@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FC } from 'react';
+// @ts-ignore
 import { CONFIGS } from '@environment';
 import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
 import { S } from './service-selection.styles';
+import { CategoryItem, ProvidedService } from '../../types';
 
-const ServiceSelection = ({
+const ServiceSelection: FC<ServiceSelectionProps> = ({
   initialValue = [],
   onServiceSelected,
-  serviceList = {},
+  serviceList = [],
   setErrors,
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState();
-  const [selectedServicesIds, setSelectedServicesIds] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>(null);
+  const [selectedServicesIds, setSelectedServicesIds] = useState<string[]>([]);
   const [selectedServices, setSelectedServices] = useState(initialValue || []);
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState<ProvidedService>(null);
 
   const categories = serviceList.map((item) => item.category.name).sort();
 
@@ -112,6 +114,13 @@ const ServiceSelection = ({
       </S.ServiceServicesContainer>
     </S.ServiceSelectionContainer>
   );
+};
+
+export type ServiceSelectionProps = {
+  initialValue: CategoryItem[];
+  onServiceSelected: (categoryItems: CategoryItem[]) => void;
+  serviceList: ProvidedService[];
+  setErrors: any;
 };
 
 export default ServiceSelection;

@@ -580,6 +580,11 @@ export const FirstStepMessage = styled(AppointmentInfo)`
 
 export default WidgetView;
 
+export type SelectedTime = {
+  selectedHour: string;
+  selectedMinute: string;
+};
+
 export type ErrorType = {
   userName?: boolean;
   userPhone?: boolean;

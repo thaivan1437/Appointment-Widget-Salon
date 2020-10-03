@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 import { COLORS, INPUT_COLORS } from './colors';
 
-export const S = {};
+export const S: any = {};
 
-S.Input = styled.input`
+interface InputStyleProps {
+  hasError: boolean;
+  hasValue: boolean;
+}
+
+S.Input = styled.input<InputStyleProps>`
   width: 400px;
   font-size: 22px;
   border-radius: 10px;
