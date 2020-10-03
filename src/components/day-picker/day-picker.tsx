@@ -19,9 +19,7 @@ const DayPicker: FC<DayPickerProps> = ({
   initialValue,
   holidays,
 }) => {
-  const [selectedDate, setSelectedDate] = useState<
-    DatePickerDate | undefined
-  >();
+  const [selectedDate, setSelectedDate] = useState<DatePickerDate>(null);
   const [dates, setDates] = useState<DatePickerDate[]>([]);
   const [showErrorContainer, setShowErrorContainer] = useState(false);
 
@@ -37,8 +35,6 @@ const DayPicker: FC<DayPickerProps> = ({
   useEffect(() => {
     if (initialValue) {
       handleDateChange(initialValue);
-    } else {
-      handleDateChange(dates[0] || undefined);
     }
   }, [dates]);
 
@@ -102,9 +98,9 @@ export type DayPickerProps = {
 
 export type DatePickerDate = {
   isHoliday: boolean;
-  day: any;
-  weekday: any;
-  month: any;
+  day: number;
+  weekday: string;
+  month: string;
   dateValue: Date;
 };
 
