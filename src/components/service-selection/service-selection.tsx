@@ -8,6 +8,7 @@ import { S } from './service-selection.styles';
 import { CategoryItem, ProvidedService } from '../../types';
 
 const ServiceSelection: FC<ServiceSelectionProps> = ({
+  color,
   initialValue = [],
   onServiceSelected,
   serviceList = [],
@@ -62,11 +63,7 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
     }
   }
   function selectedCategoriesCheck(category) {
-    if (selectedCategories.includes(category)) {
-      return true;
-    } else {
-      return false;
-    }
+    return selectedCategories.includes(category);
   }
   return (
     <S.ServiceSelectionContainer>
@@ -81,7 +78,7 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
               }}
               selected={selectedCategory === item.category.name}
             >
-              <S.CircleIcon></S.CircleIcon>
+              <S.CircleIcon color={color} />
               <div>{item.category.name}</div>
             </S.CategoryItem>
 
@@ -91,7 +88,6 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
                   item.categoryItems &&
                   item.categoryItems.length > 0 &&
                   item.categoryItems.map((service, index) => (
-                    // eslint-disable-next-line react/jsx-key
                     <S.ServiceItem
                       key={index}
                       onClick={() => {
@@ -147,6 +143,7 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
 };
 
 export type ServiceSelectionProps = {
+  color: string;
   initialValue: CategoryItem[];
   onServiceSelected: (categoryItems: CategoryItem[]) => void;
   serviceList: ProvidedService[];

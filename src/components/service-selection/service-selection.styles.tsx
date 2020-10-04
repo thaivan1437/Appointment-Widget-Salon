@@ -79,16 +79,20 @@ S.IconContainer = styled.img`
   }
 `;
 
-S.CircleIcon = styled.span`
+interface CircleIconStyleProps {
+  color: string;
+}
+
+S.CircleIcon = styled.span<CircleIconStyleProps>`
   height: 20px;
   width: 20px;
-  background: red;
+  background: ${(props) => props.color};
   border-radius: 50px;
   margin-right: 8px;
   @media (max-width: 768px) {
     width: 16px;
     height: 16px;
-    background: red;
+    background: ${(props) => props.color};
     border-radius: 50%;
     margin-right: 8px;
   }

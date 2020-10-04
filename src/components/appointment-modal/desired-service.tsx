@@ -5,6 +5,7 @@ import { COLORS } from '@common/colors';
 import sortBy from 'lodash/sortBy';
 import ServiceSelection from '@components/service-selection/service-selection';
 import { ErrorType } from '@components/widget-view/widget-view';
+import { COLOR_SCHEMA } from '@common/constants';
 import { CategoryItem, WidgetConfigData } from '../../types';
 
 const DesiredService: FC<DesiredServiceProps> = ({
@@ -14,6 +15,12 @@ const DesiredService: FC<DesiredServiceProps> = ({
   selectedServices,
   setSelectedServices,
 }) => {
+  const FALLBACK_COLOR = 'red';
+
+  const color =
+    (widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]) ||
+    COLOR_SCHEMA[FALLBACK_COLOR];
+
   return (
     <div>
       <ModalStyles.ModalStepTitle>
@@ -21,6 +28,7 @@ const DesiredService: FC<DesiredServiceProps> = ({
         <UpToLabel hasError={errors.upToLabel}>(up to 4 Services)</UpToLabel>
       </ModalStyles.ModalStepTitle>
       <ServiceSelection
+        color={color}
         setErrors={setErrors}
         serviceList={widgetConfig.widgetData.appointments}
         initialValue={selectedServices}
