@@ -122,7 +122,7 @@ export const BusinessHoursTitle = styled(ModalStyles.ModalStepTitle)`
 `;
 
 export const BusinessHoursContent = styled(ModalStyles.ModalContentContainer)`
-  padding: 40px 0;
+  padding: 22px 0;
 `;
 
 export const PhoneContent = styled.a`

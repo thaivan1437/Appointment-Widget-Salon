@@ -78,7 +78,7 @@ S.DialogCycle = styled.div<{ top: String; bottom: String }>`
 `;
 
 S.HalfModalDialogCycle = styled(S.DialogCycle)`
-  left: 435px;
+  left: 470px;
 `;
 
 S.ModalContentContainer = styled.div`
@@ -88,7 +88,7 @@ S.ModalContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
 
-  padding: 50px 0 68px;
+  padding: 34px 0 68px;
   @media (min-width: 768px) and (max-width: 1024px) {
     padding: 20px 0 40px;
     flex: 1 1;
@@ -154,7 +154,7 @@ S.HalfModelFooter = styled(S.ModalFooter)`
 S.ModalStepTitle = styled.div`
   width: 400px;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-weight: 500;
   @media (min-width: 768px) and (max-width: 1024px) {
     font-size: 22px;
