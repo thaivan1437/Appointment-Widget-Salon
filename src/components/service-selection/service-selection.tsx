@@ -1,9 +1,10 @@
 import React, { useState, useEffect, FC } from 'react';
 // @ts-ignore
-import { CONFIGS } from '@environment';
 import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
 import { Collapse } from 'reactstrap';
+import IconOptionChecked from '@common/icons/icon-option-checked';
+import IconOptionUnChecked from '@common/icons/icon-option-unchecked';
 import { S } from './service-selection.styles';
 import { CategoryItem, ProvidedService } from '../../types';
 
@@ -122,13 +123,13 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
                         setSelectedServices(tempSelectedServices);
                       }}
                     >
-                      <S.IconContainer
-                        src={
-                          selectedServicesIds.indexOf(service.id) !== -1
-                            ? `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/icon_checked.png`
-                            : `https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/radio_off.png`
-                        }
-                      />
+                      <S.IconContainer>
+                        {selectedServicesIds.indexOf(service.id) !== -1 ? (
+                          <IconOptionChecked />
+                        ) : (
+                          <IconOptionUnChecked />
+                        )}
+                      </S.IconContainer>
 
                       <div>{service.name}</div>
                     </S.ServiceItem>

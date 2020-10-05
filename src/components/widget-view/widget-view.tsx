@@ -18,7 +18,9 @@ import Pricing from '@modules/pricing/pricing';
 import BusinessHours from '@modules/business-hours/business-hours';
 import Promotions from '@modules/promotions/promotions';
 import { DatePickerDate } from '@components/day-picker/day-picker';
+import IconChevronRight from '@common/icons/icon-chevron-right';
 import { WidgetConfigData, Promotion } from '../../types';
+import IconChevronLeft from '../../common/icons/icon-chevron-left';
 
 const FALLBACK_COLOR = 'red';
 
@@ -130,8 +132,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
     setColor(color);
     setFolderName(
       widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]
-        ? widgetConfig.style.toLowerCase()
-        : FALLBACK_COLOR
+        ? widgetConfig.style.toUpperCase()
+        : FALLBACK_COLOR.toUpperCase
     );
 
     const size = (widgetConfig.widgets.length || 1) * 90;
@@ -285,11 +287,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
                   }
                 }}
               >
-                Next &#x203A;
-                {/*
-                <img
-                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img> */}
+                {'Next '}
+                <IconChevronRight />
               </CommonStyles.Button>
             </R.ButtonWrapper4>
           </>
@@ -304,7 +303,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
             />
             <R.ButtonWrapper1>
               <R.BackButton onClick={() => setSelectedStep(1)}>
-                &#x2039;
+                <IconChevronLeft />
                 {' Back'}
               </R.BackButton>
               <CommonStyles.Button
@@ -312,7 +311,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
                 disabled={!(selectedDate && selectedDate.dateValue)}
                 onClick={() => setSelectedStep(3)}
               >
-                Next &#x203A;
+                {'Next '}
+                <IconChevronRight />
               </CommonStyles.Button>
             </R.ButtonWrapper1>
           </>
@@ -332,7 +332,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
             />
             <R.ButtonWrapper3>
               <R.BackButton onClick={() => setSelectedStep(2)}>
-                &#x2039;
+                <IconChevronLeft />
                 {' Back'}
               </R.BackButton>
               <CommonStyles.Button
@@ -340,10 +340,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
                 disabled={!(selectedTime1 && selectedTime2)}
                 onClick={() => setSelectedStep(4)}
               >
-                Next &#x203A;
-                {/* <img
-                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img> */}
+                {'Next '}
+                <IconChevronRight />
               </CommonStyles.Button>
             </R.ButtonWrapper3>
           </>
@@ -361,7 +359,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
             />
             <R.ButtonWrapper2>
               <R.BackButton onClick={() => setSelectedStep(3)}>
-                &#x2039;
+                <IconChevronLeft />
                 {' Back'}
               </R.BackButton>
               <CommonStyles.Button
@@ -369,11 +367,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
                 disabled={selectedServices.length < 1}
                 onClick={() => setSelectedStep(5)}
               >
-                Next &#x203A;
-                {/*
-                <img
-                  src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/arrow.svg`}
-                ></img> */}
+                {'Next '}
+                <IconChevronRight />
               </CommonStyles.Button>
             </R.ButtonWrapper2>
           </>
@@ -425,25 +420,25 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
             <R.ImageWrapper
               onClick={() => setShowModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/appointments.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/appointments.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
             <R.ImageWrapper
               onClick={() => setShowPricingModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/pricing.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/pricing.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
             <R.ImageWrapper
               onClick={() => setShowPromotionsModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/promotions.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/promotions.png`}
             />
           ) : null}
           {showWidgetButton('WIDGET_BUSINESS_HOURS', widgetConfig.widgets) ? (
             <R.ImageWrapper
               onClick={() => setShowBusinessHoursModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${folderName}/business-hours.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/business-hours.png`}
             />
           ) : null}
         </R.WidgetViewWrapper>

@@ -27,32 +27,31 @@ R.ImageWrapper = styled.img`
 `;
 const ButtonWrapper = styled.div`
   align-self: flex-end;
-  margin: 41px 50px 0 0;
+  margin-right: 50px;
 
   display: flex;
   align-items: center;
   @media (max-width: 768px) {
-    margin: 41px 30px 0 0;
+    margin-right: 30px;
   }
 `;
 
 // TODO move common styles file
 R.ButtonWrapper1 = styled(ButtonWrapper)`
-  margin-top: 55px;
+  margin-top: 59px;
 `;
 R.ButtonWrapper2 = styled(ButtonWrapper)`
-  margin-top: 11px;
+  margin-top: 23px;
 `;
 
 R.ButtonWrapper4 = styled(ButtonWrapper)`
-  margin-top: -10px;
   @media (max-width: 768px) {
     margin-top: 10px;
   }
 `;
 
 R.ButtonWrapper3 = styled(ButtonWrapper)`
-  margin-top: 31px;
+  margin-top: 39px;
 `;
 R.BackButton = styled.div`
   color: ${COLORS.DOVE_GRAY};

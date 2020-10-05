@@ -88,7 +88,7 @@ const RequestPage: FC<RequestPageProps> = ({
           {showLoading ? (
             <img
               id="spinner"
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/spinner.png`}
+              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/icon_spinner.png`}
             />
           ) : (
             'Request an Appointment'

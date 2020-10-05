@@ -66,13 +66,12 @@ const BaseItem = styled.div`
 S.CategoryItem = styled(BaseItem)``;
 S.ServiceItem = styled(BaseItem)``;
 
-S.IconContainer = styled.img`
+S.IconContainer = styled.span`
   flex-shrink: 0;
-
   width: 22px;
   height: 22px;
-
   margin-right: 8px;
+
   @media (max-width: 768px) {
     width: 16;
     height: 16px;

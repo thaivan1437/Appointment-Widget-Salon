@@ -33,7 +33,7 @@ const CustomRodal: FC<CustomRodalProps> = ({
       </S.CloseIconText>
       {selectedStyle ? (
         <S.CloseIcon
-          src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/icons/${selectedStyle}/close-button.png`}
+          src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${selectedStyle}/close-button.png`}
           role="button"
           onClick={() => setShowModal(false)}
         />
