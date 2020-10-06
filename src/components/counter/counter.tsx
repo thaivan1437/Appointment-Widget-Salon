@@ -18,7 +18,7 @@ const Counter: FC<CounterProps> = ({ countChange, initialValue }) => {
   const [count, setCount] = useState(initialValue || 1);
 
   // TODO: add callback props
-  const setCountHandler = (actionType: String) => {
+  const setCountHandler = (actionType: string) => {
     if (actionType === COUNT_ACTIONS.DECREASE && count > 1) {
       const newCount = count - 1;
       setCount(newCount);

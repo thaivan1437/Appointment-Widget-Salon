@@ -40,7 +40,12 @@ S.DayPickerWrapper = styled.div`
   }
 `;
 
-S.DayItem = styled.div<{ selected: String; isHoliday: Boolean }>`
+interface DayItemStyleProps {
+  selected: string;
+  isHoliday: string;
+}
+
+S.DayItem = styled.div<DayItemStyleProps>`
   display: flex;
   flex-direction: column;
   align-items: center;

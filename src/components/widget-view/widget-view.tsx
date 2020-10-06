@@ -126,10 +126,11 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
         }));
     }
 
-    const color =
+    setColor(
       (widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]) ||
-      COLOR_SCHEMA[FALLBACK_COLOR];
-    setColor(color);
+        COLOR_SCHEMA[FALLBACK_COLOR]
+    );
+
     setFolderName(
       widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]
         ? widgetConfig.style.toUpperCase()

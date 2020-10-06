@@ -1,6 +1,6 @@
 import CustomRodal from '@components/custom-rodal/custom-rodal';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
-import React, { useState, useEffect, FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { ColorContext } from '@components/widget-view/widget-view';
 import sortBy from 'lodash/sortBy';
 import find from 'lodash/find';
@@ -32,21 +32,20 @@ const Pricing: FC<PricingProps> = ({
   const [serviceList, setServiceList] = useState([]);
 
   useEffect(() => {
-    const serviceList =
+    const services =
       find(pricingList, (item) => item.category.name === selectedCategory) ||
       [];
-    const sortedServiceList = serviceList.categoryItems
-      ? sortBy([...serviceList.categoryItems], ['name'])
+    const sortedServices = services.categoryItems
+      ? sortBy([...services.categoryItems], ['name'])
       : [];
 
-    if (sortedServiceList.length > 0) {
-      sortedServiceList.forEach((service) => {
-        const sortedVariations = sortBy([...service.variations], ['name']);
-        service.variations = sortedVariations;
+    if (sortedServices.length > 0) {
+      sortedServices.forEach((service) => {
+        service.variations = sortBy([...service.variations], ['name']);
       });
     }
 
-    setServiceList(sortedServiceList);
+    setServiceList(sortedServices);
   }, [selectedCategory]);
 
   useEffect(() => {
@@ -122,27 +121,29 @@ const Pricing: FC<PricingProps> = ({
                         ) : null}
                       </ListItemWrapper>
                       {service.variations && service.variations.length > 1
-                        ? service.variations.map((variation, index) => (
-                            <PriceItem key={index}>
-                              <div>
-                                {variation.name === 'Regular'
-                                  ? variation.name.toLowerCase()
-                                  : variation.name}
-                              </div>
+                        ? service.variations.map(
+                            (variation, variationIndex) => (
+                              <PriceItem key={`variation-${variationIndex}`}>
+                                <div>
+                                  {variation.name === 'Regular'
+                                    ? variation.name.toLowerCase()
+                                    : variation.name}
+                                </div>
 
-                              <div>
-                                {variation.price_money &&
-                                variation.price_money.amount &&
-                                variation.price_money.symbol
-                                  ? `${
-                                      variation.price_money.symbol
-                                    }${formatAmount(
-                                      variation.price_money.amount
-                                    )}`
-                                  : 'Call Us'}
-                              </div>
-                            </PriceItem>
-                          ))
+                                <div>
+                                  {variation.price_money &&
+                                  variation.price_money.amount &&
+                                  variation.price_money.symbol
+                                    ? `${
+                                        variation.price_money.symbol
+                                      }${formatAmount(
+                                        variation.price_money.amount
+                                      )}`
+                                    : 'Call Us'}
+                                </div>
+                              </PriceItem>
+                            )
+                          )
                         : null}
                     </div>
                   ))

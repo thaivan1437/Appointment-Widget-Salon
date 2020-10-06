@@ -4,11 +4,11 @@ import { COLORS } from '@common/colors';
 export const R: any = {};
 
 interface WidgetViewWrapperProps {
-  vertical: String;
-  top: String;
-  left: String;
-  right: String;
-  bottom: String;
+  vertical: string;
+  top: string;
+  left: string;
+  right: string;
+  bottom: string;
 }
 R.WidgetViewWrapper = styled.div<WidgetViewWrapperProps>`
   position: absolute;

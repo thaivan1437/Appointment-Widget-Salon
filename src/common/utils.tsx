@@ -72,7 +72,7 @@ export const getDates = (holidays = []) => {
   const stopDate = addMonth(currentDate, 1);
 
   if (holidays.length > 0) {
-    holidays.map((holiday) => {
+    holidays.forEach((holiday) => {
       holidayArray.push(getRequestDateString(new Date(holiday.date)));
     });
   }

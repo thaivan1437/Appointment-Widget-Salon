@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { S as CommonStyles } from '@common/styles';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';

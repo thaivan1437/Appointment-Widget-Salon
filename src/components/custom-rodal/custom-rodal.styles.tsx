@@ -57,8 +57,8 @@ S.ModalContentWrapper = styled.div`
 `;
 
 interface DialogCycleProps {
-  top: String;
-  bottom: String;
+  top: string;
+  bottom: string;
 }
 S.DialogCycle = styled.div<DialogCycleProps>`
   position: absolute;

@@ -88,9 +88,9 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
                 {selectedItems &&
                   item.categoryItems &&
                   item.categoryItems.length > 0 &&
-                  item.categoryItems.map((service, index) => (
+                  item.categoryItems.map((service, serviceIndex) => (
                     <S.ServiceItem
-                      key={index}
+                      key={`service-${serviceIndex}`}
                       onClick={() => {
                         const tempSelectedServicesIds = [
                           ...selectedServicesIds,
