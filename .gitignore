@@ -1,7 +1,7 @@
 .DS_Store
 node_modules/
 build/
-.idea
-.next/
-.next
 out/
+package-lock.json
+.idea
+.next

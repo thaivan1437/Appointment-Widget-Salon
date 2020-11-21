@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { CONFIGS } from '@environment';
+import * as Sentry from '@sentry/browser';
+import { config } from '@environment';
 import { createBrowserHistory } from 'history';
 
 import Home from "./pages/Home";
@@ -14,6 +15,12 @@ const history = createBrowserHistory();
 const path = (/#!(\/.*)$/.exec(history.location.hash) || [])[1];
 if (path) {
   history.replace(path);
+}
+if (process.env.PUBLIC_URL !== 'local') {
+  Sentry.init({
+    dsn: config.SENTRY_URL,
+    environment: config.nodeEnv
+  });
 }
 
 class App extends React.Component {
