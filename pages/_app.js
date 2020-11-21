@@ -2,12 +2,12 @@ import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 
-import { SENTRY_URL } from '../src/env'
+import {config} from '../src/helper/get_config';
 
 import * as Sentry from '@sentry/browser'
 
 Sentry.init({
-  dsn: SENTRY_URL
+  dsn: config.SENTRY_URL
 })
 
 if (module.hot) {

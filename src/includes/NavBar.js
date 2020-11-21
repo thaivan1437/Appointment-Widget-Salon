@@ -3,7 +3,7 @@ import { Navbar, Nav, Image } from "react-bootstrap";
 import menuDatas from './menu'
 import { Animated } from "react-animated-css";
 import Link from 'next/link'
-import { CDN_URL } from "../env";
+import {config} from '../helper/get_config';
 
 class NavBar extends Component {
   state = {
@@ -29,10 +29,10 @@ class NavBar extends Component {
       <Navbar className={this.state.isTop ? `navbar navbar-fixed-top ${this.state.isToggle ? "scrolled" : ""}` : "navbar navbar-fixed-top scrolled"} fixed="top" expand="lg">
         {/* <Navbar className={"navbar navbar-fixed-top scrolled"}> */}
         <Navbar.Brand className='navbar-brand' href="/">
-          <Image src={CDN_URL + "/site/logo.png"} style={{ width: 200 }} className='logo-brand ml-sm-5 img-fluid' />
+          <Image src={config.CDN_URL + "/site/logo.png"} style={{ width: 200 }} className='logo-brand ml-sm-5 img-fluid' />
         </Navbar.Brand>
         <Navbar.Toggle style={{ border: 0 }} onClick={() => {this.setState({isToggle:!this.state.isToggle})}}>
-          <img src={CDN_URL + "/site/navbar-toggler-icon.png"} height="20" width="20" alt="" />
+          <img src={config.CDN_URL + "/site/navbar-toggler-icon.png"} height="20" width="20" alt="" />
         </Navbar.Toggle>
         <Navbar.Collapse id="navbar" className="navbar-collapse collapse">
           <Nav id="top-menu" className="nav navbar-nav navbar-right">

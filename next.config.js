@@ -1,8 +1,20 @@
 const withSass = require('@zeit/next-sass')
 const withCss = require('@zeit/next-css')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const FilterWarningsPlugin = require('webpack-filter-warnings-plugin')
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 const withSourceMaps = require('@zeit/next-source-maps')();
+const developmentExtension = require('./src/environments/development');
+const productionExtension = require('./src/environments/production');
+
+const isDev = process.env.PUBLIC_NEXT_ENV === 'development';
+let isConfig = ''
+if (isDev)  {
+  isConfig = developmentExtension
+}
+
+if (!isDev)  {
+  isConfig = productionExtension
+}
 
 module.exports = withSourceMaps(withCss(withSass({
   cssModules: true,
@@ -25,5 +37,6 @@ module.exports = withSourceMaps(withCss(withSass({
       }),
     )
     return config;
-  }
+  },
+  publicRuntimeConfig: isConfig,
 })))

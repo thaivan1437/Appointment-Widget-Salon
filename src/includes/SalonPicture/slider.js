@@ -1,5 +1,5 @@
 import React from 'react';
-import { CDN_URL } from "../../env";
+import {config} from '../../helper/get_config';
 const PREVIOUS = 'previous';
 const NEXT = 'next';
 
@@ -29,7 +29,7 @@ const arrowTransforms = {
 };
 function Arrow({ direction = 'right' }) {
 	return (
-		<img src={`${CDN_URL}/site/${direction}.png`} />
+		<img src={`${config.CDN_URL}/site/${direction}.png`} />
 	);
 }
 
