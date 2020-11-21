@@ -6,7 +6,7 @@ const withSourceMaps = require('@zeit/next-source-maps')();
 const developmentExtension = require('./src/environments/development');
 const productionExtension = require('./src/environments/production');
 
-const isDev = process.env.PUBLIC_NEXT_ENV === 'development';
+const isDev = process.env.PUBLIC_NEXT_ENV === 'development' || process.env.PUBLIC_NEXT_ENV === 'local';
 let isConfig = ''
 if (isDev)  {
   isConfig = developmentExtension
@@ -38,5 +38,8 @@ module.exports = withSourceMaps(withCss(withSass({
     )
     return config;
   },
-  publicRuntimeConfig: isConfig,
+  publicRuntimeConfig: {
+    ...isConfig,
+    nodeEnv: process.env.PUBLIC_NEXT_ENV
+  }
 })))

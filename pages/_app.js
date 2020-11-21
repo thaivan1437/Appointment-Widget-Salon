@@ -6,9 +6,12 @@ import {config} from '../src/helper/get_config';
 
 import * as Sentry from '@sentry/browser'
 
-Sentry.init({
-  dsn: config.SENTRY_URL
-})
+if (config.nodeEnv !== 'local') {
+  Sentry.init({
+    dsn: config.SENTRY_URL,
+    environment: config.nodeEnv
+  })
+}
 
 if (module.hot) {
   module.hot.addStatusHandler(status => {
