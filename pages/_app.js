@@ -6,10 +6,10 @@ import {config} from '../src/helper/get_config';
 
 import * as Sentry from '@sentry/browser'
 
-if (config.nodeEnv !== 'local') {
+if (config.env !== 'local') {
   Sentry.init({
     dsn: config.SENTRY_URL,
-    environment: config.nodeEnv
+    environment: config.env
   })
 }
 

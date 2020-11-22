@@ -40,6 +40,6 @@ module.exports = withSourceMaps(withCss(withSass({
   },
   publicRuntimeConfig: {
     ...isConfig,
-    nodeEnv: process.env.PUBLIC_NEXT_ENV
+    env: process.env.PUBLIC_NEXT_ENV
   }
 })))
