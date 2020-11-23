@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 import { createBrowserHistory } from 'history';
 
 import Home from "./pages/Home";
@@ -13,8 +14,10 @@ import {config} from '../src/helper/get_config';
 if (config.env !== 'local') {
   Sentry.init({
     dsn: config.SENTRY_URL,
-    environment: config.env
-  })
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+    environment: process.env.NODE_ENV,
+  });
 }
 const history = createBrowserHistory();
 
