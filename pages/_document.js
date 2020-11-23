@@ -1,6 +1,6 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import * as Sentry from '@sentry/browser'
+import * as Sentry from '@sentry/react';
 import developmentExtension from '../src/environments/development'
 import productionExtension from '../src/environments/production'
 

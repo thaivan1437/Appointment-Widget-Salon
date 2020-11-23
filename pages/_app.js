@@ -1,16 +1,17 @@
 import React from 'react'
 import App from 'next/app'
 import Head from 'next/head'
-
 import {config} from '../src/helper/get_config';
-
-import * as Sentry from '@sentry/browser'
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 
 if (config.env !== 'local') {
   Sentry.init({
     dsn: config.SENTRY_URL,
-    environment: config.env
-  })
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+    environment: config.env,
+  });
 }
 
 if (module.hot) {
