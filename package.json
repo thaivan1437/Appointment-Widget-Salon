@@ -12,7 +12,7 @@
     "dist:dev": "npm run package:prepare && npm run build:dev && node inject-widget.js --buildEnv=development",
     "dist:prod": "npm run package:prepare && npm run build:prod && node inject-gtm.js && node inject-widget.js --buildEnv=production",
     "local": "PUBLIC_NEXT_ENV=local next dev",
-    "next-dev": "npm run package:prepare && PUBLIC_NEXT_ENV=development next dev",
+    "next-dev": "PUBLIC_NEXT_ENV=development next dev",
     "next-build": "PUBLIC_NEXT_ENV=production && next build",
     "next-start": "PUBLIC_NEXT_ENV=production && next start",
     "export": "PUBLIC_NEXT_ENV=production next export",

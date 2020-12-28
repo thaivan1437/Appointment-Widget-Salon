@@ -1,10 +1,7 @@
 import React from 'react'
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import * as Sentry from '@sentry/react';
-import developmentExtension from '../src/environments/development'
-import productionExtension from '../src/environments/production'
-
-const CONFIGS = process.env.PUBLIC_NEXT_ENV === 'development' ? developmentExtension : productionExtension
+import {config} from '../src/helper/get_config';
 
 process.on('unhandledRejection', err => {
   Sentry.captureException(err)
@@ -28,7 +25,7 @@ class MyDocument extends Document {
           rel="stylesheet"
           href="/lib/css/bootstrap.min.css"
         />
-        
+
         <link
           rel="stylesheet"
           href="/lib/css/image-gallery.css"
@@ -42,7 +39,7 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="/lib/css/horizontal.css"
           />
-          { process.env.PUBLIC_NEXT_ENV === 'production'
+          { config.env === 'production'
             && <>
               <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135985682-1" />
               <script dangerouslySetInnerHTML={{ __html: `
@@ -51,8 +48,10 @@ class MyDocument extends Document {
               />
             </>
           }
-         
-          <script src={`https://widgets.salonmanager.${CONFIGS.domainExtension}/loader.js`} data-sm={CONFIGS.widgetAppId}></script>
+
+          {config.env !== 'production' &&
+            <script src={`https://widgets.salonmanager.${config.domainExtension}/loader.js`} data-sm={config.locationID}></script>
+          }
         </Head>
         <body>
           <Main />
