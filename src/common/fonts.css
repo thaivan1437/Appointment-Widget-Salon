@@ -35,6 +35,13 @@ body {
   background: transparent !Important;
   box-sizing: border-box;
 }
+.wrap-images {
+  position: relative;
+  transition: ease-in .5s;
+  overflow: hidden;
+}
+
+.wrap-images:after {content: "";top: 7px;left: 8px;width: 77px;height: 77px;position: absolute;border-radius: 10px;cursor: pointer;transition: ease-in .5s;box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;}
 
 #spinner {
   animation: spin 2s infinite linear;

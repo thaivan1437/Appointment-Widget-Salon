@@ -12,6 +12,10 @@ S.CustomRodal = styled(Rodal)`
     border-radius: 15px;
     box-shadow: 3px 3px 10px 3px rgba(0, 0, 0, 0.2);
   }
+  .rodal-mask {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+  }
 `;
 
 S.CloseIcon = styled.img`

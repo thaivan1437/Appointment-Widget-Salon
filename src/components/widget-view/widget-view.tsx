@@ -419,28 +419,36 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
           vertical={widgetConfig.orientation === 'VERTICAL'}
         >
           {showWidgetButton('WIDGET_APPOINTMENT', widgetConfig.widgets) ? (
-            <R.ImageWrapper
-              onClick={() => setShowModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/appointments.png`}
-            />
+            <div className="wrap-images">
+              <R.ImageWrapper
+                onClick={() => setShowModal(true)}
+                src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/appointments.png`}
+              />
+            </div>
           ) : null}
           {showWidgetButton('WIDGET_PRICING', widgetConfig.widgets) ? (
-            <R.ImageWrapper
-              onClick={() => setShowPricingModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/pricing.png`}
-            />
+            <div className="wrap-images">
+              <R.ImageWrapper
+                onClick={() => setShowPricingModal(true)}
+                src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/pricing.png`}
+              />
+            </div>
           ) : null}
           {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
-            <R.ImageWrapper
-              onClick={() => setShowPromotionsModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/promotions.png`}
-            />
+            <div className="wrap-images">
+              <R.ImageWrapper
+                onClick={() => setShowPromotionsModal(true)}
+                src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/promotions.png`}
+              />
+            </div>
           ) : null}
           {showWidgetButton('WIDGET_BUSINESS_HOURS', widgetConfig.widgets) ? (
-            <R.ImageWrapper
-              onClick={() => setShowBusinessHoursModal(true)}
-              src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/business-hours.png`}
-            />
+            <div className="wrap-images">
+              <R.ImageWrapper
+                onClick={() => setShowBusinessHoursModal(true)}
+                src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/${folderName}/business-hours.png`}
+              />
+            </div>
           ) : null}
         </R.WidgetViewWrapper>
       ) : null}
