@@ -26,7 +26,8 @@ R.ImageWrapper = styled.img`
   cursor: pointer;
   position: relative;
   z-index: 2;
-
+  filter: drop-shadow(2px 2px 2px #333);
+  
 `;
 const ButtonWrapper = styled.div`
   align-self: flex-end;
