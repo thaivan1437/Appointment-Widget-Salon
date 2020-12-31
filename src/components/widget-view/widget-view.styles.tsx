@@ -12,7 +12,7 @@ interface WidgetViewWrapperProps {
 }
 R.WidgetViewWrapper = styled.div<WidgetViewWrapperProps>`
   position: absolute;
-
+  display: flex;
   width: ${(props) => (props.vertical ? '90px' : 'auto')};
 
   top: ${(props) => (props.top ? '10px' : 'auto')};
@@ -24,7 +24,9 @@ R.ImageWrapper = styled.img`
   width: 90px;
   height: 90px;
   cursor: pointer;
-  filter: drop-shadow(0 0 2px #222) !important;
+  position: relative;
+  z-index: 2;
+
 `;
 const ButtonWrapper = styled.div`
   align-self: flex-end;
