@@ -126,16 +126,13 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
         }));
     }
 
-    setColor(
-      (widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]) ||
-        COLOR_SCHEMA[FALLBACK_COLOR]
-    );
+    const colorName = (widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]) || COLOR_SCHEMA[FALLBACK_COLOR];
+    setColor(colorName);
 
-    setFolderName(
-      widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]
-        ? widgetConfig.style.toUpperCase()
-        : FALLBACK_COLOR.toUpperCase()
-    );
+    const folderNamePrev = widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]
+    ? widgetConfig.style.toUpperCase()
+    : FALLBACK_COLOR.toUpperCase();
+    setFolderName(folderNamePrev);
 
     const size = (widgetConfig.widgets.length || 1) * 90;
 
