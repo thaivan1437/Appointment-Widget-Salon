@@ -134,7 +134,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
     setFolderName(
       widgetConfig.style && COLOR_SCHEMA[widgetConfig.style.toLowerCase()]
         ? widgetConfig.style.toUpperCase()
-        : FALLBACK_COLOR.toUpperCase
+        : FALLBACK_COLOR.toUpperCase()
     );
 
     const size = (widgetConfig.widgets.length || 1) * 90;
@@ -247,7 +247,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
             : `:${selectedTimeObject.selectedMinute}`
         ) || '';
 
-    return display ? hourString : '';
+    return display ? hourString :  hourString.toLowerCase();
   };
 
   const makeAnAppointmentClick = (promotion) => {
