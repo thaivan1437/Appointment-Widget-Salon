@@ -247,7 +247,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
             : `:${selectedTimeObject.selectedMinute}`
         ) || '';
 
-    return display ? hourString : hourString.toLowerCase();
+    return display ? hourString : '';
   };
 
   const makeAnAppointmentClick = (promotion) => {
