@@ -52,7 +52,7 @@ const BusinessHours: FC<BusinessHoursProps> = ({
   businessHours,
 }) => {
   const businessPhone =
-    (businessHours.businessPhone && businessHours.businessPhone.phoneNumber) ||
+    (businessHours?.businessPhone && businessHours?.businessPhone?.phoneNumber) ||
     '';
 
   return (
@@ -77,7 +77,7 @@ const BusinessHours: FC<BusinessHoursProps> = ({
               } receive SMS/text message)`}
             </PhoneWrapper>
           ) : null}
-          {businessHours.periods ? (
+          {businessHours?.periods ? (
             <HolidayListWrapper>
               <MainContent>
                 <MainRow>
@@ -85,8 +85,8 @@ const BusinessHours: FC<BusinessHoursProps> = ({
                   <TitleCell>Open</TitleCell>
                   <TitleCell>Close</TitleCell>
                 </MainRow>
-                {businessHours.periods && businessHours.periods.length > 0
-                  ? businessHours.periods.map((item, index) => {
+                {businessHours?.periods && businessHours?.periods?.length > 0
+                  ? businessHours?.periods?.map((item, index) => {
                       // console.log(openTimeStart(item.hours[0]['openTime'],item.hours[0]['closeTime']))
                       return (
                         <MainRow key={index}>
@@ -147,7 +147,7 @@ const BusinessHours: FC<BusinessHoursProps> = ({
               </MainContent>
             </HolidayListWrapper>
           ) : (
-            businessHours.fullDay && (
+            businessHours?.fullDay && (
               <BusinessHoursTitle>We open 24/7</BusinessHoursTitle>
             )
           )}
@@ -167,8 +167,8 @@ const BusinessHours: FC<BusinessHoursProps> = ({
         <HolidayModalInformationContainer>
           <HolidayListWrapper>
             <HolidayTitle header>Holidays and Closed Days</HolidayTitle>
-            {businessHours.holidays && businessHours.holidays.length > 0
-              ? businessHours.holidays.map((holidayItem, index) => {
+            {businessHours?.holidays && businessHours?.holidays?.length > 0
+              ? businessHours?.holidays?.map((holidayItem, index) => {
                   const date_options = {
                     year: 'numeric',
                     month: 'long',
@@ -188,10 +188,10 @@ const BusinessHours: FC<BusinessHoursProps> = ({
                   );
                 })
               : null}
-            {businessHours.customMessage &&
-            businessHours.customMessage.toString().length > 0 ? (
+            {businessHours?.customMessage &&
+            businessHours?.customMessage.toString().length > 0 ? (
               <HolidayItem style={{ color: color }}>
-                {businessHours.customMessage}
+                {businessHours?.customMessage}
               </HolidayItem>
             ) : null}
           </HolidayListWrapper>

@@ -35,7 +35,9 @@ const getValidPromotions = (promotions = []) => {
   const promArray = [];
   const today = new Date();
   const todayTime = today.getTime();
-
+  if (!promotions) {
+    return ;
+  }
   promotions.forEach((promotion) => {
     if (promotion.toDate > todayTime) {
       promArray.push(promotion);

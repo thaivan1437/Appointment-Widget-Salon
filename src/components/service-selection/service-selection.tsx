@@ -24,9 +24,12 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
   const [selectedItems, setSelectedItems] = useState<ProvidedService>(null);
   const [selectedCategories, setSelectedCategories] = useState([]);
 
-  const categories = serviceList.map((item) => item.category.name).sort();
+  const categories = serviceList?.map((item) => item.category.name).sort();
+  let sortedServiceList = []
+  if (serviceList) {
+    sortedServiceList = [...serviceList];
+  }
 
-  const sortedServiceList = [...serviceList];
   sortedServiceList.forEach((item, index) => {
     sortedServiceList[index].categoryItems = sortBy(item.categoryItems, [
       'name',
@@ -42,7 +45,7 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
   }, [selectedCategory]);
 
   useEffect(() => {
-    setSelectedCategory(categories[0]);
+    setSelectedCategory(categories ? categories[0] : '');
   }, []);
 
   useEffect(() => {
@@ -69,7 +72,7 @@ const ServiceSelection: FC<ServiceSelectionProps> = ({
   return (
     <S.ServiceSelectionContainer>
       <S.ServiceCategoryContainer>
-        {serviceList.map((item, index) => (
+        {serviceList?.map((item, index) => (
           <div key={index}>
             <S.CategoryItem
               onClick={() => {

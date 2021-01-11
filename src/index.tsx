@@ -86,7 +86,10 @@ window.initWidget = function (d, appId) {
       promotionsData,
     ])
       .then((result) => {
-        const { style, orientation, position } = result[2].data.data;
+        const configResult = result[2].data.data;
+        const style = configResult?.style;
+        const orientation = configResult?.orientation;
+        const position = configResult?.position;
         const configData: WidgetConfigData = {
           style,
           orientation,

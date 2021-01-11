@@ -71,7 +71,7 @@ export const getDates = (holidays = []) => {
   let currentDate = new Date();
   const stopDate = addMonth(currentDate, 1);
 
-  if (holidays.length > 0) {
+  if (holidays?.length > 0) {
     holidays.forEach((holiday) => {
       holidayArray.push(getRequestDateString(new Date(holiday.date)));
     });

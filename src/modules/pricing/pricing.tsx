@@ -27,7 +27,7 @@ const Pricing: FC<PricingProps> = ({
   color,
   pricingList = [],
 }) => {
-  const mainCategoryList = pricingList.map((item) => item.category.name).sort();
+  const mainCategoryList = pricingList?.map((item) => item.category.name).sort();
   const [selectedCategory, setSelectedCategory] = useState<string>();
   const [serviceList, setServiceList] = useState([]);
 
