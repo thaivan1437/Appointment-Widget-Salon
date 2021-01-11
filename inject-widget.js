@@ -17,7 +17,7 @@ const CONFIGS = require(configPath);
 const options = {
     files: 'public/index.html',
     from: '</body>',
-    to: '<script src="https://widgets.salonmanager.'+ CONFIGS.domainExtension +'/loader.js" data-sm="'+CONFIGS.locationID+'"></script></body>'
+    to: '<script src="https://widgets.salonmanager.'+ CONFIGS.domainExtension +'/loader.js" data-sm="'+CONFIGS.locationID+'" defer></script></body>'
 };
 
 try {
