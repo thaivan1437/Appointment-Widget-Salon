@@ -75,7 +75,7 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
 
   const [frameStyle, setFrameStyle] = useState({
     common:
-      'position:fixed;bottom:0px;right:0px;border:none;z-index:2147483647;',
+      'position:fixed;border:none;z-index:2147483647;',
     position: null,
     orientation: 'width:0;height:0;',
   });

@@ -167,6 +167,12 @@ const BusinessHours: FC<BusinessHoursProps> = ({
         <HolidayModalInformationContainer>
           <HolidayListWrapper>
             <HolidayTitle header>Holidays and Closed Days</HolidayTitle>
+            {businessHours?.customMessage &&
+            businessHours?.customMessage.toString().length > 0 ? (
+              <HolidayItem style={{ color: color }}>
+                {businessHours?.customMessage}
+              </HolidayItem>
+            ) : null}
             {businessHours?.holidays && businessHours?.holidays?.length > 0
               ? businessHours?.holidays?.map((holidayItem, index) => {
                   const date_options = {
@@ -188,12 +194,6 @@ const BusinessHours: FC<BusinessHoursProps> = ({
                   );
                 })
               : null}
-            {businessHours?.customMessage &&
-            businessHours?.customMessage.toString().length > 0 ? (
-              <HolidayItem style={{ color: color }}>
-                {businessHours?.customMessage}
-              </HolidayItem>
-            ) : null}
           </HolidayListWrapper>
         </HolidayModalInformationContainer>
       </ColorContext.Provider>

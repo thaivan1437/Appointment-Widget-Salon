@@ -109,7 +109,7 @@ const RequestPage: FC<RequestPageProps> = ({
             'By requesting an appointment, you agree to receive text messages and to our '
           }
           <a
-            href={`https://salonmanager.${CONFIGS.domainExtension}/terms-of-use`}
+            href={`https://salonmanager.${CONFIGS.domainExtension}/legal/terms-of-use.html`}
             target="_blank"
             rel="noreferrer"
           >
@@ -117,11 +117,11 @@ const RequestPage: FC<RequestPageProps> = ({
           </a>
           {' and '}
           <a
-            href={`https://salonmanager.${CONFIGS.domainExtension}/privacy-policy`}
+            href={`https://salonmanager.${CONFIGS.domainExtension}/legal/privacy-policy.html`}
             target="_blank"
             rel="noreferrer"
           >
-            Privacy Policy
+            Privacy Policy.
           </a>
         </PolicyContainer>
       </ConfirmationStepWrapper>
