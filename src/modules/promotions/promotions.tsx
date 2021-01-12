@@ -94,7 +94,7 @@ const Promotions: FC<PromotionsProps> = ({
                 </PromotionItem>
               ))
             ) : (
-              <NoPromotion>There are no promotions available :(</NoPromotion>
+              <NoPromotion>No promotions available at this times, Please check back later.</NoPromotion>
             )}
           </PromotionSlider>
           <ModalStyles.ModalFooter>

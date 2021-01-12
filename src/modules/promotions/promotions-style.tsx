@@ -116,7 +116,7 @@ export const NoPromotion = styled.div`
   text-align: center;
   font-size: 30px;
   padding: 152px 0;
-  color: ${COLORS.DOVE_GRAY};
+  color: ${COLORS.ERROR};
 `;
 
 export const PromotionItem = styled.div``;
