@@ -58,6 +58,17 @@ export const PromotionCode = styled(BaseContentStyle)`
   }
 `;
 
+export const PromotionCodeDesc = styled(BaseContentStyle)`
+  font-size: 30px;
+  font-weight: 500;
+  display: inline-block;
+  user-select: text;
+  color: ${COLORS.ERROR};
+  @media (max-width: 768px) {
+    font-size: 25px;
+  }
+`;
+
 export const PromotionDesc = styled(BaseContentStyle)`
   font-size: 24px;
   @media (max-width: 768px) {

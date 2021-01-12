@@ -14,6 +14,7 @@ import {
   GroupWrapper,
   NoPromotion,
   PromotionCode,
+  PromotionCodeDesc,
   PromotionDesc,
   PromotionItem,
   PromotionItemWrapper,
@@ -59,7 +60,11 @@ const Promotions: FC<PromotionsProps> = ({
                 <PromotionItem key={promotion.id}>
                   <PromotionItemWrapper>
                     <PromotionTitle>{promotion.title}</PromotionTitle>
-                    <PromotionCode>{promotion.promoCode}</PromotionCode>
+                    <PromotionCode>
+                      <PromotionCodeDesc>Promo Code: </PromotionCodeDesc>
+                      {' ' + promotion.promoCode + ' '}
+                      <PromotionCodeDesc> ({promotion.promoDiscount.amount + promotion.promoDiscount.type} OFF) </PromotionCodeDesc>
+                    </PromotionCode>
                     <GroupWrapper>
                       <PromotionDesc>
                         {promotion.shortDescription}
