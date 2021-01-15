@@ -25,7 +25,7 @@ const CustomRodal: FC<CustomRodalProps> = ({
       closeMaskOnClick={false}
       showCloseButton={false}
       width={isTablet ? 600 : isMobile ? 360 : 900}
-      height={isTablet ? 650 : isMobile ? 600 : 420}
+      height={isTablet ? 650 : isMobile ? 600 : 450}
       onClose={() => setShowModal(false)}
     >
       <S.CloseIconText onClick={() => setShowModal(false)}>

@@ -14,11 +14,11 @@ R.WidgetViewWrapper = styled.div<WidgetViewWrapperProps>`
   position: absolute;
   display: flex;
   width: ${(props) => (props.vertical ? '90px' : 'auto')};
-
   top: ${(props) => (props.top ? '10px' : 'auto')};
   left: ${(props) => (props.left ? '10px' : 'auto')};
   right: ${(props) => (props.right ? '10px' : 'auto')};
   bottom: ${(props) => (props.bottom ? '10px' : 'auto')};
+  align-items: center;
 `;
 R.ImageWrapper = styled.img`
   width: 90px;
@@ -27,7 +27,12 @@ R.ImageWrapper = styled.img`
   position: relative;
   z-index: 2;
   filter: drop-shadow(2px 2px 2px #333);
-  
+
+  &.w80 {
+    width: 80px;
+    height: 80px;
+  }
+
 `;
 const ButtonWrapper = styled.div`
   align-self: flex-end;

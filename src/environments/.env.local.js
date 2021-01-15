@@ -5,6 +5,7 @@ export const CONFIGS = {
   xAppVersion: 'v1.0.0@20190610',
   timeZone: 'America/Los_Angeles',
   isLocal: true,
+  cdn_url: 'https://cdn.belmontbeautysalon.net',
 };
 export const SENTRY_DSN =
   'https://21d4a1621eed4d63bf372f2e17869753@o257892.ingest.sentry.io/1826350';

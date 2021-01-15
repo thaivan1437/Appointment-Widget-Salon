@@ -21,6 +21,7 @@ import { DatePickerDate } from '@components/day-picker/day-picker';
 import IconChevronRight from '@common/icons/icon-chevron-right';
 import { WidgetConfigData, Promotion } from '../../types';
 import IconChevronLeft from '../../common/icons/icon-chevron-left';
+import GiftCard from '@modules/gift-card/gift-card';
 
 const FALLBACK_COLOR = 'red';
 
@@ -55,6 +56,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
   const [showPricingModal, setShowPricingModal] = useState(false);
   const [showBusinessHoursModal, setShowBusinessHoursModal] = useState(false);
   const [showPromotionsModal, setShowPromotionsModal] = useState(false);
+  const [showGiftCardModal, setShowGiftCardModal] = useState(false);
+
   const [selectedStep, setSelectedStep] = useState(1);
   const [userName, setUserName] = useState('');
   const [userPhone, setUserPhone] = useState('');
@@ -136,7 +139,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
     : FALLBACK_COLOR.toUpperCase();
     setFolderName(folderNamePrev);
 
-    const size = (widgetConfig.widgets.length || 1) * 90;
+    // set width iframe
+    const size = (widgetConfig.widgets.length + 1 || 1) * 90;
 
     setFrameStyle((prev) => ({
       ...prev,
@@ -180,6 +184,10 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
   useEffect(() => {
     setIFrameStyle(showPromotionsModal);
   }, [showPromotionsModal]);
+
+  useEffect(() => {
+    setIFrameStyle(showGiftCardModal);
+  }, [showGiftCardModal]);
 
   useEffect(() => {
     if (selectedPromotion) {
@@ -441,6 +449,15 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
               />
             </div>
           ) : null}
+          {showWidgetButton('WIDGET_PROMOTIONS', widgetConfig.widgets) ? (
+            <div className="wrap-images">
+              <R.ImageWrapper
+                onClick={() => setShowGiftCardModal(true)}
+                src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/YELLOW/egift-cards.png`}
+                className="w80"
+              />
+            </div>
+          ) : null}
           {showWidgetButton('WIDGET_BUSINESS_HOURS', widgetConfig.widgets) ? (
             <div className="wrap-images">
               <R.ImageWrapper
@@ -550,6 +567,15 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
       <Promotions
         showPromotionsModal={showPromotionsModal}
         setShowPromotionsModal={setShowPromotionsModal}
+        folderName={folderName}
+        color={color}
+        promotionData={getValidPromotions(widgetConfig.widgetData.promotions)}
+        makeAnAppointmentClick={makeAnAppointmentClick}
+      />
+      {/*GiftCard*/}
+      <GiftCard
+        showPromotionsModal={showGiftCardModal}
+        setShowPromotionsModal={setShowGiftCardModal}
         folderName={folderName}
         color={color}
         promotionData={getValidPromotions(widgetConfig.widgetData.promotions)}

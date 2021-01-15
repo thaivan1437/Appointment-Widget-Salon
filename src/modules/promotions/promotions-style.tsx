@@ -79,10 +79,24 @@ export const PromotionDesc = styled(BaseContentStyle)`
 export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   padding: 40px 50px;
 
+  &.e-gift {
+    padding: 0;
+    width: 500px;
+  }
+  .mt-half {
+    margin-top: 1rem;
+  }
+
   *:focus {
     outline: 0;
   }
 
+  .clear {
+    clear: both;
+  }
+  img{
+    max-width:100%;
+  }
   .slick-prev:before,
   .slick-next:before {
     color: ${(props) => props.color};
@@ -110,6 +124,12 @@ export const PromotionSlider = styled(Slider)`
   width: 100%;
   width: 500px;
   height: 320px;
+
+  &.e-gift {
+    height: 280px;
+
+  }
+
   @media (max-width: 768px) {
     width: 300px;
   }
