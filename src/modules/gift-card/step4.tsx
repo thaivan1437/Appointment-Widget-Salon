@@ -91,7 +91,7 @@ const Step4: FC<PromotionsProps> = ({
 
   return(
     <>
-      <Subject color="#444">eGift Cards 4</Subject>
+      <Subject color="#444">eGift Cards</Subject>
 
       <WrapReceipt>
         <label className="w100">Deliver by:</label>

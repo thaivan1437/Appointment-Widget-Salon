@@ -66,7 +66,7 @@ const Step3: FC<PromotionsProps> = ({
 
   return(
     <>
-      <Subject color="#444">eGift Cards 3</Subject>
+      <Subject color="#444">eGift Cards</Subject>
       <WrapInput>
         <BaseInput
           type="text"

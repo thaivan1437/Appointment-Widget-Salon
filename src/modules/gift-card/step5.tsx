@@ -8,7 +8,7 @@ const Step5: FC<PromotionsProps> = ({
 
   return(
     <>
-      <Subject color="#444">eGift Cards 5</Subject>
+      <Subject color="#444">eGift Cards</Subject>
     </>
   );
 };
