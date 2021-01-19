@@ -6,7 +6,6 @@ import React, { FC, useState } from 'react';
 import { ColorContext } from '@components/widget-view/widget-view';
 import IconChevronRight from '../../common/icons/icon-chevron-right';
 import IconChevronLeft from '../../common/icons/icon-chevron-left';
-import { R } from '@components/widget-view/widget-view.styles';
 // @ts-ignore
 import { CONFIGS } from '@environment';
 import {
@@ -18,8 +17,6 @@ import {
   BaseInput,
   GroupInputRadio,
   ButtonWrap2,
-  Title,
-  GiftDetail,
 } from '@modules/gift-card/gift-card.styles';
 import { COLORS } from '@common/colors';
 import { Promotion } from '../../types';
@@ -29,7 +26,7 @@ import Step3 from './step3';
 import Step4 from './step4';
 import Step5 from './step5';
 import { validateEmail } from './helper'
-
+import { R } from '@components/widget-view/widget-view.styles';
 
 const GiftCard: FC<PromotionsProps> = ({
   showPromotionsModal,
@@ -39,10 +36,10 @@ const GiftCard: FC<PromotionsProps> = ({
 }) => {
   const [selectedEGift, setSelectedEGift] = useState({ status: false, value: null});
   const [selectedStep, setSelectedStep] = useState(1);
-  const [amount, setAmount] = useState(null);
+  const [amount, setAmount] = useState<AmountType>({ amount: 0, typeButton: 'button'});
   const [design, setDesign] = useState('0');
-  const [receiptData, setReceiptData] = useState({ nameCard: '', phone: '', email: ''});
-  const [deliverData, setDeliverData] = useState({ message: '', phone: '', email: ''});
+  const [receiptData, setReceiptData] = useState({ nameCard: '', phone: '', email: '', type: 'phone'});
+  const [deliverData, setDeliverData] = useState({ message: '', phone: '', email: '', type: 'phone',typeDeliver: 'now', schedule: new Date()});
   const [error, setError] = useState<ErrorType>({ nameCard: false, phone: false, email: false});
 
   const funcSetDesign = (value) => {
@@ -92,13 +89,14 @@ const GiftCard: FC<PromotionsProps> = ({
               funcSetDesign = {funcSetDesign}
             />
             <DFlex className="step1">
-              <GroupInputRadio>
+              <GroupInputRadio className="margin-left">
                 <BaseInput
                   id="select-egift"
                   type="radio"
                   name="select-egift"
                   checked={ (design === selectedEGift.value) ? true : false }
                   onChange={() => setSelectedEGift({ status: true, value: design})}
+
                 />
                 <label className="black" htmlFor="select-egift">Select this design</label>
               </GroupInputRadio>
@@ -121,6 +119,7 @@ const GiftCard: FC<PromotionsProps> = ({
               setAmountCallback={funcSetAmount}
               color={color}
               amount={amount}
+              error={error}
             />
             <ButtonWrap2 className="step2">
               <R.BackButton onClick={() => setSelectedStep(1)}>
@@ -130,7 +129,17 @@ const GiftCard: FC<PromotionsProps> = ({
               <CommonStyles.Button
                 color={color}
                 disabled={amount == null}
-                onClick={() => setSelectedStep(3)}
+                onClick={() => {
+                  if (
+                    amount &&
+                    amount.typeButton ==="number" &&
+                    (amount.amount < 100 || amount.amount > 200 )
+                    ) {
+                    setError({ customAmount: true });
+                    return;
+                  }
+                  setSelectedStep(3);
+                }}
               >
                 {'Next '}
                 <IconChevronRight />
@@ -156,7 +165,7 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={amount.length < 1}
+                disabled={amount?.amount < 1}
                 onClick={() => {
                   funcCheckError(receiptData);
                   if (!receiptData.nameCard) {
@@ -196,7 +205,7 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={amount?.length < 1}
+                disabled={amount?.amount < 1}
                 onClick={() => {
                   funcCheckError(deliverData);
                   if (!deliverData?.phone && !deliverData?.email) {
@@ -227,7 +236,7 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={amount?.length < 1}
+                disabled={amount?.amount < 1}
                 onClick={() => {
                   funcCheckError(deliverData);
                   if (!deliverData?.phone && !deliverData?.email) {
@@ -303,62 +312,52 @@ const GiftCard: FC<PromotionsProps> = ({
               </FirstStepMessage>
             ) : null}
 
-            {selectedStep === 2 ? (
-              <GiftDetail>
-                <Title>eGift card detail</Title>
-                <div className="e-title">
-                  {design?.length > 0 ? design : null}
-                </div>
-              </GiftDetail>
-            ) : null}
-
             {selectedStep === 3 ? (
-              <GiftDetail>
-                <Title>eGift card detail</Title>
-                <div className="e-title">
-                  {design?.length > 0 ? design : null}
-                </div>
-                <div className="e-title">
-                  {amount ? amount : null}
-                </div>
-              </GiftDetail>
+              <>
+                <AppointmentInfo header>eGift card detail</AppointmentInfo>
+                <R.InformationWrapper>
+                  <AppointmentInfo>
+                    {amount?.amount ? "$ " + amount?.amount : null}
+                  </AppointmentInfo>
+                </R.InformationWrapper>
+              </>
             ) : null}
 
             {selectedStep === 4 ? (
-              <GiftDetail>
-                <Title>eGift card detail</Title>
-                <div className="e-title">
-                  {design?.length > 0 ? design : null}
-                </div>
-                <div className="e-title">
-                  {amount ? amount : null}
-                </div>
-                <div className="e-title">
-                  <label>From</label>
-                  <p>{receiptData?.nameCard ? receiptData?.nameCard : null}</p>
-                </div>
-              </GiftDetail>
+              <>
+                <AppointmentInfo header>eGift card detail</AppointmentInfo>
+                <R.InformationWrapper>
+                  <AppointmentInfo>
+                    {amount?.amount ? "$ " + amount?.amount : null}
+                  </AppointmentInfo>
+                  <AppointmentInfo>
+                    <label>From</label>
+                    <div>{receiptData?.nameCard ? receiptData?.nameCard : null}</div>
+                  </AppointmentInfo>
+                </R.InformationWrapper>
+              </>
             ) : null}
 
             {selectedStep === 5 ? (
-              <GiftDetail>
-                <Title>eGift card detail</Title>
-                <div className="e-title">
-                  {design?.length > 0 ? design : null}
-                </div>
-                <div className="e-title">
-                  {amount ? amount : null}
-                </div>
-                <div className="e-title">
-                  <label>{receiptData?.nameCard ? "From" : null}</label>
-                  <p>{receiptData?.nameCard ? receiptData?.nameCard : null}</p>
-                </div>
-                <div className="e-title">
-                  <label>{deliverData?.message ? "To" : null}</label>
-                  <p>{deliverData?.phone ? deliverData?.phone : null}</p>
-                  <p>{deliverData?.message ? deliverData?.message : null}</p>
-                </div>
-              </GiftDetail>
+              <>
+                <AppointmentInfo header>eGift card detail</AppointmentInfo>
+                <R.InformationWrapper>
+                  <AppointmentInfo>
+                    {amount?.amount ? "$ " + amount?.amount : null}
+                  </AppointmentInfo>
+
+                  <AppointmentInfo>
+                    <label>From</label>
+                    <div>{receiptData?.nameCard ? receiptData?.nameCard : null}</div>
+                  </AppointmentInfo>
+                  <AppointmentInfo>
+                    <label>To</label>
+                    <div>{deliverData?.phone ? deliverData?.phone : deliverData?.email}</div>
+                    <div>{deliverData?.message ? deliverData?.message : null}</div>
+                    <div>{(deliverData?.schedule.toDateString() && deliverData?.typeDeliver ==="schedule") ? deliverData?.schedule.toDateString() : null}</div>
+                  </AppointmentInfo>
+                </R.InformationWrapper>
+              </>
             ) : null}
 
           </ModalStyles.ModalDetailContentContainer>
@@ -381,9 +380,34 @@ export type ErrorType = {
   nameCard?: boolean;
   phone?: boolean;
   email?: boolean;
+  customAmount?: boolean;
 };
+export type AmountType = {
+  amount?: number;
+  typeButton?: string;
+};
+type AppointmentInfoStyleProps = { header?: boolean; userName?: boolean };
+const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
+  color: ${(props) =>
+    props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
+  padding: 0 20px 8px;
+  font-size: 19px;
+  font-weight: 500;
+  text-transform: ${(props) => (props.userName ? 'capitalize' : 'none')};
 
-export const FirstStepMessage = styled.div`
+  text-align: ${(props) => (props.header ? 'center' : 'left')};
+
+  label {
+    display:block;
+    color: ${COLORS.DOVE_GRAY1};
+    font-weight: 700;
+  }
+  div {
+    margin-left: 30px;
+  }
+`;
+
+export const FirstStepMessage = styled(AppointmentInfo)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -391,7 +415,6 @@ export const FirstStepMessage = styled.div`
   height: 100%;
   font-size: 24px;
   text-align: center;
-  color: ${COLORS.DOVE_GRAY1}
 `;
 
 export default GiftCard;

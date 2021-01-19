@@ -6,18 +6,16 @@ import {
   GroupInputRadio,
   WrapReceipt,
 } from '@modules/gift-card/gift-card.styles';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Step4: FC<PromotionsProps> = ({
   setDeliverCallback,
   error,
   deliverInit,
 }) => {
-  const [deliver, setDeliver] = useState<deliverType>({
-    sms: true,
-    email: false ,
-    now: true,
-    schedule: false
-  });
+
+  const [startDate, setStartDate] = useState({ value: deliverInit?.schedule, status: false });
 
   const handleSetValue = (e) => {
     const { value, name } = e.target;
@@ -62,53 +60,66 @@ const Step4: FC<PromotionsProps> = ({
   const changeMethodReceipt = (e) => {
     const { id } = e.target;
     // reset useState when change method input
-    if (id === "sms") {
-      setDeliver({ ...deliver, sms: true, email: false });
+    if (id === "phone") {
+
       setDeliverCallback({
         ...deliverInit,
         email: '',
-        phone: ''
+        phone: '',
+        type: id,
       });
     }
     if (id === "email") {
-      setDeliver({ ...deliver, sms: false, email: true });
       setDeliverCallback({
         ...deliverInit,
         email: '',
-        phone: ''
+        phone: '',
+        type: id,
       });
     }
 
     if (id === "now") {
-      setDeliver({ ...deliver, schedule: false, now: true });
+      setDeliverCallback({
+        ...deliverInit,
+        typeDeliver: id,
+      });
     }
 
     if (id === "schedule") {
-      setDeliver({ ...deliver, now: false, schedule: true });
+      setDeliverCallback({
+        ...deliverInit,
+        typeDeliver: id,
+      });
+      setStartDate({ ...startDate, status: true});
     }
 
   };
 
+  const handleSetDate = (date) => {
+    setDeliverCallback({ ...deliverInit, schedule: date });
+    setStartDate({ value: date, status: false});
+  };
+
   return(
     <>
-      <Subject color="#444">eGift Cards</Subject>
+      <Subject>eGift Cards</Subject>
 
       <WrapReceipt>
         <label className="w100">Deliver by:</label>
         <GroupInputRadio className="w150">
           <BaseInput
-            id="sms"
+            id="phone"
             type="radio"
-            checked={(deliver.sms) ? true : false}
+            checked={(deliverInit?.type === "phone") ? true : false}
             onChange={(e) => changeMethodReceipt(e)}
           />
-          <label className="weight" htmlFor="sms">Text message</label>
+          <label className="weight" htmlFor="phone">Text message</label>
         </GroupInputRadio>
         <GroupInputRadio className="150">
           <BaseInput
             id="email"
             type="radio"
-            checked={deliver.email ? true : false}
+            checked={deliverInit.type === "email" ? true : false}
             onChange={(e) => changeMethodReceipt(e)}
           />
           <label className="weight" htmlFor="email">Email</label>
@@ -117,17 +128,17 @@ const Step4: FC<PromotionsProps> = ({
 
       <WrapInput>
         <BaseInput
-          type={deliver.sms ? "tel" : "email"}
-          name={deliver.sms ? "phone" : "email"}
-          value={deliver.sms ? deliverInit.phone : deliverInit.email}
-          className={(error.phone || error.email) ? "error" : "" + "no-radius-bottom"}
-          placeholder={deliver.sms ? "Enter your phone (000) 000-0000" : "Enter your email"}
+          type={deliverInit?.type === "phone" ? "tel" : "email"}
+          name={deliverInit?.type === "phone" ? "phone" : "email"}
+          value={deliverInit?.type === "phone" ? deliverInit?.phone : deliverInit?.email}
+          className={(error?.phone || error?.email) ? "error" : "" + "no-radius-bottom"}
+          placeholder={deliverInit?.type === "phone" ? "Enter your phone (000) 000-0000" : "Enter your email"}
           onChange={(e) => handleSetValue(e)}
         />
         <BaseInput
           type="text"
           name="message"
-          value={deliverInit.message}
+          value={deliverInit?.message}
           className="no-radius-top"
           placeholder="Enter short message"
           onChange={(e) => handleSetValue(e)}
@@ -140,19 +151,33 @@ const Step4: FC<PromotionsProps> = ({
           <BaseInput
             id="now"
             type="radio"
-            checked={(deliver.now) ? true : false}
+            checked={(deliverInit?.typeDeliver === "now") ? true : false}
             onChange={(e) => changeMethodReceipt(e)}
           />
           <label className="weight" htmlFor="now">Now</label>
         </GroupInputRadio>
-        <GroupInputRadio className="150">
+        <GroupInputRadio className={`150 wrap--date ${startDate.status ? 'active' : ''}`}>
           <BaseInput
             id="schedule"
             type="radio"
-            checked={deliver.schedule ? true : false}
+            checked={deliverInit?.typeDeliver === "schedule" ? true : false}
             onChange={(e) => changeMethodReceipt(e)}
           />
-          <label className="weight" htmlFor="schedule">Schedule</label>
+          <label
+            className="weight"
+            htmlFor="schedule"
+            onClick={() => setStartDate({ ...startDate, status: !startDate.status })}
+          >
+              Schedule
+          </label>
+          <div className="input--date">
+            <DatePicker
+              selected={startDate.value}
+              onChange={(date) => handleSetDate(date)}
+              inline
+            />
+          </div>
+
         </GroupInputRadio>
       </WrapReceipt>
     </>
@@ -171,14 +196,12 @@ export type errorInit = {
   phone?: boolean;
   email?: boolean;
 }
-export type deliverType = {
-  sms?: boolean;
-  email?: boolean;
-  now?: boolean;
-  schedule?: boolean;
-}
+
 export type deliverDataType = {
   phone?: string;
   email?: string;
   message?: string;
+  type?: string;
+  typeDeliver?: string;
+  schedule?: Date;
 }

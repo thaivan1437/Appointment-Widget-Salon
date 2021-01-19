@@ -11,7 +11,7 @@ S.ServiceSelectionContainer = styled.div`
   display: flex;
   width: 400px;
 
-  height: 190px;
+  height: 265px;
   padding: 16px;
 
   color: ${COLORS.DOVE_GRAY};

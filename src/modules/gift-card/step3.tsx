@@ -12,7 +12,7 @@ const Step3: FC<PromotionsProps> = ({
   error,
   receiptInit,
 }) => {
-  const [receipt, setReceipt] = useState({ sms: true, email: false});
+
   const handleSetValue = (e) => {
     const { value, name } = e.target;
 
@@ -53,20 +53,16 @@ const Step3: FC<PromotionsProps> = ({
     }
 
   }
+
   const changeMethodReceipt = (e) => {
     const { id } = e.target;
-    if (id === "sms") {
-      setReceipt({ sms: true, email: false });
-    }
-    if (id === "email") {
-      setReceipt({ sms: false, email: true });
-    }
-    setReceiptCallback({ ...receiptInit, email: '', phone: ''});
+
+    setReceiptCallback({ ...receiptInit, email: '', phone: '', type: id});
   };
 
   return(
     <>
-      <Subject color="#444">eGift Cards</Subject>
+      <Subject>eGift Cards</Subject>
       <WrapInput>
         <BaseInput
           type="text"
@@ -84,18 +80,18 @@ const Step3: FC<PromotionsProps> = ({
         <label className="w100">Receipt by:</label>
         <GroupInputRadio className="w150">
           <BaseInput
-            id="sms"
+            id="phone"
             type="radio"
-            checked={(receipt.sms) ? true : false}
+            checked={(receiptInit.type === "phone") ? true : false}
             onChange={(e) => changeMethodReceipt(e)}
           />
-          <label className="weight" htmlFor="sms">Text message</label>
+          <label className="weight" htmlFor="phone">Text message</label>
         </GroupInputRadio>
         <GroupInputRadio className="150">
           <BaseInput
             id="email"
             type="radio"
-            checked={receipt.email ? true : false}
+            checked={receiptInit.type === "email" ? true : false}
             onChange={(e) => changeMethodReceipt(e)}
           />
           <label className="weight" htmlFor="email">Email</label>
@@ -104,11 +100,11 @@ const Step3: FC<PromotionsProps> = ({
 
       <WrapInput>
         <BaseInput
-          type={receipt.sms ? "tel" : "email"}
-          name={receipt.sms ? "phone" : "email"}
-          value={receipt.sms ? receiptInit?.phone : receiptInit?.email}
+          type={receiptInit.type === "phone" ? "tel" : "email"}
+          name={receiptInit.type === "phone" ? "phone" : "email"}
+          value={receiptInit.type === "phone" ? receiptInit?.phone : receiptInit?.email}
           className={(error.phone || error.email) ? "error" : ""}
-          placeholder={receipt.sms ? "Enter your phone (000) 000-0000" : "Enter your email"}
+          placeholder={receiptInit.type === "phone" ? "Enter your phone (000) 000-0000" : "Enter your email"}
           onChange={(e) => handleSetValue(e)}
         />
       </WrapInput>
@@ -124,13 +120,16 @@ export type PromotionsProps = {
   error?: errorInit;
   receiptInit?: receiptData;
 };
+
 export type errorInit = {
   nameCard?: boolean;
   phone?: boolean;
   email?: boolean;
-}
+};
+
 export type receiptData = {
   nameCard?: string;
   phone?: string;
   email?: string;
-}
+  type?: string;
+};

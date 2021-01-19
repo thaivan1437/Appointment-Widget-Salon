@@ -1,7 +1,11 @@
-import React, { useRef, useEffect, FC, useState } from 'react';
+import React, { useRef, useEffect, FC } from 'react';
 import {
   PromotionSlider,
 } from '@modules/promotions/promotions-style';
+import {
+  Subject,
+  WrapInformation,
+} from '@modules/gift-card/gift-card.styles';
 
 const Step1: FC<PromotionsProps> = ({
   showPromotionsModal,
@@ -26,6 +30,15 @@ const Step1: FC<PromotionsProps> = ({
     }
   }, [showPromotionsModal]);
 
+  const designData = [
+    {images: 'https://cdn.salonmanager.net/egiftcards/designs/generic/1.png', class: 'gift'},
+    {images: 'https://cdn.salonmanager.net/egiftcards/designs/generic/2.png', class: 'gift'},
+    {images: 'https://cdn.salonmanager.net/egiftcards/designs/valentinesday/1.png' , class: ''},
+    {images: 'https://cdn.salonmanager.net/egiftcards/designs/valentinesday/2.png', class: ''},
+    {images: 'https://cdn.salonmanager.net/egiftcards/designs/mothersday/1.png', class: ''},
+    {images: 'https://cdn.salonmanager.net/egiftcards/designs/mothersday/2.png', class: ''}
+  ]
+
   const settings = {
     dots: false,
     speed: 500,
@@ -42,27 +55,28 @@ const Step1: FC<PromotionsProps> = ({
 
   return(
     <>
+      <Subject className="no-paddingBottom">eGift Cards</Subject>
       <PromotionSlider {...settings} ref={sliderRef} className="e-gift">
-        <div>
-          <h3>
-            <img src="http://cdn.salonmanager.net/widgets/icons/1a.png" />
-          </h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
+        {designData && designData?.map((item, index) => {
+          return (
+            <div key={index} className="images">
+              <WrapInformation>
+                <img className="slider" src={item.images} />
+                <div className="info-gift">
+                  <div className="company-name">Belmont beauty salon</div>
+                  <div className="address">
+                    951 Old County Rd. Suite 4<br />
+                    Belmont, CA 94002
+                  </div>
+                  <div className="phone">(650) 595-2800</div>
+                  <div className={`redeem-code ${item.class}`}>
+                    0000 - 0000 - 0000 - 0000
+                  </div>
+                </div>
+              </WrapInformation>
+            </div>
+          )
+        })}
       </PromotionSlider>
     </>
   );

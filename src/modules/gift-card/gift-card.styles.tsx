@@ -32,7 +32,6 @@ export const WrapInput = styled.div<BaseInput>`
     border-radius: 10px;
     background-color: ${INPUT_COLORS.BACKGROUND_COLOR};
     color:${INPUT_COLORS.TEXT_COLOR};
-    font-weight: 600;
     text-align: left;
     border: solid 1px ${INPUT_COLORS.BORDER};
 
@@ -45,17 +44,13 @@ export const WrapInput = styled.div<BaseInput>`
       border-top-right-radius: 0;
     }
 
-    &.error {
+    &.error, &.error::placeholder {
       color: ${COLORS.ERROR};
-      border: solid 1px ${COLORS.ERROR};
     }
   }
 
   input::placeholder {
     color: #babbc0;
-    &.error {
-      color: ${COLORS.ERROR};
-    }
   }
 
   label {
@@ -68,21 +63,11 @@ export const ButtonWrap2 = styled.div`
   justify-content: flex-end;
   width: 100%;
   align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 
-  &.step2 {
-    margin-top: 5px;
-  }
-
-  &.step3 {
-    margin-top: 45px;
-    padding-right: 0;
-  }
-
-  &.step4 {
-    margin-top: 21px;
-  }
 `
-
 export const GroupInputRadio = styled.div`
   [type="radio"]:checked,
   [type="radio"]:not(:checked) {
@@ -98,10 +83,9 @@ export const GroupInputRadio = styled.div`
     line-height: 20px;
     display: inline-block;
     color: ${COLORS.DOVE_GRAY1};
-    font-weight: 700;
 
     &.black {
-      color: ${COLORS.BLACK};
+      color: #212529;
       font-weight: 500;
     }
   }
@@ -141,6 +125,24 @@ export const GroupInputRadio = styled.div`
       transform: scale(1);
   }
 
+  &.wrap--date {
+    position:relative;
+  }
+  .input--date {
+    display:none;
+    position: absolute;
+    bottom: 36px;
+    left: -50%;
+    width: auto;
+    height:auto;
+  }
+  &.wrap--date.active .input--date {
+    display:block;
+  }
+
+  &.margin-left {
+    margin-left: 45px;
+  }
 `
 
 export const DFlex = styled(BaseContentStyle)`
@@ -149,8 +151,9 @@ export const DFlex = styled(BaseContentStyle)`
   justify-content: space-between;
 
   &.step1 {
-    margin-top: 13px;
-    padding-right: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 `;
 
@@ -160,21 +163,23 @@ export const FWrap = styled(DFlex)`
 
 export const Subject = styled.div`
   padding: 0px 0px 30px 40px;
-  font-weight: 700;
   text-align: left;
   display: flex;
   justify-content: flex-start;
   width: 100%;
   font-size: 23px;
-  color: ${(props) => (props?.color ? props?.color : COLORS.DOVE_GRAY)};
+  color: ${(props) => (props?.color ? props?.color : COLORS.ROOT)};
+
+  &.no-paddingBottom {
+    padding-bottom: 0;
+  }
 `
 
 export const Title = styled.div`
   padding: 18px 0;
-  font-weight: 700;
   text-align: center;
-  font-size: 23px;
-  color: ${(props) => (props?.color ? props?.color : COLORS.DOVE_GRAY3)};
+  font-size: 20px;
+  color: ${(props) => (props?.color ? props?.color : COLORS.ROOT)};
 `
 
 export const WrapButton = styled.div<BaseContentStyleProps>`
@@ -189,9 +194,8 @@ export const WrapButton = styled.div<BaseContentStyleProps>`
     margin: 0 10px;
     border-radius: 10px;
     font-size: 20px;
-    color: ${(props) => (props?.color ? props?.color : COLORS.DOVE_GRAY)};
+    color: ${(props) => (props?.color ? props?.color : COLORS.ROOT)};
     background-color: ${(props) => (props?.bColor ? props?.bColor : COLORS.BLACK)};
-    font-weight: 700;
     transition: ease-in 0.5s;
     margin-bottom: 15px;
 
@@ -206,6 +210,32 @@ export const WrapButton = styled.div<BaseContentStyleProps>`
     }
   }
 
+  .wrap--customAmount {
+    position: relative;
+
+    label {
+      position: absolute;
+      top: 20px;
+      left: calc(50% - 35px);
+      color: #fff;
+    }
+    &.error input, &.error label{
+      color: ${COLORS.ERROR}
+    }
+  }
+
+  /* Chrome, Safari, Edge, Opera */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
 `
 export const WrapReceipt = styled.div`
   width: 100%;
@@ -215,7 +245,7 @@ export const WrapReceipt = styled.div`
 
   label {
     color: #aaa;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   &.step3 {
@@ -235,21 +265,40 @@ export const WrapReceipt = styled.div`
   }
 
 `
-export const GiftDetail = styled.div`
-  width: 100%;
+export const WrapInformation = styled.div`
+  position: relative;
+  font-size: 14px;
 
-  .e-title {
-    font-size: 18px;
-    padding: 10px 0 0 20px;
-    color: ${COLORS.DOVE_GRAY2};
 
-    label {
-      color: ${COLORS.DOVE_GRAY2};
-      font-weight: 700;
-    }
-    p {
-      padding-left: 15px;
-      margin-bottom: 5px;
+  .info-gift {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .company-name {
+    color: red;
+  }
+  .phone {
+    font-weight: 700;
+  }
+
+  .address {
+    font-size: 12px;
+  }
+
+  .redeem-code {
+    position: absolute;
+    font-size: 16px;
+    left: calc(50% - 92px);
+    bottom: 56px;
+
+    &.gift {
+      bottom: 70px;
     }
   }
 

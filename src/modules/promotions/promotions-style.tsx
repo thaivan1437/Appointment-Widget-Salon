@@ -63,7 +63,6 @@ export const PromotionCodeDesc = styled(BaseContentStyle)`
   font-weight: 500;
   display: inline-block;
   user-select: text;
-  color: ${COLORS.ERROR};
   @media (max-width: 768px) {
     font-size: 25px;
   }
@@ -84,7 +83,7 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
     width: 500px;
   }
   .mt-half {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
   }
 
   *:focus {
@@ -94,9 +93,16 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   .clear {
     clear: both;
   }
+
   img{
     max-width:100%;
   }
+
+  img.slider {
+    width: 100%;
+    margin:auto;
+  }
+
   .slick-prev:before,
   .slick-next:before {
     color: ${(props) => props.color};
@@ -118,6 +124,7 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   .slick-prev {
     left: -40px;
   }
+
 `;
 
 export const PromotionSlider = styled(Slider)`
@@ -126,8 +133,17 @@ export const PromotionSlider = styled(Slider)`
   height: 320px;
 
   &.e-gift {
-    height: 280px;
+    height: 290px;
+    width: 450px;
 
+  }
+
+  .slick-slider {
+    user-select: unset;
+  }
+
+  .slick-prev.slick-disabled:before, .slick-next.slick-disabled:before {
+    cursor: initial
   }
 
   @media (max-width: 768px) {

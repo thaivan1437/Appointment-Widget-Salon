@@ -36,10 +36,12 @@ R.ImageWrapper = styled.img`
 `;
 const ButtonWrapper = styled.div`
   align-self: flex-end;
-  margin-right: 50px;
-
   display: flex;
   align-items: center;
+  position: absolute;
+  bottom: 70px;
+  right: 50px;
+
   @media (max-width: 768px) {
     margin-right: 30px;
   }

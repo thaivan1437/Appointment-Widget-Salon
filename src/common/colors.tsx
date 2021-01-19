@@ -19,6 +19,7 @@ export const COLORS = {
   STORM_GRAY: '#747883',
   SILVER: '#C8C8C8',
   ERROR: '#EA3350',
+  ROOT: '#212529',
 };
 
 export const INPUT_COLORS = {

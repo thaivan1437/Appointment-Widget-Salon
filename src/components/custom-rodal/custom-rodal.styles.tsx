@@ -91,11 +91,10 @@ S.HalfModalDialogCycle = styled(S.DialogCycle)`
 
 S.ModalContentContainer = styled.div`
   flex: 2;
-
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  position:relative;
   padding: 34px 0 68px;
   @media (min-width: 768px) and (max-width: 1024px) {
     padding: 20px 0 40px;
