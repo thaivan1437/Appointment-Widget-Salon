@@ -2,7 +2,7 @@ import CustomRodal from '@components/custom-rodal/custom-rodal';
 import styled from 'styled-components';
 import { S as ModalStyles } from '@components/custom-rodal/custom-rodal.styles';
 import { S as CommonStyles } from '@common/styles';
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { ColorContext } from '@components/widget-view/widget-view';
 import IconChevronRight from '../../common/icons/icon-chevron-right';
 import IconChevronLeft from '../../common/icons/icon-chevron-left';
@@ -14,7 +14,6 @@ import {
 
 import {
   DFlex,
-  BaseInput,
   GroupInputRadio,
   ButtonWrap2,
 } from '@modules/gift-card/gift-card.styles';
@@ -28,6 +27,7 @@ import Step5 from './step5';
 import { validateEmail } from './helper'
 import { R } from '@components/widget-view/widget-view.styles';
 
+
 const GiftCard: FC<PromotionsProps> = ({
   showPromotionsModal,
   setShowPromotionsModal,
@@ -37,12 +37,19 @@ const GiftCard: FC<PromotionsProps> = ({
   const [selectedEGift, setSelectedEGift] = useState({ status: false, value: null});
   const [selectedStep, setSelectedStep] = useState(1);
   const [amount, setAmount] = useState<AmountType>({ amount: 0, typeButton: 'button'});
-  const [design, setDesign] = useState('0');
-  const [receiptData, setReceiptData] = useState({ nameCard: '', phone: '', email: '', type: 'phone'});
-  const [deliverData, setDeliverData] = useState({ message: '', phone: '', email: '', type: 'phone',typeDeliver: 'now', schedule: new Date()});
+  const [design, setDesign] = useState({ value: '', check: null, action: '', label: 'Select this design', images: '' });
+
+  const [receiptData, setReceiptData] = useState({ nameCard: ''});
+  const [deliverData, setDeliverData] = useState({ message: '', phone: '', email: '', type: 'phone',
+  typeDeliver: 'now',
+  schedule: new Date(),
+  action: '',
+  });
   const [error, setError] = useState<ErrorType>({ nameCard: false, phone: false, email: false});
+  const [closeDate, setCloseDate] = useState({ value: false });
 
   const funcSetDesign = (value) => {
+    setSelectedEGift({ ...selectedEGift, value: value});
     setDesign(value);
   }
   const funcSetAmount = (value) => {
@@ -52,6 +59,7 @@ const GiftCard: FC<PromotionsProps> = ({
   const funcSetReceiptData = (value) => {
     setReceiptData(value);
     funcCheckError(value);
+
   }
   const funcCheckError = (value) => {
     if (value?.nameCard && value?.nameCard?.length < 2) {
@@ -75,6 +83,11 @@ const GiftCard: FC<PromotionsProps> = ({
   const funcSetDeliverData = (value) => {
     setDeliverData(value);
     funcCheckError(value);
+    setCloseDate({ value: false});
+  }
+
+  const handleCloseDate = () => {
+    setCloseDate({ value: true })
   }
 
   const renderContent = () => {
@@ -85,24 +98,18 @@ const GiftCard: FC<PromotionsProps> = ({
         return (
           <>
             <Step1
-              showPromotionsModal={showPromotionsModal}
               funcSetDesign = {funcSetDesign}
+              design = {design}
             />
             <DFlex className="step1">
               <GroupInputRadio className="margin-left">
-                <BaseInput
-                  id="select-egift"
-                  type="radio"
-                  name="select-egift"
-                  checked={ (design === selectedEGift.value) ? true : false }
-                  onChange={() => setSelectedEGift({ status: true, value: design})}
-
-                />
-                <label className="black" htmlFor="select-egift">Select this design</label>
+                {design?.check}
+                <label className="black" >{design?.label}</label>
               </GroupInputRadio>
+
               <CommonStyles.Button
                 color={color}
-                disabled={!(selectedEGift.status)}
+                disabled={!design?.value}
                 onClick={() => setSelectedStep(2)}
               >
                 {'Next '}
@@ -128,12 +135,12 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={amount == null}
+                disabled={!amount?.amount && amount?.amount === 0}
                 onClick={() => {
                   if (
                     amount &&
-                    amount.typeButton ==="number" &&
-                    (amount.amount < 100 || amount.amount > 200 )
+                    amount.typeButton ==="text" &&
+                    (amount.amount < 20 || amount.amount > 500 )
                     ) {
                     setError({ customAmount: true });
                     return;
@@ -165,18 +172,14 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={amount?.amount < 1}
+                disabled={!receiptData.nameCard}
                 onClick={() => {
                   funcCheckError(receiptData);
                   if (!receiptData.nameCard) {
                     setError({ nameCard: true });
                     return;
                   }
-                  if (!receiptData?.phone && !receiptData?.email) {
-                    setError({ phone: true, email: true });
-                    return;
-                  }
-                  if (!error.email && !error.nameCard && !error.phone) {
+                  if (!error.nameCard) {
                     setSelectedStep(4);
                   }
                 }}
@@ -197,6 +200,7 @@ const GiftCard: FC<PromotionsProps> = ({
               color={color}
               error={error}
               deliverInit = {deliverData}
+              closeDate ={closeDate}
             />
             <ButtonWrap2 className="step4">
               <R.BackButton onClick={() => setSelectedStep(3)}>
@@ -205,7 +209,7 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={amount?.amount < 1}
+                disabled={!deliverData?.phone && !deliverData?.email}
                 onClick={() => {
                   funcCheckError(deliverData);
                   if (!deliverData?.phone && !deliverData?.email) {
@@ -234,7 +238,7 @@ const GiftCard: FC<PromotionsProps> = ({
                 <IconChevronLeft />
                 {' Back'}
               </R.BackButton>
-              <CommonStyles.Button
+              {/* <CommonStyles.Button
                 color={color}
                 disabled={amount?.amount < 1}
                 onClick={() => {
@@ -250,7 +254,7 @@ const GiftCard: FC<PromotionsProps> = ({
               >
                 {'Next '}
                 <IconChevronRight />
-              </CommonStyles.Button>
+              </CommonStyles.Button> */}
             </ButtonWrap2>
           </>
         );
@@ -266,6 +270,7 @@ const GiftCard: FC<PromotionsProps> = ({
       setShowModal={setShowPromotionsModal}
       selectedStyle={folderName}
       width={900}
+      clickToCloseDate = {handleCloseDate}
     >
       <ColorContext.Provider value={color}>
         {/* left */}
@@ -308,54 +313,35 @@ const GiftCard: FC<PromotionsProps> = ({
             {/* check step show content right */}
             {selectedStep === 1 ? (
               <FirstStepMessage>
-                Your appointment details will appear here
+                Your eGift Card details will appear here
               </FirstStepMessage>
             ) : null}
 
-            {selectedStep === 3 ? (
+            {selectedStep > 1 ? (
               <>
-                <AppointmentInfo header>eGift card detail</AppointmentInfo>
+                <AppointmentInfo header>eGift Card Detail</AppointmentInfo>
                 <R.InformationWrapper>
                   <AppointmentInfo>
-                    {amount?.amount ? "$ " + amount?.amount : null}
-                  </AppointmentInfo>
-                </R.InformationWrapper>
-              </>
-            ) : null}
-
-            {selectedStep === 4 ? (
-              <>
-                <AppointmentInfo header>eGift card detail</AppointmentInfo>
-                <R.InformationWrapper>
-                  <AppointmentInfo>
-                    {amount?.amount ? "$ " + amount?.amount : null}
-                  </AppointmentInfo>
-                  <AppointmentInfo>
-                    <label>From</label>
-                    <div>{receiptData?.nameCard ? receiptData?.nameCard : null}</div>
-                  </AppointmentInfo>
-                </R.InformationWrapper>
-              </>
-            ) : null}
-
-            {selectedStep === 5 ? (
-              <>
-                <AppointmentInfo header>eGift card detail</AppointmentInfo>
-                <R.InformationWrapper>
-                  <AppointmentInfo>
-                    {amount?.amount ? "$ " + amount?.amount : null}
+                    {design?.images ? <img src={design.images} /> : null}
+                    {selectedStep > 2 && amount?.amount ? "$" + amount?.amount : null}
                   </AppointmentInfo>
 
-                  <AppointmentInfo>
-                    <label>From</label>
-                    <div>{receiptData?.nameCard ? receiptData?.nameCard : null}</div>
-                  </AppointmentInfo>
-                  <AppointmentInfo>
-                    <label>To</label>
-                    <div>{deliverData?.phone ? deliverData?.phone : deliverData?.email}</div>
-                    <div>{deliverData?.message ? deliverData?.message : null}</div>
-                    <div>{(deliverData?.schedule.toDateString() && deliverData?.typeDeliver ==="schedule") ? deliverData?.schedule.toDateString() : null}</div>
-                  </AppointmentInfo>
+                  { selectedStep > 3 &&
+                    <AppointmentInfo>
+                      <label>From</label>
+                      <div>{receiptData?.nameCard ? receiptData?.nameCard : null}</div>
+                    </AppointmentInfo>
+                  }
+
+                  {selectedStep > 4 &&
+                    <AppointmentInfo>
+                      <label>To</label>
+                      <div>{deliverData?.phone ? deliverData?.phone : deliverData?.email}</div>
+                      <div>{deliverData?.message ? deliverData?.message : null}</div>
+                      <div>{(deliverData?.schedule.toDateString() && deliverData?.typeDeliver ==="schedule") ? deliverData?.schedule.toDateString() : null}</div>
+                    </AppointmentInfo>
+                  }
+
                 </R.InformationWrapper>
               </>
             ) : null}
@@ -397,10 +383,16 @@ const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
 
   text-align: ${(props) => (props.header ? 'center' : 'left')};
 
+  img {
+    max-width: 100%;
+  }
+
   label {
     display:block;
     color: ${COLORS.DOVE_GRAY1};
     font-weight: 700;
+    font-style: italic;
+    margin-bottom: 0;
   }
   div {
     margin-left: 30px;

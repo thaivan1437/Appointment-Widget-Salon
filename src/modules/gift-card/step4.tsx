@@ -8,14 +8,15 @@ import {
 } from '@modules/gift-card/gift-card.styles';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import IconOptionChecked from '@common/icons/icon-option-checked';
+import IconOptionUnChecked from '@common/icons/icon-option-unchecked';
 
 const Step4: FC<PromotionsProps> = ({
   setDeliverCallback,
   error,
   deliverInit,
+  closeDate
 }) => {
-
-  const [startDate, setStartDate] = useState({ value: deliverInit?.schedule, status: false });
 
   const handleSetValue = (e) => {
     const { value, name } = e.target;
@@ -44,20 +45,22 @@ const Step4: FC<PromotionsProps> = ({
           selectedPattern
         );
 
-        setDeliverCallback({ ...deliverInit, phone: processedValue });
+        setDeliverCallback({ ...deliverInit, phone: processedValue, action: '' });
       }
     }
 
     if (name === "email") {
-      setDeliverCallback({ ...deliverInit, email: value });
+      setDeliverCallback({ ...deliverInit, email: value , action: ''});
     }
 
     if (name === "message") {
-      setDeliverCallback({ ...deliverInit, message: value });
+      setDeliverCallback({ ...deliverInit, message: value , action: ''});
     }
 
   }
+
   const changeMethodReceipt = (e) => {
+    e.stopPropagation()
     const { id } = e.target;
     // reset useState when change method input
     if (id === "phone") {
@@ -89,15 +92,14 @@ const Step4: FC<PromotionsProps> = ({
       setDeliverCallback({
         ...deliverInit,
         typeDeliver: id,
+        action: 'key',
       });
-      setStartDate({ ...startDate, status: true});
     }
 
   };
 
   const handleSetDate = (date) => {
     setDeliverCallback({ ...deliverInit, schedule: date });
-    setStartDate({ value: date, status: false});
   };
 
   return(
@@ -105,24 +107,15 @@ const Step4: FC<PromotionsProps> = ({
       <Subject>eGift Cards</Subject>
 
       <WrapReceipt>
-        <label className="w100">Deliver by:</label>
+        <label className="w100">Delivery by:</label>
         <GroupInputRadio className="w150">
-          <BaseInput
-            id="phone"
-            type="radio"
-            checked={(deliverInit?.type === "phone") ? true : false}
-            onChange={(e) => changeMethodReceipt(e)}
-          />
-          <label className="weight" htmlFor="phone">Text message</label>
+          {deliverInit?.type === "phone" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
+          <label className="weight" id="phone" onClick={(e) => changeMethodReceipt(e)}>Phone</label>
         </GroupInputRadio>
         <GroupInputRadio className="150">
-          <BaseInput
-            id="email"
-            type="radio"
-            checked={deliverInit.type === "email" ? true : false}
-            onChange={(e) => changeMethodReceipt(e)}
-          />
-          <label className="weight" htmlFor="email">Email</label>
+
+          {deliverInit?.type === "email" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
+          <label className="weight" id="email" onClick={(e) => changeMethodReceipt(e)}>Email</label>
         </GroupInputRadio>
       </WrapReceipt>
 
@@ -131,8 +124,8 @@ const Step4: FC<PromotionsProps> = ({
           type={deliverInit?.type === "phone" ? "tel" : "email"}
           name={deliverInit?.type === "phone" ? "phone" : "email"}
           value={deliverInit?.type === "phone" ? deliverInit?.phone : deliverInit?.email}
-          className={(error?.phone || error?.email) ? "error" : "" + "no-radius-bottom"}
-          placeholder={deliverInit?.type === "phone" ? "Enter your phone (000) 000-0000" : "Enter your email"}
+          className={`${(error?.phone || error?.email) ? "error" : ""} no-radius-bottom`}
+          placeholder={deliverInit?.type === "phone" ? "Enter recipient phone (000) 000-0000" : "Enter recipient email"}
           onChange={(e) => handleSetValue(e)}
         />
         <BaseInput
@@ -140,40 +133,37 @@ const Step4: FC<PromotionsProps> = ({
           name="message"
           value={deliverInit?.message}
           className="no-radius-top"
-          placeholder="Enter short message"
+          placeholder="Enter short message for the recipient"
           onChange={(e) => handleSetValue(e)}
         />
       </WrapInput>
 
       <WrapReceipt className="mt-half">
-        <label className="w100">Deliver Date:</label>
+        <label className="w100">Delivery Date:</label>
         <GroupInputRadio className="w150">
-          <BaseInput
-            id="now"
-            type="radio"
-            checked={(deliverInit?.typeDeliver === "now") ? true : false}
-            onChange={(e) => changeMethodReceipt(e)}
-          />
-          <label className="weight" htmlFor="now">Now</label>
+          {deliverInit?.typeDeliver === "now" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
+          <label className="weight" id="now" onClick={(e) => changeMethodReceipt(e)}>Now</label>
         </GroupInputRadio>
-        <GroupInputRadio className={`150 wrap--date ${startDate.status ? 'active' : ''}`}>
-          <BaseInput
-            id="schedule"
-            type="radio"
-            checked={deliverInit?.typeDeliver === "schedule" ? true : false}
-            onChange={(e) => changeMethodReceipt(e)}
-          />
+        <GroupInputRadio className={`150 wrap--date ${(
+            deliverInit.typeDeliver === "schedule" &&
+            closeDate.value === false &&
+            deliverInit.action !==""
+          ) ? 'active' : ''}`}>
+          {deliverInit?.typeDeliver === "schedule" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
           <label
             className="weight"
-            htmlFor="schedule"
-            onClick={() => setStartDate({ ...startDate, status: !startDate.status })}
+            id="schedule"
+            onClick={(e) => {
+              changeMethodReceipt(e)
+            }}
           >
-              Schedule
+            Schedule
           </label>
           <div className="input--date">
             <DatePicker
-              selected={startDate.value}
+              selected={deliverInit.schedule}
               onChange={(date) => handleSetDate(date)}
+              isClearable={true}
               inline
             />
           </div>
@@ -191,6 +181,9 @@ export type PromotionsProps = {
   color?: string;
   error?: errorInit;
   deliverInit?: deliverDataType;
+  closeDate?: {
+    value?: boolean;
+  };
 };
 export type errorInit = {
   phone?: boolean;
@@ -204,4 +197,5 @@ export type deliverDataType = {
   type?: string;
   typeDeliver?: string;
   schedule?: Date;
+  action?: string;
 }

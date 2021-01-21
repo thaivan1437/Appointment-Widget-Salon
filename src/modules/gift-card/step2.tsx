@@ -21,15 +21,16 @@ const Step2: FC<PromotionsProps> = ({
 }) => {
   const handleSelectAmount = (e) => {
     const { value, tagName } = e.target;
-    const newValue = parseInt(value, 10);
-    const defaultValue = [25, 50, 75, 100];
+    let newValue = value.replace("$", "");
+    newValue = parseInt(newValue, 10);
+
     if (tagName === "BUTTON") {
       setAmountCallback({ amount: newValue, typeButton: 'button'});
       error.customAmount = false;
       return;
     }
 
-    setAmountCallback({ amount: newValue, typeButton: 'number'});
+    setAmountCallback({ amount: newValue, typeButton: 'text'});
 
   }
 
@@ -51,26 +52,36 @@ const Step2: FC<PromotionsProps> = ({
                 key={index}
                 onClick={(e) => handleSelectAmount(e)}
                 value={item.value}
-                className={ (amount.amount === (item.value)) ? 'active': ''}
+                className={ (amount.amount === item.value && amount.typeButton === 'button') ? 'active': ''}
               >
-                {item.type} {item.value}
+                {item.type}{item.value}
               </button>
             )
           })
         }
         <div className={`wrap--customAmount ${(error.customAmount) ? 'error' : ''}`}>
-          <BaseInput
-            type={amount.typeButton === "number" ? "number" : "button"}
-            value={(amount?.amount && amount.typeButton === "number") ? amount.amount : "Custom Amount"}
-            className={`${(amount.typeButton === "number") ? "active": ''}  `}
-            min="100"
-            max="200"
-            onClick= {() => {
-              setAmountCallback({ amount: 0, typeButton: 'number'});
-            }}
-            onChange={(e) => handleSelectAmount(e)}
-          />
-          {amount.typeButton === "number" ? <label className='customAmount'>$</label> : ""}
+          {amount?.typeButton === "button" &&
+            <BaseInput
+              type={"button"}
+              value={"Custom Amount"}
+              onClick= {() => {
+                setAmountCallback({ amount: 20, typeButton: 'text'});
+              }}
+            />
+          }
+          { amount?.typeButton === "text" &&
+            <>
+              <BaseInput
+                type={"text"}
+                value={`$${amount?.amount ? amount?.amount : "0"}`}
+                className={`${(amount?.typeButton === "text") ? "active": ''}  `}
+                pattern="[0-9]*"
+                onChange={(e) => handleSelectAmount(e)}
+              />
+              <label>minimum $20, maximum $500</label>
+            </>
+          }
+
         </div>
       </WrapButton>
     </>

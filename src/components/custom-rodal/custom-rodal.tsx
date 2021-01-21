@@ -11,6 +11,7 @@ const CustomRodal: FC<CustomRodalProps> = ({
   selectedStyle,
   halfMode,
   width,
+  clickToCloseDate,
 }) => {
   const isTablet = useMediaQuery({
     query: '(min-width: 768px) and (max-width: 1024px)',
@@ -50,7 +51,9 @@ const CustomRodal: FC<CustomRodalProps> = ({
         </>
       )}
 
-      <S.ModalContentWrapper>{children}</S.ModalContentWrapper>
+      <S.ModalContentWrapper onClick={() => {
+        clickToCloseDate(true)
+      }}>{children}</S.ModalContentWrapper>
     </S.CustomRodal>
   );
 };
@@ -62,6 +65,7 @@ export type CustomRodalProps = {
   selectedStyle?: string;
   halfMode?: boolean;
   width?: number;
+  clickToCloseDate?: (e) => void;
 };
 
 export default CustomRodal;

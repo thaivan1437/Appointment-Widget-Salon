@@ -454,7 +454,6 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
               <R.ImageWrapper
                 onClick={() => setShowGiftCardModal(true)}
                 src={`https://cdn.salonmanager.${CONFIGS.domainExtension}/widgets/styles/YELLOW/egift-cards.png`}
-                className="w80"
               />
             </div>
           ) : null}

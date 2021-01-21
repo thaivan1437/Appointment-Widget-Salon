@@ -26,6 +26,14 @@ export const WrapInput = styled.div<BaseInput>`
   display:block;
   width: 100%;
 
+  &.pt-85 {
+    padding-top : 85px;
+
+    @media (max-width: 768px) {
+      padding : 0 15px 40px;
+    }
+  }
+
   input {
     width: 85%;
     padding: 15px;
@@ -55,6 +63,7 @@ export const WrapInput = styled.div<BaseInput>`
 
   label {
     color: ${COLORS.DOVE_GRAY1};
+    font-size: 14px;
   }
 `
 
@@ -67,62 +76,18 @@ export const ButtonWrap2 = styled.div`
   bottom: 0;
   left: 0;
 
+  @media (max-width: 768px) {
+    position: unset;
+    padding: 0 15px;
+  }
+
 `
 export const GroupInputRadio = styled.div`
-  [type="radio"]:checked,
-  [type="radio"]:not(:checked) {
-      position: absolute;
-      left: -9999px;
-  }
-  [type="radio"]:checked + label,
-  [type="radio"]:not(:checked) + label
-  {
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    color: ${COLORS.DOVE_GRAY1};
+  display:flex;
 
-    &.black {
-      color: #212529;
-      font-weight: 500;
-    }
-  }
-  [type="radio"]:checked + label:before,
-  [type="radio"]:not(:checked) + label:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 18px;
-      height: 18px;
-      border: 1px solid #0679be;
-      border-radius: 100%;
-      background: #fff;
-  }
-  [type="radio"]:checked + label:after,
-  [type="radio"]:not(:checked) + label:after {
-      content: '';
-      width: 10px;
-      height: 10px;
-      background: #0679be;
-      position: absolute;
-      top: 4px;
-      left: 4px;
-      border-radius: 100%;
-      -webkit-transition: all 0.2s ease;
-      transition: all 0.2s ease;
-  }
-  [type="radio"]:not(:checked) + label:after {
-      opacity: 0;
-      -webkit-transform: scale(0);
-      transform: scale(0);
-  }
-  [type="radio"]:checked + label:after {
-      opacity: 1;
-      -webkit-transform: scale(1);
-      transform: scale(1);
+  label {
+    margin: 0 0 0 15px;
+    color: initial;
   }
 
   &.wrap--date {
@@ -131,7 +96,7 @@ export const GroupInputRadio = styled.div`
   .input--date {
     display:none;
     position: absolute;
-    bottom: 36px;
+    bottom: 50px;
     left: -50%;
     width: auto;
     height:auto;
@@ -142,6 +107,12 @@ export const GroupInputRadio = styled.div`
 
   &.margin-left {
     margin-left: 45px;
+  }
+
+  @media (max-width: 768px) {
+    &.margin-left {
+      margin-left: 0;
+    }
   }
 `
 
@@ -154,6 +125,13 @@ export const DFlex = styled(BaseContentStyle)`
     position: absolute;
     bottom: 0;
     left: 0;
+  }
+
+  @media (max-width: 768px ) {
+    &.step1 {
+      padding: 0 15px;
+      position: unset;
+    }
   }
 `;
 
@@ -180,6 +158,10 @@ export const Title = styled.div`
   text-align: center;
   font-size: 20px;
   color: ${(props) => (props?.color ? props?.color : COLORS.ROOT)};
+
+  @media (max-width: 768px) {
+    padding: 0 0 15px;
+  }
 `
 
 export const WrapButton = styled.div<BaseContentStyleProps>`
@@ -200,25 +182,44 @@ export const WrapButton = styled.div<BaseContentStyleProps>`
     margin-bottom: 15px;
 
     :hover{
-      background-color: ${(props) => (props?.activeColor ? props?.activeColor : COLORS.DOVE_GRAY)};
-      color: white;
+      background-color: ${COLORS.ALTO};
     }
 
     &.active {
       background-color: ${(props) => (props?.activeColor ? props?.activeColor : COLORS.DOVE_GRAY)};
-      color:white
+      color:white;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      padding: 8px 30px;
     }
   }
 
   .wrap--customAmount {
     position: relative;
+    text-align:center;
+
+    input {
+      margin-bottom: 0;
+    }
 
     label {
+      font-size: 14px;
+      color: ${COLORS.RED};
+      text-align: left;
+      display:block;
+      margin-left: 10px;
+    }
+
+    label.customAmount {
       position: absolute;
       top: 20px;
       left: calc(50% - 35px);
       color: #fff;
+      font-size: 20px;
     }
+
     &.error input, &.error label{
       color: ${COLORS.ERROR}
     }
@@ -278,10 +279,12 @@ export const WrapInformation = styled.div`
     height: 100%;
     padding: 20px;
     text-align: center;
+    cursor: pointer;
   }
 
   .company-name {
     color: red;
+    font-weight: bold;
   }
   .phone {
     font-weight: 700;
@@ -296,9 +299,34 @@ export const WrapInformation = styled.div`
     font-size: 16px;
     left: calc(50% - 92px);
     bottom: 56px;
+    color: ${COLORS.DOVE_GRAY4};
 
     &.gift {
       bottom: 70px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .info-gift {
+      padding: 15px;
+    }
+
+    .phone {
+      font-size: 13px;
+    }
+
+    .address {
+      font-size: 11px;
+    }
+
+    .redeem-code {
+      font-size: 13px;
+      left: calc(50% - 75px);
+      bottom: 46px;
+
+      &.gift {
+        bottom: 57px;
+      }
     }
   }
 

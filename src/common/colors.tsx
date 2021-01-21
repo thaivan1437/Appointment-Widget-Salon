@@ -10,6 +10,7 @@ export const COLORS = {
   DOVE_GRAY1: '#929292',
   DOVE_GRAY2: '#777777',
   DOVE_GRAY3: '#444444',
+  DOVE_GRAY4: '#BBBBBB',
   SHADOW: 'rgba(0, 0, 0, 0.1)',
   ALABASTER: '#F8F8F8',
   MERCURY: '#E2E2E2',
@@ -19,6 +20,7 @@ export const COLORS = {
   STORM_GRAY: '#747883',
   SILVER: '#C8C8C8',
   ERROR: '#EA3350',
+  RED: '#FF0000',
   ROOT: '#212529',
 };
 

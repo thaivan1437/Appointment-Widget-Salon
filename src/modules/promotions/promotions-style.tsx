@@ -116,6 +116,7 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   .slick-next {
     width: 45px;
     height: 45px;
+    z-index: 2;
   }
   .slick-next {
     right: -40px;
@@ -123,6 +124,23 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
 
   .slick-prev {
     left: -40px;
+  }
+
+  @media (max-width: 768px) {
+    &.e-gift {
+      width: 100%;
+      padding: 0 0 25px;
+      height: 250px;
+      overflow: scroll;
+    }
+
+    .slick-next {
+      right: 0;
+    }
+
+    .slick-prev {
+      left: 0;
+    }
   }
 
 `;
@@ -148,6 +166,11 @@ export const PromotionSlider = styled(Slider)`
 
   @media (max-width: 768px) {
     width: 300px;
+
+    &.e-gift {
+      width: 100%;
+      padding: 0 0 25px;
+    }
   }
 `;
 

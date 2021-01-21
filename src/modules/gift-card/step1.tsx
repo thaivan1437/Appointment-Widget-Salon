@@ -6,29 +6,34 @@ import {
   Subject,
   WrapInformation,
 } from '@modules/gift-card/gift-card.styles';
+import IconOptionChecked from '@common/icons/icon-option-checked';
+import IconOptionUnChecked from '@common/icons/icon-option-unchecked';
 
 const Step1: FC<PromotionsProps> = ({
-  showPromotionsModal,
   funcSetDesign,
+  design,
 }) => {
 
-  const handleSelectAmount = (value) => {
-    funcSetDesign(value);
+  const handleSelectAmount = ({ value, action, images }) => {
+
+    if (action === 'click') {
+      funcSetDesign({ value: value, check: <IconOptionChecked />, action: action, label: "Selected", images: images });
+      return;
+    }
+    funcSetDesign({ ...design, check: design.value === value ? <IconOptionChecked /> : <IconOptionUnChecked />, label: 'Select this design' });
   }
 
   const sliderRef = useRef(null);
 
   useEffect(() => {
     if (
-      !showPromotionsModal &&
       sliderRef &&
       sliderRef.current &&
       sliderRef.current.slickGoTo
     ) {
       sliderRef.current.slickGoTo(0);
-      handleSelectAmount('design 0');
     }
-  }, [showPromotionsModal]);
+  }, []);
 
   const designData = [
     {images: 'https://cdn.salonmanager.net/egiftcards/designs/generic/1.png', class: 'gift'},
@@ -46,10 +51,10 @@ const Step1: FC<PromotionsProps> = ({
     slidesToShow: 1,
     slidesToScroll: 1,
     afterChange: (current) => {
-      handleSelectAmount('design ' + current);
+      handleSelectAmount({ value: 'design ' + current, action: '', images: '' });
     },
     beforeChange: (current) => {
-      handleSelectAmount('design ' + current);
+      handleSelectAmount({ value: 'design ' + current, action: '', images: '' });
     }
   };
 
@@ -62,8 +67,8 @@ const Step1: FC<PromotionsProps> = ({
             <div key={index} className="images">
               <WrapInformation>
                 <img className="slider" src={item.images} />
-                <div className="info-gift">
-                  <div className="company-name">Belmont beauty salon</div>
+                <div className="info-gift" onClick={() => handleSelectAmount({ value: 'design ' + index , action: 'click', images: item.images})}>
+                  <div className="company-name">Belmont Beauty Salon</div>
                   <div className="address">
                     951 Old County Rd. Suite 4<br />
                     Belmont, CA 94002
@@ -74,6 +79,7 @@ const Step1: FC<PromotionsProps> = ({
                   </div>
                 </div>
               </WrapInformation>
+
             </div>
           )
         })}
@@ -85,6 +91,12 @@ const Step1: FC<PromotionsProps> = ({
 export default Step1;
 
 export type PromotionsProps = {
-  showPromotionsModal: boolean;
   funcSetDesign: (e) => void;
+  design?: DesignProps;
+};
+export type DesignProps = {
+  check?: string;
+  value?: string;
+  action?: string;
+  label?: string;
 };
