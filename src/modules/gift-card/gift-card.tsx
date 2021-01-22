@@ -103,7 +103,7 @@ const GiftCard: FC<PromotionsProps> = ({
               funcSetDesign = {funcSetDesign}
               design = {design}
             />
-            {console.log(design)}
+
             <DFlex className="step1">
               <GroupInputRadio className="margin-left" onClick={() => setDesign({
                 ...design,
