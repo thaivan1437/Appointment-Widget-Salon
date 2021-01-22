@@ -135,7 +135,10 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={!amount?.amount && amount?.amount === 0}
+                disabled={
+                  !amount?.amount || amount?.amount === 0 ||
+                  amount?.amount < 20 || amount?.amount > 500
+                }
                 onClick={() => {
                   if (
                     amount &&
@@ -319,7 +322,7 @@ const GiftCard: FC<PromotionsProps> = ({
 
             {selectedStep > 1 ? (
               <>
-                <AppointmentInfo header>eGift Card Detail</AppointmentInfo>
+                <AppointmentInfo header>eGift Card Details</AppointmentInfo>
                 <R.InformationWrapper>
                   <AppointmentInfo>
                     {design?.images ? <img src={design.images} /> : null}

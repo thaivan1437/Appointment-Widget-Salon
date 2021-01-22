@@ -181,13 +181,10 @@ export const WrapButton = styled.div<BaseContentStyleProps>`
     transition: ease-in 0.5s;
     margin-bottom: 15px;
 
-    :hover{
-      background-color: ${COLORS.ALTO};
-    }
-
     &.active {
       background-color: ${(props) => (props?.activeColor ? props?.activeColor : COLORS.DOVE_GRAY)};
-      color:white;
+      border: solid 1px ${(props) => (props?.activeColor ? props?.activeColor : COLORS.DOVE_GRAY)};
+      color: white;
       font-weight: 700;
     }
 
@@ -206,7 +203,7 @@ export const WrapButton = styled.div<BaseContentStyleProps>`
 
     label {
       font-size: 14px;
-      color: ${COLORS.RED};
+      color: ${COLORS.DOVE_GRAY1};
       text-align: left;
       display:block;
       margin-left: 10px;
