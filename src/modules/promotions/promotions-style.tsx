@@ -151,8 +151,8 @@ export const PromotionSlider = styled(Slider)`
   height: 320px;
 
   &.e-gift {
-    height: 290px;
-    width: 450px;
+    height: 232px;
+    width: 360px;
 
   }
 

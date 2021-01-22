@@ -106,7 +106,7 @@ export const GroupInputRadio = styled.div`
   }
 
   &.margin-left {
-    margin-left: 45px;
+    margin-left: 80px;
   }
 
   @media (max-width: 768px) {
@@ -285,21 +285,23 @@ export const WrapInformation = styled.div`
   }
   .phone {
     font-weight: 700;
+    font-size: 13px;
   }
 
   .address {
     font-size: 12px;
+    line-height: 12px;
   }
 
   .redeem-code {
     position: absolute;
-    font-size: 16px;
-    left: calc(50% - 92px);
-    bottom: 56px;
+    font-size: 13px;
+    left: calc(50% - 75px);
+    bottom: 46px;
     color: ${COLORS.DOVE_GRAY4};
 
     &.gift {
-      bottom: 70px;
+      bottom: 58px;
     }
   }
 
