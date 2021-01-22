@@ -144,7 +144,10 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={!amount?.amount && amount?.amount === 0}
+                disabled={
+                  !amount?.amount || amount?.amount === 0 ||
+                  amount?.amount < 20 || amount?.amount > 500
+                }
                 onClick={() => {
                   if (
                     amount &&
@@ -280,6 +283,7 @@ const GiftCard: FC<PromotionsProps> = ({
       selectedStyle={folderName}
       width={900}
       clickToCloseDate = {handleCloseDate}
+      type="eGift"
     >
       <ColorContext.Provider value={color}>
         {/* left */}
@@ -328,7 +332,7 @@ const GiftCard: FC<PromotionsProps> = ({
 
             {selectedStep > 1 ? (
               <>
-                <AppointmentInfo header>eGift Card Detail</AppointmentInfo>
+                <AppointmentInfo header>eGift Card Details</AppointmentInfo>
                 <R.InformationWrapper>
                   <AppointmentInfo>
                     {design?.images ? <img src={design.images} /> : null}
@@ -346,8 +350,8 @@ const GiftCard: FC<PromotionsProps> = ({
                     <AppointmentInfo>
                       <label>To</label>
                       <div>{deliverData?.phone ? deliverData?.phone : deliverData?.email}</div>
-                      <div>{deliverData?.message ? deliverData?.message : null}</div>
                       <div>{(deliverData?.schedule.toDateString() && deliverData?.typeDeliver ==="schedule") ? deliverData?.schedule.toDateString() : null}</div>
+                      <div className="message">{deliverData?.message ? deliverData?.message : null}</div>
                     </AppointmentInfo>
                   }
 
@@ -393,7 +397,9 @@ const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
   text-align: ${(props) => (props.header ? 'center' : 'left')};
 
   img {
-    max-width: 100%;
+    max-width: 200px;
+    margin: auto;
+    display: block;
   }
 
   label {
@@ -405,6 +411,31 @@ const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
   }
   div {
     margin-left: 30px;
+
+    &.message {
+      height: 50px;
+      overflow-y: auto;
+
+      /* width */
+      ::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+    }
   }
 `;
 

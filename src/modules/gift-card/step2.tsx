@@ -65,7 +65,7 @@ const Step2: FC<PromotionsProps> = ({
               type={"button"}
               value={"Custom Amount"}
               onClick= {() => {
-                setAmountCallback({ amount: 20, typeButton: 'text'});
+                setAmountCallback({ amount: 'enter amount', typeButton: 'text'});
               }}
             />
           }
@@ -75,10 +75,13 @@ const Step2: FC<PromotionsProps> = ({
                 type={"text"}
                 value={`$${amount?.amount ? amount?.amount : "0"}`}
                 className={`${(amount?.typeButton === "text") ? "active": ''}  `}
+                onClick= {() => {
+                  setAmountCallback({ amount: '', typeButton: 'text'});
+                }}
                 pattern="[0-9]*"
                 onChange={(e) => handleSelectAmount(e)}
               />
-              <label>minimum $20, maximum $500</label>
+              <label>min $20, max $500</label>
             </>
           }
 
