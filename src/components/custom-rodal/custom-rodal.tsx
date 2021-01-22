@@ -51,9 +51,7 @@ const CustomRodal: FC<CustomRodalProps> = ({
         </>
       )}
 
-      <S.ModalContentWrapper onClick={() => {
-        clickToCloseDate(true)
-      }}>{children}</S.ModalContentWrapper>
+      <S.ModalContentWrapper onClick={(e) => clickToCloseDate(true) }>{children}</S.ModalContentWrapper>
     </S.CustomRodal>
   );
 };

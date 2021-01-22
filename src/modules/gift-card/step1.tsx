@@ -17,10 +17,19 @@ const Step1: FC<PromotionsProps> = ({
   const handleSelectAmount = ({ value, action, images }) => {
 
     if (action === 'click') {
-      funcSetDesign({ value: value, check: <IconOptionChecked />, action: action, label: "Selected", images: images });
+      funcSetDesign({
+        value: value,
+        check: design.label ==='Selected' ? <IconOptionUnChecked /> : <IconOptionChecked /> ,
+        action: design.label ==='Selected' ? null : action,
+        label: design.label ==='Selected' ? 'Select this design' : 'Selected',
+        images: images });
       return;
     }
-    funcSetDesign({ ...design, check: design.value === value ? <IconOptionChecked /> : <IconOptionUnChecked />, label: 'Select this design' });
+    funcSetDesign({ ...design,
+      check: design.value === value ? <IconOptionChecked /> : <IconOptionUnChecked />,
+      label: design.value === value ? 'Selected' : 'Select this design',
+      fake: value,
+    });
   }
 
   const sliderRef = useRef(null);
@@ -79,7 +88,9 @@ const Step1: FC<PromotionsProps> = ({
                   </div>
                 </div>
               </WrapInformation>
-
+              <div>
+                <IconOptionUnChecked /> select chose design
+              </div>
             </div>
           )
         })}

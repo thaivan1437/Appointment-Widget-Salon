@@ -26,6 +26,8 @@ import Step4 from './step4';
 import Step5 from './step5';
 import { validateEmail } from './helper'
 import { R } from '@components/widget-view/widget-view.styles';
+import IconOptionChecked from '@common/icons/icon-option-checked';
+import IconOptionUnChecked from '@common/icons/icon-option-unchecked';
 
 
 const GiftCard: FC<PromotionsProps> = ({
@@ -37,7 +39,7 @@ const GiftCard: FC<PromotionsProps> = ({
   const [selectedEGift, setSelectedEGift] = useState({ status: false, value: null});
   const [selectedStep, setSelectedStep] = useState(1);
   const [amount, setAmount] = useState<AmountType>({ amount: 0, typeButton: 'button'});
-  const [design, setDesign] = useState({ value: '', check: null, action: '', label: 'Select this design', images: '' });
+  const [design, setDesign] = useState({ value: '', check: null, action: '', label: 'Select this design', images: '', fake: '' });
 
   const [receiptData, setReceiptData] = useState({ nameCard: ''});
   const [deliverData, setDeliverData] = useState({ message: '', phone: '', email: '', type: 'phone',
@@ -101,15 +103,22 @@ const GiftCard: FC<PromotionsProps> = ({
               funcSetDesign = {funcSetDesign}
               design = {design}
             />
+            {console.log(design)}
             <DFlex className="step1">
-              <GroupInputRadio className="margin-left">
-                {design?.check}
-                <label className="black" >{design?.label}</label>
+              <GroupInputRadio className="margin-left" onClick={() => setDesign({
+                ...design,
+                label: design.label === 'Select this design' ? 'Selected' : 'Select this design',
+                check: design.label === 'Select this design' ? <IconOptionChecked /> : <IconOptionUnChecked />,
+                action: design.label === 'Select this design' ? 'click' : '',
+                value: design.fake
+              })}>
+                {design.action !=='' ? design?.check : <IconOptionUnChecked />}
+                <label className="black">{design?.label}</label>
               </GroupInputRadio>
 
               <CommonStyles.Button
                 color={color}
-                disabled={!design?.value}
+                disabled={!design?.value || !design.action}
                 onClick={() => setSelectedStep(2)}
               >
                 {'Next '}
