@@ -61,7 +61,7 @@ const Step4: FC<PromotionsProps> = ({
 
   const changeMethodReceipt = (e) => {
     e.stopPropagation()
-    const { id } = e.target;
+    const id  =  e.target.getAttribute('data-id');
     // reset useState when change method input
     if (id === "phone") {
 
@@ -104,22 +104,23 @@ const Step4: FC<PromotionsProps> = ({
 
   return(
     <>
-      <Subject>eGift Cards</Subject>
+      <Subject className="step4">eGift Cards</Subject>
 
       <WrapReceipt>
         <label className="w100">Delivery by:</label>
-        <GroupInputRadio className="w150">
-          {deliverInit?.type === "phone" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
-          <label className="weight" id="phone" onClick={(e) => changeMethodReceipt(e)}>Phone</label>
-        </GroupInputRadio>
-        <GroupInputRadio className="150">
-
+        <GroupInputRadio className="w100 relative">
           {deliverInit?.type === "email" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
-          <label className="weight" id="email" onClick={(e) => changeMethodReceipt(e)}>Email</label>
+          <label className="weight" id="email" data-id="email" onClick={(e) => changeMethodReceipt(e)}>Email</label>
         </GroupInputRadio>
+        <GroupInputRadio className="w150 relative" data-id="phone" onClick={(e) => changeMethodReceipt(e)}>
+          {deliverInit?.type === "phone" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
+          <label className="weight" id="phone" data-id="phone" onClick={(e) => changeMethodReceipt(e)}>Text message</label>
+        </GroupInputRadio>
+
       </WrapReceipt>
 
       <WrapInput>
+        <div>Recipient</div>
         <BaseInput
           type={deliverInit?.type === "phone" ? "tel" : "email"}
           name={deliverInit?.type === "phone" ? "phone" : "email"}
@@ -140,22 +141,20 @@ const Step4: FC<PromotionsProps> = ({
 
       <WrapReceipt className="mt-half">
         <label className="w100">Delivery Date:</label>
-        <GroupInputRadio className="w150">
+        <GroupInputRadio className="w100 relative">
           {deliverInit?.typeDeliver === "now" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
-          <label className="weight" id="now" onClick={(e) => changeMethodReceipt(e)}>Now</label>
+          <label className="weight" id="now" data-id="now" onClick={(e) => changeMethodReceipt(e)}>Now</label>
         </GroupInputRadio>
-        <GroupInputRadio className={`150 wrap--date ${(
+        <GroupInputRadio className={`relative w150 wrap--date ${(
             deliverInit.typeDeliver === "schedule" &&
             closeDate.value === false &&
             deliverInit.action !==""
           ) ? 'active' : ''}`}>
-          {deliverInit?.typeDeliver === "schedule" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
+            {deliverInit?.typeDeliver === "schedule" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
           <label
             className="weight"
             id="schedule"
-            onClick={(e) => {
-              changeMethodReceipt(e)
-            }}
+            data-id="schedule" onClick={(e) => changeMethodReceipt(e)}
           >
             Schedule
           </label>

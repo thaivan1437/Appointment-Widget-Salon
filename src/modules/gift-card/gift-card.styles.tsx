@@ -27,7 +27,7 @@ export const WrapInput = styled.div<BaseInput>`
   width: 100%;
 
   &.pt-85 {
-    padding-top : 85px;
+    padding-top : 60px;
 
     @media (max-width: 768px) {
       padding : 0 15px 40px;
@@ -35,13 +35,17 @@ export const WrapInput = styled.div<BaseInput>`
   }
 
   input {
-    width: 85%;
-    padding: 15px;
+    width: 400px;
+    font-size: 22px;
     border-radius: 10px;
+    padding: 12px;
+    border: solid 1px #ccc;
+    color: ${(props) =>
+      props.hasError ? COLORS.ERROR : INPUT_COLORS.TEXT_COLOR};
     background-color: ${INPUT_COLORS.BACKGROUND_COLOR};
-    color:${INPUT_COLORS.TEXT_COLOR};
+    line-height: 2;
     text-align: left;
-    border: solid 1px ${INPUT_COLORS.BORDER};
+
 
     &.no-radius-bottom {
       border-bottom-left-radius: 0;
@@ -52,9 +56,20 @@ export const WrapInput = styled.div<BaseInput>`
       border-top-right-radius: 0;
     }
 
+    ::placeholder {
+      color: ${(props) =>
+        props.hasError ? COLORS.ERROR : INPUT_COLORS.HIT_TEXT};
+    }
+    ::-moz-placeholder {
+      color: ${(props) =>
+        props.hasError ? COLORS.ERROR : INPUT_COLORS.HIT_TEXT};
+      opacity: 1;
+    }
+
     &.error, &.error::placeholder {
       color: ${COLORS.ERROR};
     }
+
   }
 
   input::placeholder {
@@ -88,6 +103,9 @@ export const GroupInputRadio = styled.div`
   label {
     margin: 0 0 0 15px;
     color: initial;
+    cursor: pointer;
+  }
+  svg {
     cursor: pointer;
   }
 
@@ -153,6 +171,10 @@ export const Subject = styled.div`
   &.no-paddingBottom {
     padding-bottom: 0;
   }
+
+  &.step4 {
+    padding: 0 0 15px 40px;
+  }
 `
 
 export const Title = styled.div`
@@ -160,6 +182,10 @@ export const Title = styled.div`
   text-align: center;
   font-size: 20px;
   color: ${(props) => (props?.color ? props?.color : COLORS.ROOT)};
+
+  &.step2 {
+    padding: 0 0 18px;
+  }
 
   @media (max-width: 768px) {
     padding: 0 0 15px;
@@ -245,7 +271,7 @@ export const WrapReceipt = styled.div`
 
   label {
     color: #aaa;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   &.step3 {
@@ -262,6 +288,20 @@ export const WrapReceipt = styled.div`
 
   .w150 {
     width: 180px;
+  }
+
+  .relative {
+    position: relative;
+    height: 100%;
+
+    label {
+      position: absolute;
+      margin: 0;
+      top:0;
+      left: 0;
+      width: 100%;
+      padding-left: 40px;
+    }
   }
 
 `

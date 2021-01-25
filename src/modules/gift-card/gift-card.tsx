@@ -28,21 +28,20 @@ import { validateEmail } from './helper'
 import { R } from '@components/widget-view/widget-view.styles';
 import IconOptionChecked from '@common/icons/icon-option-checked';
 import IconOptionUnChecked from '@common/icons/icon-option-unchecked';
-
+import {imagesList} from './constant'
 
 const GiftCard: FC<PromotionsProps> = ({
-  showPromotionsModal,
-  setShowPromotionsModal,
+  showEGiftCardModal,
+  setShowEGiftCardModal,
   folderName,
   color,
 }) => {
-  const [selectedEGift, setSelectedEGift] = useState({ status: false, value: null});
   const [selectedStep, setSelectedStep] = useState(1);
   const [amount, setAmount] = useState<AmountType>({ amount: 0, typeButton: 'button'});
-  const [design, setDesign] = useState({ value: '', check: null, action: '', label: 'Select this design', images: '', fake: '' });
-
+  const [design, setDesign] = useState({ value: '', check: null, action: '', label: 'Select this design',
+  images: '', fake: '' });
   const [receiptData, setReceiptData] = useState({ nameCard: ''});
-  const [deliverData, setDeliverData] = useState({ message: '', phone: '', email: '', type: 'phone',
+  const [deliverData, setDeliverData] = useState({ message: '', phone: '', email: '', type: 'email',
   typeDeliver: 'now',
   schedule: new Date(),
   action: '',
@@ -50,8 +49,22 @@ const GiftCard: FC<PromotionsProps> = ({
   const [error, setError] = useState<ErrorType>({ nameCard: false, phone: false, email: false});
   const [closeDate, setCloseDate] = useState({ value: false });
 
+  useEffect(() => {
+    if (showEGiftCardModal === false) {
+      setSelectedStep(1);
+      setAmount({amount: 0, typeButton: 'button'});
+      setDesign({value: '', check: null, action: '', label: 'Select this design', images: '', fake: '' });
+      setReceiptData({ nameCard: ''});
+      setDeliverData({message: '', phone: '', email: '', type: 'email',
+      typeDeliver: 'now',
+      schedule: new Date(),
+      action: '',});
+      setError({ nameCard: false, phone: false, email: false});
+      setCloseDate({ value: false});
+    }
+  }, [showEGiftCardModal]);
+
   const funcSetDesign = (value) => {
-    setSelectedEGift({ ...selectedEGift, value: value});
     setDesign(value);
   }
   const funcSetAmount = (value) => {
@@ -61,8 +74,8 @@ const GiftCard: FC<PromotionsProps> = ({
   const funcSetReceiptData = (value) => {
     setReceiptData(value);
     funcCheckError(value);
-
   }
+
   const funcCheckError = (value) => {
     if (value?.nameCard && value?.nameCard?.length < 2) {
       setError({ nameCard: true });
@@ -110,7 +123,8 @@ const GiftCard: FC<PromotionsProps> = ({
                 label: design.label === 'Select this design' ? 'Selected' : 'Select this design',
                 check: design.label === 'Select this design' ? <IconOptionChecked /> : <IconOptionUnChecked />,
                 action: design.label === 'Select this design' ? 'click' : '',
-                value: design.fake
+                value: design.fake,
+                images: design.fake ? imagesList[design.fake] : imagesList[design.value]
               })}>
                 {design.action !=='' ? design?.check : <IconOptionUnChecked />}
                 <label className="black">{design?.label}</label>
@@ -184,7 +198,6 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={!receiptData.nameCard}
                 onClick={() => {
                   funcCheckError(receiptData);
                   if (!receiptData.nameCard) {
@@ -221,7 +234,6 @@ const GiftCard: FC<PromotionsProps> = ({
               </R.BackButton>
               <CommonStyles.Button
                 color={color}
-                disabled={!deliverData?.phone && !deliverData?.email}
                 onClick={() => {
                   funcCheckError(deliverData);
                   if (!deliverData?.phone && !deliverData?.email) {
@@ -278,8 +290,8 @@ const GiftCard: FC<PromotionsProps> = ({
 
   return (
     <CustomRodal
-      showModal={showPromotionsModal}
-      setShowModal={setShowPromotionsModal}
+      showModal={showEGiftCardModal}
+      setShowModal={setShowEGiftCardModal}
       selectedStyle={folderName}
       width={900}
       clickToCloseDate = {handleCloseDate}
@@ -367,8 +379,8 @@ const GiftCard: FC<PromotionsProps> = ({
 };
 
 export type PromotionsProps = {
-  showPromotionsModal: boolean;
-  setShowPromotionsModal: (show: boolean) => void;
+  showEGiftCardModal: boolean;
+  setShowEGiftCardModal: (show: boolean) => void;
   folderName: string;
   color: string;
   promotionData: Promotion[];
@@ -386,6 +398,7 @@ export type AmountType = {
   typeButton?: string;
 };
 type AppointmentInfoStyleProps = { header?: boolean; userName?: boolean };
+
 const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
   color: ${(props) =>
     props.header ? COLORS.DOVE_GRAY : COLORS.SILVER_CHALICE};
@@ -397,7 +410,7 @@ const AppointmentInfo = styled.div<AppointmentInfoStyleProps>`
   text-align: ${(props) => (props.header ? 'center' : 'left')};
 
   img {
-    max-width: 200px;
+    max-width: 150px;
     margin: auto;
     display: block;
   }

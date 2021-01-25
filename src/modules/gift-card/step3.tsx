@@ -4,6 +4,7 @@ import {
   WrapInput,
   BaseInput,
 } from '@modules/gift-card/gift-card.styles';
+import { USERNAME_REGEX } from '@common/constants';
 
 const Step3: FC<PromotionsProps> = ({
   setReceiptCallback,
@@ -13,7 +14,17 @@ const Step3: FC<PromotionsProps> = ({
 
   const handleSetValue = (e) => {
     const { value } = e.target;
-    setReceiptCallback({...receiptInit, nameCard: value});
+    const replacedValue = value
+      .replace(USERNAME_REGEX, '')
+      .toLowerCase()
+      .replace(/\b[a-z](?=[a-z]{2})/g, function (letter) {
+        return letter.toUpperCase();
+      });
+
+    if (replacedValue.length <= 32) {
+      setReceiptCallback({...receiptInit, nameCard: replacedValue});
+    }
+
   }
 
   return(

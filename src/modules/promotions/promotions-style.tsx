@@ -83,7 +83,7 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
     width: 500px;
   }
   .mt-half {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
   }
 
   *:focus {

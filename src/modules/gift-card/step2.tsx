@@ -37,7 +37,7 @@ const Step2: FC<PromotionsProps> = ({
   return(
     <>
       <Subject>eGift Cards</Subject>
-      <Title>Select eGift Card Amount</Title>
+      <Title className="step2">Select eGift Card Amount</Title>
       <WrapButton
         bColor='#f8f7f7'
         color='#383838'

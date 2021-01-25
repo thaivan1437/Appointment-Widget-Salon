@@ -573,8 +573,8 @@ const WidgetView: FC<WidgetViewProps> = ({ widgetConfig, appId }) => {
       />
       {/*GiftCard*/}
       <GiftCard
-        showPromotionsModal={showGiftCardModal}
-        setShowPromotionsModal={setShowGiftCardModal}
+        showEGiftCardModal={showGiftCardModal}
+        setShowEGiftCardModal={setShowGiftCardModal}
         folderName={folderName}
         color={color}
         promotionData={getValidPromotions(widgetConfig.widgetData.promotions)}

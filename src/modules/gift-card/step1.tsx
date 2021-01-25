@@ -15,7 +15,6 @@ const Step1: FC<PromotionsProps> = ({
 }) => {
 
   const handleSelectAmount = ({ value, action, images }) => {
-
     if (action === 'click') {
       funcSetDesign({
         value: value,
@@ -29,6 +28,7 @@ const Step1: FC<PromotionsProps> = ({
       check: design.value === value ? <IconOptionChecked /> : <IconOptionUnChecked />,
       label: design.value === value ? 'Selected' : 'Select this design',
       fake: value,
+      images: 'https://cdn.salonmanager.net/egiftcards/designs/generic/1.png',
     });
   }
 
@@ -88,9 +88,6 @@ const Step1: FC<PromotionsProps> = ({
                   </div>
                 </div>
               </WrapInformation>
-              <div>
-                <IconOptionUnChecked /> select chose design
-              </div>
             </div>
           )
         })}
