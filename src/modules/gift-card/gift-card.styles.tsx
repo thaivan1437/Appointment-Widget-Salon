@@ -88,6 +88,7 @@ export const GroupInputRadio = styled.div`
   label {
     margin: 0 0 0 15px;
     color: initial;
+    cursor: pointer;
   }
 
   &.wrap--date {
@@ -107,6 +108,7 @@ export const GroupInputRadio = styled.div`
 
   &.margin-left {
     margin-left: 80px;
+    cursor: pointer;
   }
 
   @media (max-width: 768px) {

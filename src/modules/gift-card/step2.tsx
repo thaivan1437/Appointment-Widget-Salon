@@ -65,7 +65,7 @@ const Step2: FC<PromotionsProps> = ({
               type={"button"}
               value={"Custom Amount"}
               onClick= {() => {
-                setAmountCallback({ amount: 'enter amount', typeButton: 'text'});
+                setAmountCallback({ amount: 'Enter amount', typeButton: 'text'});
               }}
             />
           }
@@ -73,7 +73,7 @@ const Step2: FC<PromotionsProps> = ({
             <>
               <BaseInput
                 type={"text"}
-                value={`$${amount?.amount ? amount?.amount : "0"}`}
+                value={`$${amount?.amount ? amount?.amount : ""}`}
                 className={`${(amount?.typeButton === "text") ? "active": ''}  `}
                 onClick= {() => {
                   setAmountCallback({ amount: '', typeButton: 'text'});
