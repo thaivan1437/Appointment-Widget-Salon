@@ -5,6 +5,7 @@ import {
   BaseInput,
   GroupInputRadio,
   WrapReceipt,
+  Title,
 } from '@modules/gift-card/gift-card.styles';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -70,6 +71,7 @@ const Step4: FC<PromotionsProps> = ({
         email: '',
         phone: '',
         type: id,
+        action: ''
       });
     }
     if (id === "email") {
@@ -78,6 +80,7 @@ const Step4: FC<PromotionsProps> = ({
         email: '',
         phone: '',
         type: id,
+        action: ''
       });
     }
 
@@ -107,7 +110,7 @@ const Step4: FC<PromotionsProps> = ({
   return(
     <>
       <Subject className="step4">eGift Cards</Subject>
-      <div className="title--step4">Recipient</div>
+      <Title className="step4">Recipient</Title>
       <WrapReceipt>
         <label className="w100">Delivery By:</label>
         <GroupInputRadio className="w100 relative">
@@ -141,7 +144,7 @@ const Step4: FC<PromotionsProps> = ({
       </WrapInput>
 
       <WrapReceipt className="mt-half">
-        <label className="w100">Delivery date:</label>
+        <label className="w100">Delivery Date:</label>
         <GroupInputRadio className="w100 relative">
           {deliverInit?.typeDeliver === "now" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
           <label className="weight" id="now" data-id="now" onClick={(e) => changeMethodReceipt(e)}>Now</label>

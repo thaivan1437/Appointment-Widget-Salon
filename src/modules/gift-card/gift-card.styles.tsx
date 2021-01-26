@@ -27,7 +27,7 @@ export const WrapInput = styled.div<BaseInput>`
   width: 100%;
 
   &.pt-85 {
-    padding-top : 60px;
+    padding-top : 30px;
 
     @media (max-width: 768px) {
       padding : 0 15px 40px;
@@ -145,6 +145,7 @@ export const DFlex = styled(BaseContentStyle)`
   display:flex;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 
   &.step1 {
     position: absolute;
@@ -178,7 +179,7 @@ export const Subject = styled.div`
   }
 
   &.step4 {
-    padding: 0 0 15px 40px;
+    padding: 0 0 5px 40px;
   }
 `
 
@@ -190,6 +191,10 @@ export const Title = styled.div`
 
   &.step2 {
     padding: 0 0 18px;
+  }
+
+  &.step4 {
+    padding: 0 0 10px;
   }
 
   @media (max-width: 768px) {
@@ -280,7 +285,7 @@ export const WrapReceipt = styled.div`
 
   label {
     color: #aaa;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   &.step3 {

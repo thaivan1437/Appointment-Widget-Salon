@@ -3,6 +3,7 @@ import {
   Subject,
   WrapInput,
   BaseInput,
+  Title,
 } from '@modules/gift-card/gift-card.styles';
 import { USERNAME_REGEX } from '@common/constants';
 
@@ -30,9 +31,8 @@ const Step3: FC<PromotionsProps> = ({
   return(
     <>
       <Subject>eGift Cards</Subject>
-
+      <Title className="step2">Sender</Title>
       <WrapInput className="pt-85">
-        <div>Sender</div>
         <BaseInput
           type="text"
           id="name"

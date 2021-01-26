@@ -88,7 +88,7 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
     }
   }
   .mt-half {
-    margin-top: 1rem;
+    margin-top: 0.5rem;
   }
 
   *:focus {
@@ -130,6 +130,31 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   .slick-prev {
     left: -40px;
   }
+
+  .slick-dots li button {
+    width: 10px;
+    height: 10px;
+    padding: 5px;
+  }
+  .slick-dots li button:before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border: solid 1px #000;
+    border-radius: 50%;
+  }
+  .slick-dots li.slick-active button:before {
+      opacity: .75;
+      color: #c7c9cd;
+      background: #c7c9cd;
+      border: solid 1px;
+  }
+  .slick-dots li {
+    width: 10px;
+    height: 10px;
+    margin: 0 2px;
+  }
+
 
   @media (max-width: 768px) {
     &.e-gift {

@@ -54,7 +54,7 @@ const Step1: FC<PromotionsProps> = ({
   ]
 
   const settings = {
-    dots: false,
+    dots: true,
     speed: 500,
     infinite: false,
     slidesToShow: 1,
