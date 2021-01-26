@@ -47,7 +47,6 @@ const Step2: FC<PromotionsProps> = ({
           dataFake?.map((item, index) => {
 
             return (
-
               <button
                 key={index}
                 onClick={(e) => handleSelectAmount(e)}
@@ -59,7 +58,7 @@ const Step2: FC<PromotionsProps> = ({
             )
           })
         }
-        <div className={`wrap--customAmount ${(error.customAmount) ? 'error' : ''}`}>
+        <div className={`wrap--customAmount`}>
           {amount?.typeButton === "button" &&
             <BaseInput
               type={"button"}
@@ -81,7 +80,7 @@ const Step2: FC<PromotionsProps> = ({
                 pattern="[0-9]*"
                 onChange={(e) => handleSelectAmount(e)}
               />
-              <label>min $20, max $500</label>
+              <label className={`${(error.customAmount) ? 'error' : ''}`}>min $20, max $500</label>
             </>
           }
 

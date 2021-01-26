@@ -105,7 +105,7 @@ S.ModalContentContainer = styled.div`
     padding: 20px 0 20px;
     flex: 1 1;
     min-height: 300px;
-    overflow: hidden;
+    overflow: auto;
   }
 `;
 S.ModalDetailContentContainer = styled.div`

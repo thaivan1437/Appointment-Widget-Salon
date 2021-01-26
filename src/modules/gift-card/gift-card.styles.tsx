@@ -70,6 +70,11 @@ export const WrapInput = styled.div<BaseInput>`
       color: ${COLORS.ERROR};
     }
 
+    @media (max-width: 768px) {
+      width: 100%;
+      font-size: 17px;
+    }
+
   }
 
   input::placeholder {
@@ -248,6 +253,10 @@ export const WrapButton = styled.div<BaseContentStyleProps>`
     &.error input, &.error label{
       color: ${COLORS.ERROR}
     }
+
+    label.error{
+      color: ${COLORS.ERROR}
+    }
   }
 
   /* Chrome, Safari, Edge, Opera */
@@ -300,15 +309,18 @@ export const WrapReceipt = styled.div`
       top:0;
       left: 0;
       width: 100%;
-      padding-left: 40px;
+      padding-left: 30px;
     }
+  }
+
+  @media (max-width: 768px) {
+    font-size: 14px;
   }
 
 `
 export const WrapInformation = styled.div`
   position: relative;
   font-size: 14px;
-
 
   .info-gift {
     position: absolute;
@@ -325,6 +337,7 @@ export const WrapInformation = styled.div`
     color: red;
     font-weight: bold;
   }
+
   .phone {
     font-weight: 700;
     font-size: 13px;
@@ -352,21 +365,19 @@ export const WrapInformation = styled.div`
       padding: 15px;
     }
 
-    .phone {
-      font-size: 13px;
-    }
-
     .address {
-      font-size: 11px;
+      font-size: 10px;
     }
 
     .redeem-code {
-      font-size: 13px;
-      left: calc(50% - 75px);
-      bottom: 46px;
+      bottom: 38px;
+      font-size: 11px;
+      left: calc(50% - 64px);
 
       &.gift {
-        bottom: 57px;
+        bottom: 47px;
+        font-size: 11px;
+        left: calc(50% - 63px);
       }
     }
   }

@@ -36,7 +36,7 @@ const GiftCard: FC<PromotionsProps> = ({
   folderName,
   color,
 }) => {
-  const [selectedStep, setSelectedStep] = useState(1);
+  const [selectedStep, setSelectedStep] = useState(4);
   const [amount, setAmount] = useState<AmountType>({ amount: 0, typeButton: 'button'});
   const [design, setDesign] = useState({ value: '', check: null, action: '', label: 'Select this design',
   images: '', fake: '' });
@@ -45,6 +45,7 @@ const GiftCard: FC<PromotionsProps> = ({
   typeDeliver: 'now',
   schedule: new Date(),
   action: '',
+  default: true,
   });
   const [error, setError] = useState<ErrorType>({ nameCard: false, phone: false, email: false});
   const [closeDate, setCloseDate] = useState({ value: false });
@@ -58,7 +59,7 @@ const GiftCard: FC<PromotionsProps> = ({
       setDeliverData({message: '', phone: '', email: '', type: 'email',
       typeDeliver: 'now',
       schedule: new Date(),
-      action: '',});
+      action: '',default: true});
       setError({ nameCard: false, phone: false, email: false});
       setCloseDate({ value: false});
     }
@@ -69,6 +70,14 @@ const GiftCard: FC<PromotionsProps> = ({
   }
   const funcSetAmount = (value) => {
     setAmount(value);
+    if (value?.amount && value?.typeButton === "text" && (value?.amount < 20 || value?.amount > 500 ))
+    {
+      setError({ customAmount: true });
+      return;
+    } else {
+      setError({ customAmount: false });
+      return;
+    }
   }
 
   const funcSetReceiptData = (value) => {
@@ -300,7 +309,7 @@ const GiftCard: FC<PromotionsProps> = ({
       <ColorContext.Provider value={color}>
         {/* left */}
         <ModalStyles.ModalContentContainer>
-          <CustomModalContent color={color} className="e-gift">
+          <CustomModalContent color={color} className={`e-gift ${(selectedStep === 2 || selectedStep === 3) ? "step2" : ""}`}>
 
             {renderContent()}
 

@@ -85,6 +85,7 @@ const Step4: FC<PromotionsProps> = ({
       setDeliverCallback({
         ...deliverInit,
         typeDeliver: id,
+        default: true,
       });
     }
 
@@ -93,21 +94,22 @@ const Step4: FC<PromotionsProps> = ({
         ...deliverInit,
         typeDeliver: id,
         action: 'key',
+        default: true,
       });
     }
 
   };
 
   const handleSetDate = (date) => {
-    setDeliverCallback({ ...deliverInit, schedule: date });
+    setDeliverCallback({ ...deliverInit, schedule: date, default: false });
   };
 
   return(
     <>
       <Subject className="step4">eGift Cards</Subject>
-
+      <div className="title--step4">Recipient</div>
       <WrapReceipt>
-        <label className="w100">Delivery by:</label>
+        <label className="w100">Delivery By:</label>
         <GroupInputRadio className="w100 relative">
           {deliverInit?.type === "email" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
           <label className="weight" id="email" data-id="email" onClick={(e) => changeMethodReceipt(e)}>Email</label>
@@ -120,7 +122,6 @@ const Step4: FC<PromotionsProps> = ({
       </WrapReceipt>
 
       <WrapInput>
-        <div>Recipient</div>
         <BaseInput
           type={deliverInit?.type === "phone" ? "tel" : "email"}
           name={deliverInit?.type === "phone" ? "phone" : "email"}
@@ -140,7 +141,7 @@ const Step4: FC<PromotionsProps> = ({
       </WrapInput>
 
       <WrapReceipt className="mt-half">
-        <label className="w100">Delivery Date:</label>
+        <label className="w100">Delivery date:</label>
         <GroupInputRadio className="w100 relative">
           {deliverInit?.typeDeliver === "now" ? <IconOptionChecked /> : <IconOptionUnChecked/>}
           <label className="weight" id="now" data-id="now" onClick={(e) => changeMethodReceipt(e)}>Now</label>
@@ -156,7 +157,7 @@ const Step4: FC<PromotionsProps> = ({
             id="schedule"
             data-id="schedule" onClick={(e) => changeMethodReceipt(e)}
           >
-            Schedule
+            {(deliverInit?.schedule && !deliverInit?.default) ? deliverInit?.schedule.toDateString() : "Schedule"}
           </label>
           <div className="input--date">
             <DatePicker
@@ -197,4 +198,5 @@ export type deliverDataType = {
   typeDeliver?: string;
   schedule?: Date;
   action?: string;
+  default?: boolean;
 }

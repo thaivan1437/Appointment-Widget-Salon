@@ -26,6 +26,10 @@ S.SelectionContainer = styled.div<SelectionContainerProps>`
 
   cursor: pointer;
 
+  @media (max-width: 768px){
+    width: 70px;
+  }
+
   &:after,
   &:before {
     display: ${(props) => (props.selected ? 'block' : 'none')};

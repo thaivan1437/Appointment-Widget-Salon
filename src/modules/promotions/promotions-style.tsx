@@ -81,6 +81,11 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   &.e-gift {
     padding: 0;
     width: 500px;
+
+    .title--step4 {
+      display: flex;
+      width: 100%;
+    }
   }
   .mt-half {
     margin-top: 1rem;
@@ -129,9 +134,12 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   @media (max-width: 768px) {
     &.e-gift {
       width: 100%;
-      padding: 0 0 25px;
+      padding: 0 15px 0px;
       height: 250px;
       overflow: scroll;
+    }
+    &.e-gift.step2 {
+      padding: 0 0px 25px;
     }
 
     .slick-next {
@@ -169,7 +177,8 @@ export const PromotionSlider = styled(Slider)`
 
     &.e-gift {
       width: 100%;
-      padding: 0 0 25px;
+      padding: 0 15px 0px;
+      height: 100%;
     }
   }
 `;

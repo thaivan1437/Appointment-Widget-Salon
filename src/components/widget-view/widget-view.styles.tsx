@@ -27,6 +27,7 @@ R.ImageWrapper = styled.img`
   position: relative;
   z-index: 2;
   filter: drop-shadow(2px 2px 2px #333);
+
 `;
 const ButtonWrapper = styled.div`
   align-self: flex-end;
@@ -38,6 +39,9 @@ const ButtonWrapper = styled.div`
 
   @media (max-width: 768px) {
     margin-right: 30px;
+    position: relative;
+    bottom: 0;
+    right: 0;
   }
 `;
 
