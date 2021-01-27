@@ -226,7 +226,6 @@ export const WrapButton = styled.div<BaseContentStyleProps>`
     font-size: 20px;
     color: ${(props) => (props?.color ? props?.color : COLORS.ROOT)};
     background-color: ${(props) => (props?.bColor ? props?.bColor : COLORS.BLACK)};
-    transition: ease-in 0.5s;
     margin-bottom: 15px;
 
     &.active {

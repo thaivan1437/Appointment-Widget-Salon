@@ -190,6 +190,10 @@ export const PromotionSlider = styled(Slider)`
 
   }
 
+  .slick-prev, .slick-next {
+    top: 55%;
+  }
+
   .slick-slider {
     user-select: unset;
   }
