@@ -81,6 +81,7 @@ export const CustomModalContent = styled(ModalStyles.ModalContentContainer)`
   &.e-gift {
     padding: 0;
     width: 500px;
+    overflow: unset;
 
     .title--step4 {
       display: flex;

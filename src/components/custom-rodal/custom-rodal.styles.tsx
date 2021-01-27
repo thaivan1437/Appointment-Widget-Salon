@@ -100,6 +100,8 @@ S.ModalContentContainer = styled.div`
     padding: 20px 0 40px;
     flex: 1 1;
     min-height: 300px;
+    height: 300px;
+    overflow: scroll
   }
   @media (max-width: 768px) {
     padding: 20px 0 20px;

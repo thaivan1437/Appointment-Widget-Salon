@@ -96,6 +96,12 @@ export const ButtonWrap2 = styled.div`
   bottom: 0;
   left: 0;
 
+  @media (min-width: 768px) and (max-width: 1024px) {
+    &.step4 {
+      bottom: -75px;
+    }
+  }
+
   @media (max-width: 768px) {
     position: unset;
     padding: 0 15px;
@@ -151,6 +157,10 @@ export const DFlex = styled(BaseContentStyle)`
     position: absolute;
     bottom: 0;
     left: 0;
+
+    @media (min-width:768px ) and (max-width: 1024px) {
+      bottom: -50px;
+    }
   }
 
   @media (max-width: 768px ) {
