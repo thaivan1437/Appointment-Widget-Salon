@@ -140,7 +140,7 @@ const Step4: FC<PromotionsProps> = ({
           className="no-radius-top"
           placeholder="Enter short message for the recipient"
           onChange={(e) => handleSetValue(e)}
-          maxLength={75}
+          maxLength={42}
         />
       </WrapInput>
 

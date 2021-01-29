@@ -371,7 +371,7 @@ const GiftCard: FC<PromotionsProps> = ({
                     <AppointmentInfo>
                       <label>To</label>
                       <div>{deliverData?.phone ? deliverData?.phone : deliverData?.email}</div>
-                      <div>{(deliverData?.schedule.toDateString() && deliverData?.typeDeliver ==="schedule") ? deliverData?.schedule.toDateString() : null}</div>
+                      <div>{(deliverData?.schedule.toDateString() && deliverData?.typeDeliver ==="schedule") ? deliverData?.schedule.toDateString() : "Now"}</div>
                       <div className="message">{deliverData?.message ? deliverData?.message : null}</div>
                     </AppointmentInfo>
                   }
