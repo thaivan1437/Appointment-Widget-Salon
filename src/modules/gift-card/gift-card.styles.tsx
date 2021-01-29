@@ -77,6 +77,10 @@ export const WrapInput = styled.div<BaseInput>`
 
   }
 
+  .title {
+    font-size: 20px;
+  }
+
   input::placeholder {
     color: #babbc0;
   }
@@ -205,6 +209,8 @@ export const Title = styled.div`
 
   &.step4 {
     padding: 0 0 10px;
+    text-align: left;
+    width: 100%;
   }
 
   @media (max-width: 768px) {

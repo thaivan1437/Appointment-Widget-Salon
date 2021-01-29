@@ -31,8 +31,8 @@ const Step3: FC<PromotionsProps> = ({
   return(
     <>
       <Subject>eGift Cards</Subject>
-      <Title className="step2">Sender</Title>
       <WrapInput className="pt-85">
+        <div className="title">Sender</div>
         <BaseInput
           type="text"
           id="name"
