@@ -44,6 +44,7 @@
     "react-helmet": "^6.1.0",
     "react-responsive": "^8.1.0",
     "react-slick": "^0.27.14",
+    "react-square-payment-form": "^0.7.2",
     "reactstrap": "^8.6.0",
     "rodal": "^1.8.1",
     "slick-carousel": "^1.8.1",

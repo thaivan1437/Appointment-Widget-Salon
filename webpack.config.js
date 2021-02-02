@@ -86,6 +86,7 @@ module.exports = (env) => {
       port: 5555,
       hot: true,
       contentBase: path.join(__dirname, 'dist'),
+      disableHostCheck: true,
     },
   };
 };
