@@ -53,9 +53,10 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {config.env !== 'production' &&
+          <iframe src="https://noah-git-chore-rollback.thaivan1437.vercel.app/1.0.0/" />
+          {/* {config.env !== 'production' &&
             <script src={`https://noah-git-chore-hardcode-locationid.thaivan1437.vercel.app/1.0.0/loader.js`} data-sm={config.locationID} defer></script>
-          }
+          } */}
         </body>
       </Html>
     )
