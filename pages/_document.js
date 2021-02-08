@@ -54,7 +54,7 @@ class MyDocument extends Document {
           <Main />
           <NextScript />
           {config.env !== 'production' &&
-            <script src={`https://noah-hg7lqzy1k.vercel.app/1.0.0/loader.js`} data-sm={config.locationID} defer></script>
+            <script src={`https://noah-git-chore-hardcode-locationid.thaivan1437.vercel.app/1.0.0/loader.js`} data-sm={config.locationID} defer></script>
           }
         </body>
       </Html>
