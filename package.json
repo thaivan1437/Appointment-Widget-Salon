@@ -20,7 +20,8 @@
     "build-sitemap:dev": "node scripts/sitemap-common.js",
     "build:ci": "PUBLIC_NEXT_ENV=production next build && npm run build-sitemap",
     "export-dev": "PUBLIC_NEXT_ENV=development next export",
-    "build-dev:ci": "PUBLIC_NEXT_ENV=development next build && npm run build-sitemap:dev"
+    "build-dev:ci": "PUBLIC_NEXT_ENV=development next build && npm run build-sitemap:dev",
+    "build-local": "npm run next-build && npm run export "
   },
   "eslintConfig": {
     "extends": "react-app"

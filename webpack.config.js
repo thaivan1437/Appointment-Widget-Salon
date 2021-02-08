@@ -61,9 +61,6 @@ module.exports = {
                 template: path.join(__dirname, '/public/index.html'),
                 favicon: 'public/favicon.ico'
             }
-        ),
-        new HWP({
-            template: path.join(__dirname, 'public/blank'),
-          }),
+        )
     ]
 }
