@@ -20,7 +20,9 @@
     "build-sitemap:dev": "node scripts/sitemap-common.js",
     "build:ci": "PUBLIC_NEXT_ENV=production next build && npm run build-sitemap",
     "export-dev": "PUBLIC_NEXT_ENV=development next export",
-    "build-dev:ci": "PUBLIC_NEXT_ENV=development next build && npm run build-sitemap:dev"
+    "build-dev:ci": "PUBLIC_NEXT_ENV=development next build && npm run build-sitemap:dev",
+    "nodemon": "nodemon -e js,json,css,scss,jsx",
+    "start:local": "export PUBLIC_NEXT_ENV=development && next build && next export && serve out"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,8 +51,9 @@
     "globby": "^11.0.1",
     "history": "^4.10.1",
     "mini-css-extract-plugin": "^0.9.0",
-    "next": "^10.0.3",
+    "next": "^10.1.2",
     "node-sass": "^4.13.0",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "react": "^16.14.0",
     "react-animated-css": "^1.2.1",
@@ -60,7 +63,8 @@
     "react-device-detect": "^1.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.1"
+    "react-scripts": "4.0.1",
+    "serve": "^11.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.12.8",

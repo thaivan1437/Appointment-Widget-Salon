@@ -217,18 +217,25 @@ class Slider extends React.PureComponent {
 					this.animating = false;
 					return;
 				}
+
 				const touch = e.touches[0];
 				const newLeft = touch[this.swipeEventProperty] - this.pageStartPosition;
 				this.currentElementPosition = this.currentElementStartPosition + newLeft;
-				this.currentElement.style[this.swipeProperty] = `${this.currentElementPosition}px`;
+
+				if (this.currentElement) {
+					this.currentElement.style[this.swipeProperty] = `${this.currentElementPosition}px`;
+				}
+
 				if (this.previousElement) {
 					this.previousElementPosition = this.previousElementStartPosition + newLeft;
 					this.previousElement.style[this.swipeProperty] = `${this.previousElementPosition}px`;
 				}
+
 				if (this.nextElement) {
 					this.nextElementPosition = this.nextElementStartPosition + newLeft;
 					this.nextElement.style[this.swipeProperty] = `${this.nextElementPosition}px`;
 				}
+
 				this.animating = false;
 			});
 	};
@@ -236,20 +243,27 @@ class Slider extends React.PureComponent {
 	handleTouchEnd = () => {
 		this.animating = false;
 		this.isSwiping = false;
-		this.currentElement.style.removeProperty(this.swipeProperty);
-		this.currentElement.style.removeProperty('transition');
+		
+		if (this.currentElement) {
+			this.currentElement.style.removeProperty(this.swipeProperty);
+			this.currentElement.style.removeProperty('transition');
+		}
+
 		if (this.previousElement) {
 			this.previousElement.style.removeProperty('visibility');
 			this.previousElement.style.removeProperty('transition');
 			this.previousElement.style.removeProperty(this.swipeProperty);
 		}
+
 		if (this.nextElement) {
 			this.nextElement.style.removeProperty('visibility');
 			this.nextElement.style.removeProperty('transition');
 			this.nextElement.style.removeProperty(this.swipeProperty);
 		}
+
 		const touchDelta = this.currentElementStartPosition - this.currentElementPosition;
 		const minSwipeOffset = this.props.minSwipeOffset || 15;
+
 		if (Math.abs(touchDelta) > minSwipeOffset) {
 			if (touchDelta < 0) {
 				this.previous();

@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "ignore": ["node_modules", ".next"],
+  "watch": ["src/"],
+  "ext": "js json css scss jsx",
+  "exec": "npm run start:local"
+}
