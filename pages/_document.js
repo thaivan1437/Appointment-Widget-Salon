@@ -69,7 +69,10 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <iframe name="widget-iframe" id="widget-iframe" src={`https://widgets.salonmanager.${config.domainExtension}/index.html`} style={{width:500, height: 100, position: "fixed", bottom: 0, right: 0, zIndex: 292939939, border: "unset"}}></iframe>
+          {
+            config.env !== 'production' &&
+            <iframe name="widget-iframe" id="widget-iframe" src={`https://widgets.salonmanager.${config.domainExtension}/index.html`} style={{width:500, height: 100, position: "fixed", bottom: 0, right: 0, zIndex: 292939939, border: "unset"}}></iframe>
+          }
           <div dangerouslySetInnerHTML={{ __html: scriptCode }} />
           {/* <script src={`http://localhost:5555/loader.js`} data-sm={config.locationID} defer></script> */}
           {/* {config.env !== 'production' &&
