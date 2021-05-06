@@ -20,7 +20,7 @@
     "build:ci": "PUBLIC_NEXT_ENV=production next build && npm run build-sitemap",
     "export": "PUBLIC_NEXT_ENV=production next export",
     "build-dev:ci": "PUBLIC_NEXT_ENV=development next build && npm run build-sitemap:dev",
-    "export-dev": "PUBLIC_NEXT_ENV=development next export",  
+    "export-dev": "PUBLIC_NEXT_ENV=development next export",
     "nodemon": "nodemon -e js,json,css,scss,jsx",
     "start:local": "export PUBLIC_NEXT_ENV=development && next build && next export && serve out"
   },
@@ -47,12 +47,14 @@
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "@zeit/next-source-maps": "0.0.4-canary.1",
+    "autoprefixer": "^10.2.5",
     "bootstrap": "^4.5.3",
     "globby": "^11.0.1",
     "history": "^4.10.1",
     "mini-css-extract-plugin": "^0.9.0",
     "next": "^10.1.2",
     "node-sass": "^4.13.0",
+    "postcss": "^8.2.14",
     "prettier": "^2.2.1",
     "react": "^16.14.0",
     "react-animated-css": "^1.2.1",
@@ -86,8 +88,5 @@
     "webpack-dev-server": "^3.11.0",
     "webpack-filter-warnings-plugin": "^1.2.1",
     "yargs": "^14.2.3"
-  },
-  "peerDependencies": {
-    "postcss": "^8.0.0"
   }
 }
