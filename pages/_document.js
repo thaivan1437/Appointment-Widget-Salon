@@ -18,22 +18,6 @@ class MyDocument extends Document {
   }
 
   render() {
-    const scriptCode = `<script type="text/javascript">
-    {
-      document.addEventListener("DOMContentLoaded", function(event) {
-        function w(x) {
-          var iframe = document.getElementById("widget-iframe");
-          if (x.data.type == 'init' || x.data.type == 'showModal') {
-            iframe.setAttribute('style', x.data.data.style);
-          }
-        }
-        window.attachEvent
-          ? window.attachEvent('onmessage', w)
-          : window.addEventListener('message', w, !1);
-        });
-    }
-    </script>`
-
     return (
       <Html>
         <Head>
@@ -69,11 +53,9 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          <iframe title="widgets" name="widget-iframe" id="widget-iframe" src={`https://widgets.salonmanager.${config.domainExtension}/index.html?locationId=${config.locationID}`} style={{width:500, height: 100, position: "fixed", bottom: 0, right: 0, zIndex: 292939939, border: "unset"}}></iframe>
-          <div dangerouslySetInnerHTML={{ __html: scriptCode }} />
-          {/* {config.env !== 'production' &&
+          {config.env !== 'production' &&
             <script src={`https://widgets.salonmanager.${config.domainExtension}/loader.js`} data-sm={config.locationID} defer></script>
-          } */}
+          }
         </body>
       </Html>
     )
