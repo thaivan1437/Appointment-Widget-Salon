@@ -53,9 +53,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
-          {config.env !== 'production' &&
-            <script src={`https://widgets.salonmanager.${config.domainExtension}/loader.js`} data-sm={config.locationID} defer></script>
-          }
+          <script src={`https://widgets.salonmanager.${config.domainExtension}/loader.js`} data-sm={config.locationID} defer></script>
         </body>
       </Html>
     )
