@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, Image } from "react-bootstrap";
-import menuDatas from './menu'
+import menuData from './menu'
 import { Animated } from "react-animated-css";
 import Link from 'next/link'
 import {config} from '../helper/get_config';
@@ -37,7 +37,7 @@ class NavBar extends Component {
         <Navbar.Collapse id="navbar" className="navbar-collapse collapse">
           <Nav id="top-menu" className="nav navbar-nav navbar-right">
             {
-              menuDatas.map((item, index) => {
+              menuData.map((item, index) => {
                 return <Link
                   key={index}
                   href={item.route}

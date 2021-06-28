@@ -3,5 +3,5 @@ module.exports = {
   widgetAppId: "02be81b0-ef90-11ea-a403-f7ec25654d22",
   SENTRY_URL: 'https://ba897c0588c1409ca37eee455bf89f25@o409134.ingest.sentry.io/5424908',
   CDN_URL: 'https://cdn.belmontbeautysalon.com',
-  locationID: '1f94c190-a981-11eb-a8a7-6913f3abca53',
+  locationID: 'df629930-d6f3-11eb-8906-933f99aef51b',
 };

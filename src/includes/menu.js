@@ -10,11 +10,6 @@ const menuItem = [
     "target": ""
 },
 {
-    "title" : "Buy Gift Card",
-    "route" : "https://squareup.com/gift/NMX9BT7AD693E/order",
-    "target": "_blank"
-},
-{
     "title" : "Customer's Pictures",
     "route" : "https://www.instagram.com/belmontbeautysalon/",
     "target": "_blank"
