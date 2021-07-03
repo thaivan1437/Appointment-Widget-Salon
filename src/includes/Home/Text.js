@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Covid19 from './Covid19';
+// import Covid19 from './Covid19';
 
 class Text extends Component {
     constructor(props) {
@@ -11,7 +11,7 @@ class Text extends Component {
 
     render() {
         return  <Container>
-                    <Covid19 />
+                    {/* <Covid19 /> */}
                     <Row style={{ marginTop: 60, marginBottom:50, fontSize:23 }}>
                         <Col>
                             Belmont Beauty Salon is dedicated to providing you with professional, relaxing and excellent services in an environment that is sparkling with freshness and where the ambiance creates a relaxing & soothing sensation for every customer who walks through our doors.
