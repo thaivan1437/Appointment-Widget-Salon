@@ -32,7 +32,7 @@ class Text extends Component {
                             <br /><br />
                             We are open all year round, except on July 4th, Labor Day, Thanksgiving, Christmas and New Year Day.
                             <br /><br />
-                            <b>Open 7 Days A Week</b><br />
+                            <b>Business Hours</b><br />
                             <span><b>Mon: </b> Closed</span><br />
                             <span><b>Tue - Fri: </b> 10:00 AM – 7:00 PM</span><br />
                             <span><b>Sat - Sun: </b> 10:00 AM – 6:00 PM</span><br />
