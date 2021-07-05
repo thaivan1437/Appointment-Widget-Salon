@@ -28,7 +28,7 @@ class App extends React.Component {
   componentDidMount() {
     // const script = document.createElement("script");
     // script.src = `https://widgets.salonmanager.${CONFIGS.domainExtension}/loader.js`;
-    // script.setAttribute("data-sm", `${CONFIGS.widgetAppId}`);
+    // script.setAttribute("data-sm", `${CONFIGS.locationID}`);
     // document.body.appendChild(script);
   }
   render() {
