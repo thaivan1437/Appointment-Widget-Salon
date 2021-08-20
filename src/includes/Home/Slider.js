@@ -27,7 +27,7 @@ class Slider extends Component {
                     <Container>
                         <Row>
                             <Col>
-                            <Animated animationIn="fadeInLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
+                            <Animated animationIn="fadeInLeft" animationInDuration={3000} animationOutDuration={3000} isVisible={this.state.focus}>
 
                             <div className="time-table" style={ isMobile ? {width: 315} : {}}>
                                 <span><b>Belmont Beauty Salon</b></span><br /><br />
@@ -38,7 +38,7 @@ class Slider extends Component {
                         </Animated>
                             </Col>
                             <Col>
-                            <Animated animationIn="fadeInRight" animationInDuration={1000} animationOutDuration={1000} isVisible={this.state.focus}>
+                            <Animated animationIn="fadeInRight" animationInDuration={3000} animationOutDuration={3000} isVisible={this.state.focus}>
                             <div className="time-table" style={ isMobile ? {width: 315} : {}}>
                                     <span><b>Business Hours</b></span> <br /><br />
                                     <span>Mon</span> <span style={{marginLeft:127}}>Closed</span> <br />
@@ -57,7 +57,7 @@ class Slider extends Component {
         return  <section className="page-slider">
                     <div className={`slider`}>
                         {showAnimated && this.sliderRender()}
-                        <MySlider autoplay={3000}>
+                        <MySlider autoplay={4000}>
                             {sliderData.map((item, index) => (
                                 <div
                                     key={index}
