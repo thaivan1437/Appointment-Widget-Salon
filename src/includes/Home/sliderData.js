@@ -22,7 +22,6 @@ const menuItem = [
     {
         original: config.CDN_URL + '/site/Slider/7.jpg',
     }
-    
 ];
 
 export default menuItem;

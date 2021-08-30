@@ -58,14 +58,15 @@ class Slider extends Component {
                     <div className={`slider`}>
                         {showAnimated && this.sliderRender()}
                         <MySlider autoplay={4000}>
-                            {sliderData.map((item, index) => (
+                            {sliderData.forEach((item, index) => (
                                 <div
                                     key={index}
-                                    style={{ background: `url('${item.original}') no-repeat center center`, backgroundPosition: "center",
-                                    backgroundSize: "cover" }}
-                                >
-
-                                </div>
+                                    style={{
+                                        background: `url('${item ? item.original : ""}') no-repeat center center`,
+                                        backgroundPosition: "center",
+                                        backgroundSize: "cover" 
+                                    }}
+                                ></div>
                             ))}
                         </MySlider>
                     </div>
