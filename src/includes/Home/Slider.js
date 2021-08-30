@@ -58,7 +58,7 @@ class Slider extends Component {
                     <div className={`slider`}>
                         {showAnimated && this.sliderRender()}
                         <MySlider autoplay={4000}>
-                            {sliderData.forEach((item, index) => (
+                            {sliderData.map((item, index) => (
                                 <div
                                     key={index}
                                     style={{
