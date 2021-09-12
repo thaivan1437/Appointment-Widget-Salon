@@ -33,8 +33,7 @@ class Text extends Component {
                             We are open all year round, except on July 4th, Labor Day, Thanksgiving, Christmas and New Year Day.
                             <br /><br />
                             <b>Business Hours</b><br />
-                            <span><b>Mon: </b> Closed</span><br />
-                            <span><b>Tue - Fri: </b> 10:00 AM – 7:00 PM</span><br />
+                            <span><b>Mon - Fri: </b> 10:00 AM – 7:00 PM</span><br />
                             <span><b>Sat - Sun: </b> 10:00 AM – 6:00 PM</span><br />
                             <br />
                             <b>Need a last-minute beauty treatment? Please call us at (650) 595-2800</b>

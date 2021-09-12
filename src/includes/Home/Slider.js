@@ -40,10 +40,10 @@ class Slider extends Component {
                             <Col>
                             <Animated animationIn="fadeInRight" animationInDuration={3000} animationOutDuration={3000} isVisible={this.state.focus}>
                             <div className="time-table" style={ isMobile ? {width: 315} : {}}>
-                                    <span><b>Business Hours</b></span> <br /><br />
+                                    <div><span><b>Business Hours</b></span> </div><br />{isMobile ? null : <br />}
                                     {/* <span>Mon</span> <span style={{marginLeft:127}}>Closed</span> <br /> */}
-                                    <strong><span>Mon - Fri</span></strong> <span style={{marginLeft:90}}>10:00 AM – 7:00 PM</span> <br />
-                                    <strong><span>Sat - Sun</span></strong> <span style={{marginLeft:82}}>10:00 AM – 6:00 PM</span> <br /> <br />
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}><strong><span>Mon - Fri</span></strong> <span>10:00 AM – 7:00 PM</span> </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}><strong><span>Sat - Sun</span></strong> <span>10:00 AM – 6:00 PM</span> </div>
 
                             </div>
                         </Animated>
