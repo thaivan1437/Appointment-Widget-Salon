@@ -50,10 +50,19 @@ class MyDocument extends Document {
           }
 
         </Head>
-        <body>
+        <body id="testI">
           <Main />
           <NextScript />
-          <script src={`https://widgets.salonmanager.${config.domainExtension}/loader.js`} data-sm={config.locationID} defer></script>
+          <script src={`https://widget-git-feature-update-widget-thaivan1437.vercel.app/1.0.0/widgets.js`} data-sm='38a70820-1c43-11ec-a4c7-094e418eaaf4' defer></script>
+          <script dangerouslySetInnerHTML ={{ __html:`
+            window.addEventListener('message', function(event) {
+              if (event.data && event.data.data && event.data.data.showModal) {
+                console.log(event, event.origin);
+                document.getElementById("testI").style.cssText = "overflow-y: hidden !important";
+              } else {
+                document.getElementById("testI").style.cssText = "";
+              }
+            });`}} />
         </body>
       </Html>
     )
