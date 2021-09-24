@@ -50,7 +50,7 @@ class MyDocument extends Document {
           }
 
         </Head>
-        <body id="testI">
+        <body id="no-scroll">
           <Main />
           <NextScript />
           <script src={`https://widgets.salonmanager.${config.domainExtension}/loader.js`} data-sm={config.locationID} defer></script>
@@ -58,9 +58,9 @@ class MyDocument extends Document {
             window.addEventListener('message', function(event) {
               if (event.data && event.data.data && event.data.data.showModal) {
                 console.log(event, event.origin);
-                document.getElementById("testI").style.cssText = "overflow-y: hidden !important";
+                document.getElementById("no-scroll").style.cssText = "overflow: hidden !important";
               } else {
-                document.getElementById("testI").style.cssText = "";
+                document.getElementById("no-scroll").style.cssText = "";
               }
             });`}} />
         </body>
