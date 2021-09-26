@@ -42,8 +42,8 @@ class Slider extends Component {
                             <div className="time-table" style={ isMobile ? {width: 315} : {}}>
                                     <div><span><b>Business Hours</b></span> </div><br />{isMobile ? null : <br />}
                                     {/* <span>Mon</span> <span style={{marginLeft:127}}>Closed</span> <br /> */}
-                                    <div style={{display: 'flex', justifyContent: 'space-between'}}><strong><span>Mon - Fri</span></strong> <span>10:00 AM – 7:00 PM</span> </div>
-                                    <div style={{display: 'flex', justifyContent: 'space-between'}}><strong><span>Sat - Sun</span></strong> <span>10:00 AM – 6:00 PM</span> </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}><strong><span>Mon - Sat</span></strong> <span>10:00 AM – 7:00 PM</span> </div>
+                                    <div style={{display: 'flex', justifyContent: 'space-between'}}><strong><span>Sun</span></strong> <span>10:00 AM – 6:00 PM</span> </div>
 
                             </div>
                         </Animated>
