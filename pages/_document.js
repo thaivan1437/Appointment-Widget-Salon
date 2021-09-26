@@ -57,7 +57,6 @@ class MyDocument extends Document {
           <script dangerouslySetInnerHTML ={{ __html:`
             window.addEventListener('message', function(event) {
               if (event.data && event.data.data && event.data.data.showModal) {
-                console.log(event, event.origin);
                 document.getElementById("no-scroll").style.cssText = "overflow: hidden !important";
               } else {
                 document.getElementById("no-scroll").style.cssText = "";
