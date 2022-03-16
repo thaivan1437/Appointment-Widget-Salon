@@ -53,8 +53,12 @@ class MyDocument extends Document {
         <body id="no-scroll">
           <Main />
           <NextScript />
-          <script src={`https://widgets.salonmanager.${config.domainExtension}/loader.js`} data-sm={config.locationID} defer></script>
+          <script src={`https://widget-git-feature-update-widget-appointment-thaivan1437.vercel.app/1.0.0/loader.js`} data-sm={config.locationID} defer></script>
+          {/* <script src={`https://widget-git-feature-update-widget-appointment-thaivan1437.vercel.app/1.0.0/vendors~widgets.js`} data-sm={config.locationID} defer></script> */}
           <script dangerouslySetInnerHTML ={{ __html:`
+            var myIframe = document.querySelector('.myIframe');
+            console.log('myIframe', myIframe)
+            // myIframe.contentWindow.postMessage('hello', '*');
             window.addEventListener('message', function(event) {
               if (event.data && event.data.data && event.data.data.showModal) {
                 document.getElementById("no-scroll").style.cssText = "overflow: hidden !important";
